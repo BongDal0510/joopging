@@ -1,10 +1,249 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html>
+<!--<jsp:include page="../headerFooter/header.jsp" />-->
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+    <title>메인페이지</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+
+    <style>
+
+        /* 브라우저 마진과 패딩 리셋 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* INPUT 가리기 */
+        .section input[id*="slide"] {
+            display: none;
+        }
+
+        /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
+        .section .slidewrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .section .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+        }
+
+        .section .slidelist>li {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+        }
+
+        .section .slidelist>li>a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        } /* 화살표 화면 밖으로 나가면 안보이도록 OVERFLOW로 가림처리 */
+        .section .slidelist>li>a img {
+            width: 100%;
+        }
+
+        /* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+        .section .slidelist label {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 50px;
+            cursor: pointer;
+        }
+
+        .section .slidelist .left {
+            left: -300px;
+            background: url('/images/left.png') center center/100% no-repeat;
+        } /* LEFT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+        .section .slidelist .right {
+            right: -300px;
+            background: url('/images/right.png') center center/100% no-repeat;
+        } /* RIGHT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+
+        /* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(0%);
+        }
+
+        .section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-100%);
+        }
+
+        .section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-200%);
+        }
+
+        /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
+        {
+            left: 30px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
+        {
+            right: 30px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
+        {
+            left: 30px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right
+        {
+            right: 30px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left
+        {
+            left: 30px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right
+        {
+            right: 30px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+
+    </style>
+</head>
+<body class="homepage is-preload">
+
+    <div id="page-wrapper">
+        <div class="section" style="background-color: #ffffff;">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
+
+        <div class="slidewrap">
+            <ul class="slidelist" style=height:400px;margin-bottom:85px;margin-top:-140px;>
+                <li><a> <label for="slide03" class="left"></label> <img
+                        src="/images/플로깅.png"> <label for="slide02" class="right"></label>
+                </a></li>
+                <li><a> <label for="slide01" class="left"></label>
+                    <img src="/images/이벤트예시사진.jpg"> <label for="slide03" class="right"></label>
+                </a></li>
+                <li><a> <label for="slide02" class="left"></label>
+                    <img src="/images/이벤트예시2.jpg"> <label for="slide01" class="right"></label>
+                </a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <section id="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Portfolio -->
+                    <section>
+                        <header class="major">
+                            <h2>9월 플로깅</h2>
+                        </header>
+                        <div class="row">
+                            <div class="col-4 col-6-medium col-12-small">
+                                <section class="box">
+                                    <a href="#" class="image featured"><img
+                                            src="${pageContext.request.contextPath}/images/양화대교.png" alt="" /></a>
+                                    <header>
+                                        <h3>
+                                            양화대교 플로깅
+                                            <p>(23/30)</p>
+                                        </h3>
+                                    </header>
+                                        <p>9월 20일-9월 26일</p>
+                                        <footer>
+                                            <ul class="actions">
+                                                <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
+                                            </ul>
+                                        </footer>
+                                </section>
+                            </div>
+                            <div class="col-4 col-6-medium col-12-small">
+                                <section class="box">
+                                    <a href="" class="image featured"><img
+                                            src="/images/성내천.png" alt="" /></a>
+                                    <header id=center>
+                                        <h3>
+                                            성내천 플로깅
+                                            <p>(20/30)</p>
+                                        </h3>
+                                    </header>
+                                    <p>9월 27일-10월 3일</p>
+                                    <footer>
+                                        <ul class="actions">
+                                            <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
+                                        </ul>
+                                    </footer>
+                                </section>
+                            </div>
+                            <div class="col-4 col-6-medium col-12-small">
+                                <section class="box">
+                                    <a href="" class="image featured"><img
+                                            src="/images/마포대교.png" alt="" /></a>
+                                    <header>
+                                        <h3>
+                                            마포대교 플로깅
+                                            <p>(13/30)</p>
+                                        </h3>
+                                    </header>
+                                    <p>10월 4일-10월 10일</p>
+                                    <footer>
+                                        <ul class="actions">
+                                            <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
+                                        </ul>
+                                    </footer>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-12">
+                    <!-- Blog -->
+                    <section>
+                        <header class="major">
+                            <h2>플로깅이 처음이신가요?</h2>
+                        </header>
+                        <p align="middle">
+                            <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--<jsp:include page="../headerFooter/footer.jsp" />-->
+    <!-- Scripts -->
+    <script>
+        function payment(){
+            window.location.href = "${pageContext.request.contextPath}/app/plogging_res/ploggingPay.jsp";
+        }
+    </script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.dropotron.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+    <!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
+    <!--<script>var contextPath = "${pageContext.request.contextPath}";</script>-->
 </body>
 </html>
