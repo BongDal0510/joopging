@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<div id="header" name="header">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <title>Insert title here</title>
     <style>
         @font-face {
@@ -40,7 +40,7 @@
             margin: 3% 0 0 8%;
         }
 
-        nav#nav2.mainNavMiddle{
+        nav#nav.mainNavMiddle{
             margin:1% 0;
         }
 
@@ -55,11 +55,21 @@
             margin: 1% 0 0 0;
         }
 
+        #nav > ul > li.current > a {
+            background: none !important;
+            color: #5d5d5d !important;
+        }
+
+        #nav > ul > li.current > a:hover {
+            color: #ffffff !important;
+            background: #0b871e !important;
+        }
+
         .rightSupHeader {
             font-family: 'Dongle-Regular';
             text-align: end;
             margin: 0;
-            padding: 0 28.8% 0 0;
+            padding: 0 8% 0 0;
             font-size: 21.8px;
         }
 
@@ -78,6 +88,11 @@
             font-size: 13px;
         }
 
+        #page-wrapper-01 {
+            line-height: 3em;
+            background: #f1f1f1;
+        }
+
         /* ul#gapRemover li > a{
         padding:0.4em 0.4em 0.4em 0.4em;
 
@@ -93,19 +108,23 @@
     </style>
 </head>
 <body class="homepage is-preload">
-<div id="header" name="header">
-    <div id="page-wrapper">
+<!--<div id="header" name="header">-->
+    <div id="page-wrapper-01">
         <!-- Header -->
         <section class="rightSupHeader">
-            <nav id="nav1" class="rightSupNav">
-                <ul id="gapRemover">
-                    <li><a href="no-sidebar.html">로그인</a></li>
-                    <li><a href="no-sidebar.html">장바구니</a></li>
-                    <li><a href="no-sidebar.html">마이페이지</a></li>
-                </ul>
-            </nav>
+            <div>
+                <nav id="nav" class="rightSupNav">
+                    <ul id="gapRemover">
+                        <li><a href="no-sidebar.html">로그인</a></li>
+                        <li><a href="no-sidebar.html">장바구니</a></li>
+                        <li><a href="no-sidebar.html">마이페이지</a></li>
+                    </ul>
+                </nav>
+            </div>
         </section>
+    </div>
 
+    <div id="page-wrapper-02">
         <section id="ploggingHeader">
 
             <!-- Logo -->
@@ -116,7 +135,7 @@
                 </a>
             </h1>
             <!-- Nav -->
-            <nav id="nav2" class="mainNavMiddle">
+            <nav id="nav" class="mainNavMiddle">
                 <ul>
                     <li class="current"><a href="">소개</a></li>
                     <li><a href="#">플로깅</a></li>
@@ -127,6 +146,7 @@
                 </ul>
             </nav>
         </section>
+    </div>
     </div>
 </div>
 </body>

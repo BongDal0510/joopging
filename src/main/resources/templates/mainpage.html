@@ -116,7 +116,7 @@
     </style>
 </head>
 <body class="homepage is-preload">
-    <div id="header" name="header"></div>
+    <div id="main_header"></div>
     <div id="page-wrapper">
         <div class="section" style="background-color: #ffffff;">
             <input type="radio" name="slide" id="slide01" checked>
@@ -223,7 +223,7 @@
             </div>
         </div>
     </section>
-    <div id="footer" name="footer"></div>
+    <div id="main_footer"></div>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.dropotron.min.js"></script>
     <script src="/js/browser.min.js"></script>
@@ -232,8 +232,8 @@
     <script src="/js/main.js"></script>
     <script type="text/javascript">
     $(function(){
-       $("#header").load("header #header");
-       $("#footer").load("footer #footer");
+       $("#main_header").load("header #header");
+       $("#main_footer").load("footer #footer");
     });
     </script>
 </body>

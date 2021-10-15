@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/mainpage/*")
+@RequestMapping("/main/*")
 @RequiredArgsConstructor
-public class MypageController {
+public class MainpageController {
 
     @GetMapping("mainpage")
     public String mainpage(){
@@ -21,6 +21,7 @@ public class MypageController {
     public String header(){
         return "header";
     }
+
     @GetMapping("footer")
     public String footer(){
         return "footer";
