@@ -1,16 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <!--    <jsp:include page="../headerFooter/header.jsp" />-->
+    <div id="main_header"></div>
     <title>Untitled</title>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css" />
-
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <style>
         /* 브라우저 마진과 패딩 리셋 */
         * {
@@ -227,7 +225,7 @@
                         <div class="col-4 col-6-medium col-12-small">
                             <section class="box">
                                 <a href="" class="image featured"><img
-                                        style =height:330px; src="/images/인증이벤트.jpg" alt="" /></a>
+                                        style =height:330px; src="/images/인증이벤트.jpg" alt=""/></a>
                                 <header>
                                     <h3>
                                         플로깅 인증이벤트
@@ -255,16 +253,17 @@
                     <p align="middle">
                     </p>
                 </section>
-                <!--                <jsp:include page="../headerFooter/footer.jsp" />-->
+                <div id="main_footer"></div>
                 <!-- Scripts -->
-                <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/jquery.dropotron.min.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+                <script src="/js/jquery.min.js"></script>
+                <script src="/js/jquery.dropotron.min.js"></script>
+                <script src="/js/browser.min.js"></script>
+                <script src="/js/breakpoints.min.js"></script>
+                <script src="/js/util.js"></script>
+                <script src="/js/header.js"></script>
+                <script src="/js/main.js"></script>
                 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-<!--                <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>-->
-<!--                <script>var contextPath = "${pageContext.request.contextPath}";</script>-->
-</body>
+                <script> $(function() { $("#postcodify_search_button").postcodifyPopUp();}); </script>
+                <script>var contextPath = "${pageContext.request.contextPath}";</script>
+    </body>
 </html>

@@ -13,17 +13,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainpageController {
 
     @GetMapping("mainpage")
-    public String mainpage(){
+    public String mainpage() {
         return "mainpage";
     }
 
     @GetMapping("header")
-    public String header(){
+    public String header() {
         return "header";
     }
 
     @GetMapping("footer")
-    public String footer(){
+    public String footer() {
         return "footer";
+    }
+
+    @GetMapping("event")
+    public String event() {
+        return "event";
+    }
+
+    @GetMapping("cs")
+    public String cs() {
+        return "cs";
     }
 }
