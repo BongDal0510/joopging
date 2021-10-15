@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/header.css" type="text/css"/>
+    <title>Insert title here</title>
+    <style>
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Dongle-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108_2@1.0/Dongle-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'BMJUA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        #ploggingHeader {
+            padding: 0 0 0.8% 0%;
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
+            /*    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); */
+        }
+
+        .mainNavMiddle {
+            font-family: 'yg-jalnan';
+            width: 50%;
+            padding: 0;
+            margin: 3% 0 0 8%;
+        }
+
+        nav#nav2.mainNavMiddle{
+            margin:1% 0;
+        }
+
+        .mainNavMiddle ul {
+            padding: 0;
+            margin: 3% 0 0 0;
+        }
+
+        #logoYogi {
+            width: 4%;
+            padding: 0;
+            margin: 1% 0 0 0;
+        }
+
+        .rightSupHeader {
+            font-family: 'Dongle-Regular';
+            text-align: end;
+            margin: 0;
+            padding: 0 28.8% 0 0;
+            font-size: 21.8px;
+        }
+
+        /*  .rightSupHeader {
+        font-family: 'yg-jalnan';
+           text-align: end;
+           margin: 0;
+           padding: 0 28.8% 0 0;
+           font-size: 11px;
+        } */
+        .rightSupHeader {
+            font-family: 'BMJUA';
+            text-align: end;
+            margin: 0;
+            padding: 0 28.5% 0 0;
+            font-size: 13px;
+        }
+
+        /* ul#gapRemover li > a{
+        padding:0.4em 0.4em 0.4em 0.4em;
+
+        } */
+        /* 동글이는 이거  */
+        /* ul#gapRemover li > a{
+        padding:0.4em 0 0.4em 0;
+
+        } */
+        #gapRemover li{
+            padding:0;
+        }
+    </style>
+</head>
+<body class="homepage is-preload">
+<div id="header">
+    <div id="page-wrapper">
+        <!-- Header -->
+        <section class="rightSupHeader">
+            <nav id="nav1" class="rightSupNav">
+                <ul id="gapRemover">
+                    <li><a href="no-sidebar.html">로그인</a></li>
+                    <li><a href="no-sidebar.html">장바구니</a></li>
+                    <li><a href="no-sidebar.html">마이페이지</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <section id="ploggingHeader">
+
+            <!-- Logo -->
+            <h1 id="logoYogi">
+                <a href="/mainpage/mainpage/">
+                    <img src="/static/images/joopging_logo.png">
+                </a>
+            </h1>
+            <!-- Nav -->
+            <nav id="nav2" class="mainNavMiddle">
+                <ul>
+                    <li class="current"><a href="">소개</a></li>
+                    <li><a href="#">플로깅</a></li>
+                    <li><a href="left-sidebar.html">샵</a></li>
+                    <li><a href="right-sidebar.html">이벤트</a></li>
+                    <li><a href="no-sidebar.html">인터뷰</a></li>
+                    <li><a href="no-sidebar.html">고객센터</a></li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+</div>
+</body>
+</html>

@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--
 	Dopetrope by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 -->
 <html>
-<!--<jsp:include page="../headerFooter/header.jsp" />-->
-<head>
-
     <title>메인페이지</title>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
     <style>
 
         /* 브라우저 마진과 패딩 리셋 */
@@ -120,8 +120,15 @@
 
     </style>
 </head>
+<script src="/js/jquery.min.js"></script>
+<script>
+    $(function(){
+        $("#main_header").load("/header.html #header");
+        $("#main_footer").load("/footer.html #footer");
+    });
+</script>
 <body class="homepage is-preload">
-
+    <div id="main_header"></div>
     <div id="page-wrapper">
         <div class="section" style="background-color: #ffffff;">
             <input type="radio" name="slide" id="slide01" checked>
@@ -228,7 +235,7 @@
             </div>
         </div>
     </section>
-    <!--<jsp:include page="../headerFooter/footer.jsp" />-->
+    <div id="main_footer"></div>
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.dropotron.min.js"></script>
@@ -239,4 +246,10 @@
     <!--<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>-->
     <!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
 </body>
+<!--<script>-->
+<!--    $(function(){-->
+<!--       $("#main_header").load("header.html #header");-->
+<!--       $("#main_footer").load("footer.html #footer");-->
+<!--    });-->
+<!--</script>-->
 </html>
