@@ -1,15 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--
-	Dopetrope by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
--->
+
 <html>
     <title>메인페이지</title>
     <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
@@ -120,15 +115,8 @@
 
     </style>
 </head>
-<script src="/js/jquery.min.js"></script>
-<script>
-    $(function(){
-        $("#main_header").load("/header.html #header");
-        $("#main_footer").load("/footer.html #footer");
-    });
-</script>
 <body class="homepage is-preload">
-    <div id="main_header"></div>
+    <div id="header" name="header"></div>
     <div id="page-wrapper">
         <div class="section" style="background-color: #ffffff;">
             <input type="radio" name="slide" id="slide01" checked>
@@ -235,21 +223,18 @@
             </div>
         </div>
     </section>
-    <div id="main_footer"></div>
-    <!-- Scripts -->
+    <div id="footer" name="footer"></div>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.dropotron.min.js"></script>
     <script src="/js/browser.min.js"></script>
     <script src="/js/breakpoints.min.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
-    <!--<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>-->
-    <!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
+    <script type="text/javascript">
+    $(function(){
+       $("#header").load("header #header");
+       $("#footer").load("footer #footer");
+    });
+    </script>
 </body>
-<!--<script>-->
-<!--    $(function(){-->
-<!--       $("#main_header").load("header.html #header");-->
-<!--       $("#main_footer").load("footer.html #footer");-->
-<!--    });-->
-<!--</script>-->
 </html>

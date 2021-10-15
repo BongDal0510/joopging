@@ -16,4 +16,13 @@ public class MypageController {
     public String mainpage(){
         return "mainpage";
     }
+
+    @GetMapping("header")
+    public String header(){
+        return "header";
+    }
+    @GetMapping("footer")
+    public String footer(){
+        return "footer";
+    }
 }
