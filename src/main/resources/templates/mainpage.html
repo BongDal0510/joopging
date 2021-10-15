@@ -23,7 +23,7 @@
 
         /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
         .section .slidewrap {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             overflow: hidden;
         }
@@ -53,7 +53,7 @@
         .section .slidelist label {
             position: absolute;
             z-index: 1;
-            top: 50%;
+            top: 31%;
             transform: translateY(-50%);
             padding: 50px;
             cursor: pointer;
@@ -84,12 +84,12 @@
         /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
         .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
         {
-            left: 30px;
+            left: 1px;
             transition: all .35s ease .5s;
         } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
         {
-            right: 30px;
+            right: 1px;
             transition: all .35s ease .5s;
         } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
@@ -148,9 +148,10 @@
 
                     <!-- Portfolio -->
                     <section>
-                        <header class="major">
+                        <hr>
+                        <div style="text-align: center; margin-bottom: 2em;">
                             <h2>9월 플로깅</h2>
-                        </header>
+                        </div>
                         <div class="row">
                             <div class="col-4 col-6-medium col-12-small">
                                 <section class="box">
@@ -213,9 +214,10 @@
                 <div class="col-12">
                     <!-- Blog -->
                     <section>
-                        <header class="major">
+                        <hr>
+                        <div style="text-align: center; margin-bottom: 2em;">
                             <h2>플로깅이 처음이신가요?</h2>
-                        </header>
+                        </div>
                         <p align="middle">
                             <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </p>
