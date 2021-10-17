@@ -8,7 +8,7 @@ $(".list").each(function(index, item){
     tempList.push($(item).text());
 });
 
-$("#myPageMainList").css("color", "#0b871e");
+$("#myPageMainList").css("color", "#94c477");
 $("#myPageMainList").text("▶"+tempList[0]);
 
 $(".list").on("click", function(){
@@ -28,7 +28,7 @@ $(".list").on("click", function(){
 
         }
         if(check){
-            $(item).css("color", "#0b871e");
+            $(item).css("color", "#94c477");
             $(item).text("▶" + value);
             if(value==tempList[2]){
                 $(".payment").show();
@@ -57,13 +57,13 @@ $('li').on("click", function(){
     }
     else if(value.includes("내 상품")){
         $(".payment").not($(this)).css("color","#5d5d5d");
-        $("#paymentMainList").css("color","#0b871e");
+        $("#paymentMainList").css("color","#94c477");
 
         $("#paymentMain").show();
         $(".imp-medium").not($("#paymentMain")).hide();
     }
     else if(value=="- 찜 목록"){
-        $(this).css("color","#0b871e");
+        $(this).css("color","#94c477");
         $(".payment").not($(this)).css("color","#5d5d5d");
 
         $("#paymentDib").show();
@@ -71,13 +71,13 @@ $('li').on("click", function(){
     }
     else if(value.includes("회원 정보")){
         $(".member").not($(this)).css("color","#5d5d5d");
-        $("#memberMainList").css("color","#0b871e");
+        $("#memberMainList").css("color","#94c477");
 
         $("#updateInfo").show();
         $(".imp-medium").not($("#updateInfo")).hide();
     }
     else if(value=="- 회원 탈퇴"){
-        $(this).css("color","#0b871e");
+        $(this).css("color","#94c477");
         $(".member").not($(this)).css("color","#5d5d5d");
 
         $("#deleteInfo").show();
