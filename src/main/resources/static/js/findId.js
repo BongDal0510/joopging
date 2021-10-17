@@ -11,16 +11,14 @@ function generateRandomCode() {
 	}
 function certifyId(){
 	
-	var form = document.findName;
+	var form = document.searchId;
 	console.log(form.member_name.value);
 	
 	if(!form.member_name.value){
 		alert("이름을 입력해주세요.");
 		return false;
 	}
-	
-	
-	 
+
 	var memberName = document.getElementById('member_name');
 	document.getElementById('memberName').value = memberName.value;
 	document.getElementById('randomNum').value = generateRandomCode();

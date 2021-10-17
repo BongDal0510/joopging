@@ -36,4 +36,18 @@ public class memberController {
         return "footer";
     }
 
+    @GetMapping("findId")
+    public String findId(){
+        return "findId";
+    }
+
+    @GetMapping("findPw")
+    public String findPw(){
+        return "findPw";
+    }
+
+    @GetMapping("searchId")
+    public String searchId(){
+        return "searchId";
+    }
 }
