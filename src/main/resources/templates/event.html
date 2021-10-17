@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <div id="main_header"></div>
     <title>Untitled</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
     <style>
         /* 브라우저 마진과 패딩 리셋 */
         * {
@@ -121,72 +120,85 @@
             margin-bottom:10px;
         }
 
-        .round_grade{
-
-            border:10px solid;
-            width:200px;
-            height:200px;
-            border-radius:50%;
-            line-height:167px;
-            text-align:center;
-            font-size:2rem;
-            margin:auto;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
-
+        .event_subtitle {
+            text-align: center;
+            margin-bottom: 2em;
+            margin-top: 4em;
         }
 
-        .round_header{
-            font-size:25px;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
+        /* 사이드바 회원정보 관련 CSS*/
+
+        #sideBarInner{
+            float: left;
+            margin-top: 30%;
+            margin-left: 10%;
+            width: 250px;
+            height: 280px;
+            margin-right: 2%;
+            border: 1px solid #e6e6e6;
+            padding: 30px 20px;
         }
 
-        .round_detail{
-            font-size:25px;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
-            text-align:center;
+        #sideBarDelivery{
+            padding: 10px 0;
+        }
+
+        .sideBarInfo{
+            display: inline;
+            float: right;
+        }
 
     </style>
 </head>
 
 <body class="homepage is-preload">
-
-<header style=margin-bottom:100px;>
-    <div style=text-align:center;width:90%;padding:10px;>
-        <h1><span style=font-size:60px;>최원준</span>님</h1>
-
-        <h3 style=float:right;>새싹등급</h3>
-        <h2 style=float:right;margin-right:5px;>LV 1 </h2>
-        <img class="grade" src="/images/새싹.png" alt="" />
-
-    </div>
-</header>
-<table>
-    <tr class="round_detail">
-        <td>참여횟수</td>
-        <td>포인트</td>
-        <td>출석체크</td>
-    </tr>
-    <tr>
-        <td><div class="round_grade" style=border-color:green;>35회</div></td>
-        <td><div class="round_grade" style=border-color:blue;>3556P</div></td>
-        <td><div class="round_grade" style=border-color:red;>1/30</div></td>
-    </tr>
-</table>
+<div id="main_header"></div>
+<div style="position: fixed;">
+<!-- 회원정보 사이드바 -->
+    <div id="sideBarInner">
+        <div>
+            <div>
+                <img class="grade" src="/images/새싹.png">
+            </div>
+            <div>
+                <strong>최원준 님</strong>
+            </div>
+        </div>
+        <hr>
+        <div id="sideBarDelivery"style="padding: 10px 0;">
+            <div>
+                <strong>참여횟수</strong>
+                <div class="sideBarInfo">
+                    <span>35회</span>
+                </div>
+            </div>
+            <div>
+                <strong>포인트</strong>
+                <div class="sideBarInfo">
+                    <span>3556P</span>
+                </div>
+            </div>
+            <div>
+                <strong>출석체크</strong>
+                <div class="sideBarInfo" >
+                    <span>1/30</span>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
 
 <!-- Main -->
-<section id="main">
+<!--<section id="main">-->
     <div class="container">
         <div class="row">
             <div class="col-12" style=clear:both;>
 
                 <!-- Portfolio -->
                 <section>
-                    <header class="major">
+                    <div class="event_subtitle">
                         <h2>9월 이벤트</h2>
-                    </header>
+                    </div>
                     <div class="row">
                         <div class="col-4 col-6-medium col-12-small">
                             <section class="box">
@@ -242,28 +254,19 @@
                         </div>
                     </div>
                 </section>
-
             </div>
-            <div class="col-12">
-
-                <!-- Blog -->
-                <section>
-                    <header class="major">
-                    </header>
-                    <p align="middle">
-                    </p>
-                </section>
-                <div id="main_footer"></div>
-                <!-- Scripts -->
-                <script src="/js/jquery.min.js"></script>
-                <script src="/js/jquery.dropotron.min.js"></script>
-                <script src="/js/browser.min.js"></script>
-                <script src="/js/breakpoints.min.js"></script>
-                <script src="/js/util.js"></script>
-                <script src="/js/header.js"></script>
-                <script src="/js/main.js"></script>
-                <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-                <script> $(function() { $("#postcodify_search_button").postcodifyPopUp();}); </script>
-                <script>var contextPath = "${pageContext.request.contextPath}";</script>
-    </body>
+        </div>
+    </div>
+<!--</section>-->
+<div id="main_footer"></div>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+</body>
 </html>
