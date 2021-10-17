@@ -51,41 +51,26 @@
             margin: 3% 0 0 0;
         }
 
-        #nav > ul > li.current > a {
-            background: none !important;
-            color: #5d5d5d !important;
-        }
-
         #nav > ul > li {
             margin: 0 !important;
         }
 
-        #nav > ul > li.current > a:hover {
+        #menubar > li.current > a {
+            background: none !important;
+            color: #5d5d5d !important;
+        }
+
+        #menubar > li.current > a:hover {
             color: #ffffff !important;
             background: #0b871e !important;
         }
 
         .rightSupHeader {
-            font-family: 'Dongle-Regular';
-            text-align: end;
-            margin: 0;
-            padding: 0 8% 0 0;
-            font-size: 21.8px;
-        }
-
-        /*  .rightSupHeader {
-        font-family: 'yg-jalnan';
-           text-align: end;
-           margin: 0;
-           padding: 0 28.8% 0 0;
-           font-size: 11px;
-        } */
-        .rightSupHeader {
             font-family: 'BMJUA';
-            text-align: end;
-            margin: 0;
-            padding: 0 16% 0 0;
             font-size: 13px;
+            width: 80%;
+            text-align: center;
+            margin: auto;
         }
 
         #page-wrapper-01 {
@@ -104,6 +89,11 @@
             text-align: right;
         }
 
+        #gapRemover > li > a:hover {
+            color: #0b871e !important;
+            background: none !important;
+        }
+
         /* ul#gapRemover li > a{
         padding:0.4em 0.4em 0.4em 0.4em;
 
@@ -113,19 +103,22 @@
         padding:0.4em 0 0.4em 0;
 
         } */
-        #gapRemover li{
-            padding:0;
+        #gapRemover > li > a {
+            padding: 0.6em 0.5em 0.6em 0.5em !important;
         }
     </style>
 </head>
+
+    <!-- ☀ ☁ ☂ ☃ -->
 
 <body class="homepage is-preload">
     <div id="page-wrapper-01">
         <!-- Header -->
         <section class="rightSupHeader">
-            <div>
+            <div style="text-align: right; padding-right: 11%;">
                 <nav id="nav" class="rightSupNav">
                     <ul id="gapRemover">
+                        <li>☀ &nbsp 10.18 &nbsp 8ºC</li>
                         <li><a href="/member/login">로그인</a></li>
                         <li><a href="no-sidebar.html">장바구니</a></li>
                         <li><a href="no-sidebar.html">마이페이지</a></li>
@@ -147,13 +140,13 @@
             <!-- Nav -->
             <div id="main_menu">
                 <nav id="nav" class="mainNavMiddle">
-                    <ul>
+                    <ul id="menubar">
                         <li class="current"><a href="">소개</a></li>
                         <li><a href="#">플로깅</a></li>
-                        <li><a href="left-sidebar.html">샵</a></li>
-                        <li><a href="right-sidebar.html">이벤트</a></li>
-                        <li><a href="no-sidebar.html">인터뷰</a></li>
-                        <li><a href="no-sidebar.html">고객센터</a></li>
+                        <li><a href="#">샵</a></li>
+                        <li><a href="/main/event">이벤트</a></li>
+                        <li><a href="#">인터뷰</a></li>
+                        <li><a href="/main/cs">고객센터</a></li>
                     </ul>
                 </nav>
             </div>
