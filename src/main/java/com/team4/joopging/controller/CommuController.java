@@ -104,4 +104,14 @@ public class CommuController {
 
     @GetMapping("communityRegister")
     public void goPage(){}
+
+    @GetMapping("header")
+    public String header() {
+        return "header";
+    }
+
+    @GetMapping("footer")
+    public String footer() {
+        return "footer";
+    }
 }
