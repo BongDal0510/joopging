@@ -9,7 +9,7 @@ $(".list").each(function(index, item){
 });
 
 $("#myPageMainList").css("color", "#94c477");
-$("#myPageMainList").text("▶"+tempList[0]);
+$("#myPageMainList").text("▶ "+tempList[0]);
 
 $(".list").on("click", function(){
     var value = $(this).text();
@@ -29,7 +29,7 @@ $(".list").on("click", function(){
         }
         if(check){
             $(item).css("color", "#94c477");
-            $(item).text("▶" + value);
+            $(item).text("▶ " + value);
             if(value==tempList[2]){
                 $(".payment").show();
                 $(".member").hide();

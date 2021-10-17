@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<html>
-<title>메인페이지</title>
+<head>
+<title>MY PAGE</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="/css/main.css" type="text/css"/>
@@ -13,8 +12,27 @@
         margin: 0;
         padding: 0;
     }
+    /*font-family*/
+    @font-face {
+        font-family: 'BMJUA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
 
-
+/*div*/
+    div.imp-medium{
+        display: none
+    }
+    div#deleteNotice{
+        border:solid #94c477;
+        padding : 25px;
+        margin-bottom: 20px;
+    }
+    div#page-wrapper button, div#page-wrapper input[type="button"]{
+        font-family: 'BMJUA';
+        font-weight: normal;
+    }
     /* Section/Article */
 
     header h3#myList {
@@ -124,12 +142,12 @@
 
     #ploggingAdv button{
         margin : 160px 30px 30px 430px;
+        padding: 5px 10px 5px 10px;
+        font-size: 18px;
+        width: 180px;
+        height: 43px;
     }
 
-    .button {
-        font-family: 'Jua';
-
-    }
     .changeButton{
         font-weight: 500;
         font-size: 1.1em;
@@ -146,7 +164,8 @@
     }
 
     ul li.list {
-        padding : 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         font-size : 22px;
         border-bottom-color : #d3d3d3;
         border-bottom-width: 1px;
@@ -170,17 +189,10 @@
     ol li ul li{
         color: #3d3d3d;
     }
-    /* Nav */
-
-    span.headerPluse{
-        display: inline-block;
-    }
-
 
     /* Main */
 
     #main {
-        font-family: 'yg-jalnan';
         background: #ffffff;
         padding: 0.5em 0 0.5em 0;
     }
@@ -198,27 +210,6 @@
 
     #main .major h2 {
         background: #ffffff;
-    }
-
-    /* Footer */
-
-    #footer {
-        position: relative;
-        color: #858484;
-        padding: 4em 0;
-        text-align: center;
-    }
-
-    #footer:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-size: 100% 100%;
-        z-index: 0;
-        opacity: 0.5;
-        text-align: center;
     }
 
     #footer a {
@@ -248,20 +239,8 @@
         font-size: 1.75em;
     }
 
-    /* Copyright */
-
-    #copyright {
-        text-align: center;
-        margin: 3em 0 2em 0;
-    }
-
-    #copyright ul.links {
-        display: inline-block;
-        background: #2C2929;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 5px;
-        margin: 0;
-        padding: 0.85em 2.25em 0.85em 2.25em;
+    article.box.post header h2{
+        margin-bottom: 30px;
     }
 
     /* XLarge */
@@ -281,74 +260,32 @@
     @media screen and (max-width: 1280px) {
 
         /* Basic */
-
         body, input, textarea, select {
             font-size: 11pt;
         }
 
         /* Section/Article */
-
-        header.major {
-            margin: 0.75em 0 2.5em 0;
-        }
-
         header.major h2 {
             padding: 0 1em 0 1em;
         }
 
         /* Social */
-
         ul.social li {
             margin: 0 0 0.25em 0.75em;
         }
 
-        /* Header */
-
-        #header {
-            padding: 4em 0 3em 0;
-        }
-
-        /* Banner */
-
-        #banner {
-            padding: 6em 0;
-            margin: 3em 0 0 0;
-        }
 
         /* Intro */
-
-        #intro {
-            padding: 0;
-        }
-
         #intro section {
             padding: 1em 2em;
         }
 
-        #intro .middle:before {
-            left: -12px;
-        }
-
-        #intro .middle:after {
-            right: -12px;
-        }
-
         /* Main */
-
         #main {
             padding: 30px 0;
         }
 
         /* Footer */
-
-        #footer {
-            padding: 3em 0;
-        }
-
-        #footer:before {
-            height: 2.5em;
-        }
-
         #footer header {
             margin: 0 0 1.5em 0;
         }
@@ -357,43 +294,28 @@
             font-size: 1.25em;
         }
 
-        /* Copyright */
-
-        #copyright {
-            margin: 0;
+        /* Banner */
+        #banner header {
+            padding: 1.5em 1em 1.5em 1em;
+            display: block;
+            border-radius: 0;
         }
 
+        #banner header h2 {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            margin: 0 0 0.25em 0;
+        }
+
+        #banner header p {
+            font-size: 1.2em;
+        }
     }
-
-    /* Nav */
-
-    #page-wrapper {
-        font-family: 'yg-jalnan';
-    }
-
-    /* Banner */
-
-    #banner header {
-        padding: 1.5em 1em 1.5em 1em;
-        display: block;
-        border-radius: 0;
-    }
-
-    #banner header h2 {
-        font-size: 1.5em;
-        line-height: 1.5em;
-        margin: 0 0 0.25em 0;
-    }
-
-    #banner header p {
-        font-size: 1.2em;
-    }
-
 </style>
 </head>
-<div id="main_header"></div>
 <body class="homepage is-preload">
-<div id="page-wrapper">
+<div id="main_header"></div>
+<div id="page-wrapper" style="font-family: 'yg-jalnan';">
     <!-- Main -->
     <section id="main">
         <div class="container" style="display: flex; justify-content: space-around;">
@@ -424,7 +346,7 @@
                             <h2><!--이름-->님 환영합니다.</h2>
                         </header>
                         <div id = "ploggingAdv">
-                            <button style="font-size: 16px; width: 180px; height: 43px;" onclick="location.href='${pageContext.request.contextPath}/app/plogging_res/ploggingResList.jsp' ">
+                            <button> <!--onclick="location.href='/app/plogging_res/ploggingResList.jsp' ">-->
                                 플로깅 예약하러 가기
                             </button>
                         </div>
@@ -595,7 +517,7 @@
                             <h2>개인 정보 변경</h2>
                             ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
                         </header>
-                        <form method="post" name="updateForm" action="${pageContext.request.contextPath}/mypage/UpdateMemberOk.my">
+                        <form method="post" name="updateForm"> <!--action="/mypage/UpdateMemberOk.my">-->
                             <table class = 'delete123' style="width: 640px;">
                                 <tr>
                                     <td colspan = "2"></td>
@@ -702,7 +624,7 @@
                             <h2>회원 탈퇴</h2>
                             ▶ 회원탈퇴를 원하시는 경우, 이용해주세요.
                         </header>
-                        <div style="border:solid; padding : 25px;">
+                        <div id="deleteNotice">
                             <p style="text-align:center;">
                                 <img src="../images/탈퇴신청사진.PNG">
                             </p>
@@ -724,7 +646,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <form method="post" name="deleteForm" action="${pageContext.request.contextPath}/mypage/DeleteMemberOk.my">
+                        <form method="post" name="deleteForm"> <!--action="/mypage/DeleteMemberOk.my">-->
                             <table class = 'delete123'>
                                 <tr>
                                     <td colspan = "2"><h3>기본정보</h3></td>
@@ -799,7 +721,7 @@
                             </table>
 
                             <p style="text-align: right;">
-                                <button style="font-size: 18px;" onclick="location.href='${pageContext.request.contextPath}/singlehelp/SingleWrit.si'">글쓰기</button>
+                                <button style="font-size: 18px;"> <!--onclick="location.href=''"-->글쓰기</button>
 
                             </p>
                             <table style="font-size:1.3rem">
