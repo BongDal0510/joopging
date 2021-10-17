@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.CommuReplyMapper">
+    <insert id="insertCommuReply">
+        INSERT INTO TBL_COMMUREPLY (COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER)
+        VALUES (SEQ_COMMUREPLY.NEXTVAL, #{commuBno}, #{commuReply}, #{commuReplier})
+    </insert>
+
+    <select id="readCommuReply" resultType="commuReplyVO">
+        SELECT COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDATE, COMMUREPLYUPDATEDATE FROM TBL_COMMUREPLY
+        WHERE COMMURNO = #{commuRno}
+    </select>
+
+    <delete id="deleteCommuReply">
+        DELETE FROM TBL_COMMUREPLY WHERE COMMURNO = #{commuRno}
+    </delete>
+
+    <update id="updateCommuReply">
+        UPDATE TBL_COMMUREPLY
+        SET COMMUREPLY = #{commuReply}, COMMUREPLYUPDATEDATE = SYSDATE
+        WHERE COMMURNO = #{commuRno}
+    </update>
+
+    <select id="getCommuReplyListWithPaging" resultType="commuReplyVO">
+    <![CDATA[
+    SELECT COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDAE, COMMUREPLYUPDATEDATE
+    FROM
+        (
+        SELECT /*+ INDEX_DESC(TBL_COMMUREPLY PK_COMMUREPLY)*/
+        ROWNUM R, COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDATE, COMMUREPLYUPDATEDATE
+        FROM TBL_COMMUREPLY
+        WHERE COMMUBNO = #{commuBno}
+        AND ROWNUM <= #{criteria.pagaNum} * #{criteria.amount}
+        )
+        WHERE R > (#{criteria.pageNum} -1) * #{criteria.amount}
+    ]]>
+    </select>
+
+    <select id="getCommuReplyTotal" resultType="_int">
+        SELECT COUNT(COMMURNO) FROM TBL_COMMUREPLY WHERE COMMUBNO = #{commuBno}
+    </select>
+</mapper>

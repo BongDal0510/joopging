@@ -16,7 +16,11 @@ import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
+<<<<<<< HEAD
 @MapperScan("com.example.board.mappers")
+=======
+@MapperScan("com.team4.joopging.mappers")
+>>>>>>> c02a898 (community 게시판 작업중)
 public class MyBatisConfig {
     private final ApplicationContext applicationContext;
 
@@ -44,4 +48,8 @@ public class MyBatisConfig {
         }
         return null;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c02a898 (community 게시판 작업중)

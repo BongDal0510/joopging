@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/community.css"/>
+    <title>error</title>
+    <style>
+        div.notfound-404 img{
+            text-align: center;
+            width: 50%;
+        }
+        div#notfound{
+            text-align: center;
+            width: 100%;
+        }
+        #errorButtons{
+            text-align: center;
+            margin-top: 5%;
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!--header 위치-->
+<header>
+    여기에 헤더가 들어갑니다.
+</header>
+
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+            <div id="commuBoardWrapper">
+                <!--게시판 목록 왼쪽 사이드-->
+                <div id="commuBoardLeft">
+                    <img src="/images/leftAd.png">
+                    <!--<img src="/images/nogreenAd.png">-->
+                </div>
+
+
+                <!--error message-->
+                <div id="commuBoardMiddle">
+                    <div id="notfound">
+                        <div class="notfound">
+                            <div class="notfound-404">
+
+                                <img src="/images/wrongAccess.png">
+                            </div>
+                            <div id="errorButtons">
+                                <a href="javascript:history.go(-1)" class="button small">돌아가기</a>
+                                <a href="/commu/communityList" class="button small">홈으로</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+                  <!--  <img src="/images/leftAd.png">-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
