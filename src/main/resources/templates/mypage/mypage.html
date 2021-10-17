@@ -58,8 +58,9 @@
         text-align: center;
     }
     /*table*/
-    form input[name="text"], form select{
+    form input[type=text], #user_email3 {
         display: inline !important;
+        padding: 0 !important;
     }
 
     table.boardList thead{
@@ -673,9 +674,9 @@
                                 <tr>
                                     <th scope="row"><label style="line-height:24px;">주소<br>(우편물 수령지)</label></th><!--for="user_address"-->
                                     <td>
-                                        <div style="display: flex;">
-                                            <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5" title="우편번호" maxlength="6" readonly="readonly" value="" style="width:88px;background:#fbfbfb;margin:0 5px 10px 0;">
-                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" style="font-weight: 500;font-size: 1.1em;padding: 0.35em 1.2em;background-color: #b3b3b3;" value="우편번호">
+                                        <div style="margin: 0 5px 10px 0;">
+                                            <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5" title="우편번호" maxlength="6" readonly="readonly" value="" style="width:88px; background:#fbfbfb; margin:0 5px 10px 0;">
+                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" style="font-weight: 500; font-size: 14px; background-color: #b3b3b3;" value="우편번호">
                                         </div>
                                         <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1" style="width:235px;margin-right:5px;background:#fbfbfb;">
                                         <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2" style="width:235px;margin-right:5px;background:#fbfbfb">
