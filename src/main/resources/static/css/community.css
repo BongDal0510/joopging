@@ -92,4 +92,12 @@ ul.actions{
 
 input.button{
     background-color: #94C477;
+    border: solid 1px #f4f4f5;
 }
+
+tr.tHead th{
+    text-align: center;
+}
+div#registerBtn{
+font-size: 12px;
+margin-bottom: 2%;}
