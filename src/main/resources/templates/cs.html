@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div id="main_header"></div>
+    <title>Board</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <style>
+        .big-width {display: block;}
+        .small-width {display: none;}
+        div#searchWrap{display: flex;}
+        select[name='type']{width: 30%;}
+        input[name='keyword']{width: 60%;}
+        form[name='searchForm']{overflow: hidden;}
+
+        @media (max-width: 918px) {
+            .writer {display: none;}
+            .regDate {display: none;}
+            .updateDate {display: none;}
+            .big-width {display: none;}
+            .small-width {display: block;}
+            div#searchWrap{display: block;}
+            select[name='type']{width: 100%;}
+            input[name='keyword']{width: 100%;}
+            a.search{width: 100%;}
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+
+            <!-- Elements -->
+            <header class="major">
+                <h1>Board</h1>
+                <p>게시판 목록</p>
+            </header>
+            <!--href에 알맞는 URL 설정-->
+            <div class="table-wrapper">
+                <table style="text-align: center;">
+                    <thead>
+                    <tr class="tHead">
+                        <th class="bno">번호</th>
+                    </tr>
+                    <tr class="tHead">
+                        <th class="bno">번호</th>
+                    </tr>
+                    <tr class="tHead">
+                        <th class="bno">번호</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/header.js"></script>
+<div id="main_footer"></div>
+</body>
+</html>
