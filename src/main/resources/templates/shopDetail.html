@@ -6,8 +6,33 @@
 -->
 <html lang="en">
 <style>
+
+    html {
+        scroll-behavior: smooth;
+    }
+    @font-face {
+        font-family: 'S-CoreDream-4Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'yg-jalnan';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'S-CoreDream-3Light';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+
     .stock_detail {
         width: 50%;
+
     }
 
     .shop_text {
@@ -15,6 +40,7 @@
         float: right;
         height: 50%;
         margin-bottom: 200px;
+
     }
 
     .stock_img {
@@ -29,7 +55,7 @@
         width: 40%;
         padding: 5px;
         border: 1px solid #999;
-        font-family: 'Nanumgothic';
+        font-family: 'yg-jalnan';
         background: url('https://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
         border-radius: 3px;
         -webkit-appearance: none;
@@ -58,6 +84,7 @@
         position:-webkit-sticky;
         position:sticky;
         top:0;
+
     }
     .navtable{
         width: 62%;
@@ -65,8 +92,7 @@
         margin: auto;
         border-color: #d3d3d3;
         border: solid 1px;
-
-
+        font-family: 'S-CoreDream-3Light';
 
 
     }
@@ -77,6 +103,7 @@
     }
 
     .nav_a{
+        font-family: 'S-CoreDream-3Light';
         text-decoration-line: none;
     }
 </style>
@@ -85,8 +112,10 @@
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet"
-          href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
 </head>
 <body class="no-sidebar is-preload">
 
@@ -174,10 +203,16 @@
         <hr align="center" style="border: solid 1px green; width: 100%;">
         <nav>
             <table class="navtable">
-                <tr style="background-color: #14a876;">
-                    <td class="navbutton"><a class="nav_a" href="#detail">상세정보</a></td>
-                    <td class="navbutton"><a class="nav_a" href="#review">상품후기</a></td>
-                    <td class="navbutton"><a class="nav_a" href="#qna">상품문의</a></td>
+                <tr style="background-color: whitesmoke;">
+                    <td id="detail_td" class="navbutton">
+                        <a id="detail_a" class="nav_a" href="#detail">상세정보</a>
+                    </td>
+                    <td id="review_td" class="navbutton">
+                        <a id="review_a" class="nav_a"  href="#review">상품후기</a>
+                    </td>
+                    <td id="qna_td" class="navbutton">
+                        <a id="qna_a" class="nav_a"  href="#qna">상품문의</a>
+                    </td>
                 </tr>
             </table>
         </nav>
@@ -233,7 +268,7 @@
     <!-- Footer -->
 
 
-
+</body>
     <!-- Scripts -->
     <script
             src="/js/jquery.min.js"></script>
@@ -245,12 +280,9 @@
             src="/js/breakpoints.min.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
-</body>
-<script language="JavaScript">
+    <script language="JavaScript"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
-</script>
-
-
+    </script>
 
 <script>
     $(document).ready(function() {
@@ -272,6 +304,51 @@
             $("#redheart").hide();
             return false;
         });
+
+        /* a 태그를 눌렀을 때 주는 효과*/
+        $("#detail_a").click(function(){
+            $("#detail_td").css({
+                "border-top-color" : "green",
+                "border-bottom" : "hidden"
+            })
+            $("#review_td").css({
+                "border-color" : "#d3d3d3"
+
+            })
+            $("#qna_td").css({
+                "border-color" : "#d3d3d3"
+
+            });
+        });
+
+        $("#review_a").click(function(){
+            $("#review_td").css({
+                "border-top-color" : "green",
+                "border-bottom" : "hidden"
+            })
+            $("#detail_td").css({
+                "border-color" : "#d3d3d3"
+            })
+            $("#qna_td").css({
+                "border-color" : "#d3d3d3"
+            });
+        });
+
+        $("#qna_a").click(function(){
+            $("#qna_td").css({
+                "border-top-color" : "green",
+                "border-bottom" : "hidden"
+            })
+            $("#detail_td").css({
+                "border-color" : "#d3d3d3"
+
+            })
+            $("#review_td").css({
+                "border-color" : "#d3d3d3"
+            });
+        });
+
+
     });
 
 
@@ -329,5 +406,8 @@
         }
         sum.value = parseInt(hm.value) * sell_price;
     }
+
+
+
 </script>
 </html>
