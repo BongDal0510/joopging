@@ -63,7 +63,7 @@
         width: 62%;
         text-align: center;
         margin: auto;
-        border-color: black;
+        border-color: #d3d3d3;
         border: solid 1px;
 
 
@@ -72,6 +72,12 @@
     }
     .navbutton{
         border: solid 1px;
+        border-color: #d3d3d3;
+
+    }
+
+    .nav_a{
+        text-decoration-line: none;
     }
 </style>
 <head>
@@ -168,17 +174,16 @@
         <hr align="center" style="border: solid 1px green; width: 100%;">
         <nav>
             <table class="navtable">
-                <tr>
-                    <td class="navbutton">상세정보</td>
-                    <td class="navbutton">상품후기</td>
-                    <td class="navbutton">상품문의</td>
+                <tr style="background-color: #14a876;">
+                    <td class="navbutton"><a class="nav_a" href="#detail">상세정보</a></td>
+                    <td class="navbutton"><a class="nav_a" href="#review">상품후기</a></td>
+                    <td class="navbutton"><a class="nav_a" href="#qna">상품문의</a></td>
                 </tr>
             </table>
-
         </nav>
 
 
-        <div class="detail">
+        <div id="detail" class="detail">
             <img
                     style="text-algin: center; width: 550px; height: 500px; margin-top: 200px;"
                     src="/images/프라이탁.jpg">
@@ -193,7 +198,7 @@
                  src="/images/프라이탁정보2.jpg">
         </div>
 
-        <div class="board" style="margin-top: 200px; height: 200px;">
+        <div id ="review" class="board" style="margin-top: 200px; height: 200px;">
             <h2 style="text-align: center;">REVIEW</h2>
             <p style="text-align: center;">게시판 자리</p>
 
@@ -207,11 +212,11 @@
 
         </div>
 
-        <div class="board" style="margin-top: 200px; height: 200px;">
+        <div  id ="qna" class="board" style="margin-top: 200px; height: 200px;">
             <h2 style="text-align: center;">Q&A</h2>
             <p style="text-align: center;">Q&A 자리</p>
         </div>
-        <div class="Q&A_btn" style="text-align: center;">
+        <div  class="Q&A_btn" style="text-align: center;">
             <input class= "writebtn" type="button" value="WRITE">
             <input class= "listbtn" type="button" value="LIST" onclick="">
 
