@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div id="header" name="header">
+<div id="header" name="header" style="position: fixed; width: 100%; z-index: 99999;">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
@@ -54,17 +54,18 @@
 
         #nav > ul > li {
             margin: 0 !important;
+            padding-left: 0;
         }
 
-        #menubar > li.current > a {
-            background: none !important;
-            color: #5d5d5d !important;
-        }
+        /*#menubar > li.current > a {*/
+        /*    background: none !important;*/
+        /*    color: #5d5d5d !important;*/
+        /*}*/
 
-        #menubar > li.current > a:hover {
-            color: #ffffff !important;
-            background: #0b871e !important;
-        }
+        /*#menubar > li.current > a:hover {*/
+        /*    color: #ffffff;*/
+        /*    background: #0b871e;*/
+        /*}*/
 
         .rightSupHeader {
             font-family: 'BMJUA';
@@ -90,7 +91,7 @@
             text-align: right;
         }
 
-        #gapRemover > li > a:hover {
+        #gapRemover > li:hover > a {
             color: #0b871e !important;
             background: none !important;
         }
@@ -119,7 +120,7 @@
             <div style="text-align: right; padding-right: 11%;">
                 <nav id="nav" class="rightSupNav">
                     <ul id="gapRemover">
-                        <li>☀ &nbsp 10.18 &nbsp 8ºC</li>
+                        <li style="padding-right:0.5em">☀ &nbsp 10.18 &nbsp 8ºC</li>
                         <li><a href="/member/login">로그인</a></li>
                         <li><a href="no-sidebar.html">장바구니</a></li>
                         <li><a href="no-sidebar.html">마이페이지</a></li>
@@ -142,7 +143,7 @@
             <div id="main_menu">
                 <nav id="nav" class="mainNavMiddle">
                     <ul id="menubar">
-                        <li class="current"><a href="">소개</a></li>
+                        <li><a href="#">소개</a></li>
                         <li><a href="#">플로깅</a></li>
                         <li><a href="#">샵</a></li>
                         <li><a href="/main/event">이벤트</a></li>
