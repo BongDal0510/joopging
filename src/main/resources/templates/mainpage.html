@@ -23,7 +23,7 @@
 
         /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
         .section .slidewrap {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             overflow: hidden;
         }
@@ -53,7 +53,6 @@
         .section .slidelist label {
             position: absolute;
             z-index: 1;
-            top: 50%;
             transform: translateY(-50%);
             padding: 50px;
             cursor: pointer;
@@ -84,32 +83,32 @@
         /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
         .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
         {
-            left: 30px;
+            left: 1px;
             transition: all .35s ease .5s;
         } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
         {
-            right: 30px;
+            right: 1px;
             transition: all .35s ease .5s;
         } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
         {
-            left: 30px;
+            left: 1px;
             transition: all .35s ease .5s;
         } /* 2번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right
         {
-            right: 30px;
+            right: 1px;
             transition: all .35s ease .5s;
         } /* 2번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left
         {
-            left: 30px;
+            left: 1px;
             transition: all .35s ease .5s;
         } /* 3번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
         .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right
         {
-            right: 30px;
+            right: 1px;
             transition: all .35s ease .5s;
         } /* 3번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
 
@@ -117,8 +116,8 @@
 </head>
 
 <body class="homepage is-preload">
-    <div id="main_header"></div>
-    <div id="page-wrapper">
+<div id="main_header"></div>
+<div id="page-wrapper">
         <div class="section" style="background-color: #ffffff;">
             <input type="radio" name="slide" id="slide01" checked>
             <input type="radio" name="slide" id="slide02">
@@ -126,14 +125,19 @@
 
         <div class="slidewrap">
             <ul class="slidelist" style=height:400px;margin-bottom:85px;margin-top:-140px;>
-                <li><a> <label for="slide03" class="left"></label> <img
-                        src="/images/플로깅.png"> <label for="slide02" class="right"></label>
+                <li><a>
+                    <label for="slide03" class="left" style="top: 31%;"></label>
+                    <img src="/images/플로깅.png">
+                    <label for="slide02" class="right" style="top: 31%;"></label>
                 </a></li>
-                <li><a> <label for="slide01" class="left"></label>
-                    <img src="/images/이벤트예시사진.jpg"> <label for="slide03" class="right"></label>
+                <li><a>
+                    <label for="slide01" class="left" style="top: 28%;"></label>
+                    <img src="/images/이벤트예시사진.jpg">
+                    <label for="slide03" class="right" style="top: 28%;"></label>
                 </a></li>
-                <li><a> <label for="slide02" class="left"></label>
-                    <img src="/images/이벤트예시2.jpg"> <label for="slide01" class="right"></label>
+                <li><a> <label for="slide02" class="left" style="top: 24%;"></label>
+                    <img src="/images/이벤트예시2.jpg">
+                    <label for="slide01" class="right" style="top: 24%;"></label>
                 </a></li>
             </ul>
         </div>
@@ -148,9 +152,10 @@
 
                     <!-- Portfolio -->
                     <section>
-                        <header class="major">
+                        <hr>
+                        <div style="text-align: center; margin-bottom: 2em;">
                             <h2>9월 플로깅</h2>
-                        </header>
+                        </div>
                         <div class="row">
                             <div class="col-4 col-6-medium col-12-small">
                                 <section class="box">
@@ -213,9 +218,10 @@
                 <div class="col-12">
                     <!-- Blog -->
                     <section>
-                        <header class="major">
+                        <hr>
+                        <div style="text-align: center; margin-bottom: 2em;">
                             <h2>플로깅이 처음이신가요?</h2>
-                        </header>
+                        </div>
                         <p align="middle">
                             <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </p>
@@ -231,11 +237,7 @@
     <script src="/js/breakpoints.min.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
-    <script type="text/javascript">
-    $(function(){
-       $("#main_header").load("header #header");
-       $("#main_footer").load("footer #footer");
-    });
-    </script>
+    <script type="text/javascript"></script>
+    <script src="/js/header.js"></script>
 </body>
 </html>

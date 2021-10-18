@@ -26,4 +26,14 @@ public class memberController {
         return "join";
     }
 
+    @GetMapping("header")
+    public String header() {
+        return "header";
+    }
+
+    @GetMapping("footer")
+    public String footer() {
+        return "footer";
+    }
+
 }
