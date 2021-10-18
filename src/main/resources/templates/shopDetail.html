@@ -54,6 +54,25 @@
     .allbox {
         margin-bottom: 100px;
     }
+    nav{
+        position:-webkit-sticky;
+        position:sticky;
+        top:0;
+    }
+    .navtable{
+        width: 62%;
+        text-align: center;
+        margin: auto;
+        border-color: black;
+        border: solid 1px;
+
+
+
+
+    }
+    .navbutton{
+        border: solid 1px;
+    }
 </style>
 <head>
     <title>Stock_detail</title>
@@ -70,7 +89,7 @@
 <div id="page-wrapper">
 
     <!-- Header -->
-
+    <div id="main_header"></div>
     <!-- Main -->
     <section id="main">
 
@@ -147,7 +166,16 @@
 
 
         <hr align="center" style="border: solid 1px green; width: 100%;">
+        <nav>
+            <table class="navtable">
+                <tr>
+                    <td class="navbutton">상세정보</td>
+                    <td class="navbutton">상품후기</td>
+                    <td class="navbutton">상품문의</td>
+                </tr>
+            </table>
 
+        </nav>
 
 
         <div class="detail">
