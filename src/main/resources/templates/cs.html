@@ -55,7 +55,7 @@
 
         #main {
             padding: 0 17% !important;
-            margin: 4em 0 4em 0;
+            margin: 8.3em 0 4em 0;
         }
 
         div > h2 {
@@ -93,7 +93,6 @@
 
         .hidden_content {
             background: #f4f4f5;
-            display: none;
         }
 
         #inquiry_guide {
@@ -118,7 +117,7 @@
     </style>
 </head>
 <body class="is-preload" style="margin: 0;">
-<div id="main_header"></div>
+<div id="main_header" style="display: flex"></div>
 <!-- Main -->
 <div id="main">
     <div class="wrapper">
@@ -201,14 +200,25 @@
 <div id="main_footer"></div>
 </body>
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.hidden_content').hide();
+    });
+
     function showcontent(title){
         let getClass = $(title).attr('class');
         var hiddenContent = $('.hidden_content');
 
         $.each(hiddenContent, function(index, item){
-                if(item.id == getClass){
-                    item.css('display', 'block');
+            if(item.id == getClass){
+                if(this.style.display == 'none') {
+                    $(this).show(); //보영님 사랑해
+                }else{
+                    $(this).hide();
                 }
+            }else{
+                $(this).hide();
+            }
         });
     }
 </script>

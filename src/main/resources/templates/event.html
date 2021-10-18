@@ -126,10 +126,8 @@
 
         .grade{
             float:right;
-            width: 50px;
-            height: 50px;
-            margin-right:10px;
-            margin-bottom:10px;
+            width: 40px;
+            height: 40px;
         }
 
         .event_subtitle {
@@ -142,13 +140,13 @@
 
         #sideBarInner{
             float: left;
-            margin-top: 30%;
+            margin-top: 9.3em;
             margin-left: 10%;
             width: 250px;
-            height: 280px;
-            margin-right: 2%;
+            height: 250px;
             border: 1px solid #e6e6e6;
             padding: 30px 20px;
+            font-family: 'S-CoreDream-3Light';
         }
 
         #sideBarDelivery{
@@ -160,11 +158,15 @@
             float: right;
         }
 
+        .container {
+            margin-top: 5.3em !important;
+        }
+
     </style>
 </head>
 
 <body class="homepage is-preload">
-<div id="main_header"></div>
+<div id="main_header" style="display: flex"></div>
 <div style="position: fixed;">
 <!-- 회원정보 사이드바 -->
     <div id="sideBarInner">
@@ -172,11 +174,11 @@
             <div>
                 <img class="grade" src="/images/새싹.png">
             </div>
-            <div>
-                <strong>최원준 님</strong>
+            <div style="line-height: 40px; font-family: 'S-CoreDream-4Regular';">
+                <strong style="font-weight: 700">최워너원 님</strong>
             </div>
         </div>
-        <hr>
+        <hr style="margin:1em 0 1em 0;">
         <div id="sideBarDelivery"style="padding: 10px 0;">
             <div>
                 <strong>참여횟수</strong>
@@ -214,28 +216,11 @@
                     <div class="row">
                         <div class="col-4 col-6-medium col-12-small">
                             <section class="box">
-                                <a href="#" class="image featured"><img
-                                        style =height:330px; src="/images/출석.png" alt="" /></a>
-                                <header>
-                                    <h3>
-                                        9월 출석 이벤트
-                                    </h3>
-                                    <p>9월 01일-9월 30일</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="" class="button alt">참여하기</a></li>
-                                        </ul>
-                                    </footer>
-                            </section>
-                        </div>
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="box">
                                 <a href="" class="image featured"><img
-                                        style =height:330px; src="/images/신규가입.png" alt="" /></a>
+                                        style =height:330px; src="/images/출석.png" alt="" /></a>
                                 <header id=center>
                                     <h3>
-                                        9월 신규가입 이벤트
-
+                                        9월 출석 이벤트
                                     </h3>
                                 </header>
                                 <p>9월 01일-09월 30일</p>
@@ -246,6 +231,24 @@
                                 </footer>
                             </section>
                         </div>
+                        <div class="col-4 col-6-medium col-12-small">
+                            <section class="box">
+                                <a href="" class="image featured"><img
+                                        style =height:330px; src="/images/신규가입.png" alt="" /></a>
+                                <header id=center>
+                                    <h3>
+                                        9월 신규가입 이벤트
+                                    </h3>
+                                </header>
+                                <p>9월 01일-09월 30일</p>
+                                <footer>
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">참여하기</a></li>
+                                    </ul>
+                                </footer>
+                            </section>
+                        </div>
+
                         <div class="col-4 col-6-medium col-12-small">
                             <section class="box">
                                 <a href="" class="image featured"><img
