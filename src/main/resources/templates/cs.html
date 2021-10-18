@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Board</title>
+    <title>고객센터</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
     <style>
         @font-face {
             font-family: 'yg-jalnan';
@@ -112,8 +114,6 @@
         #inquiry_button:hover {
             background: #5d5d5d;
         }
-
-
     </style>
 </head>
 <body class="is-preload" style="margin: 0;">
@@ -200,7 +200,6 @@
 <div id="main_footer"></div>
 </body>
 <script type="text/javascript">
-
     $(document).ready(function(){
         $('.hidden_content').hide();
     });
@@ -212,7 +211,7 @@
         $.each(hiddenContent, function(index, item){
             if(item.id == getClass){
                 if(this.style.display == 'none') {
-                    $(this).show(); //보영님 사랑해
+                    $(this).show();
                 }else{
                     $(this).hide();
                 }

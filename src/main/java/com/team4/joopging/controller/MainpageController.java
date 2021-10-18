@@ -36,4 +36,9 @@ public class MainpageController {
     public String cs() {
         return "cs";
     }
+
+    @GetMapping("eventInfo")
+    public String eventInfo() {
+        return "eventInfo";
+    }
 }
