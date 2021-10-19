@@ -106,6 +106,52 @@
         font-family: 'S-CoreDream-3Light';
         text-decoration-line: none;
     }
+    h3{
+        font-family: 'S-CoreDream-3Light';
+        text-align: left;
+
+    }
+    #review_div{
+        width: 62%;
+        margin-left: 20%;
+        margin-top: 20%;
+    }
+    #qna_div{
+        width: 62%;
+        margin-left: 20%;
+        margin-top: 20%;
+    }
+    .review_div_info {
+        background-color: #f9f9f9;
+        display: flex;
+        padding: 25px 20px;
+        justify-content: space-around;
+        font-family: 'S-CoreDream-3Light';
+    }
+    .qna_div_info{
+        background-color: #f9f9f9;
+        font-family: 'S-CoreDream-3Light';
+        padding: 20px 20px;
+        font-size: 12px;
+
+    }
+    .point{
+        color:green;
+        font-weight: bold;
+    }
+
+    #review_notice{
+        font-size: 13px;
+    }
+    #review_btn{
+        font-family: 'S-CoreDream-3Light';
+
+    }
+    .container{
+        font-family: 'S-CoreDream-3Light';
+
+    }
+
 </style>
 <head>
     <title>Stock_detail</title>
@@ -150,7 +196,7 @@
                     - 남녀공용<br>
                     - 전면 소뿔단추 활용<br>
                     - 프라이탁의 시그니쳐 로고<br>
-                    <h4>COlOR : GREEN, WHITE</h4>
+                    <h4>COLOR : GREEN, WHITE</h4>
                     </p>
                 </div>
 
@@ -201,6 +247,7 @@
 
 
         <hr align="center" style="border: solid 1px green; width: 100%;">
+        <!--네비게이션 메뉴-->
         <nav>
             <table class="navtable">
                 <tr style="background-color: whitesmoke;">
@@ -208,10 +255,10 @@
                         <a id="detail_a" class="nav_a" href="#detail">상세정보</a>
                     </td>
                     <td id="review_td" class="navbutton">
-                        <a id="review_a" class="nav_a"  href="#review">상품후기</a>
+                        <a id="review_a" class="nav_a"  href="#review_div">상품후기</a>
                     </td>
                     <td id="qna_td" class="navbutton">
-                        <a id="qna_a" class="nav_a"  href="#qna">상품문의</a>
+                        <a id="qna_a" class="nav_a"  href="#qna_div">상품문의</a>
                     </td>
                 </tr>
             </table>
@@ -233,31 +280,45 @@
                  src="/images/프라이탁정보2.jpg">
         </div>
 
-        <div id ="review" class="board" style="margin-top: 200px; height: 200px;">
-            <h2 style="text-align: center;">REVIEW</h2>
-            <p style="text-align: center;">게시판 자리</p>
+        <div id="review_div">
+            <h3 id="review_h3">상품후기</h3>
+            <hr align="center" style="border: solid 1px green; width: 100%;">
 
-
-
+            <div class="review_div_info">
+                <div>
+                    <p id="review_notice">고객님의 소중한 상품후기에 <span class="point">포인트</span>를 드립니다.<br>
+                    다만 관련법에 위반이 되는표현이 포함된 경우,<br>
+                    부득이 삭제될 수 있으니 양해 바랍니다.</p>
+                    <input id="review_btn" type="button" value="후기작성" onclick="">
+                </div>
+                 <div>
+                    <img src="/images/일반리뷰.png">
+                    <p style="text-align: center">일반 후기 등록시 <br>
+                        <span class="point">100Point</span> 지급
+                    </p>
+                 </div>
+                 <div>
+                    <img src="/images/포토리뷰.png">
+                     <p style="text-align: center">포토 후기 등록시 <br>
+                         <span class="point">300Point</span> 지급
+                     </p>
+                 </div>
+            </div>
         </div>
 
-        <div class="board_btn" style="text-align: center;">
-            <input class= "writebtn" type="button" value="WRITE" onclick="">
-            <input class= "listbtn" type="button" value="LIST" onclick="">
+        <div id="qna_div">
+            <h3>상품문의</h3>
+            <hr align="center" style="border: solid 1px green; width: 100%;">
 
+            <div class="qna_div_info">
+                <div>
+                    <p id="qna_notice">문의하신 내역을 확인하시려면 <span class="point">마이페이지 > 문의내역 > 상품문의내역</span>에서 확인하실 수 있습니다.<br>
+                        상품에 대한 궁금한 사항을 남겨 주시면, 신속히 답변 드리겠습니다.
+                    </p>
+                </div>
+
+            </div>
         </div>
-
-        <div  id ="qna" class="board" style="margin-top: 200px; height: 200px;">
-            <h2 style="text-align: center;">Q&A</h2>
-            <p style="text-align: center;">Q&A 자리</p>
-        </div>
-        <div  class="Q&A_btn" style="text-align: center;">
-            <input class= "writebtn" type="button" value="WRITE">
-            <input class= "listbtn" type="button" value="LIST" onclick="">
-
-        </div>
-
-
     </section>
 
 
@@ -306,44 +367,54 @@
         });
 
         /* a 태그를 눌렀을 때 주는 효과*/
+        /* 상세보기 눌렀을 때 효과 */
         $("#detail_a").click(function(){
             $("#detail_td").css({
+                "border-top": "solid 3px",
                 "border-top-color" : "green",
                 "border-bottom" : "hidden"
             })
             $("#review_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
 
             })
             $("#qna_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
 
             });
         });
-
+        /* 상품후기 눌렀을 때 효과 */
         $("#review_a").click(function(){
             $("#review_td").css({
+                "border-top": "solid 3px",
                 "border-top-color" : "green",
                 "border-bottom" : "hidden"
             })
             $("#detail_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
             })
             $("#qna_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
             });
         });
-
+        /* 상품문의 눌렀을 때 효과 */
         $("#qna_a").click(function(){
             $("#qna_td").css({
+                "border-top": "solid 3px",
                 "border-top-color" : "green",
                 "border-bottom" : "hidden"
             })
             $("#detail_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
 
             })
             $("#review_td").css({
+                "border-top" : "solid 1px",
                 "border-color" : "#d3d3d3"
             });
         });
@@ -351,25 +422,7 @@
 
     });
 
-
-
-
-
-    $(".writebtn").click(function() {
-
-        alert("준비중입니다");
-        return false;
-
-    });
-
-
-    $(".listbtn").click(function() {
-
-        alert("준비중입니다");
-        return false;
-
-    });
-
+    // 수량 조종하는 함수
     var sell_price;
     var amount;
 
@@ -406,7 +459,6 @@
         }
         sum.value = parseInt(hm.value) * sell_price;
     }
-
 
 
 </script>
