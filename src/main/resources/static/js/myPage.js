@@ -9,7 +9,6 @@ $(".list").each(function(index, item){
 });
 
 $("#myPageMainList").css("color", "#94c477");
-$("#myPageMainList").text("▶ "+tempList[0]);
 
 $(".list").on("click", function(){
     var value = $(this).text();
@@ -29,16 +28,12 @@ $(".list").on("click", function(){
         }
         if(check){
             $(item).css("color", "#94c477");
-            $(item).text("▶ " + value);
             if(value==tempList[3]){
                 $(".payment").show();
                 $(".hiddenList").not($(".payment")).hide();
             }else if(value==tempList[4]){
                 $(".member").show();
                 $(".hiddenList").not($(".member")).hide();
-            }else if(value==tempList[5]){
-                $(".writing").show();
-                $(".hiddenList").not($(".writing")).hide();
             }
             else{
                 $(".hiddenList").hide();
@@ -91,18 +86,8 @@ $('li').on("click", function(){
         $(".imp-medium").not($("#deleteInfo")).hide();
     }
     else if(value.includes("게시글")){
-        $(".writing").not($(this)).css("color","#5d5d5d");
-        $("#writingMainList").css("color","#94c477");
-
         $("#myWriting").show();
         $(".imp-medium").not($("#myWriting")).hide();
-    }
-    else if(value=="- 내 댓글"){
-        $(this).css("color","#94c477");
-        $(".writing").not($(this)).css("color","#5d5d5d");
-
-        $("#myComment").show();
-        $(".imp-medium").not($("#myComment")).hide();
     }
     else if(value.includes("문의하기")){
         $("#question").show();
