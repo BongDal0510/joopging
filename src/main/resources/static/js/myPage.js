@@ -7,6 +7,7 @@ var tempList= new Array;
 $(".list").each(function(index, item){
     tempList.push($(item).text());
 });
+console.log(tempList);
 
 $("#myPageMainList").css("color", "#94c477");
 $("#myPageMainList").text("▶ "+tempList[0]);
@@ -33,10 +34,17 @@ $(".list").on("click", function(){
             if(value==tempList[2]){
                 $(".payment").show();
                 $(".member").hide();
+                $(".writing").hide();
             }else if(value==tempList[3]){
                 $(".payment").hide();
                 $(".member").show();
-            }else{
+                $(".writing").hide();
+            }else if(value==tempList[4]){
+                $(".payment").hide();
+                $(".member").hide();
+                $(".writing").show();
+            }
+            else{
                 $(".payment").hide();
                 $(".member").hide();
             }
