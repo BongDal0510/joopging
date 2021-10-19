@@ -7,7 +7,6 @@ var tempList= new Array;
 $(".list").each(function(index, item){
     tempList.push($(item).text());
 });
-console.log(tempList.values());
 
 $("#myPageMainList").css("color", "#94c477");
 $("#myPageMainList").text("▶ "+tempList[0]);
@@ -31,22 +30,18 @@ $(".list").on("click", function(){
         if(check){
             $(item).css("color", "#94c477");
             $(item).text("▶ " + value);
-            if(value==tempList[2]){
+            if(value==tempList[3]){
                 $(".payment").show();
-                $(".member").hide();
-                $(".writing").hide();
-            }else if(value==tempList[3]){
-                $(".payment").hide();
-                $(".member").show();
-                $(".writing").hide();
+                $(".hiddenList").not($(".payment")).hide();
             }else if(value==tempList[4]){
-                $(".payment").hide();
-                $(".member").hide();
+                $(".member").show();
+                $(".hiddenList").not($(".member")).hide();
+            }else if(value==tempList[5]){
                 $(".writing").show();
+                $(".hiddenList").not($(".writing")).hide();
             }
             else{
-                $(".payment").hide();
-                $(".member").hide();
+                $(".hiddenList").hide();
             }
         }
     });
@@ -60,6 +55,10 @@ $('li').on("click", function(){
         $(".imp-medium").not($("#myHome")).hide();
     }
     else if(value.includes("플로깅 예약 확인")){
+        $("#checkPoint").show();
+        $(".imp-medium").not($("#checkPoint")).hide();
+    }
+    else if(value.includes("포인트 내역")){
         $("#checkPloggingMain").show();
         $(".imp-medium").not($("#checkPloggingMain")).hide();
     }
@@ -90,6 +89,20 @@ $('li').on("click", function(){
 
         $("#deleteInfo").show();
         $(".imp-medium").not($("#deleteInfo")).hide();
+    }
+    else if(value.includes("내 글 관리")){
+        $(".writing").not($(this)).css("color","#5d5d5d");
+        $("#writingMainList").css("color","#94c477");
+
+        $("#myWriting").show();
+        $(".imp-medium").not($("#myWriting")).hide();
+    }
+    else if(value=="- 내 댓글"){
+        $(this).css("color","#94c477");
+        $(".writing").not($(this)).css("color","#5d5d5d");
+
+        $("#myComment").show();
+        $(".imp-medium").not($("#myComment")).hide();
     }
     else if(value.includes("문의하기")){
         $("#question").show();
