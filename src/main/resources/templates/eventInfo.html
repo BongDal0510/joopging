@@ -29,13 +29,18 @@
             height: 40px;
         }
 
+        #supersideBar {
+            position: fixed;
+            width: 260px;
+            margin-left: 6%;
+            margin-top: 7.5%;
+        }
+
         #sideBarInner{
-            float: left;
-            margin-top: 9.3em;
-            margin-left: 10%;
-            width: 250px;
+            width: 100%;
             height: 250px;
             border: 1px solid #e6e6e6;
+            border-radius: 20px;
             padding: 30px 20px;
             font-family: 'S-CoreDream-3Light';
         }
@@ -50,9 +55,17 @@
         }
 
         .container {
-            margin-top: 5.3em !important;
-            margin-left: 17%;
-            margin-right: 17%;
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 50%;
+            margin: auto;
+            margin-top: 4em;
         }
 
     </style>
@@ -60,7 +73,7 @@
 
 <body class="homepage is-preload" style="margin: 0;">
 <div id="main_header" style="display: flex"></div>
-<div style="position: fixed;">
+<div id="supersideBar">
     <!-- 회원정보 사이드바 -->
     <div id="sideBarInner">
         <div>
@@ -97,23 +110,18 @@
 
 <div class="container">
     <div class="box post">
-        <!-- 샘플 상세페이지 이미지 -->
-        <!-- 이미지는 한장으로 표현할 것 -->
-        <a href="#" class="image featured"><img src="/images/마포대교.png" style="width: 50%; margin: auto;"/></a>
-
-        <!-- 샘플 상세페이지 내용(텍스트) -->
-        <!-- 스프링 작업 후 데이터의 연산 필요 -->
+        <div>
+            <img class="eventImage" src="/images/마포대교.png"/>
+        </div>
         <header>
             <h2>마포대교 플로깅</h2>
         </header>
         <h4>마표대교에서 달려라! 주워라!</h4>
-
         <p>
             장소 : 마포대교<br> <br> 일시 : 2021-09-27 AM 10:00 ~ PM 13:00<br>
             <br> 내용 : 마포대교 일대 플로깅 켐페인 진행<br> <br> 참가비 : 2000원
             (예약 신청시 결제 페이지 이동)<br> <br>
         </p>
-
         <section>
             <header>
                 <h3>주의 사항</h3>
