@@ -26,13 +26,13 @@ public class ControllerTest {
 
     //  하위의 모튼 테스트가 실행되기 전에 실행되도록 한다.
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
 //  가짜 MVC에 WebApplicationContext를 전달한 후 환경을 생성한다.
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
-    public void testCommuList() throws Exception{           //Get 방식
+    public void testCommuList() throws Exception {           //Get 방식
         log.info(mockMvc.perform(MockMvcRequestBuilders.get("/commu/communityList")
                 .param("pageNum", "1")
                 .param("amount", "10")
@@ -40,8 +40,9 @@ public class ControllerTest {
                 .andReturn().getModelAndView().getModelMap().toString());
     }
 
+
     @Test
-    public void testRegisterCommu() throws Exception{
+    public void testRegisterCommu() throws Exception {
         String bno = mockMvc.perform(MockMvcRequestBuilders.post("/commu/communityRegister")
                 .param("commuTitle", "테스트 새 글 제목")
                 .param("commuContent", "테스트 새 글 내용")
@@ -52,17 +53,17 @@ public class ControllerTest {
     }
 
     @Test
-    public void testReadCommu() throws Exception{
+    public void testReadCommu() throws Exception {
         String commu = mockMvc.perform(MockMvcRequestBuilders.get("/commu/communityRead")
-                .param("commuBno", "7")
+                .param("commuBno", "10584076")
         ).andReturn().getModelAndView().getViewName();/*getModelMap().toString();*///모델 객체 있는거 확인했던거.
 
         log.info(commu);
     }
 
     @Test
-    public void testModify() throws Exception{
-        String result = mockMvc.perform(MockMvcRequestBuilders.post("/board/modify")
+    public void testModify() throws Exception {
+        String result = mockMvc.perform(MockMvcRequestBuilders.post("/commu/communityModify")
                 .param("bno", "7")
                 .param("title", "수정된 새 글 제목")
                 .param("content", "수정된 새 글 내용")
@@ -73,7 +74,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testRemove() throws Exception{
+    public void testRemove() throws Exception {
         String result = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
                 .param("bno", "7")).andReturn().getFlashMap().toString();
 
@@ -92,4 +93,5 @@ public class ControllerTest {
                 .andReturn().getModelAndView().getModelMap().toString();
         log.info(result);
     }
+
 }

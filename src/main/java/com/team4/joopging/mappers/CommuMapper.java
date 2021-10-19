@@ -28,4 +28,7 @@ public interface CommuMapper {
 
     //게시글 총 갯수
     public int getCommuTotal(Criteria criteria);
+
+    //게시글 조회수
+    public int updateCommuViewCnt(Long commuBno);
 }

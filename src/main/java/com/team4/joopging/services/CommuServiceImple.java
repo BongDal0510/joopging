@@ -41,4 +41,9 @@ public class CommuServiceImple implements CommuService{
 
     @Override
     public int getCommuTotal(Criteria criteria) { return commuDAO.getCommuTotal(criteria); }
+
+    @Override
+    public boolean updateCommuViewCnt(Long commuBno) { return commuDAO.updateCommuViewCnt(commuBno); }
+
+
 }

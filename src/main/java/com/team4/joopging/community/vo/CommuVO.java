@@ -12,4 +12,6 @@ public class CommuVO {
     private String commuWriter;
     private String commuRegDate;
     private String commuUpdateDate;
+    private Long commuViewCnt;
+    private int commuBoardStatus;
 }

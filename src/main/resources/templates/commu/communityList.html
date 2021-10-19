@@ -8,7 +8,6 @@
     <meta name="keywords" content=""/>
     <link rel="stylesheet" href="/css/community.css" type="text/css"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
@@ -46,12 +45,17 @@
             form[name='searchForm']{
                 overflow: hidden;}
         }
+        header.major{
+            border:none;
+        }
+
     </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
+<header id="commuHeaderWrapper">
    <div id="main_header"></div>
-
+</header>
 
 
 <!-- Main -->
@@ -86,7 +90,7 @@
                                 <th class="title">제목</th>
                                 <th class="writer">작성자</th>
                                 <th class="regDate">작성일</th>
-                                <th class="updateDate">수정일</th>
+                                <th class="viewCnt">조회수</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -96,7 +100,7 @@
                                     <td class="title"><a id="goRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>
-                                    <td class="updateDate" th:text="*{commuUpdateDate}"></td>
+                                    <td class="viewCnt" th:text="*{commuViewCnt}"></td>
                                 </tr>
                             </th:block>
                             </tbody>
