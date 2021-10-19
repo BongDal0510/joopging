@@ -7,7 +7,7 @@ var tempList= new Array;
 $(".list").each(function(index, item){
     tempList.push($(item).text());
 });
-console.log(tempList);
+console.log(tempList.values());
 
 $("#myPageMainList").css("color", "#94c477");
 $("#myPageMainList").text("▶ "+tempList[0]);
