@@ -16,7 +16,7 @@
 
     #main {
         background: #ffffff;
-        padding: 4em 0 2em 0 !important;
+        padding: 0px !important;
     }
 
     .big-width {display: block;}
@@ -36,7 +36,7 @@
         a.search{width: 100%;}
         form[name='searchForm']{
             overflow: hidden;}
-    }
+
     header.major{
         border:none;
     }
@@ -47,7 +47,7 @@
         font-family: S-CoreDream-3Light;
         display: none;
         margin: 0 auto;
-        padding-left: 0px;
+        padding-top: 5.1px;
         width: 65% !important;
     }
     div#deleteNotice{
@@ -57,6 +57,9 @@
     }
 
     div#list{
+        padding: 0px;
+        padding-left: 90px;
+        margin-top: 0px;
         width: 220px;
     }
 
@@ -75,6 +78,7 @@
     /*header*/
 
     .box.post header {
+        padding: 0px !important;
         margin: 0 0 2em 0;
     }
 
@@ -181,12 +185,21 @@
         font-family: S-CoreDream-3Light !important;
     }
 
+    input[id='postcodify_search_button'], input[id='changePw']{
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        background-color: #b3b3b3 !important;
+    }
+
+    form input[type=text]{
+        padding: 0.5em 0.7em !important;
+    }
+
+
     #ploggingAdv button{
         margin : 0px;
         padding: 5px 10px 5px 10px;
         font-size: 18px;
-        width: 180px;
-        height: 43px;
     }
 
     .changeButton{
@@ -197,10 +210,12 @@
 
 
     /* List */
-
+    ul{
+        padding-left: 0px !important;
+    }
 
     ul li {
-        padding-left: 2em;
+        padding-left: 0px !important;
         text-align: left;
     }
 
@@ -239,7 +254,6 @@
 
     #main {
         background: #ffffff;
-        padding: 1em 0 1em 0;
     }
 
     #main:before {
@@ -291,6 +305,8 @@
     }
 
     div.row{
+        margin-top: 10%;
+        margin-bottom: 5%;
         margin-left: 17%;
         margin-right: 17%;
     }
@@ -304,6 +320,8 @@
     @media screen and (max-width: 1680px) {
 
         div.row{
+            margin-top: 10%;
+            margin-bottom: 5%;
             margin-left: 17%;
             margin-right: 17%;
         }
@@ -319,6 +337,8 @@
 
     @media screen and (max-width: 1440px) {
         div.row{
+            margin-top: 10%;
+            margin-bottom: 5%;
             margin-left: 8%;
             margin-right: 8%;
         }
@@ -373,7 +393,7 @@
 <body class="homepage is-preload">
 <!-- 헤더 -->
 <header>
-    <div id="main_header"></div>
+    <div id="main_header" style="display: flex"></div>
 </header>
 <div id="page-wrapper">
 
@@ -631,7 +651,7 @@
                                     <th>비밀번호</th>
                                     <td style="display: flex;"><input type="password" id = "newPw" name="newMemberPw" style="display: none;">
                                         &nbsp;&nbsp;
-                                        <input type="button" id = "changePw" value="비밀번호 변경" style="background-color: #b3b3b3; font-size: 14px;">
+                                        <input type="button" id = "changePw" value="비밀번호 변경">
                                     </td>
                                 </tr>
                                 <tr>
@@ -699,7 +719,7 @@
                                     <td>
                                         <div style="margin: 0 5px 10px 0;">
                                             <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5" title="우편번호" maxlength="6" readonly="readonly" value="" style="width:88px; background:#fbfbfb; margin:0 5px 10px 0;">
-                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" style="font-weight: 500; font-size: 14px; background-color: #b3b3b3;" value="우편번호">
+                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" value="우편번호">
                                         </div>
                                         <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1" style="width:235px;margin-right:5px;background:#fbfbfb;">
                                         <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2" style="width:235px;margin-right:5px;background:#fbfbfb">
