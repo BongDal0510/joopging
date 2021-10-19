@@ -28,11 +28,11 @@
     <!--검색기능을 합치기 위해 MyBatis 동적 태그 사용-->
     <select id="getCommuList" resultType="commuVO">
         <![CDATA[
-        SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE
+        SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE,COMMUVIEWCNT, COMMUBOARDSTATUS
         FROM
             (
                 SELECT /*+ INDEX_DESC(TBL_COMMUBOARD PK_COMMUBOARD)*/
-                ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE
+                ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
                 FROM TBL_COMMUBOARD
                 WHERE
                         ]]>
@@ -69,7 +69,7 @@
 
     <!--특정 게시글 가져오기-->
     <select id="readCommu" parameterType="long" resultType="commuVO">
-		SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE
+		SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
 		FROM TBL_COMMUBOARD WHERE COMMUBNO = #{commuBno}
 	</select>
 
@@ -85,7 +85,7 @@
 		DELETE FROM TBL_COMMUBOARD
 		WHERE COMMUBNO = #{commuBno}
 	</delete>
-
+<!--전체 게시글 수-->
     <select id="getCommuTotal" resultType="_int">
         SELECT COUNT(COMMUBNO) FROM TBL_COMMUBOARD
         <where>
@@ -94,4 +94,11 @@
             </trim>
         </where>
     </select>
+
+    <!--조회수 조회-->
+    <update id="updateCommuViewCnt">
+		UPDATE TBL_COMMUBOARD
+		SET COMMUVIEWCNT = COMMUVIEWCNT + 1
+		WHERE COMMUBNO = #{commuBno}
+	</update>
 </mapper>

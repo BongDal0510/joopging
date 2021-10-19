@@ -35,6 +35,7 @@ public class CommuController {
         return "commu/communityList";
     }
 
+
     @PostMapping("communityRegister")
     public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr) {
         log.info("--------------------------------");
@@ -51,21 +52,23 @@ public class CommuController {
     }
 
     @GetMapping({"communityRead", "communityModify"})
-    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, HttpServletRequest request) {
+    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, CommuVO commuVO, HttpServletRequest request) {
         String reqURI = request.getRequestURI();
         String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
         //read 요청시 read 출력
         //modify 요청시 modify 출력
         log.info("--------------------------------");
         log.info(reqType + " : " + commuBno);
+        log.info("viewCnt : " + commuVO.getCommuViewCnt());
         log.info("--------------------------------");
-
         model.addAttribute("commu", commuService.getCommu(commuBno));
+        model.addAttribute("commuVO", commuService.updateCommuViewCnt(commuBno));
         model.addAttribute("criteria", criteria);
     }
 
+//조회수 증가 /commu/communityRead POST bno
 
-
+//조회 = read할때 같이 진행되야하는데
     //modify 요청을 처리할 수 있는 비지니스 로직 작성
     //수정 성공시 result에 "success"를 담아서 전달한다.
     //단위 테스트로 View에 전달할 파라미터를 조회한다.

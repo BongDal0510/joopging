@@ -32,6 +32,16 @@ public class CommuMapperTest {
         mapper.insertCommu(commu);
 
     }
+
+    @Test
+    public void testUpdateCommuViewCnt(){
+        if (mapper.readCommu(10518689L) == null) {
+            log.info("*****No such Board*****");
+        } else {
+            log.info("Update Count : " + mapper.updateCommuViewCnt(10518689L));
+        }
+    }
+
     @Test
     public void testInsertSelectKey_commuBno() {
 
