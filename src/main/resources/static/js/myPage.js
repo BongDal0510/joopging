@@ -90,7 +90,7 @@ $('li').on("click", function(){
         $("#deleteInfo").show();
         $(".imp-medium").not($("#deleteInfo")).hide();
     }
-    else if(value.includes("내 글 관리")){
+    else if(value.includes("내 게시글")){
         $(".writing").not($(this)).css("color","#5d5d5d");
         $("#writingMainList").css("color","#94c477");
 
