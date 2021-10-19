@@ -1,10 +1,106 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>아이디 찾깅</title>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
     <style>
+        /* Button */
+
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        button,
+        .button {
+            -webkit-appearance: none;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+            background: #14a876;
+            color: #fff !important;
+            font-weight: 700;
+            outline: 0;
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+            text-align: center;
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+        }
+
+        input[type="button"]:hover,
+        input[type="submit"]:hover,
+        input[type="reset"]:hover,
+        button:hover,
+        .button:hover {
+            background: #24b886;
+        }
+
+        input[type="button"]:active,
+        input[type="submit"]:active,
+        input[type="reset"]:active,
+        button:active,
+        .button:active {
+            background: #049866;
+        }
+
+        input[type="button"].alt,
+        input[type="submit"].alt,
+        input[type="reset"].alt,
+        button.alt,
+        .button.alt {
+            background: #0b871e;
+        }
+
+        input[type="button"].alt:hover,
+        input[type="submit"].alt:hover,
+        input[type="reset"].alt:hover,
+        button.alt:hover,
+        .button.alt:hover {
+            background: #066514;
+        }
+
+        input[type="button"].alt:active,
+        input[type="submit"].alt:active,
+        input[type="reset"].alt:active,
+        button.alt:active,
+        .button.alt:active {
+            background: #151112;
+        }
+
+        input[type="button"].icon:before,
+        input[type="submit"].icon:before,
+        input[type="reset"].icon:before,
+        button.icon:before,
+        .button.icon:before {
+            opacity: 0.35;
+            position: relative;
+            top: 0.05em;
+            margin-right: 0.75em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.5em;
+            padding: 0.75em 1.5em 0.75em 1.5em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+        }
+
         .out {
             width: 400px;
             height: 550px;
@@ -17,9 +113,12 @@
             border: solid 1px #dddddd;
             border-radius: 5px;
         }
+
+        p{
+            color:#5d5d5d;
+        }
     </style>
 </head>
-<link rel="stylesheet" href="/css/main.css" type="text/css"/>
 
 <body>
 <div class="out">
@@ -31,49 +130,60 @@
     <hr>
 
     <!--폼 태그-->
-    <form action="member/searchId" name="actionSubmit">
-        <div class="col-6 col-12-xsmall" style="width:100%" id="div">
+    <form name="findId" id="findId" method="post">
+        <br>
 
+            <!--이름-->
             <p style="margin:0;">
                 이름 <span id="idCheck_text" style="font-size:0.7em;"></span>
             </p>
             <input class="line" type="text" name="member_name" id="member_name" value="" placeholder="성명입력" style="width:100%; height:50px;"/>
+            <br>
+            <br>
 
+            <!--생년월일-->
             <p style="margin:0;">
                 생년월일 / 성별 <span id="gender_text" style="font-size:0.7em;"></span>
             </p>
-            <input class="line" type="text" name="member_birth" id="member_birth" value="" placeholder="생년월일"
-                   style="width:40%; height:50px;"/>
-            -
-            <input class="line" type="text" name="member_gender" id="member_gender" style="width:10%; height:50px;"/>
-            ******
+            <div>
+                <input class="line" type="text" name="member_birth" id="member_birth" placeholder="생년월일" style="width:40%; height:50px;" maxlength="6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                -
+                <input class="line" type="text" name="member_gender" id="member_gender" style="width:10%; height:50px;" maxlength="1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                ******
+            </div>
+            <br>
 
+            <!--전화번호-->
             <p style="margin:0;">
                 휴대폰번호 <span id="phoneCheck_text" style="font-size:0.7em;"></span>
-                <input class="line" type="text" name="member_id" id="member_id" value="" placeholder="숫자만 입력" style="width:100%; height:50px;" maxlength="11"/>
+            </p>
+            <input class="line" type="text" name="member_phone" id="member_phone" value="" placeholder="숫자만 입력" style="width:100%; height:50px;" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+            <br>
+            <br>
 
-            <div>
-                <button type="button" value="완료" class="primary" onclick="certifyId()"
-                        style="width:150px; height:50px; background:#94c477;">완료
-                </button>
-                <span style="padding:10px"></span>
-                <button type="button" value="취소" class="primary" onclick="window.close()"
-                        style="width:150px; height:50px; background:#94c477;">취소
+            <!--완료버튼-->
+            <div style="text-align: center;">
+                <button type="button" value="완료" class="primary" onclick="certifyId()" style="width:150px; height:50px; background:#94c477;">
+                    완료
                 </button>
 
+                <!--그냥 띄어쓰기-->
+                <span style="padding:1px"></span>
+
+                <button type="button" value="취소" class="primary" onclick="window.close()" style="width:150px; height:50px; background:#94c477;">
+                    취소
+                </button>
+
+                <!--데이터 전송을 위한 input태그-->
                 <input type="hidden" id="memberName" name="memberName" readonly/>
                 <input type="hidden" id="randomNum" name="randomNum" readonly/>
             </div>
 
-        </div>
     </form>
-
 </div>
-
 </body>
 <script src="/js/findId.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
 <script type="text/javascript"></script>
-<script src="/js/header.js"></script>
 </html>
