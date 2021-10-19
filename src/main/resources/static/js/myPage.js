@@ -55,12 +55,12 @@ $('li').on("click", function(){
         $(".imp-medium").not($("#myHome")).hide();
     }
     else if(value.includes("플로깅 예약 확인")){
-        $("#checkPoint").show();
-        $(".imp-medium").not($("#checkPoint")).hide();
-    }
-    else if(value.includes("포인트 내역")){
         $("#checkPloggingMain").show();
         $(".imp-medium").not($("#checkPloggingMain")).hide();
+    }
+    else if(value.includes("포인트 내역")){
+        $("#checkPoint").show();
+        $(".imp-medium").not($("#checkPoint")).hide();
     }
     else if(value.includes("내 상품")){
         $(".payment").not($(this)).css("color","#5d5d5d");
