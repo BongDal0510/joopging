@@ -1,15 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <div id="main_header"></div>
-    <title>Untitled</title>
+    <title>이벤트</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
     <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* 브라우저 마진과 패딩 리셋 */
         * {
             margin: 0;
@@ -21,249 +41,284 @@
             display: none;
         }
 
-        /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
-        .section .slidewrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
+        .event_subtitle {
+            text-align: center;
+            margin-bottom: 2em;
+            margin-top: 5%;
         }
 
-        .section .slidelist {
-            white-space: nowrap;
-            font-size: 0;
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+            width: auto !important;
         }
 
-        .section .slidelist>li {
-            display: inline-block;
-            vertical-align: middle;
-            width: 100%;
-            transition: all .5s;
-        }
-
-        .section .slidelist>li>a {
-            display: block;
-            position: relative;
-            overflow: hidden;
-        } /* 화살표 화면 밖으로 나가면 안보이도록 OVERFLOW로 가림처리 */
-        .section .slidelist>li>a img {
-            width: 100%;
-        }
-
-        /* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
-        .section .slidelist label {
-            position: absolute;
-            z-index: 1;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 50px;
-            cursor: pointer;
-        }
-
-        .section .slidelist .left {
-            left: -300px;
-            background: url('/images/left.png') center center/100% no-repeat;
-        } /* LEFT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
-        .section .slidelist .right {
-            right: -300px;
-            background: url('/images/right.png') center center/100% no-repeat;
-        } /* RIGHT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
-
-        /* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
-        .section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
-            transform: translateX(0%);
-        }
-
-        .section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
-            transform: translateX(-100%);
-        }
-
-        .section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
-            transform: translateX(-200%);
-        }
-
-        /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
-        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
-        {
-            left: 30px;
-            transition: all .35s ease .5s;
-        } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
-        {
-            right: 30px;
-            transition: all .35s ease .5s;
-        } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
-        {
-            left: 30px;
-            transition: all .35s ease .5s;
-        } /* 2번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right
-        {
-            right: 30px;
-            transition: all .35s ease .5s;
-        } /* 2번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left
-        {
-            left: 30px;
-            transition: all .35s ease .5s;
-        } /* 3번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right
-        {
-            right: 30px;
-            transition: all .35s ease .5s;
-        } /* 3번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
-
+        /* 사이드바 회원정보 관련 CSS*/
         .grade{
             float:right;
-            width: 50px;
-            height: 50px;
-            margin-right:10px;
-            margin-bottom:10px;
+            width: 40px;
+            height: 40px;
         }
 
-        .round_grade{
-
-            border:10px solid;
-            width:200px;
-            height:200px;
-            border-radius:50%;
-            line-height:167px;
-            text-align:center;
-            font-size:2rem;
-            margin:auto;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
-
+        #supersideBar {
+            position: fixed;
+            width: 260px;
+            margin-left: 6%;
+            margin-top: 7.5%;
         }
 
-        .round_header{
-            font-size:25px;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
+        #sideBarInner{
+            width: 100%;
+            height: 250px;
+            border: 1px solid #e6e6e6;
+            border-radius: 20px;
+            padding: 30px 20px;
+            font-family: 'S-CoreDream-3Light';
         }
 
-        .round_detail{
-            font-size:25px;
-            font-family: 'Gowun Dodum', sans-serif; "궁서체";
-            font-weight:bold;
-            text-align:center;
+        #sideBarDelivery{
+            padding: 10px 0;
+        }
+
+        .sideBarInfo{
+            display: inline;
+            float: right;
+        }
+
+        #center {
+            margin: 0;
+        }
+
+        .image.featured {
+            margin: 0 !important;
+        }
+
+        .eventImage {
+            margin: 0 !important;
+        }
+
+        .eventDate {
+            margin: 0;
+            font-size: 13pt;
+        }
+
+        .boxinner {
+            padding: 1em 1em 1em 1em !important;
+            font-family: 'S-CoreDream-3Light';
+            text-align: left !important;
+        }
+
+        .alt {
+            font-size: 17px !important;
+            padding: 0.2em 1em !important;
+        }
+
+        .eventButton {
+            float: right;
+            margin-left: auto;
+            margin-top: 0;
+        }
 
     </style>
 </head>
 
 <body class="homepage is-preload">
-
-<header style=margin-bottom:100px;>
-    <div style=text-align:center;width:90%;padding:10px;>
-        <h1><span style=font-size:60px;>최원준</span>님</h1>
-
-        <h3 style=float:right;>새싹등급</h3>
-        <h2 style=float:right;margin-right:5px;>LV 1 </h2>
-        <img class="grade" src="/images/새싹.png" alt="" />
-
-    </div>
-</header>
-<table>
-    <tr class="round_detail">
-        <td>참여횟수</td>
-        <td>포인트</td>
-        <td>출석체크</td>
-    </tr>
-    <tr>
-        <td><div class="round_grade" style=border-color:green;>35회</div></td>
-        <td><div class="round_grade" style=border-color:blue;>3556P</div></td>
-        <td><div class="round_grade" style=border-color:red;>1/30</div></td>
-    </tr>
-</table>
+<div id="main_header" style="display: flex"></div>
+<div id="supersideBar">
+<!-- 회원정보 사이드바 -->
+    <div id="sideBarInner">
+        <div>
+            <div>
+                <img class="grade" src="/images/새싹.png">
+            </div>
+            <div style="line-height: 40px; font-family: 'S-CoreDream-4Regular';">
+                <strong style="font-weight: 700">최워너원 님</strong>
+            </div>
+        </div>
+        <hr style="margin:1em 0 1em 0;">
+        <div id="sideBarDelivery"style="padding: 10px 0;">
+            <div>
+                <strong>참여횟수</strong>
+                <div class="sideBarInfo">
+                    <span>35회</span>
+                </div>
+            </div>
+            <div>
+                <strong>포인트</strong>
+                <div class="sideBarInfo">
+                    <span>3556P</span>
+                </div>
+            </div>
+            <div>
+                <strong>출석체크</strong>
+                <div class="sideBarInfo" >
+                    <span>1/30</span>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
 
 <!-- Main -->
-<section id="main">
+<!--<section id="main">-->
     <div class="container">
         <div class="row">
             <div class="col-12" style=clear:both;>
 
                 <!-- Portfolio -->
                 <section>
-                    <header class="major">
-                        <h2>9월 이벤트</h2>
-                    </header>
+                    <div class="event_subtitle">
+                        <h2 style="text-align: left; font-family: 'yg-jalnan';">9월 이벤트</h2>
+                    </div>
                     <div class="row">
                         <div class="col-4 col-6-medium col-12-small">
-                            <section class="box">
-                                <a href="#" class="image featured"><img
-                                        style =height:330px; src="/images/출석.png" alt="" /></a>
-                                <header>
-                                    <h3>
-                                        9월 출석 이벤트
-                                    </h3>
-                                    <p>9월 01일-9월 30일</p>
-                                    <footer>
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/출석.png"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            9월 출석 이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
                                         <ul class="actions">
-                                            <li><a href="" class="button alt">참여하기</a></li>
+                                            <li><a href="/main/eventInfo" class="button alt">참여하기</a></li>
                                         </ul>
                                     </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
                             </section>
                         </div>
                         <div class="col-4 col-6-medium col-12-small">
-                            <section class="box">
-                                <a href="" class="image featured"><img
-                                        style =height:330px; src="/images/신규가입.png" alt="" /></a>
-                                <header id=center>
-                                    <h3>
-                                        9월 신규가입 이벤트
-
-                                    </h3>
-                                </header>
-                                <p>9월 01일-09월 30일</p>
-                                <footer>
-                                    <ul class="actions">
-                                        <li><a href="#" class="button alt">참여하기</a></li>
-                                    </ul>
-                                </footer>
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/신규가입.png"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            9월 신규가입 이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
+                                        <ul class="actions">
+                                            <li><a href="#" class="button alt">참여하기</a></li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
                             </section>
                         </div>
                         <div class="col-4 col-6-medium col-12-small">
-                            <section class="box">
-                                <a href="" class="image featured"><img
-                                        style =height:330px; src="/images/인증이벤트.jpg" alt=""/></a>
-                                <header>
-                                    <h3>
-                                        플로깅 인증이벤트
-
-                                    </h3>
-                                </header>
-                                <p>9월 01일-12월 31일</p>
-                                <footer>
-                                    <ul class="actions">
-                                        <li><a href="" class="button alt">참여하기</a></li>
-                                    </ul>
-                                </footer>
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/인증이벤트.jpg"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            플로깅 인증이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
+                                        <ul class="actions">
+                                            <li><a href="#" class="button alt">참여하기</a></li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
                             </section>
                         </div>
-                    </div>
+                        <div class="col-4 col-6-medium col-12-small">
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/출석.png"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            9월 출석 이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
+                                        <ul class="actions">
+                                            <li><a href="#" class="button alt">참여하기</a></li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-4 col-6-medium col-12-small">
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/신규가입.png"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            9월 신규가입 이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
+                                        <ul class="actions">
+                                            <li><a href="#" class="button alt">참여하기</a></li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-4 col-6-medium col-12-small">
+                            <section class="eventImage">
+                                <a href="#" class="image featured"><img style = height:330px; src="/images/인증이벤트.jpg"/></a>
+                            </section>
+                            <section class="box boxinner">
+                                <div style="display: flex">
+                                    <header id="center">
+                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                            플로깅 인증이벤트
+                                        </h4>
+                                    </header>
+                                    <footer class="eventButton">
+                                        <ul class="actions">
+                                            <li><a href="#" class="button alt">참여하기</a></li>
+                                        </ul>
+                                    </footer>
+                                </div>
+                                <div>
+                                    <p class="eventDate">9월 01일-09월 30일</p>
+                                </div>
+                            </section>
+                        </div>
+                        </div>
                 </section>
-
             </div>
-            <div class="col-12">
-
-                <!-- Blog -->
-                <section>
-                    <header class="major">
-                    </header>
-                    <p align="middle">
-                    </p>
-                </section>
-                <div id="main_footer"></div>
-                <!-- Scripts -->
-                <script src="/js/jquery.min.js"></script>
-                <script src="/js/jquery.dropotron.min.js"></script>
-                <script src="/js/browser.min.js"></script>
-                <script src="/js/breakpoints.min.js"></script>
-                <script src="/js/util.js"></script>
-                <script src="/js/header.js"></script>
-                <script src="/js/main.js"></script>
-                <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-                <script> $(function() { $("#postcodify_search_button").postcodifyPopUp();}); </script>
-                <script>var contextPath = "${pageContext.request.contextPath}";</script>
-    </body>
+        </div>
+    </div>
+<!--</section>-->
+<div id="main_footer"></div>
+</body>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/header.js"></script>
+<script>
+    function goEvent(){
+        location.href = "/main/eventInfo";
+    }
+</script>
 </html>

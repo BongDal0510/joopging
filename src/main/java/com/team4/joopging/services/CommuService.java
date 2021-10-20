@@ -14,4 +14,5 @@ public interface CommuService {
     public boolean removeCommu(Long commuBno);
     public List<CommuVO> getCommuList(Criteria criteria);
     public int getCommuTotal(Criteria criteria);
+    public boolean updateCommuViewCnt(Long commuBno);
 }

@@ -40,4 +40,6 @@ public class CommuDAO {
     }
     /*전체 게시글 수*/
     public int getCommuTotal(Criteria criteria){ return mapper.getCommuTotal(criteria);}
+    /*게시글 조회수*/
+    public boolean updateCommuViewCnt(Long commuBno){return mapper.updateCommuViewCnt(commuBno) == 1; }
 }

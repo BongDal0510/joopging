@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>이벤트 상세페이지</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 50%;
+            margin: auto;
+            margin-top: 4em;
+        }
+
+        /* 사이드바 회원정보 관련 CSS*/
+        .grade{
+            float:right;
+            width: 40px;
+            height: 40px;
+        }
+
+        #supersideBar {
+            position: fixed;
+            width: 260px;
+            margin-left: 6%;
+            margin-top: 7.5%;
+        }
+
+        #sideBarInner{
+            width: 100%;
+            height: 250px;
+            border: 1px solid #e6e6e6;
+            border-radius: 20px;
+            padding: 30px 20px;
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        #sideBarDelivery{
+            padding: 10px 0;
+        }
+
+        .sideBarInfo{
+            display: inline;
+            float: right;
+        }
+
+    </style>
+</head>
+
+<body class="homepage is-preload" style="margin: 0;">
+<div id="main_header" style="display: flex"></div>
+<div id="supersideBar">
+    <!-- 회원정보 사이드바 -->
+    <div id="sideBarInner">
+        <div>
+            <div>
+                <img class="grade" src="/images/새싹.png">
+            </div>
+            <div style="line-height: 40px; font-family: 'S-CoreDream-4Regular';">
+                <strong style="font-weight: 700">최워너원 님</strong>
+            </div>
+        </div>
+        <hr style="margin:1em 0 1em 0;">
+        <div id="sideBarDelivery"style="padding: 10px 0;">
+            <div>
+                <strong>참여횟수</strong>
+                <div class="sideBarInfo">
+                    <span>35회</span>
+                </div>
+            </div>
+            <div>
+                <strong>포인트</strong>
+                <div class="sideBarInfo">
+                    <span>3556P</span>
+                </div>
+            </div>
+            <div>
+                <strong>출석체크</strong>
+                <div class="sideBarInfo" >
+                    <span>1/30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="box post">
+        <div>
+            <img class="eventImage" src="/images/마포대교.png"/>
+        </div>
+        <header>
+            <h2>마포대교 플로깅</h2>
+        </header>
+        <h4>마표대교에서 달려라! 주워라!</h4>
+        <p>
+            장소 : 마포대교<br> <br> 일시 : 2021-09-27 AM 10:00 ~ PM 13:00<br>
+            <br> 내용 : 마포대교 일대 플로깅 켐페인 진행<br> <br> 참가비 : 2000원
+            (예약 신청시 결제 페이지 이동)<br> <br>
+        </p>
+        <section>
+            <header>
+                <h3>주의 사항</h3>
+            </header>
+            <p style="color: red;">
+                1. 모든 신청은 선착순 예약이며, 가용 인원 초과 시 조기 예약 마감할 수 있습니다.<br> 2. 신청
+                시 소액의 신청 금액이 부과 될 수 있습니다.<br> 3. 개인 사유로 인해 예약을 취소할 경우 규정에
+                따라 환불이 불가능 할 수 있습니다.<br> 4. 우천 등의 사유로 플로깅 일정이 취소될 수 있으며,
+                이에 따른 모든 예약은 환불됩니다.<br>
+            </p>
+        </section>
+    </div>
+</div>
+
+<div id="main_footer"></div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/header.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</html>
