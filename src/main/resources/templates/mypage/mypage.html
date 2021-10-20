@@ -46,13 +46,12 @@
     div.imp-medium{
         font-family: S-CoreDream-3Light;
         display: none;
-        margin: 0 auto;
-        padding-top: 5.1px;
-        width: 65% !important;
+        padding-top: 4.8px;
+        width: 70% !important;
     }
     div#deleteNotice{
         border:solid #94c477;
-        padding : 25px;
+        padding : 0.5em 3em;
         margin-bottom: 20px;
     }
 
@@ -85,6 +84,7 @@
     /* h1,h2,h3,h4 */
 
     h1, h2, h3, h4{
+        color: #35A14A !important;
         font-family: yg-jalnan;
     }
 
@@ -140,9 +140,9 @@
     }
 
     table.boardList thead{
-        background-color : #efefef;
-        border-bottom: 3px solid #d1d1d1;
-        border-top: 3px solid #d3d3d3;
+        background-color : #f7f7f7;
+        border-top: 3px solid #35A14A;
+        border-bottom: none;
         font-size: 16px;
     }
 
@@ -230,6 +230,20 @@
         list-style: none;
     }
 
+    form input[type=text], form input[type=email], form input[type=password], form select, form textarea {
+        padding: 0.25em 0.5em !important;
+        border-radius: 5px;
+        font-size: 16px !important;
+        border: solid 1px #d3d3d3 !important;
+        background: #fff ;
+        margin: auto;
+    }
+
+    input[type="button"], input[type="submit"], input[type="reset"], button, .button {
+        font-weight: 500 !important;
+        font-size: 14px !important;
+    }
+
     .hiddenList{
         font-family: S-CoreDream-4Regular;
         font-size : 14px;
@@ -301,18 +315,18 @@
 
     article.box.post header h2{
         margin-bottom: 30px;
-        font-size: 2em;
+        font-size: 1.8em;
     }
 
     div.row{
-        margin-top: 10%;
+        margin-top: 13%;
         margin-bottom: 5%;
         margin-left: 17%;
         margin-right: 17%;
     }
 
     .delete123{
-        width: 80%;
+        width: 650px;
     }
 
     /* XLarge */
@@ -320,7 +334,7 @@
     @media screen and (max-width: 1680px) {
 
         div.row{
-            margin-top: 10%;
+            margin-top: 13%;
             margin-bottom: 5%;
             margin-left: 17%;
             margin-right: 17%;
@@ -335,9 +349,9 @@
 
     /* Large */
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1140px) {
         div.row{
-            margin-top: 10%;
+            margin-top: 13%;
             margin-bottom: 5%;
             margin-left: 8%;
             margin-right: 8%;
@@ -464,7 +478,7 @@
                                 <tr>
                                     <th>번호</th>
                                     <th>예약번호</th>
-                                    <th>장소</th>
+                                      <th>장소</th>
                                     <th>날짜</th>
                                     <th>시간</th>
                                 </tr>
@@ -634,15 +648,12 @@
                 <!-- 회원정보변경 -->
                 <div class="col-8 col-12-medium imp-medium"  id = "updateInfo">
                     <article class="box post">
-                        <header>
+                        <header style="margin-bottom: 0px; padding-bottom: 1.5em !important; border-bottom: 3px solid #35A14A; width: 650px">
                             <h2>개인 정보 변경</h2>
                             ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
                         </header>
                         <form method="post" name="updateForm"> <!--action="/mypage/UpdateMemberOk.my">-->
                             <table class = 'delete123'>
-                                <tr>
-                                    <td colspan = "2"></td>
-                                </tr>
                                 <tr>
                                     <th>아이디</th>
                                     <td><!--아이디--></td>
@@ -730,7 +741,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: center;">
-                                        <input type="button" value="변경" id="changeMemberInfo" class= "listbtn">
+                                        <input type="button" value="회원 정보 변경" id="changeMemberInfo" class= "listbtn" style="margin-top: 1.5em">
                                     </td>
                                 </tr>
                             </table>
@@ -747,7 +758,7 @@
                         </header>
                         <div id="deleteNotice">
                             <p style="text-align:center;">
-                                <a href="#"><img src="../images/탈퇴신청사진.PNG" style="max-width:100%; height:auto;"></a>
+                                <a href="#"><img src="../images/leavecheck.png" style="max-width:100%; height:auto;"></a>
                             </p>
                             <ol>
                                 <li>
@@ -768,10 +779,8 @@
                             </ol>
                         </div>
                         <form method="post" name="deleteForm"> <!--action="/mypage/DeleteMemberOk.my">-->
+                                <h3 style="padding-bottom: 0.5em; border-bottom: #35A14A 3px solid; width: 650px;">기본 정보</h3>
                             <table class = 'delete123'>
-                                <tr>
-                                    <td colspan = "2"><h3>기본정보</h3></td>
-                                </tr>
                                 <tr>
                                     <th>이름</th>
                                     <td>이름</td>
@@ -802,7 +811,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: center;">
-                                        <input type="button" value="회원탈퇴 " id="deleteMember"/>
+                                        <input type="button" value="회원 탈퇴 " id="deleteMember" style="margin-top: 1.5em" />
                                     </td>
                                 </tr>
                             </table>

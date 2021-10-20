@@ -18,7 +18,16 @@ public class MypageController {
     }
 
     @GetMapping("orderInfo")
-    public String orderInfo(){ return  "mypage/orderInfo"; }
+    public String orderInfo(){ return "mypage/orderInfo"; }
+
+    @GetMapping("goodsRefund")
+    public String goodsRefund(){ return "mypage/goodsRefund"; }
+
+    @GetMapping("ploggingRefund")
+    public String ploggingRefund(){ return "mypage/ploggingRefund"; }
+
+    @GetMapping("deliveryTracking")
+    public String deliveryTracking(){ return "mypage/deliveryTracking"; }
 
     @GetMapping("header")
     public String header() {

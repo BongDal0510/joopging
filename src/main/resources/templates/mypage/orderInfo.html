@@ -261,7 +261,7 @@
 
         /* Large */
 
-        @media screen and (max-width: 1440px) {
+        @media screen and (max-width: 1140px) {
             div#page-wrapper {
                 margin-top: 10%;
                 margin-bottom: 5%;
@@ -334,12 +334,19 @@
                 </header>
                 <div id="info-box">
                     <table style="margin: 0px; border: none;">
+                        <colgroup>
+                            <col width="120">
+                            <col width="120">
+                            <col width="120">
+                            <col width="120">
+                            <col width="">
+                        </colgroup>
                         <tr style="text-align: center">
                             <td>주문 일자</td>
                             <td><strong>0000.00.00</strong></td>
                             <td>주문 번호</td>
                             <td>00000000</td>
-                            <td><input type="button" value="재구매"></td>
+                            <td><input type="button" value="재구매"><input type="button" value="구매 취소" style="margin: 10px"></td>
                         </tr>
                     </table>
                 </div>
@@ -391,11 +398,11 @@
                             </td>
                             <td class="bg_point btn">
                                 <a href="#" class="">
-                                    <span class="blind">리뷰 작성</span>
+                                    <span>리뷰 작성</span>
                                 </a>
                                 <br>
                                 <a href="#" class="">
-                                    <span class="blind">배송 조회</span>
+                                    <span>배송 조회</span>
                                 </a>
                             </td>
                         </tr>
