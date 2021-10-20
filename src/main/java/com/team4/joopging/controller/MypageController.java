@@ -18,7 +18,7 @@ public class MypageController {
     }
 
     @GetMapping("orderInfo")
-    public String orderInfo(){ return "mypage/orderInfo"; }
+    public String orderInfo(){ return  "mypage/orderInfo"; }
 
     @GetMapping("header")
     public String header() {

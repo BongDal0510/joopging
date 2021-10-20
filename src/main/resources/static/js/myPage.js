@@ -85,7 +85,7 @@ $('li').on("click", function(){
         $("#deleteInfo").show();
         $(".imp-medium").not($("#deleteInfo")).hide();
     }
-    else if(value.includes("내 게시글")){
+    else if(value.includes("게시글")){
         $("#myWriting").show();
         $(".imp-medium").not($("#myWriting")).hide();
     }
