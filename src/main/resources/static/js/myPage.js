@@ -9,7 +9,6 @@ $(".list").each(function(index, item){
 });
 
 $("#myPageMainList").css("color", "#94c477");
-$("#myPageMainList").text("▶"+tempList[0]);
 
 $(".list").on("click", function(){
     var value = $(this).text();
@@ -29,16 +28,15 @@ $(".list").on("click", function(){
         }
         if(check){
             $(item).css("color", "#94c477");
-            $(item).text("▶" + value);
-            if(value==tempList[2]){
+            if(value==tempList[3]){
                 $(".payment").show();
-                $(".member").hide();
-            }else if(value==tempList[3]){
-                $(".payment").hide();
+                $(".hiddenList").not($(".payment")).hide();
+            }else if(value==tempList[4]){
                 $(".member").show();
-            }else{
-                $(".payment").hide();
-                $(".member").hide();
+                $(".hiddenList").not($(".member")).hide();
+            }
+            else{
+                $(".hiddenList").hide();
             }
         }
     });
@@ -54,6 +52,10 @@ $('li').on("click", function(){
     else if(value.includes("플로깅 예약 확인")){
         $("#checkPloggingMain").show();
         $(".imp-medium").not($("#checkPloggingMain")).hide();
+    }
+    else if(value.includes("포인트 내역")){
+        $("#checkPoint").show();
+        $(".imp-medium").not($("#checkPoint")).hide();
     }
     else if(value.includes("내 상품")){
         $(".payment").not($(this)).css("color","#5d5d5d");
@@ -82,6 +84,10 @@ $('li').on("click", function(){
 
         $("#deleteInfo").show();
         $(".imp-medium").not($("#deleteInfo")).hide();
+    }
+    else if(value.includes("게시글")){
+        $("#myWriting").show();
+        $(".imp-medium").not($("#myWriting")).hide();
     }
     else if(value.includes("문의하기")){
         $("#question").show();

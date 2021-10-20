@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<html>
-<title>메인페이지</title>
+<head>
+<title>MY PAGE</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+<link rel="stylesheet" href="/css/font.css" type="text/css"/>
 <link rel="shortcut icon" href="/images/faviconWhite.ico">
 <link rel="icon" href="/images/faviconWhite.ico">
 <style>
@@ -14,34 +14,109 @@
         padding: 0;
     }
 
+    #main {
+        background: #ffffff;
+        padding: 0px !important;
+    }
 
-    /* Section/Article */
+    .big-width {display: block;}
+
+    .small-width { display: none;}
+
+    div#searchWrap{display: flex;}
+
+    select[name='type']{width: 30%; margin-right: 1%;}
+
+    input[name='keyword']{width: 56%; margin-right: 1%;}
+
+    form[name='searchForm']{overflow: hidden;}
+
+        select[name='type']{width: 100%;}
+        input[name='keyword']{width: 100%;}
+        a.search{width: 100%;}
+        form[name='searchForm']{
+            overflow: hidden;}
+
+    header.major{
+        border:none;
+    }
+
+    /*div*/
+
+    div.imp-medium{
+        font-family: S-CoreDream-3Light;
+        display: none;
+        margin: 0 auto;
+        padding-top: 5.1px;
+        width: 65% !important;
+    }
+    div#deleteNotice{
+        border:solid #94c477;
+        padding : 25px;
+        margin-bottom: 20px;
+    }
+
+    div#list{
+        padding: 0px;
+        padding-left: 90px;
+        margin-top: 0px;
+        width: 220px;
+    }
+
+    #ploggingAdv{
+        background : url('/images/KakaoTalk_20210916_170736157_05.jpg');
+        background-size : 100%;
+        margin-top : 16px;
+        text-align: right;
+        height: 240px;
+        width : 100%;
+        border-bottom : 1px solid;
+        border-top: 1px solid;
+        border-color: #b3b3b3;
+    }
+
+    /*header*/
+
+    .box.post header {
+        padding: 0px !important;
+        margin: 0 0 2em 0;
+    }
+
+    /* h1,h2,h3,h4 */
+
+    h1, h2, h3, h4{
+        font-family: yg-jalnan;
+    }
 
     header h3#myList {
-
-        border-bottom: solid;
-        border-bottom-color: #d3d3d3;
-        border-bottom-width: 3px
+        font-size: 20px;
+        font-family: yg-jalnan;
     }
+
+    .box.post div.smallBox1 h4{
+        margin : 10px;
+        color : #5d5d5d;
+    }
+    .box.post div.smallBox2 h4{
+        margin : 10px;
+        color : #5d5d5d;
+    }
+
 
 
     /* Box */
 
     .box {
         background-color: #ffffff !important;
-        padding: 14px 32px 14px 32px !important;
+        padding: 0px !important;
         text-align: left !important;
-    }
-
-
-    .box.post header {
-        margin: 0 0 2em 0;
+        border-bottom : none !important;
     }
 
     .box.post div.smallBox1{
         margin : 30px;
         margin-left : 40px;
-        width: 234px;
+        width: 40%;
         height: 220px;
         float : left;
         border : 1px solid #d3d3d3;
@@ -51,12 +126,13 @@
 
     .box.post div.smallBox2{
         margin : 30px;
-        width: 234px;
+        width: 40%;
         height: 220px;
         display: inline-block;
         border : 1px solid #d3d3d3;
         text-align: center;
     }
+
     /*table*/
     form input[type=text], #user_email3 {
         display: inline !important;
@@ -72,6 +148,11 @@
 
     table.boardList tbody{
         border-bottom: 1px solid #d3d3d3;
+    }
+
+    table.boardList caption{
+        text-align:left;
+        margin-bottom:3%;
     }
 
     table.delete123 th{
@@ -98,38 +179,29 @@
         position: relative;
     }
 
-    .box.post div.smallBox1 h4{
-        margin : 10px;
-        color : #5d5d5d;
-    }
-    .box.post div.smallBox2 h4{
-        margin : 10px;
-        color : #5d5d5d;
-    }
-
-
     /* Button */
 
-
-    #ploggingAdv{
-        background : url('/images/KakaoTalk_20210916_170736157_05.jpg');
-        background-size : 700px;
-        margin-top : 16px;
-        height: 240px;
-        width : 650px;
-        border-bottom : 1px solid;
-        border-top: 1px solid;
-        border-color: #b3b3b3;
+    button, input[type="button"]{
+        font-family: S-CoreDream-3Light !important;
     }
+
+    input[id='postcodify_search_button'], input[id='changePw']{
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        background-color: #b3b3b3 !important;
+    }
+
+    form input[type=text]{
+        padding: 0.5em 0.7em !important;
+    }
+
 
     #ploggingAdv button{
-        margin : 160px 30px 30px 430px;
+        margin : 0px;
+        padding: 5px 10px 5px 10px;
+        font-size: 18px;
     }
 
-    .button {
-        font-family: 'Jua';
-
-    }
     .changeButton{
         font-weight: 500;
         font-size: 1.1em;
@@ -138,22 +210,29 @@
 
 
     /* List */
-
+    ul{
+        padding-left: 0px !important;
+    }
 
     ul li {
-        padding-left: 2em;
+        padding-left: 0px !important;
         text-align: left;
     }
 
     ul li.list {
-        padding : 20px;
-        font-size : 22px;
+        font-family: S-CoreDream-4Regular;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size : 16px;
         border-bottom-color : #d3d3d3;
         border-bottom-width: 1px;
         list-style: none;
     }
 
     .hiddenList{
+        font-family: S-CoreDream-4Regular;
+        font-size : 14px;
         list-style: none;
         display : none;
     }
@@ -170,19 +249,11 @@
     ol li ul li{
         color: #3d3d3d;
     }
-    /* Nav */
-
-    span.headerPluse{
-        display: inline-block;
-    }
-
 
     /* Main */
 
     #main {
-        font-family: 'yg-jalnan';
         background: #ffffff;
-        padding: 0.5em 0 0.5em 0;
     }
 
     #main:before {
@@ -198,27 +269,7 @@
 
     #main .major h2 {
         background: #ffffff;
-    }
-
-    /* Footer */
-
-    #footer {
-        position: relative;
-        color: #858484;
-        padding: 4em 0;
-        text-align: center;
-    }
-
-    #footer:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-size: 100% 100%;
-        z-index: 0;
-        opacity: 0.5;
-        text-align: center;
+        padding: 0 1em 0 1em;
     }
 
     #footer a {
@@ -248,28 +299,34 @@
         font-size: 1.75em;
     }
 
-    /* Copyright */
-
-    #copyright {
-        text-align: center;
-        margin: 3em 0 2em 0;
+    article.box.post header h2{
+        margin-bottom: 30px;
+        font-size: 2em;
     }
 
-    #copyright ul.links {
-        display: inline-block;
-        background: #2C2929;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 5px;
-        margin: 0;
-        padding: 0.85em 2.25em 0.85em 2.25em;
+    div.row{
+        margin-top: 10%;
+        margin-bottom: 5%;
+        margin-left: 17%;
+        margin-right: 17%;
+    }
+
+    .delete123{
+        width: 80%;
     }
 
     /* XLarge */
 
     @media screen and (max-width: 1680px) {
 
-        /* Basic */
+        div.row{
+            margin-top: 10%;
+            margin-bottom: 5%;
+            margin-left: 17%;
+            margin-right: 17%;
+        }
 
+        /* Basic */
         body, input, textarea, select {
             font-size: 12pt;
         }
@@ -278,77 +335,34 @@
 
     /* Large */
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1440px) {
+        div.row{
+            margin-top: 10%;
+            margin-bottom: 5%;
+            margin-left: 8%;
+            margin-right: 8%;
+        }
+        .delete123{
+            width: 650px;
+        }
 
         /* Basic */
-
         body, input, textarea, select {
             font-size: 11pt;
         }
 
-        /* Section/Article */
-
-        header.major {
-            margin: 0.75em 0 2.5em 0;
-        }
-
-        header.major h2 {
-            padding: 0 1em 0 1em;
-        }
-
         /* Social */
-
         ul.social li {
             margin: 0 0 0.25em 0.75em;
         }
 
-        /* Header */
-
-        #header {
-            padding: 4em 0 3em 0;
-        }
-
-        /* Banner */
-
-        #banner {
-            padding: 6em 0;
-            margin: 3em 0 0 0;
-        }
 
         /* Intro */
-
-        #intro {
-            padding: 0;
-        }
-
         #intro section {
             padding: 1em 2em;
         }
 
-        #intro .middle:before {
-            left: -12px;
-        }
-
-        #intro .middle:after {
-            right: -12px;
-        }
-
-        /* Main */
-
-        #main {
-            padding: 30px 0;
-        }
-
         /* Footer */
-
-        #footer {
-            padding: 3em 0;
-        }
-
-        #footer:before {
-            height: 2.5em;
-        }
-
         #footer header {
             margin: 0 0 1.5em 0;
         }
@@ -357,74 +371,64 @@
             font-size: 1.25em;
         }
 
-        /* Copyright */
-
-        #copyright {
-            margin: 0;
+        /* Banner */
+        #banner header {
+            padding: 1.5em 1em 1.5em 1em;
+            display: block;
+            border-radius: 0;
         }
 
+        #banner header h2 {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            margin: 0 0 0.25em 0;
+        }
+
+        #banner header p {
+            font-size: 1.2em;
+        }
     }
-
-    /* Nav */
-
-    #page-wrapper {
-        font-family: 'yg-jalnan';
-    }
-
-    /* Banner */
-
-    #banner header {
-        padding: 1.5em 1em 1.5em 1em;
-        display: block;
-        border-radius: 0;
-    }
-
-    #banner header h2 {
-        font-size: 1.5em;
-        line-height: 1.5em;
-        margin: 0 0 0.25em 0;
-    }
-
-    #banner header p {
-        font-size: 1.2em;
-    }
-
 </style>
 </head>
-<div id="main_header"></div>
 <body class="homepage is-preload">
+<!-- 헤더 -->
+<header>
+    <div id="main_header" style="display: flex"></div>
+</header>
 <div id="page-wrapper">
+
     <!-- Main -->
-    <section id="main">
-        <div class="container" style="display: flex; justify-content: space-around;">
+    <div id="main">
             <div class="row">
-                <div class="col-4 col-12-medium" style="height: 714px; width: 366px;">
+                <div class="col-4 col-12-medium" id = "list">
                     <!-- Sidebar -->
-                    <section class="box"><!--style = "float : 'rihgt';"-->
+                    <section class="box">
                         <header>
                             <h3 id="myList">내 정보</h3>
                         </header>
                         <ul id=listAll>
                             <li class = "list" id='myPageMainList'>My Home</li>
                             <li class = "list">플로깅 예약 확인</li>
+                            <li class = "list">포인트 내역</li>
                             <li class = "list">내 상품 </li>
                             <li class = "hiddenList payment" id='paymentMainList'>- 내 상품 내역</li>
                             <li class = "hiddenList payment" >- 찜 목록</li>
                             <li class = "list">회원 정보</li>
                             <li class = "hiddenList member" id='memberMainList'>- 회원 정보 수정</li>
                             <li class = "hiddenList member" >- 회원 탈퇴</li>
+                            <li class = "list">내 게시글 관리</li>
                             <li class = "list">문의하기</li>
                         </ul>
                     </section>
                 </div>
                 <!-- 내정보 메인 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "myHome" style="display: block; width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "myHome" style="display: block;">
                     <article class="box post" style="">
                         <header>
                             <h2><!--이름-->님 환영합니다.</h2>
                         </header>
                         <div id = "ploggingAdv">
-                            <button style="font-size: 16px; width: 180px; height: 43px;" onclick="location.href='${pageContext.request.contextPath}/app/plogging_res/ploggingResList.jsp' ">
+                            <button> <!--onclick="location.href='/app/plogging_res/ploggingResList.jsp' ">-->
                                 플로깅 예약하러 가기
                             </button>
                         </div>
@@ -445,7 +449,7 @@
                     </article>
                 </div>
                 <!-- 플로깅 예약확인 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingMain" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingMain">
                     <article class="box post">
                         <header>
                             <h2>플로깅 예약 확인</h2>
@@ -453,7 +457,7 @@
                         </header>
                         <div>
                             <table class = boardList>
-                                <caption style="text-align:left; margin-bottom:3%;">
+                                <caption>
                                     내 플로깅 예약 횟수 :
                                 </caption>
                                 <thead>
@@ -489,18 +493,57 @@
                         </div>
                     </article>
                 </div>
+                <!-- 포인트 내역 확인 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "checkPoint">
+                    <article class="box post">
+                        <header>
+                            <h2>포인트 내역 확인</h2>
+                            ▶ 포인트 내역을 확인합니다.
+                        </header>
+                        <div>
+                            <table class = boardList>
+                                <caption>
+                                    현재 포인트 :
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>날짜</th>
+                                    <th>이유</th>
+                                    <th>금액</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><!--날짜--></td>
+                                    <td>
+                                        <!--이유-->
+                                    </td>
+                                    <td><!--금액--></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="center">포인트 내역이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table style="font-size:1.3rem">
+                                <tr align="center" valign="middle">
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
                 <!-- 상품 결제 내역확인 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "paymentMain" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "paymentMain">
                     <article class="box post">
                         <header>
                             <h2>내 상품 내역</h2>
                             ▶ 상품 결제 내역을 확인합니다.
                         </header>
                         <div>
-
-
                             <table class = boardList>
-                                <caption style="text-align:left; margin-bottom:3%;">
+                                <caption>
                                     내가 구매한 상품 :
                                 </caption>
                                 <thead>
@@ -543,7 +586,7 @@
                     </article>
                 </div>
                 <!-- 상품 찜 목록 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "paymentDib" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "paymentDib">
                     <article class="box post">
                         <header>
                             <h2>찜 목록</h2>
@@ -551,7 +594,7 @@
                         </header>
                         <div>
                             <table class = boardList>
-                                <caption style="text-align:left; margin-bottom:3%;">
+                                <caption>
                                     내 찜 목록 : <!--개수--> 개
                                 </caption>
                                 <thead>
@@ -589,14 +632,14 @@
                     </article>
                 </div>
                 <!-- 회원정보변경 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "updateInfo" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "updateInfo">
                     <article class="box post">
                         <header>
                             <h2>개인 정보 변경</h2>
                             ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
                         </header>
-                        <form method="post" name="updateForm" action="${pageContext.request.contextPath}/mypage/UpdateMemberOk.my">
-                            <table class = 'delete123' style="width: 640px;">
+                        <form method="post" name="updateForm"> <!--action="/mypage/UpdateMemberOk.my">-->
+                            <table class = 'delete123'>
                                 <tr>
                                     <td colspan = "2"></td>
                                 </tr>
@@ -608,7 +651,7 @@
                                     <th>비밀번호</th>
                                     <td style="display: flex;"><input type="password" id = "newPw" name="newMemberPw" style="display: none;">
                                         &nbsp;&nbsp;
-                                        <input type="button" id = "changePw" value="비밀번호 변경" style="background-color: #b3b3b3; font-size: 14px;">
+                                        <input type="button" id = "changePw" value="비밀번호 변경">
                                     </td>
                                 </tr>
                                 <tr>
@@ -676,7 +719,7 @@
                                     <td>
                                         <div style="margin: 0 5px 10px 0;">
                                             <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5" title="우편번호" maxlength="6" readonly="readonly" value="" style="width:88px; background:#fbfbfb; margin:0 5px 10px 0;">
-                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" style="font-weight: 500; font-size: 14px; background-color: #b3b3b3;" value="우편번호">
+                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" value="우편번호">
                                         </div>
                                         <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1" style="width:235px;margin-right:5px;background:#fbfbfb;">
                                         <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2" style="width:235px;margin-right:5px;background:#fbfbfb">
@@ -696,15 +739,15 @@
                 </div>
 
                 <!-- 회원 탈퇴 -->
-                <div class="col-8 col-12-medium imp-medium"  id ="deleteInfo" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id ="deleteInfo">
                     <article class="box post">
                         <header>
                             <h2>회원 탈퇴</h2>
                             ▶ 회원탈퇴를 원하시는 경우, 이용해주세요.
                         </header>
-                        <div style="border:solid; padding : 25px;">
+                        <div id="deleteNotice">
                             <p style="text-align:center;">
-                                <img src="../images/탈퇴신청사진.PNG">
+                                <a href="#"><img src="../images/탈퇴신청사진.PNG" style="max-width:100%; height:auto;"></a>
                             </p>
                             <ol>
                                 <li>
@@ -724,7 +767,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <form method="post" name="deleteForm" action="${pageContext.request.contextPath}/mypage/DeleteMemberOk.my">
+                        <form method="post" name="deleteForm"> <!--action="/mypage/DeleteMemberOk.my">-->
                             <table class = 'delete123'>
                                 <tr>
                                     <td colspan = "2"><h3>기본정보</h3></td>
@@ -766,8 +809,53 @@
                         </form>
                     </article>
                 </div>
+                <!--내 게시글-->
+                <div class="col-8 col-12-medium imp-medium"  id = "myWriting">
+                    <article class="box post">
+                        <header>
+                            <h2>내 게시글</h2>
+                            ▶ 내가 쓴 게시글을 확인합니다.
+                        </header>
+                        <div>
+                            <table class = boardList>
+                                <caption>
+                                    내 플로깅 예약 횟수 :
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>예약번호</th>
+                                    <th>장소</th>
+                                    <th>날짜</th>
+                                    <th>시간</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><!--번호--></td>
+                                    <td>
+                                        <!--링크 연결된 예약번호-->
+                                    </td>
+                                    <td><!--장소--></td>
+                                    <td><!--날짜--></td>
+                                    <td><!--시간--></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="center">작성한 게시글이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table style="font-size:1.3rem">
+                                <tr align="center" valign="middle">
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
                 <!-- 1:1 문의 -->
-                <div class="col-8 col-12-medium imp-medium"  id = "question" style="width: 753px;">
+                <div class="col-8 col-12-medium imp-medium"  id = "question">
                     <article class="box post">
                         <header>
                             <h2>1:1문의</h2>
@@ -776,7 +864,7 @@
                         <div>
 
                             <table class = boardList>
-                                <caption style="text-align:left; margin-bottom:3%;">
+                                <caption>
                                     내 게시글 : <!--개수--> 개
                                 </caption>
                                 <thead>
@@ -799,7 +887,7 @@
                             </table>
 
                             <p style="text-align: right;">
-                                <button style="font-size: 18px;" onclick="location.href='${pageContext.request.contextPath}/singlehelp/SingleWrit.si'">글쓰기</button>
+                                <button style="font-size: 18px;"> <!--onclick="location.href=''"-->글쓰기</button>
 
                             </p>
                             <table style="font-size:1.3rem">
@@ -808,8 +896,7 @@
                     </article>
                 </div>
             </div>
-        </div>
-    </section>
+    </div>
 </div>
 <div id="main_footer"></div>
 <!-- Scripts -->
