@@ -2,9 +2,11 @@ package com.team4.joopging.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.simple.JSONObject;
+//import net.nurigo.java_sdk.api.Message;
+//import net.nurigo.java_sdk.exceptions.CoolsmsException;
+//import org.json.simple.JSONObject;
+import org.apache.logging.log4j.message.Message;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -103,8 +105,8 @@ public class memberController {
     private void SendSMS(String str, String phone) {
         String api_key = "NCSDZERXIZUFDHUU";
         String api_secret = "IOM3ZQSFYIDMEQIBWFBB5OOHNIEXITWQ";
-        Message coolsms = new Message(api_key, api_secret) {
-        };
+//        Message coolsms = new Message(api_key, api_secret) {
+//        };
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
@@ -114,12 +116,12 @@ public class memberController {
         params.put("text", str);
         params.put("app_version", "test app 1.2"); // application name and version
 
-        try {
-            JSONObject obj = (JSONObject) coolsms.send(params);
-            System.out.println(obj.toString());
-        } catch(CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
+//        try {
+//            JSONObject obj = (JSONObject) coolsms.send(params);
+//            System.out.println(obj.toString());
+//        } catch(CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
     }
 }
