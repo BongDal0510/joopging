@@ -1,0 +1,825 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<title>메인페이지</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="/css/main.css" type="text/css"/>
+<link rel="shortcut icon" href="/images/faviconWhite.ico">
+<link rel="icon" href="/images/faviconWhite.ico">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* Section/Article */
+
+    header h3#myList {
+
+        border-bottom: solid;
+        border-bottom-color: #d3d3d3;
+        border-bottom-width: 3px
+    }
+
+
+    /* Box */
+
+    .box {
+        background-color: #ffffff !important;
+        padding: 14px 32px 14px 32px !important;
+        text-align: left !important;
+    }
+
+
+    .box.post header {
+        margin: 0 0 2em 0;
+    }
+
+    .box.post div.smallBox1{
+        margin : 30px;
+        margin-left : 40px;
+        width: 234px;
+        height: 220px;
+        float : left;
+        border : 1px solid #d3d3d3;
+        text-align: center;
+    }
+
+
+    .box.post div.smallBox2{
+        margin : 30px;
+        width: 234px;
+        height: 220px;
+        display: inline-block;
+        border : 1px solid #d3d3d3;
+        text-align: center;
+    }
+    /*table*/
+    form input[type=text], #user_email3 {
+        display: inline !important;
+        padding: 0 !important;
+    }
+
+    table.boardList thead{
+        background-color : #efefef;
+        border-bottom: 3px solid #d1d1d1;
+        border-top: 3px solid #d3d3d3;
+        font-size: 16px;
+    }
+
+    table.boardList tbody{
+        border-bottom: 1px solid #d3d3d3;
+    }
+
+    table.delete123 th{
+        width : 125px;
+        font-size : 14px;
+        padding: 7px 0 7px 20px;
+        text-align: left;
+        background: #f9f9f9;
+        color: #333;
+        border-color: #efefef;
+    }
+
+    input{
+        border-color: #d3d3d3;
+        border-radius : 5px;
+    }
+
+    table.delete123 td {
+        padding: 7px 0 7px 20px;
+        border-right: 0;
+        border-color: #efefef;
+        line-height: 33px;
+        color: #666;
+        position: relative;
+    }
+
+    .box.post div.smallBox1 h4{
+        margin : 10px;
+        color : #5d5d5d;
+    }
+    .box.post div.smallBox2 h4{
+        margin : 10px;
+        color : #5d5d5d;
+    }
+
+
+    /* Button */
+
+
+    #ploggingAdv{
+        background : url('/images/KakaoTalk_20210916_170736157_05.jpg');
+        background-size : 700px;
+        margin-top : 16px;
+        height: 240px;
+        width : 650px;
+        border-bottom : 1px solid;
+        border-top: 1px solid;
+        border-color: #b3b3b3;
+    }
+
+    #ploggingAdv button{
+        margin : 160px 30px 30px 430px;
+    }
+
+    .button {
+        font-family: 'Jua';
+
+    }
+    .changeButton{
+        font-weight: 500;
+        font-size: 1.1em;
+        padding: 0.45em 1.2em 0.45em 1.2em;
+    }
+
+
+    /* List */
+
+
+    ul li {
+        padding-left: 2em;
+        text-align: left;
+    }
+
+    ul li.list {
+        padding : 20px;
+        font-size : 22px;
+        border-bottom-color : #d3d3d3;
+        border-bottom-width: 1px;
+        list-style: none;
+    }
+
+    .hiddenList{
+        list-style: none;
+        display : none;
+    }
+
+    ul.not_line li{
+        list-style: circle;
+    }
+
+
+    ol li {
+        color: #75ab30;
+    }
+
+    ol li ul li{
+        color: #3d3d3d;
+    }
+    /* Nav */
+
+    span.headerPluse{
+        display: inline-block;
+    }
+
+
+    /* Main */
+
+    #main {
+        font-family: 'yg-jalnan';
+        background: #ffffff;
+        padding: 0.5em 0 0.5em 0;
+    }
+
+    #main:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-size: 100% 100%;
+        z-index: 0;
+        opacity: 0.1;
+    }
+
+    #main .major h2 {
+        background: #ffffff;
+    }
+
+    /* Footer */
+
+    #footer {
+        position: relative;
+        color: #858484;
+        padding: 4em 0;
+        text-align: center;
+    }
+
+    #footer:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-size: 100% 100%;
+        z-index: 0;
+        opacity: 0.5;
+        text-align: center;
+    }
+
+    #footer a {
+        color: #000000;
+    }
+
+    #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
+        color: #000000;
+    }
+
+    #footer h2 a, #footer h3 a, #footer h4 a, #footer h5 a, #footer h6 a, #footer strong a, #footer b a {
+        color: inherit;
+    }
+
+    #footer ul.contact li,
+    #footer ul.dates li,
+    #footer ul.divided li {
+        border-top-color: #353434;
+        border-top-color: rgba(255, 255, 255, 0.05);
+    }
+
+    #footer header {
+        margin: 0 0 3em 0;
+    }
+
+    #footer header h2 {
+        font-size: 1.75em;
+    }
+
+    /* Copyright */
+
+    #copyright {
+        text-align: center;
+        margin: 3em 0 2em 0;
+    }
+
+    #copyright ul.links {
+        display: inline-block;
+        background: #2C2929;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
+        margin: 0;
+        padding: 0.85em 2.25em 0.85em 2.25em;
+    }
+
+    /* XLarge */
+
+    @media screen and (max-width: 1680px) {
+
+        /* Basic */
+
+        body, input, textarea, select {
+            font-size: 12pt;
+        }
+
+    }
+
+    /* Large */
+
+    @media screen and (max-width: 1280px) {
+
+        /* Basic */
+
+        body, input, textarea, select {
+            font-size: 11pt;
+        }
+
+        /* Section/Article */
+
+        header.major {
+            margin: 0.75em 0 2.5em 0;
+        }
+
+        header.major h2 {
+            padding: 0 1em 0 1em;
+        }
+
+        /* Social */
+
+        ul.social li {
+            margin: 0 0 0.25em 0.75em;
+        }
+
+        /* Header */
+
+        #header {
+            padding: 4em 0 3em 0;
+        }
+
+        /* Banner */
+
+        #banner {
+            padding: 6em 0;
+            margin: 3em 0 0 0;
+        }
+
+        /* Intro */
+
+        #intro {
+            padding: 0;
+        }
+
+        #intro section {
+            padding: 1em 2em;
+        }
+
+        #intro .middle:before {
+            left: -12px;
+        }
+
+        #intro .middle:after {
+            right: -12px;
+        }
+
+        /* Main */
+
+        #main {
+            padding: 30px 0;
+        }
+
+        /* Footer */
+
+        #footer {
+            padding: 3em 0;
+        }
+
+        #footer:before {
+            height: 2.5em;
+        }
+
+        #footer header {
+            margin: 0 0 1.5em 0;
+        }
+
+        #footer header h2 {
+            font-size: 1.25em;
+        }
+
+        /* Copyright */
+
+        #copyright {
+            margin: 0;
+        }
+
+    }
+
+    /* Nav */
+
+    #page-wrapper {
+        font-family: 'yg-jalnan';
+    }
+
+    /* Banner */
+
+    #banner header {
+        padding: 1.5em 1em 1.5em 1em;
+        display: block;
+        border-radius: 0;
+    }
+
+    #banner header h2 {
+        font-size: 1.5em;
+        line-height: 1.5em;
+        margin: 0 0 0.25em 0;
+    }
+
+    #banner header p {
+        font-size: 1.2em;
+    }
+
+</style>
+</head>
+<div id="main_header"></div>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+    <!-- Main -->
+    <section id="main">
+        <div class="container" style="display: flex; justify-content: space-around;">
+            <div class="row">
+                <div class="col-4 col-12-medium" style="height: 714px; width: 366px;">
+                    <!-- Sidebar -->
+                    <section class="box"><!--style = "float : 'rihgt';"-->
+                        <header>
+                            <h3 id="myList">내 정보</h3>
+                        </header>
+                        <ul id=listAll>
+                            <li class = "list" id='myPageMainList'>My Home</li>
+                            <li class = "list">플로깅 예약 확인</li>
+                            <li class = "list">내 상품 </li>
+                            <li class = "hiddenList payment" id='paymentMainList'>- 내 상품 내역</li>
+                            <li class = "hiddenList payment" >- 찜 목록</li>
+                            <li class = "list">회원 정보</li>
+                            <li class = "hiddenList member" id='memberMainList'>- 회원 정보 수정</li>
+                            <li class = "hiddenList member" >- 회원 탈퇴</li>
+                            <li class = "list">문의하기</li>
+                        </ul>
+                    </section>
+                </div>
+                <!-- 내정보 메인 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "myHome" style="display: block; width: 753px;">
+                    <article class="box post" style="">
+                        <header>
+                            <h2><!--이름-->님 환영합니다.</h2>
+                        </header>
+                        <div id = "ploggingAdv">
+                            <button style="font-size: 16px; width: 180px; height: 43px;" onclick="location.href='${pageContext.request.contextPath}/app/plogging_res/ploggingResList.jsp' ">
+                                플로깅 예약하러 가기
+                            </button>
+                        </div>
+                        <div style="display: flex; justify-content: space-around;">
+                            <div class = "smallBox1" >
+                                <h4>나의 현황</h4>
+                                <span>예약한 플로깅이 없습니다.</span>
+                            </div>
+                            <div class = "smallBox2">
+                                <h4>1:1 문의 내역</h4>
+                                <table>
+                                            <tr>
+                                                <td colspan="2" align="center">문의 내역이 없습니다.</td>
+                                            </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- 플로깅 예약확인 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingMain" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>플로깅 예약 확인</h2>
+                            ▶ 플로깅 예약을 확인합니다.
+                        </header>
+                        <div>
+                            <table class = boardList>
+                                <caption style="text-align:left; margin-bottom:3%;">
+                                    내 플로깅 예약 횟수 :
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>예약번호</th>
+                                    <th>장소</th>
+                                    <th>날짜</th>
+                                    <th>시간</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><!--번호--></td>
+                                    <td>
+                                        <!--링크 연결된 예약번호-->
+                                    </td>
+                                    <td><!--장소--></td>
+                                    <td><!--날짜--></td>
+                                    <td><!--시간--></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table style="font-size:1.3rem">
+                                <tr align="center" valign="middle">
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+                <!-- 상품 결제 내역확인 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "paymentMain" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>내 상품 내역</h2>
+                            ▶ 상품 결제 내역을 확인합니다.
+                        </header>
+                        <div>
+
+
+                            <table class = boardList>
+                                <caption style="text-align:left; margin-bottom:3%;">
+                                    내가 구매한 상품 :
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>사진</th>
+                                    <th>상품 명</th>
+                                    <th>가격</th>
+                                    <th>수량</th>
+                                    <th>옵션</th>
+                                    <th>상태</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><!--번호--></td>
+                                    <td>
+                                        <!--사진-->
+                                    </td>
+                                    <td>
+                                        <!--상품명//상세보기-->
+                                    </td>
+                                    <td><!--가격--></td>
+                                    <td><!--수량--></td>
+                                    <td><!--옵션--></td>
+                                    <td><!--상태--></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" align="center">구매한 상품이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table style="font-size:1.3rem">
+                                <tr align="center" valign="middle">
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+                <!-- 상품 찜 목록 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "paymentDib" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>찜 목록</h2>
+                            ▶ 내가 찜한 상품들의 목록을 보여줍니다.
+                        </header>
+                        <div>
+                            <table class = boardList>
+                                <caption style="text-align:left; margin-bottom:3%;">
+                                    내 찜 목록 : <!--개수--> 개
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>상품 명</th>
+                                    <th>가격</th>
+                                    <th>선택</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                            <tr>
+                                                <td><!--번호--></td>
+                                                <td>
+                                                    <!--상품명//상세보기-->
+                                                </td>
+                                                <td><!--가격--></td>
+                                                <td><!--선택 체크박스로--></td>
+                                            </tr>
+                                        <tr>
+                                            <td colspan="6" align="center">찜 내역이 없습니다.</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <p style="text-align: right;">
+                                <button class= "listbtn">선택 삭제</button>
+                            </p>
+                            <table style="font-size:1.3rem">
+                                <tr align="center" valign="middle">
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+                <!-- 회원정보변경 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "updateInfo" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>개인 정보 변경</h2>
+                            ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
+                        </header>
+                        <form method="post" name="updateForm" action="${pageContext.request.contextPath}/mypage/UpdateMemberOk.my">
+                            <table class = 'delete123' style="width: 640px;">
+                                <tr>
+                                    <td colspan = "2"></td>
+                                </tr>
+                                <tr>
+                                    <th>아이디</th>
+                                    <td><!--아이디--></td>
+                                </tr>
+                                <tr>
+                                    <th>비밀번호</th>
+                                    <td style="display: flex;"><input type="password" id = "newPw" name="newMemberPw" style="display: none;">
+                                        &nbsp;&nbsp;
+                                        <input type="button" id = "changePw" value="비밀번호 변경" style="background-color: #b3b3b3; font-size: 14px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>이름</th>
+                                    <td>이름</td>
+                                </tr>
+                                <tr>
+                                    <th>성별</th>
+                                    <td>성별</td>
+                                </tr>
+                                <tr>
+                                    <th>생일</th>
+                                    <td>생일</td>
+                                </tr>
+                                <tr>
+                                    <th>이메일</th>
+                                    <td class="email">
+
+                                        <input type="text" id="emailId" name="emailId" style="width:175px;" placeholder="이메일 입력">
+                                        <span style="line-height:32px;">@</span>
+                                        <input type="text" id="emailDomain" name="emailDomain" value="naver.com" title="이메일 도메인" style="width:138px;margin-right:6px;">
+                                        <select id="user_email3" title="이메일 서비스를 선택하세요." onchange="selectEmail(this.value, '#emailDomain' ); return false;" style="width:138px; margin-left:2px;">
+
+                                            <option value="chol.com">chol.com</option>
+
+                                            <option value="yahoo.com">yahoo.com</option>
+
+                                            <option value="empal.com">empal.com</option>
+
+                                            <option value="freechal.com">freechal.com</option>
+
+                                            <option value="gmail.com">gmail.com</option>
+
+                                            <option value="hanafos.com">hanafos.com</option>
+
+                                            <option value="hanmail.net">hanmail.net</option>
+
+                                            <option value="hanmir.com">hanmir.com</option>
+
+                                            <option value="hitel.net">hitel.net</option>
+
+                                            <option value="hotmail.com">hotmail.com</option>
+
+                                            <option value="korea.com">korea.com</option>
+
+                                            <option value="lycos.co.kr">lycos.co.kr</option>
+
+                                            <option value="nate.com">nate.com</option>
+
+                                            <option value="naver.com" selected="">naver.com</option>
+
+                                            <option value="netian.com">netian.com</option>
+
+                                            <option value="paran.com">paran.com</option>
+
+                                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+
+                                            <option value="dreamwiz.com">dreamwiz.com</option>
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label style="line-height:24px;">주소<br>(우편물 수령지)</label></th><!--for="user_address"-->
+                                    <td>
+                                        <div style="margin: 0 5px 10px 0;">
+                                            <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5" title="우편번호" maxlength="6" readonly="readonly" value="" style="width:88px; background:#fbfbfb; margin:0 5px 10px 0;">
+                                            <input type="button" id="postcodify_search_button" class="button primary changeButton" style="font-weight: 500; font-size: 14px; background-color: #b3b3b3;" value="우편번호">
+                                        </div>
+                                        <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1" style="width:235px;margin-right:5px;background:#fbfbfb;">
+                                        <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2" style="width:235px;margin-right:5px;background:#fbfbfb">
+                                        <!-- <input type="hidden" id="addrGbn" name="addrGbn" value="1" />
+                                        <input type="hidden" id="addr" name="addr" value="" />
+                                        <p class="address">우편물 수령 정보를 변경하시면 개인정보의 주소정보도 함께 변경됩니다.</p> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">
+                                        <input type="button" value="변경" id="changeMemberInfo" class= "listbtn">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </article>
+                </div>
+
+                <!-- 회원 탈퇴 -->
+                <div class="col-8 col-12-medium imp-medium"  id ="deleteInfo" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>회원 탈퇴</h2>
+                            ▶ 회원탈퇴를 원하시는 경우, 이용해주세요.
+                        </header>
+                        <div style="border:solid; padding : 25px;">
+                            <p style="text-align:center;">
+                                <img src="../images/탈퇴신청사진.PNG">
+                            </p>
+                            <ol>
+                                <li>
+                                    웹사이트 회원 탈퇴
+                                    <ul class="not_line">
+                                        <li>회원탈퇴를 신청하시는 즉시 탈퇴 처리 됩니다.<br> 로그인이 필요한 서비스 이용은 더 이상 이용하실 수 없게 됩니다.<br>
+                                            (예: 마이페이지, 플로깅 조회 및 납부방법 직접 변경, 이벤트 참여 및 상품 결제, 자원봉사활동 실적확인 및 인증서 발급 등)</li>
+                                        <li>마이페이지에 저장된 내용들을 더 이상 보실 수 없으며, 회원 가입 시 작성하셨던 정보가 모두 삭제됩니다.
+                                        <li>자료삭제에 대한 책임은 본인에게 있음을 알려드립니다.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    재가입 관련
+                                    <ul class = "not_line">
+                                        <li>회원탈퇴 후, 탈퇴한 아이디는 본인과 타인 모두 재사용할 수 없습니다.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <form method="post" name="deleteForm" action="${pageContext.request.contextPath}/mypage/DeleteMemberOk.my">
+                            <table class = 'delete123'>
+                                <tr>
+                                    <td colspan = "2"><h3>기본정보</h3></td>
+                                </tr>
+                                <tr>
+                                    <th>이름</th>
+                                    <td>이름</td>
+                                </tr>
+                                <tr>
+                                    <th>아이디</th>
+                                    <td>아이디</td>
+                                </tr>
+                                <tr>
+                                    <th>비밀번호</th>
+                                    <td><input type="password" name="deleteMember_pw"></td>
+                                </tr>
+                                <tr>
+                                    <th>탈퇴사유</th>
+                                    <td>
+                                        <select name="deleteReason" id="selectBox"><!--style="appearance:"-->
+                                            <option value="deleteReason">탈퇴 사유를 선택해 주세요.</option>
+                                            <option value="infoLeaking">개인정보 누출 우려</option>
+                                            <option value="uncomfortable">서비스 이용 불편</option>
+                                            <option value="floggingOver">플로깅 종료</option>
+                                            <option value="etc">기타</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr id=etcReason style="display: none;">
+                                    <th>기타</th>
+                                    <td><input type="text" name = 'etcReason'></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">
+                                        <input type="button" value="회원탈퇴 " id="deleteMember"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </article>
+                </div>
+                <!-- 1:1 문의 -->
+                <div class="col-8 col-12-medium imp-medium"  id = "question" style="width: 753px;">
+                    <article class="box post">
+                        <header>
+                            <h2>1:1문의</h2>
+                            ▶ 1:1문의를 합니다.
+                        </header>
+                        <div>
+
+                            <table class = boardList>
+                                <caption style="text-align:left; margin-bottom:3%;">
+                                    내 게시글 : <!--개수--> 개
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>시간</th>
+                                    <th>관리자 확인</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <td><!--번호--></td>
+                                <td><!--제목--></td>
+                                <td><!--시간--></td>
+                                <td><!--관리자 확인--></td>
+                                        <tr>
+                                            <td colspan="4" align="center">문의 내역이 없습니다.</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+
+                            <p style="text-align: right;">
+                                <button style="font-size: 18px;" onclick="location.href='${pageContext.request.contextPath}/singlehelp/SingleWrit.si'">글쓰기</button>
+
+                            </p>
+                            <table style="font-size:1.3rem">
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div id="main_footer"></div>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/mypage.js"></script>
+<script type="text/javascript"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>

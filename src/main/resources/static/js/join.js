@@ -6,8 +6,8 @@
 /* 별도의 연산 없을 예정, 디자인 수정 보류 */
 function terms() {
 	/* var url = "http://www.daum.net"; */
-	var url = "/";
-	var name = "terms";
+	var url = "terms";
+	var name = "GET";
 	var option = "width=500, height=700, top=100, left=200, location=no";
 
 	window.open(url, name, option);
@@ -27,23 +27,44 @@ $("#term").on("click", function(){
 var check = false;
 
 function formSubmit(){
-	var form = document.joinForm;
-	
-	console.log(document.getElementById("member_age"))
-	
-	 var format = /^([0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-	 if(!format.test(document.getElementById("member_age").value)){
-		 alert("생년월일을 다시 입력해주세요.");
-		 return;
-	 }
-	
-	if(!form.member_id.value || !check){
-		alert("아이디를 확인해주세요");
+	let form = document.joinForm;
+
+	/*아이디*/
+	if(!form.member_id.value){
+		alert("아이디를 입력해주세요.");
 		return;
 	}
-	
+	/*비밀번호*/
+	if(!form.member_pw.value){
+		alert("비밀번호를 입력해주세요.");
+		return;
+	}
+	/*이름*/
+	if(!form.member_name.value){
+		alert("이름을 입력해주세요.");
+		return;
+	}
+	/*생년월일*/
+	if(!form.member_birth.value){
+		alert("생년월일 6자리를 입력해주세요.");
+		return;
+	}
+	console.log(form.member_gender.value);
+	/*성별*/
+	if(form.member_gender.value == "선택 안함"){
+		alert("성별을 선택해주세요.");
+		return;
+	}
+
+	/*생년월일*/
+	var format = /^([0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+	if(!format.test(document.getElementById("member_birth").value)){
+		alert("옳바른 생년월일을 입력해주세요.");
+		return;
+	}
+
 	check = false;
-	
+
 	$.each($(".terms"), function(index, item){
 		if(!$(item).is(":checked")){
 			check = true;
@@ -54,7 +75,8 @@ function formSubmit(){
 		alert("이용약관 동의가 필요합니다.");
 		return;
 	}
-	
+
+	alert("줍깅에 오신 것을 환영합니다! 로그인 후 이용해주세요 ^^");
 	form.submit();
 }
 
