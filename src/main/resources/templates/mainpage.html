@@ -21,6 +21,12 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         /* 브라우저 마진과 패딩 리셋 */
         * {
             margin: 0;
@@ -134,6 +140,11 @@
             line-height: 1.5em !important;
         }
 
+        .ploggingPageTitle {
+            text-align: left;
+            font-family: yg-jalnan;
+        }
+
         .jooplist {
             justify-content: center;
         }
@@ -168,6 +179,53 @@
             font-family: 'S-CoreDream-3Light' !important;
         }
 
+        /*플로깅 안내*/
+        .event_subtitle {
+            text-align: center;
+            margin-bottom: 2em;
+            margin-top: 5%;
+        }
+
+        .container {
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+            width: auto !important;
+        }
+
+        #center {
+            margin: 0;
+        }
+
+        .image.featured {
+            margin: 0 !important;
+        }
+
+        .eventImage {
+            margin: 0 !important;
+        }
+
+        .eventDate {
+            margin: 0;
+            font-size: 13pt;
+        }
+
+        .boxinner {
+            padding: 1em 1em 1em 1em !important;
+            font-family: 'S-CoreDream-3Light';
+            text-align: left !important;
+        }
+
+        .alt {
+            font-size: 17px !important;
+            padding: 0.2em 1em !important;
+        }
+
+        .eventButton {
+            float: right;
+            margin-left: auto;
+            margin-top: 0;
+        }
 
 
     </style>
@@ -202,93 +260,106 @@
         </div>
     </div>
 
-    <!-- Main -->
-    <section id="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
+<!-- Main -->
+<!--<section id="main">-->
+<div class="container">
+    <div class="row">
+        <div class="col-12" style=clear:both;>
 
-                    <!-- Portfolio -->
-                    <section>
-                        <hr>
-                        <div style="text-align: center; margin-bottom: 2em;">
-                            <h2>9월 플로깅</h2>
-                        </div>
-                        <div class="jooplist row">
-                            <div class="joop col-4 col-6-medium col-12-small">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img
-                                            src="/images/양화대교.png" alt="" /></a>
-                                    <header>
-                                        <h3 class="ploggingBanner">
-                                            양화대교 플로깅
-                                            <p>(23/30)</p>
-                                        </h3>
-                                    </header>
-                                        <p>9월 20일-9월 26일</p>
-                                        <footer>
-                                            <ul class="actions">
-                                                <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
-                                            </ul>
-                                        </footer>
-                                </section>
-                            </div>
-                            <div class="joop col-4 col-6-medium col-12-small">
-                                <section class="box">
-                                    <a href="" class="image featured"><img
-                                            src="/images/성내천.png" alt="" /></a>
-                                    <header id=center>
-                                        <h3>
-                                            성내천 플로깅
-                                            <p>(20/30)</p>
-                                        </h3>
-                                    </header>
-                                    <p>9월 27일-10월 3일</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-                            <div class="joop col-4 col-6-medium col-12-small">
-                                <section class="box">
-                                    <a href="" class="image featured"><img
-                                            src="/images/마포대교.png" alt="" /></a>
-                                    <header>
-                                        <h3>
-                                            마포대교 플로깅
-                                            <p>(13/30)</p>
-                                        </h3>
-                                    </header>
-                                    <p>10월 4일-10월 10일</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><input type="submit" value="예약하기" class="button alt" onclick="payment()"/></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
+            <!-- Portfolio -->
+            <section>
+                <div class="event_subtitle">
+                    <h2 style="text-align: left; font-family: 'yg-jalnan';">9월 플로깅</h2>
                 </div>
-
-                <div class="col-12">
-                    <!-- Blog -->
-                    <section>
-                        <hr>
-                        <div style="text-align: center; margin-bottom: 2em;">
-                            <h2>플로깅이 처음이신가요?</h2>
-                        </div>
-                        <p align="middle">
-                            <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </p>
-                    </section>
+                <div class="row">
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/양화대교.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        양화대교 플로깅<br>
+                                        (23/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">9월 01일-09월 30일</p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/성내천.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        성내천 플로깅<br>
+                                        (20/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">9월 27일-10월 3일</p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/마포대교.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        마포대교 플로깅<br>
+                                        (13/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">10월 4일-10월 10일</p>
+                            </div>
+                        </section>
+                    </div>
                 </div>
+            </section>
+            <div class="col-12">
+                <!-- Blog -->
+                <section>
+                    <hr>
+                    <div style="text-align: center; margin-bottom: 2em;">
+                        <h2>플로깅이 처음이신가요?</h2>
+                    </div>
+                    <p align="middle">
+                        <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </p>
+                </section>
             </div>
         </div>
-    </section>
-    <div id="main_footer"></div>
+    </div>
+</div>
+
+<div id="main_footer"></div>
 </body>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
