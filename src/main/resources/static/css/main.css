@@ -1,7 +1,7 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 
-	/*Dopetrope by Pixelarity
+	Dopetrope by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
@@ -15,7 +15,7 @@ u, i, center, dl, dt, dd, ol, ul, li, fieldset,
 form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
-footer, header, hgroup, menu, nav, output, ruby,
+footer, , hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
@@ -1550,6 +1550,7 @@ input, select, textarea {
 		header.major {
 			position: relative;
 			text-align: center;
+			border-top: solid 1px #ccc;
 			top: 1em;
 			margin: 0 0 3em 0;
 		}
@@ -1622,8 +1623,8 @@ input, select, textarea {
 		cursor: pointer;
 		border: 0;
 		border-radius: 5px;
-		background: #14a876;
-		color: #fff;
+		background: #35A14A;
+		color: #fff !important;
 		font-weight: 700;
 		outline: 0;
 		font-size: 1.1em;
@@ -1640,7 +1641,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: #24b886;
+			background: #5d5d5d;
 		}
 
 		input[type="button"]:active,
@@ -1648,7 +1649,7 @@ input, select, textarea {
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background: #049866;
+			background: #35A14A;
 		}
 
 		input[type="button"].alt,
@@ -1656,7 +1657,7 @@ input, select, textarea {
 		input[type="reset"].alt,
 		button.alt,
 		.button.alt {
-			background: #0b871e;
+			background: #35A14A;
 		}
 
 			input[type="button"].alt:hover,
@@ -1664,7 +1665,7 @@ input, select, textarea {
 			input[type="reset"].alt:hover,
 			button.alt:hover,
 			.button.alt:hover {
-				background: #066514;
+				background: #5d5d5d;
 			}
 
 			input[type="button"].alt:active,
@@ -1836,7 +1837,7 @@ input, select, textarea {
 			position: absolute;
 			left: 0;
 			top: 1.3em;
-			background-color: #14a876;
+			background-color: #35A14A;
 			height: 3.5em;
 			text-align: center;
 			color: #fff;
@@ -1851,7 +1852,7 @@ input, select, textarea {
 				position: absolute;
 				bottom: 0;
 				right: -1.2em;
-				border-left: solid 1.25em #14a876;
+				border-left: solid 1.25em #35A14A;
 				border-top: solid 1.8em transparent;
 				border-bottom: solid 1.8em transparent;
 			}

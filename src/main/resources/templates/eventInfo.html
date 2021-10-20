@@ -21,6 +21,25 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 80%;
+            margin: auto;
+        }
 
         /* 사이드바 회원정보 관련 CSS*/
         .grade{
@@ -29,13 +48,18 @@
             height: 40px;
         }
 
+        #supersideBar {
+            position: fixed;
+            width: 260px;
+            margin-left: 6%;
+            margin-top: 7.5%;
+        }
+
         #sideBarInner{
-            float: left;
-            margin-top: 9.3em;
-            margin-left: 10%;
-            width: 250px;
+            width: 100%;
             height: 250px;
             border: 1px solid #e6e6e6;
+            border-radius: 20px;
             padding: 30px 20px;
             font-family: 'S-CoreDream-3Light';
         }
@@ -49,10 +73,8 @@
             float: right;
         }
 
-        .container {
-            margin-top: 5.3em !important;
-            margin-left: 17%;
-            margin-right: 17%;
+        .box {
+            font-family: 'S-CoreDream-4Regular';
         }
 
     </style>
@@ -60,7 +82,7 @@
 
 <body class="homepage is-preload" style="margin: 0;">
 <div id="main_header" style="display: flex"></div>
-<div style="position: fixed;">
+<div id="supersideBar">
     <!-- 회원정보 사이드바 -->
     <div id="sideBarInner">
         <div>
@@ -97,23 +119,32 @@
 
 <div class="container">
     <div class="box post">
-        <!-- 샘플 상세페이지 이미지 -->
-        <!-- 이미지는 한장으로 표현할 것 -->
-        <a href="#" class="image featured"><img src="/images/마포대교.png" style="width: 50%; margin: auto;"/></a>
-
-        <!-- 샘플 상세페이지 내용(텍스트) -->
-        <!-- 스프링 작업 후 데이터의 연산 필요 -->
+        <div>
+            <img class="eventImage" src="/images/event/event_seoul01.jpg"/>
+        </div>
         <header>
-            <h2>마포대교 플로깅</h2>
+            <h2>서울새활용플라자 플로깅</h2>
         </header>
-        <h4>마표대교에서 달려라! 주워라!</h4>
-
+        <h4>새활용 활동에 관심이 있으며,<br>
+            건강과 즐거움을 추구하는 모든 시민
+        </h4>
         <p>
-            장소 : 마포대교<br> <br> 일시 : 2021-09-27 AM 10:00 ~ PM 13:00<br>
-            <br> 내용 : 마포대교 일대 플로깅 켐페인 진행<br> <br> 참가비 : 2000원
-            (예약 신청시 결제 페이지 이동)<br> <br>
-        </p>
+            ▷신청기간 :  ~ 2021년 10월 20일(수) 까지<br>
+            ▷기간 : 2021년 10월 23일 (토)부터 11월 5일 (금)까지, 2주간<br>
+            ▷참여비용 : 무료<br>
+            ※ 신청자 선착순 150명에게 플로깅 물품과 제로웨이스트 제품이 담긴 플로깅 키트 제공!<br><br>
 
+            ▷ 참여방법
+            ① 서울새활용플라자 홈페이지를 통해 플로깅 이벤트 신청<br>
+            ② 플로깅 키트 수령 ※ 신청일 별 택배 순차 배송됩니다.<br>
+            ③ 플로깅 키트 물품으로 쓰레기도 주우면서 조깅도 즐기는 플로깅 체험<br>
+            ④ 플로깅 완료 후 활동 사진을 인스타그램 본인 계정에 게시 후 필수 해시태그<br>
+            : #서울새활용플라자 #서울디자인재단 #SUP #SUP플로깅 #새활용<br>
+            ⑤ 인증 완료 후 서울새활용플라자 계정 팔로우<br>
+            : @seoulupcycling<br>
+            ※ 플로깅 활동을 인증한 시민 대상으로 추첨을 통해 스타벅스 커피 쿠폰을 제공합니다.<br><br>
+            ▷ 문의 : SUP플로깅 운영사무국 (070-7549-1536)
+        </p>
         <section>
             <header>
                 <h3>주의 사항</h3>
