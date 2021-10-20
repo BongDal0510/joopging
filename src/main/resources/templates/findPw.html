@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>비밀번호 찾깅</title>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
 </head>
 <style>
     .out{
@@ -17,54 +20,48 @@
         border-radius: 5px;
     }
 </style>
-<link rel="stylesheet" href="/css/main.css" type="text/css"/>
 <body>
-<div class="out" style="margin-top: 0px; padding-top: 0px;">
+    <div style="width: 75%; margin-left:45px;">
     <div>
         <h3 style="text-align:center">SMS 인증으로 비밀번호 찾기</h3>
+        <hr>
     </div>
-    <hr>
-    <div class="col-6 col-12-xsmall" style="width:100%">
-        <p style="margin:0;">
-            아이디 <span id="idCheck_text" style="font-size:0.7em;"></span>
-        </p>
-        <form name="findId" id="findId">
+
+    <form name="findPw" id="findPw">
+        <div>
+            <p style="margin:0;">아이디</p>
             <input class="line" type="text" name="member_id" id="member_id" value="" placeholder="아이디입력" style="width:100%; height:50px;"/>
-        </form>
-        <br>
-        <p style="margin:0;">
-            이름 <span id="nameCheck_text" style="font-size:0.7em;"></span>
-        </p>
-        <input class="line" type="text" name="member_name" id="member_name" value="" placeholder="성명입력" style="width:100%; height:50px;"/>
-        <br>
-        <br>
-        <p style="margin:0;">
-            생년월일 / 성별 <span id="genderCheck_text" style="font-size:0.7em;"></span>
-        </p>
-        <input class="line" type="text" name="member_birth" id="member_birth" value="" placeholder="생년월일" style="width:40%; height:50px;"/>
-        -
-        <input class="line" type="text" name="member_gender" id="member_gender" value="" placeholder="" style="width:10%; height:50px;"/>
-        ******
-        <br>
-        <br>
-        <p style="margin:0;">
-            휴대폰번호 <span id="phoneCheck_text" style="font-size:0.7em;"></span>
-        </p>
-        <input class="line" type="text" name="member_phone" id="member_phone" value="" placeholder="숫자만 입력" style="width:100%; height:50px;"/>
-        <br>
-        <br>
-        <div style="text-align:center;" class="col-12">
-            <form action="/app/member/certifyPw.jsp" name="actionSubmit">
-                <!-- <form> -->
-                <button type="button" value="완료" class="primary" onclick="certifyPw()" style="width:150px; height:50px; background:#94c477;">완료</button>
-                <span style="padding:10px"></span>
-                <button type="button" value="취소" class="primary" onclick="window.close()" style="width:150px; height:50px; background:#94c477;">취소</button>
-                <input type="hidden" id="memberName" name="memberName" readonly/>
-                <input type="hidden" id="randomNum" name="randomNum" readonly/>
-            </form>
         </div>
+        <br>
+        <div>
+            <p style="margin:0;">이름</p>
+            <input class="line" type="text" name="member_name" id="member_name" value="" placeholder="성명입력" style="width:100%; height:50px;"/>
+        </div>
+        <br>
+        <div>
+            <p style="margin:0;">생년월일 / 성별</p>
+            <div style="display: flex;">
+                <input class="line" type="text" name="memberBirth" id="memberBirth" placeholder="생년월일" style="width:45%; height:50px; margin:0px;" maxlength="6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                <p style="margin:10px 10px;">-</p>
+                <input class="line" type="text" name="memberGender" id="memberGender" style="width:15%; height:50px; margin:0px;" maxlength="1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                <p style="margin:22px 10px; font-size: 40px;">******</p>
+            </div>
+        </div>
+        <div>
+            <!--전화번호-->
+            <p style="margin:0;">휴대폰번호</p>
+            <input class="line" type="text" name="memberPhone" id="memberPhone" value="" placeholder="숫자만 입력" style="width:100%; height:50px;" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+        </div>
+        <br>
+        <div>
+            <div style="text-align:center;" class="col-12">
+                <button type="button" value="완료" class="primary" onclick="certifyPw()" style="width:150px; height:50px; background:#94c477;">완료</button>
+                <span style="padding:1px"></span>
+                <button type="button" value="취소" class="primary" onclick="window.close()" style="width:150px; height:50px; background:#94c477;">취소</button>
+            </div>
+        </div>
+    </form>
     </div>
-</div>
 </body>
 <script>
     function generateRandomCode() {
@@ -126,10 +123,10 @@
 </script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
-<script src="/js/browser.min.js"></script>
-<script src="/js/breakpoints.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript"></script>
-<script src="/js/header.js"></script>
+<!--<script src="/js/browser.min.js"></script>-->
+<!--<script src="/js/breakpoints.min.js"></script>-->
+<!--<script src="/js/util.js"></script>-->
+<!--<script src="/js/main.js"></script>-->
+<!--<script type="text/javascript"></script>-->
+<!--<script src="/js/header.js"></script>-->
 </html>

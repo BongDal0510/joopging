@@ -30,14 +30,34 @@ public class memberController {
         return "footer";
     }
 
+    /*플로깅 소개 페이지*/
+    @GetMapping("ploggingInfo")
+    public String ploggingInfo(){
+        return "ploggingReservation/ploggingInfo";
+    }
+
+    /*이용약관 페이지*/
+    @GetMapping("terms")
+    public String terms(){
+        return "terms";
+    }
+
     /*아무 연산 없이 로그인 페이지로 이동*/
     @GetMapping("login")
     public String login() {
         return "login";
     }
 
+    /*로그인하기 : 회원정보 조회 연산 필요*/
+    @PostMapping("login")
+    public String loginAction(){
+        /*연산 작업*/
+
+        return "/mainpage";
+    }
+
     /*로그인 페이지에서 회원가입 버튼 누르기*/
-    @PostMapping("join")
+    @GetMapping("join")
     public String join() {
         return "join";
     }
@@ -50,7 +70,7 @@ public class memberController {
 
     /*아이디 찾기 SMS 인증 페이지*/
     @PostMapping("searchId")
-    public String searchId(@RequestParam("member_phone") String phone, Model model) {
+    public String searchId(@RequestParam("memberPhone") String phone, Model model) {
       String str = "123456";
 
       log.info(phone);
@@ -62,6 +82,12 @@ public class memberController {
 	  model.addAttribute("random", str);
 
       return "searchId";
+    }
+
+    /*아이디 결과 띄워주기(연산)*/
+    @GetMapping("resultFindId")
+    public String resultFindId(){
+        return "resultFindId";
     }
 
     @GetMapping("findPw")
