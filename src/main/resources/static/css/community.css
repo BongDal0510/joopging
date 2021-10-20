@@ -1,4 +1,11 @@
 @font-face {
+    font-family: 'S-CoreDream-5Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    @font-face {
     font-family: 'S-CoreDream-4Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
     font-weight: normal;
@@ -92,12 +99,18 @@ ul.actions{
 
 input.button{
     background-color: #94C477;
-    border: solid 1px #f4f4f5;
 }
 
-tr.tHead th{
-    text-align: center;
+header#headerWrapper{
+    padding: 0;
+    margin: 0;
+
 }
-div#registerBtn{
-font-size: 12px;
-margin-bottom: 2%;}
+div#goCommuListBtn{
+    padding: 0 17% 2% 0;
+}
+a#goListButton.small{
+
+    padding: 0.4% 1.5%;
+    font-size: 12px;
+}

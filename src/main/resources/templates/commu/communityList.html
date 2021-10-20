@@ -8,12 +8,16 @@
     <meta name="keywords" content=""/>
     <link rel="stylesheet" href="/css/community.css" type="text/css"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
     <style>
-
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         .big-width {display: block;}
 
         .small-width { display: none;}
@@ -46,12 +50,22 @@
             form[name='searchForm']{
                 overflow: hidden;}
         }
+        header.major{
+            border:none;
+        }
+        #commuLeftCategory{
+            font-family: 'S-CoreDream-4Regular';
+            font-weight: bold;
+            font-size: 13px;
+        }
+
     </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
+<header id="commuHeaderWrapper">
    <div id="main_header"></div>
-
+</header>
 
 
 <!-- Main -->
@@ -67,10 +81,32 @@
             <div id="commuBoardWrapper">
                 <!--게시판 목록 왼쪽 사이드-->
                 <div id="commuBoardLeft">
-                    <table>
-
+                    <table id="commuLeftCategory">
+                        <tr>
+                            <td>커뮤니티 게시판</td>
+                        </tr>
+                        <tr>
+                            <th>인터뷰</th>
+                        </tr>
+                        <tr>
+                            <th>뭐있지또</th>
+                        </tr>
+                        <tr>
+                            <th>게시판이름</th>
+                        </tr>
+                        <tr>
+                            <th>문의하기?</th>
+                        </tr>
+                        <tr>
+                            <th>ajax하기싫은데</th>
+                        </tr>
+                        <tr>
+                            <th>몇개나 있어야</th>
+                        </tr>
+                        <tr>
+                            <th>디자인이 이블까?</th>
+                        </tr>
                     </table>
-                   <img src="/images/sideCategory.PNG">
                 </div>
 
                 <!--게시판 목록-->
@@ -86,7 +122,7 @@
                                 <th class="title">제목</th>
                                 <th class="writer">작성자</th>
                                 <th class="regDate">작성일</th>
-                                <th class="updateDate">수정일</th>
+                                <th class="viewCnt">조회수</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -96,7 +132,7 @@
                                     <td class="title"><a id="goRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>
-                                    <td class="updateDate" th:text="*{commuUpdateDate}"></td>
+                                    <td class="viewCnt" th:text="*{commuViewCnt}"></td>
                                 </tr>
                             </th:block>
                             </tbody>

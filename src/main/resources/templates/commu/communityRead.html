@@ -13,13 +13,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
     <style>
-
+#boardTitleArea{
+    border: solid 1.5px #f4f4f5;
+    padding: 2%;
+}
+        div.field input[name="commuBno"]{
+            border: none;
+            color: #fff;
+            padding: 0;
+            height: 0;
+        }
+        #commuWriterTitle{
+            padding: 0 0 0 2.5%;
+            font-size: x-small;
+            width:15%;
+        }
+        div.field input[name="commuWriter"]{
+            border: none;
+            padding:0 0 0 1.5%;
+            width:20%;
+            margin: 0;
+        }
+        div.field input[name="commuTitle"]{
+            border: none;
+            font-size: large;
+            font-weight: bold;
+        }
+        #boardWriterArea{
+            display: flex;
+        }
+        div#commuBoardMiddle{
+            width: 80%;
+            margin: 0 2%;
+        }
+#commuBoardRight{
+    width: 17%;
+    padding: 0 2% 0 2%;
+}
+#commuBoardLeft{
+    width: 17%;
+    padding: 0 0 0 5%;
+}
     </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
 <header>
-    여기에 헤더가 들어갑니다.
+<div id="main_header"></div>
 </header>
 <!--<section id="communityBanner">
     <img src="/images/shopBannerAd.png">
@@ -29,43 +69,73 @@
     <div class="wrapper">
         <div class="inner">
 
-            <!-- 상세보기 헤더 -->
-            <header class="major">
+            <!-- 상세보기 헤더 -없앰 -->
+
+           <!-- <header class="major">
                 <h1>Board</h1>
                 <p>게시글 상세보기</p>
-            </header>
+            </header>-->
+            <div id="goCommuListBtn">
+                <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
+            </div>
             <!-- Table -->
             <div id="commuBoardWrapper">
                 <!--게시판 목록 왼쪽 사이드-->
                 <div id="commuBoardLeft">
-                    <img src="/images/leftAd.png">
-                    <img src="/images/nogreenAd.png">
+                    <table id="commuLeftCategory">
+                        <tr>
+                            <td>커뮤니티 게시판</td>
+                        </tr>
+                        <tr>
+                            <th>인터뷰</th>
+                        </tr>
+                        <tr>
+                            <th>뭐있지또</th>
+                        </tr>
+                        <tr>
+                            <th>게시판이름</th>
+                        </tr>
+                        <tr>
+                            <th>문의하기?</th>
+                        </tr>
+                        <tr>
+                            <th>ajax하기싫은데</th>
+                        </tr>
+                        <tr>
+                            <th>몇개나 있어야</th>
+                        </tr>
+                        <tr>
+                            <th>디자인이 이블까?</th>
+                        </tr>
+                    </table>
                 </div>
+
                 <div id="commuBoardMiddle">
-                    <div id="goCommuListBtn">
-                        <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
-                    </div>
 
             <div class="content">
                 <div class="form">
                     <form method="post" action="/commu/removeCommu">
                         <div class="fields" th:object="${commu}">
+                            <!--글 번호 : 화이트/ 안보임-->
                             <div class="field">
-                                <h4>번호</h4>
                                 <input name="bno" type="text" th:field="*{commuBno}" readonly/>
                             </div>
+                            <!--제목 공간-->
+                            <div id="boardTitleArea">
                             <div class="field">
-                                <h4>제목</h4>
                                 <input name="title" type="text" th:field="*{commuTitle}" readonly/>
                             </div>
-                            <div class="field">
-                                <h4>내용</h4>
-                                <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
-                            </div>
-                            <div class="field">
-                                <h4>작성자</h4>
+                            <div class="field" id="boardWriterArea">
+                                <h4 id="commuWriterTitle">작성자 :</h4>
                                 <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
                             </div>
+                            </div>
+                            <!--글 내용-->
+                            <div class="field">
+
+                                <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
+                            </div>
+
                         </div>
                         <ul class="actions special">
                             <li>
@@ -112,9 +182,9 @@
         </div>
     </div>
 </div>
-<p>
-
-</p>
+<footer>
+    <div id="main_footer"></div>
+</footer>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
@@ -123,6 +193,7 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/reply.js"></script>
+<script src="/js/header.js"></script>
 </body>
 <script th:inline="javascript">
     let commuBno = [[${commu.getCommuBno()}]];
