@@ -2,64 +2,70 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Board</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/community.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/community.css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
     <style>
-#boardTitleArea{
-    border: solid 1.5px #f4f4f5;
-    padding: 2%;
-}
-        div.field input[name="commuBno"]{
+        #boardTitleArea {
+            border: solid 1px #d3d3d3;
+            padding: 2%;
+        }
+
+        div.field input[name="commuBno"] {
             border: none;
             color: #fff;
             padding: 0;
             height: 0;
         }
-        #commuWriterTitle{
+
+        #commuWriterTitle {
             padding: 0 0 0 2.5%;
             font-size: x-small;
-            width:15%;
+            width: 9%;
         }
-        div.field input[name="commuWriter"]{
+
+        div.field input[name="commuWriter"] {
             border: none;
-            padding:0 0 0 1.5%;
-            width:20%;
+            padding: 0 0 0 1.5%;
+            width: 20%;
             margin: 0;
         }
-        div.field input[name="commuTitle"]{
+
+        div.field input[name="commuTitle"] {
             border: none;
             font-size: large;
             font-weight: bold;
         }
-        #boardWriterArea{
+
+        #boardWriterArea {
             display: flex;
         }
-        div#commuBoardMiddle{
-            width: 80%;
-            margin: 0 2%;
+
+        #commuBoardLeft {
+            width: 17%;
+            padding: 0 0 0 5%;
         }
-#commuBoardRight{
-    width: 17%;
-    padding: 0 2% 0 2%;
-}
-#commuBoardLeft{
-    width: 17%;
-    padding: 0 0 0 5%;
-}
+
+        #boardContentArea textarea {
+            resize: none;
+            border: solid 1px #d3d3d3;
+            border-top: none;
+            padding: 4.2%;
+        }
+
     </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
 <header>
-<div id="main_header"></div>
+    <div id="main_header"></div>
 </header>
 <!--<section id="communityBanner">
     <img src="/images/shopBannerAd.png">
@@ -71,10 +77,10 @@
 
             <!-- 상세보기 헤더 -없앰 -->
 
-           <!-- <header class="major">
-                <h1>Board</h1>
-                <p>게시글 상세보기</p>
-            </header>-->
+            <!-- <header class="major">
+                 <h1>Board</h1>
+                 <p>게시글 상세보기</p>
+             </header>-->
             <div id="goCommuListBtn">
                 <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
             </div>
@@ -112,72 +118,74 @@
 
                 <div id="commuBoardMiddle">
 
-            <div class="content">
-                <div class="form">
-                    <form method="post" action="/commu/removeCommu">
-                        <div class="fields" th:object="${commu}">
-                            <!--글 번호 : 화이트/ 안보임-->
-                            <div class="field">
-                                <input name="bno" type="text" th:field="*{commuBno}" readonly/>
-                            </div>
-                            <!--제목 공간-->
-                            <div id="boardTitleArea">
-                            <div class="field">
-                                <input name="title" type="text" th:field="*{commuTitle}" readonly/>
-                            </div>
-                            <div class="field" id="boardWriterArea">
-                                <h4 id="commuWriterTitle">작성자 :</h4>
-                                <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
-                            </div>
-                            </div>
-                            <!--글 내용-->
-                            <div class="field">
+                    <div class="content">
+                        <div class="form">
+                            <form method="post" action="/commu/removeCommu">
+                                <div class="fields" th:object="${commu}">
+                                    <!--글 번호 : 화이트/ 안보임-->
+                                    <div class="field">
+                                        <input name="bno" type="text" th:field="*{commuBno}" readonly/>
+                                    </div>
+                                    <!--제목 공간-->
+                                    <div id="boardTitleArea">
+                                        <div class="field">
+                                            <input name="title" type="text" th:field="*{commuTitle}" readonly/>
+                                        </div>
+                                        <div class="field" id="boardWriterArea">
+                                            <h4 id="commuWriterTitle">작성자 :</h4>
+                                            <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!--글 내용-->
+                                    <div class="field" id="boardContentArea">
+                                        <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}"
+                                                  readonly></textarea>
+                                    </div>
 
-                                <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
-                            </div>
+                                </div>
+                                <ul class="actions special">
+                                    <li>
+                                        <input type="button" class="button" value="수정" onclick="goUpdate()"/>
+                                        <input type="submit" class="button" value="삭제"/>
+                                    </li>
+                                </ul>
+                                <!--댓글-->
+                                <ul class="icons">
+                                    <li style="display: block">
+                                        <span class="icon solid fa-envelope"></span>
+                                        <strong>댓글</strong>
+                                    </li>
+                                </ul>
+                                <a href="javascript:void(0)" class="register button primary small" style="width: 100%">댓글
+                                    등록</a>
+                                <div style="display: none" class="register-form">
+                                    <div>
+                                        <h4>작성자</h4>
+                                        <input type="text" name="replier" placeholder="Replier">
+                                    </div>
+                                    <div>
 
+                                        <h4>댓글</h4>
+                                        <textarea rows="6" name="reply" placeholder="Reply"
+                                                  style="resize: none"></textarea>
+                                    </div>
+                                    <div style="text-align: right">
+                                        <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                                        <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                                    </div>
+                                </div>
+                                <ul class="replies"></ul>
+                            </form>
+                            <div class="paging" style="text-align: center"></div>
                         </div>
-                        <ul class="actions special">
-                            <li>
-                                <input type="button" class="button" value="수정" onclick="goUpdate()"/>
-                                <input type="submit" class="button" value="삭제"/>
-                            </li>
-                        </ul>
-                        <!--댓글-->
-                        <ul class="icons">
-                            <li style="display: block">
-                                <span class="icon solid fa-envelope"></span>
-                                <strong>댓글</strong>
-                            </li>
-                        </ul>
-                        <a href="javascript:void(0)" class="register button primary small" style="width: 100%">댓글 등록</a>
-                        <div style="display: none" class="register-form">
-                            <div>
-                                <h4>작성자</h4>
-                                <input type="text" name="replier" placeholder="Replier">
-                            </div>
-                            <div>
-
-                                <h4>댓글</h4>
-                                <textarea rows="6" name="reply" placeholder="Reply" style="resize: none"></textarea>
-                            </div>
-                            <div style="text-align: right">
-                                <a href="javascript:void(0)" class="finish button primary small">등록</a>
-                                <a href="javascript:void(0)" class="cancel button primary small">취소</a>
-                            </div>
-                        </div>
-                        <ul class="replies"></ul>
-                    </form>
-                    <div class="paging" style="text-align: center"></div>
-                </div>
-            </div>
-                </div>
-                    <!--게시판 목록 오른쪽 사이드-->
-                    <div id="commuBoardRight">
-                        <img src="/images/nogreenAd.png">
-                        <img src="/images/leftAd.png">
                     </div>
                 </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+                    <img src="/images/leftAd.png">
+                </div>
+            </div>
 
         </div>
     </div>
@@ -205,14 +213,14 @@
     /*댓글 영역의 첫 페이지를 항상 보여준다*/
     showList(pageNum);
     /*댓글 등록 버튼 클릭시, 댓글 작성폼 보여주기*/
-    $(".register").on("click", function(e){
+    $(".register").on("click", function (e) {
         e.preventDefault();
         $(".register-form").show();
         $(this).hide();
     })
 
     /*댓글 취소 버튼 클릭시 댓글 작성폼 숨기기*/
-    $(".cancel").on("click", function(e){
+    $(".cancel").on("click", function (e) {
         e.preventDefault();
         $("input[name='replier']").val("");
         $("textarea[name='reply']").val("");
@@ -221,15 +229,17 @@
     })
 
     /*댓글 등록*/
-    $(".finish").on("click", function(e){
+    $(".finish").on("click", function (e) {
         e.preventDefault();
         let replier = $("input[name='replier']").val();
         let reply = $("textarea[name='reply']").val();
 
-        if(!replier || !reply){return;}
+        if (!replier || !reply) {
+            return;
+        }
 
-        replyService.add({commuBno:commuBno, commuReply:commuReply, commuReplier:commuReplier},
-            function(result){
+        replyService.add({commuBno: commuBno, commuReply: commuReply, commuReplier: commuReplier},
+            function (result) {
                 alert(result);
                 $("input[name='replier']").val("");
                 $("textarea[name='reply']").val("");
@@ -241,14 +251,14 @@
     });
 
     /*댓글 페이징 처리*/
-    function showReplyPage(replyCnt){
+    function showReplyPage(replyCnt) {
         let endNum = Math.ceil(pageNum / 10.0) * 10;
         let startNum = endNum - 9;
         let realEnd = Math.ceil(replyCnt / 10.0);
         let divTag = $(".paging");
         let str = "";
 
-        if(endNum > realEnd){
+        if (endNum > realEnd) {
             endNum = realEnd;
         }
 
@@ -256,27 +266,27 @@
         let next = endNum * 10 < replyCnt;
 
         //917px 까지
-        if(matchMedia("screen and (max-width:918px)").matches){
-            if(pageNum > 1){
+        if (matchMedia("screen and (max-width:918px)").matches) {
+            if (pageNum > 1) {
                 str += "<a class='changePage' href='" + (pageNum - 1) + "'><code>&lt;</code></a>"
             }
             str += "<code>" + pageNum + "</code>";
-            if(pageNum < realEnd){
+            if (pageNum < realEnd) {
                 str += "<a class='changePage' href='" + (pageNum + 1) + "'><code>&gt;</code></a>"
             }
 
-        }else{//918px 이상
-            if(prev){
+        } else {//918px 이상
+            if (prev) {
                 str += "<a class='changePage' href='" + (startNum - 1) + "'><code>&lt;</code></a>"
             }
-            for(let i=startNum; i<=endNum; i++){
-                if(i == pageNum){
+            for (let i = startNum; i <= endNum; i++) {
+                if (i == pageNum) {
                     str += "<code>" + i + "</code>";
                     continue;
                 }
                 str += "<a class='changePage' href='" + i + "'><code>" + i + "</code></a>";
             }
-            if(next){
+            if (next) {
                 str += "<a class='changePage' href='" + (endNum + 1) + "'><code>&gt;</code></a>"
             }
         }
@@ -288,31 +298,29 @@
     //DOM에서 새롭게 추가되는 HTML에는 이벤트가 반영되지 않는다.
     //따라서 미리 작성해놓은 HTML에 이벤트를 반영한 후,
     //해당 자식 태그를 선택하여 이벤트 위임을 진행해야 한다.
-    $("div.paging").on("click", "a.changePage", function(e){
+    $("div.paging").on("click", "a.changePage", function (e) {
         e.preventDefault();
         pageNum = parseInt($(this).attr("href"));
         showList(pageNum);
     });
 
 
-
-
     /*댓글 목록*/
-    function showList(page){
-        replyService.getList({bno:bno, page:page || 1},
-            function(replyCnt, list){
-                if(list == null || list.length == 0){
+    function showList(page) {
+        replyService.getList({bno: bno, page: page || 1},
+            function (replyCnt, list) {
+                if (list == null || list.length == 0) {
                     replyUL.html("댓글이 없습니다.");
                     return;
                 }
                 let str = "";
-                for(let i=0, len=list.length; i<len; i++){
+                for (let i = 0, len = list.length; i < len; i++) {
                     str += "<li style='display: block' data-rno='" + list[i].rno + "'>"
                     str += "<strong>" + list[i].replier + "</strong>"
                     str += "<div>"
-                    str += "<p class='reply" + list[i].rno +"'>" + list[i].reply + "</p>"
+                    str += "<p class='reply" + list[i].rno + "'>" + list[i].reply + "</p>"
                     str += "<p><strong class='date'>" + replyService.displayTime(list[i].replyDate);
-                    if(list[i].replyDate != list[i].updateDate){
+                    if (list[i].replyDate != list[i].updateDate) {
                         str += "<br>수정된 날짜 " + replyService.displayTime(list[i].updateDate);
                     }
                     str += "</strong></p></div>"
@@ -331,15 +339,15 @@
     let check = false; //수정 중인지 아닌지 확인하는 flag
     /*댓글 수정*/
     /*이벤트 위임 -> a.modify*/
-    $(".replies").on("click", "a.modify", function(e){
+    $(".replies").on("click", "a.modify", function (e) {
         e.preventDefault();
         let rnoValue = $(this).attr("href");
         $("p.reply" + rnoValue).html("<textarea class='" + rnoValue + "'>" + $("p.reply" + rnoValue).text() + "</textarea>")
         $(this).hide(); //수정버튼 숨김
 
         let arFinish = $(".finish");
-        for(let i=0; i<arFinish.length; i++){
-            if($(arFinish[i]).attr("href") == rnoValue){
+        for (let i = 0; i < arFinish.length; i++) {
+            if ($(arFinish[i]).attr("href") == rnoValue) {
                 $(arFinish[i]).show();//클릭한 댓글 번호를 수정할 수 있도록 수정 완료 버튼 보이기
                 check = true;
                 break;
@@ -348,16 +356,18 @@
     });
 
     /*수정 확인 버튼*/
-    $(".replies").on("click", "a.finish", function(e){
+    $(".replies").on("click", "a.finish", function (e) {
         e.preventDefault();
 
         let rnoValue = $(this).attr("href");
         let newReply = $("." + rnoValue).val(); //새로 수정된 reply value
 
-        if(newReply == ""){return;}
+        if (newReply == "") {
+            return;
+        }
 
-        replyService.update({rno:rnoValue, reply:newReply},
-            function(result){
+        replyService.update({rno: rnoValue, reply: newReply},
+            function (result) {
                 alert(result);
                 check = false;//수정 확인이 완료되면, 수정하기 false. (수정 기능 종료)
                 showList(pageNum);
@@ -370,11 +380,11 @@
 
     //========================================================================================
 
-    function goUpdate(){
+    function goUpdate() {
         location.href = "/commu/communityModify" + paging + "&commuBno=" + commuBno;
     }
 
-    $("a#goList").on("click", function(){
+    $("a#goList").on("click", function () {
         location.href = "/commu/communityList" + paging;
     });
 
