@@ -17,6 +17,9 @@ public class MypageController {
         return "mypage/mypage";
     }
 
+    @GetMapping("orderInfo")
+    public String orderInfo(){ return  "mypage/orderInfo"; }
+
     @GetMapping("header")
     public String header() {
         return "header";
