@@ -39,13 +39,13 @@ public class memberController {
     /*이용약관 페이지*/
     @GetMapping("terms")
     public String terms(){
-        return "terms";
+        return "member/terms";
     }
 
     /*아무 연산 없이 로그인 페이지로 이동*/
     @GetMapping("login")
     public String login() {
-        return "login";
+        return "member/login";
     }
 
     /*로그인하기 : 회원정보 조회 연산 필요*/
@@ -59,13 +59,13 @@ public class memberController {
     /*로그인 페이지에서 회원가입 버튼 누르기*/
     @GetMapping("join")
     public String join() {
-        return "join";
+        return "member/join";
     }
 
     /*아이디 찾기 버튼 클릭*/
     @GetMapping("findId")
     public String findId() {
-        return "findId";
+        return "member/findId";
     }
 
     /*아이디 찾기 SMS 인증 페이지*/
@@ -81,18 +81,18 @@ public class memberController {
         
 	  model.addAttribute("random", str);
 
-      return "searchId";
+      return "member/searchId";
     }
 
     /*아이디 결과 띄워주기(연산)*/
     @GetMapping("resultFindId")
     public String resultFindId(){
-        return "resultFindId";
+        return "member/resultFindId";
     }
 
     @GetMapping("findPw")
     public String findPw() {
-        return "findPw";
+        return "member/findPw";
     }
 
 
