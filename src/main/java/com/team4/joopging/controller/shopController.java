@@ -39,12 +39,13 @@ public class shopController {
         return "header";
     }
 
+    @GetMapping("shop_header")
+    public String shop_header() { return "shop_header";}
+
     @GetMapping("footer")
     public String footer() {
         return "footer";
     }
-
-
 
 
 }
