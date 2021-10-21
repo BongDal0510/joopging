@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/community.css" />
+    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body class="is-preload">
+<!--header 위치-->
+<div id="main_header"></div>
+<!--<section id="communityBanner">
+    <img src="/images/shopBannerAd.png">
+</section>-->
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+
+            <!-- 수정 헤더 -->
+            <header class="major">
+                <h1>Board</h1>
+                <p>게시글 수정</p>
+            </header>
+<!--메인 영역-->
+            <div id="commuBoardWrapper">
+                <!--게시판 목록 왼쪽 사이드-->
+                <div id="commuBoardLeft">
+                    <img src="/images/leftAd.png">
+                    <img src="/images/nogreenAd.png">
+                </div>
+
+            <!-- Table -->
+                <div id="commuBoardMiddle">
+                    <div id="goCommuListBtn">
+                        <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
+                    </div>  <div class="content">
+                <div class="form">
+                    <form method="post" action="/commu/communityModify">
+                        <div class="fields" th:object="${commu}">
+                            <div class="field">
+                                <h4>번호</h4>
+                                <input name="bno" type="text" th:field="*{commuBno}" readonly/>
+                            </div>
+                            <div class="field">
+                                <h4>*제목</h4>
+                                <input name="title" type="text" th:field="*{commuTitle}"/>
+                            </div>
+                            <div class="field">
+                                <h4>*내용</h4>
+                                <textarea id="summernote" name="content" rows="6" placeholder="Content" style="resize:none" th:text="*{commuContent}"></textarea>
+                            </div>
+                            <div class="field">
+                                <h4>작성자</h4>
+                                <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
+                            </div>
+                        </div>
+                        <ul class="actions special">
+                            <li>
+                                <input type="submit" class="button" value="수정 완료"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+                </div>
+                    <!--게시판 목록 오른쪽 사이드-->
+<!--                    <div id="commuBoardRight">
+                        <img src="/images/nogreenAd.png">
+                        <img src="/images/leftAd.png">
+                    </div>-->
+                </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="main_footer"></div>
+</footer>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/header.js"></script>
+<!--summernote script-->
+<script src="/js/summernote/summernote-lite.js"></script>
+<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'Content',
+            minHeight: 370,
+            maxHeight: null,
+            focus: true,
+            lang : 'ko-KR'
+        });
+    });
+</script>
+<script>
+    let paging = [[${criteria.listLink}]];
+
+    $("a#goList").on("click", function(){
+        location.href = "/commu/communityList" + paging;
+    })
+</script>
+</html>
