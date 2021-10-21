@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GOODS REFUND</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/font.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            background: #ffffff;
+            padding: 0px !important;
+        }
+
+        select[name='type']{width: 30%; margin-right: 1%;}
+
+        input[name='keyword']{width: 56%; margin-right: 1%;}
+
+        form[name='searchForm']{overflow: hidden;}
+
+        select[name='type']{width: 100%;}
+        input[name='keyword']{width: 100%;}
+        a.search{width: 100%;}
+        form[name='searchForm']{
+            overflow: hidden;}
+
+        header.major{
+            border:none;
+        }
+
+        /*div*/
+
+        div.imp-medium{
+            font-family: S-CoreDream-3Light;
+            display: none;
+            padding-top: 4.8px;
+            width: 70% !important;
+        }
+
+        /*header*/
+
+        .box.post header {
+            padding: 0px !important;
+            margin: 0 0 1em 0;
+        }
+
+        /* h1,h2,h3,h4 */
+
+        h1, h2, h3, h4{
+            color: #35A14A !important;
+            font-family: yg-jalnan;
+        }
+
+        h3{
+            padding-bottom: 0.5em;
+            border-bottom: #35A14A 3px solid;
+        }
+
+
+
+        /* Box */
+
+        .box {
+            background-color: #ffffff !important;
+            padding: 0px !important;
+            text-align: left !important;
+            border-bottom : none !important;
+        }
+
+        /*table*/
+
+        table.boardList thead{
+            background-color : #f7f7f7;
+            border-top: 3px solid #35A14A;
+            border-bottom: none;
+            font-size: 16px;
+        }
+
+        table.boardList tbody{
+            border-bottom: 1px solid #d3d3d3;
+        }
+
+        table.boardList caption{
+            text-align:left;
+            margin-bottom:3%;
+        }
+
+        table.delete123 th{
+            width : 125px;
+            font-size : 14px;
+            padding: 7px 0 7px 20px;
+            text-align: left;
+            background: #f9f9f9;
+            color: #333;
+            border-color: #efefef;
+        }
+
+        input{
+            border-color: #d3d3d3;
+            border-radius : 5px;
+        }
+
+        table.delete123 td {
+            padding: 7px 0 7px 20px;
+            border-right: 0;
+            border-color: #efefef;
+            line-height: 33px;
+            color: #666;
+            position: relative;
+        }
+
+        /* Button */
+
+        button, input[type="button"]{
+            font-family: S-CoreDream-3Light !important;
+        }
+
+        input[id='postcodify_search_button'], input[id='changePw']{
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            background-color: #b3b3b3 !important;
+        }
+
+        form input[type=text]{
+            padding: 0.5em 0.7em !important;
+        }
+
+
+        button{
+            margin-top : 1.5em;
+            font-size: 14px;
+        }
+
+
+        /* List */
+        ul{
+            padding-left: 0px !important;
+        }
+
+        ul li {
+            padding-left: 0px !important;
+            text-align: left;
+        }
+
+        ul.not_line li{
+            list-style: none;
+        }
+
+        ol li{
+            color: #35A14A;
+            font-weight: bold;
+        }
+
+        ol li ul li{
+            color: #3d3d3d;
+            font-weight: normal;
+        }
+
+        /* Main */
+
+        #main {
+            background: #ffffff;
+        }
+
+        #main:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-size: 100% 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        #main .major h2 {
+            background: #ffffff;
+            padding: 0 1em 0 1em;
+        }
+
+        #footer a {
+            color: #000000;
+        }
+
+        #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
+            color: #000000;
+        }
+
+        #footer h2 a, #footer h3 a, #footer h4 a, #footer h5 a, #footer h6 a, #footer strong a, #footer b a {
+            color: inherit;
+        }
+
+        #footer ul.contact li,
+        #footer ul.dates li,
+        #footer ul.divided li {
+            border-top-color: #353434;
+            border-top-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #footer header {
+            margin: 0 0 3em 0;
+        }
+
+        #footer header h2 {
+            font-size: 1.75em;
+        }
+
+        article.box.post header h2{
+            font-size: 1.5em;
+        }
+
+        div#refundInfo{
+            border:solid;
+            padding : 25px;
+            border-color: #35A14A;
+        }
+
+        /* Basic */
+        body, input, textarea, select {
+            font-size: 12pt;
+        }
+
+
+        /* Basic */
+        body, input, textarea, select {
+            font-size: 11pt;
+        }
+
+        /* Social */
+        ul.social li {
+            margin: 0 0 0.25em 0.75em;
+        }
+
+        /* Intro */
+        #intro section {
+            padding: 1em 2em;
+        }
+
+        /* Footer */
+        #footer header {
+            margin: 0 0 1.5em 0;
+        }
+
+        #footer header h2 {
+            font-size: 1.25em;
+        }
+
+        /* Banner */
+        #banner header {
+            padding: 1.5em 1em 1.5em 1em;
+            display: block;
+            border-radius: 0;
+        }
+
+        #banner header h2 {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            margin: 0 0 0.25em 0;
+        }
+
+        #banner header p {
+            font-size: 1.2em;
+        }
+
+    </style>
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+    <!-- Main -->
+    <section id="main">
+        <div class="container">
+            <!-- 플로깅 취소 환불 -->
+            <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingRefund" style="display: block; padding: 50px 15% 50px 15%">
+                <article class="box post">
+                    <header>
+                        <h2>상품 환불 안내</h2>
+                    </header>
+                    <div id="refundInfo">
+                        <p style="text-align:center;">
+                            <a href="#"><img src="../images/changecheck.png" style="max-width:100%; height:auto;"></a>
+                        </p>
+                        <ol style="list-style: none;">
+                            <li>상품 환불 안내
+                            <ul class = "not_line">
+                            <li>상품 수령 후 7일이내에 환불해야 합니다.</li>
+                                    <li>상품하자 및 오발송인 경우 택배비용은 자사에서 부담합니다.</li>
+                                    <li>단순 변심에 의한 환불인 경우 택배비용은 소비자가 부담합니다.</li>
+                                    <li style="color: red;">소비자의 잘못으로 안한 상품 훼손 시 환불이 불가능합니다.</li>
+                            </ul>
+                            </li>
+                        </ol>
+                        <div style="text-align: right;">
+                            <label for="term1">위 내용을 확인했습니다.</label>
+                            <input type="checkbox" id="term1">
+                        </div>
+                    </div>
+                    <div  style= "padding: 50px 0px">
+                                <h3>상품 환불</h3>
+                        <table class = 'delete123'>
+                                <th>상품 명</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>상품 수량</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>옵션</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>환불 사유</th>
+                                <td>
+                                    <select name="paymentRefundReason" id="paymentSelectBox">
+                                        <option value="paymentRefundReason">환불 사유를 선택해주세요.</option>
+                                        <option value="changeHeart">단순 변심</option>
+                                        <option value="productDefect">상품 하자</option>
+                                        <option value="etc">기타</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr id=etcReason style="display: none;">
+                                <th>기타</th>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <th>환불액</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;  margin-top: 10px;"><button>환불하기</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/mypage.js"></script>
+<script type="text/javascript"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>
