@@ -97,10 +97,6 @@ public class memberController {
         return "member/findPw";
     }
 
-
-
-
-
     /*쿨 SMS API*/
     private void SendSMS(String str, String phone) {
         String api_key = "NCSDZERXIZUFDHUU";
@@ -123,5 +119,10 @@ public class memberController {
 //            System.out.println(e.getMessage());
 //            System.out.println(e.getCode());
 //        }
+    }
+
+    @GetMapping("ploggingReservationList")
+    public String ploggingReservationList(){
+        return "ploggingReservation/ploggingReservationList";
     }
 }
