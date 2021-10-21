@@ -58,7 +58,7 @@
         #sideBarInner{
             width: 100%;
             height: 250px;
-            border: 1px solid #e6e6e6;
+            border: 2px solid #35A14A;
             border-radius: 20px;
             padding: 30px 20px;
             font-family: 'S-CoreDream-3Light';
@@ -71,6 +71,18 @@
         .sideBarInfo{
             display: inline;
             float: right;
+        }
+
+        #memberName {
+            font-weight: 700;
+            color: #35A14A;
+            line-height: 40px;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #memberLine {
+            margin:1em 0 1em 0;
+            border-top: solid 2px #35A14A;
         }
 
         .box {
@@ -89,11 +101,11 @@
             <div>
                 <img class="grade" src="/images/새싹.png">
             </div>
-            <div style="line-height: 40px; font-family: 'S-CoreDream-4Regular';">
-                <strong style="font-weight: 700">최워너원 님</strong>
+            <div>
+                <strong id="memberName">최워너원 님</strong>
             </div>
         </div>
-        <hr style="margin:1em 0 1em 0;">
+        <hr id="memberLine">
         <div id="sideBarDelivery"style="padding: 10px 0;">
             <div>
                 <strong>참여횟수</strong>

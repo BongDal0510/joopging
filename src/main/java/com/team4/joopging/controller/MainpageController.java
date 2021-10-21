@@ -41,4 +41,21 @@ public class MainpageController {
     public String eventInfo() {
         return "eventInfo";
     }
+
+    @GetMapping("eventInfo2")
+    public String eventInfo2() {
+        return "eventInfo2";
+    }
+
+    @GetMapping("eventInfo3")
+    public String eventInfo3() {
+        return "eventInfo3";
+    }
+
+    @GetMapping("eventInfo4")
+    public String eventInfo4() {
+        return "eventInfo4";
+    }
+
+
 }
