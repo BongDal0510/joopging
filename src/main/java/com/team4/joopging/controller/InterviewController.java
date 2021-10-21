@@ -11,27 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/interview/*")
 @RequiredArgsConstructor
 public class InterviewController {
-    @GetMapping("main")
-    public String main() { return "interview/main";
-    }
+    @GetMapping("interviewMain")
+    public String main() { return "/interview/interviewMain"; }
 
-    @GetMapping("read")
-    public String read() {
-        return "interview/read";
-    }
+    @GetMapping("interviewRead")
+    public String read() { return "/interview/interviewRead";}
 
-    @GetMapping("adminModify")
-    public String adminModify() {
-        return "interview/adminModify";
-    }
 
-    @GetMapping("adminRegister")
-    public String adminRegister() {
-        return "interview/adminRegister";
-    }
+    /*admin 계정일 경우에만 등록가능*/
+    @GetMapping("interviewRegister")
+    public String eventRegister() { return "/interview/interviewRegister"; }
 
-    @GetMapping("admin")
-    public String admin() {
-        return "interview/admin";
-    }
+    /*admin 계정일 경우에만 수정가능*/
+    @GetMapping("interviewModify")
+    public String eventModify() { return "/interview/interviewModify"; }
+
 }
