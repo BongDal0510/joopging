@@ -31,7 +31,7 @@
                 <h1>Board</h1>
                 <p>게시글 수정</p>
             </header>
-<!--메인 영역-->
+            <!--메인 영역-->
             <div id="commuBoardWrapper">
                 <!--게시판 목록 왼쪽 사이드-->
                 <div id="commuBoardLeft">
@@ -39,46 +39,46 @@
                     <img src="/images/nogreenAd.png">
                 </div>
 
-            <!-- Table -->
+                <!-- Table -->
                 <div id="commuBoardMiddle">
                     <div id="goCommuListBtn">
                         <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
                     </div>  <div class="content">
-                <div class="form">
-                    <form method="post" action="/commu/communityModify">
-                        <div class="fields" th:object="${commu}">
-                            <div class="field">
-                                <h4>번호</h4>
-                                <input name="bno" type="text" th:field="*{commuBno}" readonly/>
+                    <div class="form">
+                        <form method="post" action="/commu/communityModify">
+                            <div class="fields" th:object="${commu}">
+                                <div class="field">
+                                    <h4>번호</h4>
+                                    <input name="bno" type="text" th:field="*{commuBno}" readonly/>
+                                </div>
+                                <div class="field">
+                                    <h4>*제목</h4>
+                                    <input name="title" type="text" th:field="*{commuTitle}"/>
+                                </div>
+                                <div class="field">
+                                    <h4>*내용</h4>
+                                    <textarea id="summernote" name="content" rows="6" placeholder="Content" style="resize:none" th:text="*{commuContent}"></textarea>
+                                </div>
+                                <div class="field">
+                                    <h4>작성자</h4>
+                                    <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
+                                </div>
                             </div>
-                            <div class="field">
-                                <h4>*제목</h4>
-                                <input name="title" type="text" th:field="*{commuTitle}"/>
-                            </div>
-                            <div class="field">
-                                <h4>*내용</h4>
-                                <textarea id="summernote" name="content" rows="6" placeholder="Content" style="resize:none" th:text="*{commuContent}"></textarea>
-                            </div>
-                            <div class="field">
-                                <h4>작성자</h4>
-                                <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
-                            </div>
-                        </div>
-                        <ul class="actions special">
-                            <li>
-                                <input type="submit" class="button" value="수정 완료"/>
-                            </li>
-                        </ul>
-                    </form>
+                            <ul class="actions special">
+                                <li>
+                                    <input type="submit" class="button" value="수정 완료"/>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
                 </div>
+                </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <!--                    <div id="commuBoardRight">
+                                        <img src="/images/nogreenAd.png">
+                                        <img src="/images/leftAd.png">
+                                    </div>-->
             </div>
-                </div>
-                    <!--게시판 목록 오른쪽 사이드-->
-<!--                    <div id="commuBoardRight">
-                        <img src="/images/nogreenAd.png">
-                        <img src="/images/leftAd.png">
-                    </div>-->
-                </div>
         </div>
     </div>
 </div>

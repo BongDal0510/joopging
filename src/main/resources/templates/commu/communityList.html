@@ -54,7 +54,7 @@
 <body class="is-preload">
 <!--header 위치-->
 <header id="commuHeaderWrapper">
-   <div id="main_header"></div>
+    <div id="main_header"></div>
 </header>
 
 
@@ -65,8 +65,7 @@
 
             <!-- 게시판 헤더-->
             <header class="major">
-                <h1>커뮤니티 게시판</h1>
-                <p>plogger들의 소통을 위한 공간입니다.</p>
+                <p>커뮤니티 게시판</p>
             </header>
             <div id="commuBoardWrapper">
                 <!--게시판 목록 왼쪽 사이드-->
@@ -79,32 +78,24 @@
                             <th>인터뷰</th>
                         </tr>
                         <tr>
-                            <th>뭐있지또</th>
+                            <th>이벤트</th>
                         </tr>
                         <tr>
-                            <th>게시판이름</th>
+                            <th>문의하기</th>
                         </tr>
                         <tr>
-                            <th>문의하기?</th>
+                            <th>신고된 글</th>
                         </tr>
-                        <tr>
-                            <th>ajax하기싫은데</th>
-                        </tr>
-                        <tr>
-                            <th>몇개나 있어야</th>
-                        </tr>
-                        <tr>
-                            <th>디자인이 이블까?</th>
-                        </tr>
+
                     </table>
                 </div>
 
                 <!--게시판 목록-->
                 <div id="commuBoardMiddle">
                     <div id="registerBtn">
-                    <a href="/commu/communityRegister" class="button small">글 등록</a>
+                        <a href="/commu/communityRegister" class="button small">글 등록</a>
                     </div>
-                        <div class="table-wrapper">
+                    <div class="table-wrapper">
                         <table>
                             <thead>
                             <tr class="tHead">
@@ -131,64 +122,64 @@
                         </table>
                     </div>
                 </div>
-                    <!--게시판 목록 오른쪽 사이드-->
-                    <div id="commuBoardRight">
-                        <img src="/images/nogreenAd.png">
-                        <img src="/images/leftAd.png">
-                    </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+                    <img src="/images/leftAd.png">
+                </div>
 
             </div>
-                <!--검색 기능-->
-                <form action="/commu/communityList" name="searchForm">
-                    <div class="fields" id="commuSearchWrap">
-                        <div class="field">
-                            <div id="searchWrap"th:object="${pageMaker}">
-                                <select name="type" th:object="${criteria}">
-                                    <option value="">검색 기준</option>
-                                    <option value="T" th:selected="*{type} == 'T'">제목</option>
-                                    <option value="C" th:selected="*{type} == 'C'">내용</option>
-                                    <option value="W" th:selected="*{type} == 'W'">작성자</option>
-                                    <option value="TC" th:selected="*{type} == 'TC'">제목 또는 내용</option>
-                                    <option value="TW" th:selected="*{type} == 'TW'">제목 또는 작성자</option>
-                                    <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
-                                </select>
-                                <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}">
-                                <a href="javascript:void(0)" id="commuSearchBtn" class="search button primary icon solid fa-search"></a>
-                            </div>
+            <!--검색 기능-->
+            <form action="/commu/communityList" name="searchForm">
+                <div class="fields" id="commuSearchWrap">
+                    <div class="field">
+                        <div id="searchWrap"th:object="${pageMaker}">
+                            <select name="type" th:object="${criteria}">
+                                <option value="">검색 기준</option>
+                                <option value="T" th:selected="*{type} == 'T'">제목</option>
+                                <option value="C" th:selected="*{type} == 'C'">내용</option>
+                                <option value="W" th:selected="*{type} == 'W'">작성자</option>
+                                <option value="TC" th:selected="*{type} == 'TC'">제목 또는 내용</option>
+                                <option value="TW" th:selected="*{type} == 'TW'">제목 또는 작성자</option>
+                                <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
+                            </select>
+                            <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}">
+                            <a href="javascript:void(0)" id="commuSearchBtn" class="search button primary icon solid fa-search"></a>
                         </div>
                     </div>
-                </form>
-
-
-                <!--페이징 처리-->
-                <div th:object="${pageMaker}">
-                    <div class="big-width" id="pagingStyle">
-                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
-                        <th:block
-                                th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
-                            <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
-                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
-                               th:href="${num}"><code th:text="${num}"></code></a>
-                        </th:block>
-                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
-                    </div>
-                    <!--반응형 paging 처리-->
-                    <div class="small-width" style="text-align: center">
-                        <a class="changePage" th:if="*{criteria.pageNum > 1}" th:href="*{criteria.pageNum - 1}"><code>&lt;</code></a>
-                        <code th:text="*{criteria.pageNum}"></code>
-                        <a class="changePage" th:if="*{criteria.pageNum < realEnd}"
-                           th:href="*{criteria.pageNum + 1}"><code>&gt;</code></a>
-                    </div>
-                    <form action="/commu/communityList" th:object="${criteria}" name="pageForm">
-                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
-                        <input type="hidden" name="amount" th:field="*{amount}">
-                        <input type="hidden" name="type" th:field="*{type}">
-                        <input type="hidden" name="keyword" th:field="*{keyword}">
-                    </form>
                 </div>
+            </form>
+
+
+            <!--페이징 처리-->
+            <div th:object="${pageMaker}">
+                <div class="big-width" id="pagingStyle">
+                    <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                    <th:block
+                            th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                        <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                        <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
+                           th:href="${num}"><code th:text="${num}"></code></a>
+                    </th:block>
+                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                </div>
+                <!--반응형 paging 처리-->
+                <div class="small-width" style="text-align: center">
+                    <a class="changePage" th:if="*{criteria.pageNum > 1}" th:href="*{criteria.pageNum - 1}"><code>&lt;</code></a>
+                    <code th:text="*{criteria.pageNum}"></code>
+                    <a class="changePage" th:if="*{criteria.pageNum < realEnd}"
+                       th:href="*{criteria.pageNum + 1}"><code>&gt;</code></a>
+                </div>
+                <form action="/commu/communityList" th:object="${criteria}" name="pageForm">
+                    <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                    <input type="hidden" name="amount" th:field="*{amount}">
+                    <input type="hidden" name="type" th:field="*{type}">
+                    <input type="hidden" name="keyword" th:field="*{keyword}">
+                </form>
             </div>
         </div>
     </div>
+</div>
 <!--footer 위치-->
 <footer>
     <div id="main_footer"></div>
