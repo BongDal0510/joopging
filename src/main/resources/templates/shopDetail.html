@@ -10,18 +10,21 @@
     html {
         scroll-behavior: smooth;
     }
+
     @font-face {
         font-family: 'S-CoreDream-4Regular';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
         font-weight: normal;
         font-style: normal;
     }
+
     @font-face {
         font-family: 'yg-jalnan';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
         font-weight: normal;
         font-style: normal;
     }
+
     @font-face {
         font-family: 'S-CoreDream-3Light';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
@@ -80,13 +83,15 @@
     .allbox {
         margin-bottom: 100px;
     }
-    nav{
-        position:-webkit-sticky;
-        position:sticky;
-        top:0;
+
+    nav {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
 
     }
-    .navtable{
+
+    .navtable {
         width: 62%;
         text-align: center;
         margin: auto;
@@ -96,31 +101,36 @@
 
 
     }
-    .navbutton{
+
+    .navbutton {
         border: solid 1px;
         border-color: #d3d3d3;
 
     }
 
-    .nav_a{
+    .nav_a {
         font-family: 'S-CoreDream-3Light';
         text-decoration-line: none;
     }
-    h3{
+
+    h3 {
         font-family: 'S-CoreDream-3Light';
         text-align: left;
 
     }
-    #review_div{
+
+    #review_div {
         width: 62%;
         margin-left: 20%;
         margin-top: 20%;
     }
-    #qna_div{
+
+    #qna_div {
         width: 62%;
         margin-left: 20%;
         margin-top: 20%;
     }
+
     .review_div_info {
         background-color: #f9f9f9;
         display: flex;
@@ -128,60 +138,70 @@
         justify-content: space-around;
         font-family: 'S-CoreDream-3Light';
     }
-    .qna_div_info{
+
+    .qna_div_info {
         background-color: #f9f9f9;
         font-family: 'S-CoreDream-3Light';
         padding: 20px 20px;
         font-size: 12px;
 
     }
-    .point{
-        color:green;
+
+    .point {
+        color: green;
         font-weight: bold;
     }
 
-    #review_notice{
+    #review_notice {
         font-size: 13px;
     }
-    #review_btn{
+
+    #review_btn {
         font-family: 'S-CoreDream-3Light';
 
     }
-    .container{
+
+    .container {
         font-family: 'S-CoreDream-3Light';
+
+    }
+
+    header {
 
     }
 
 </style>
 <head>
     <title>Stock_detail</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
+          content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link rel="stylesheet" href="/css/header.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
 </head>
-<body class="no-sidebar is-preload">
+<body class="no-sidebar is-preload" style="margin: 0;">
 
 
-
-<div id="page-wrapper">
+<div id="page-wrapper" style="margin: 0;">
 
     <!-- Header -->
-    <div id="main_header"></div>
+
+    <div id="shop_header" style="display: flex"></div>
+
     <!-- Main -->
     <section id="main">
 
         <div class="container">
-            <button style="visibility: hidden; margin-left: 80%;">관리자모드</button>
+            <a>
+                <button style="visibility: hidden; margin-left: 80%;">관리자모드</button>
             </a>
 
             <!-- Content -->
             <div class="stock_img">
                 <a href="#" class="stock_detail"><img
-                        src ="/images/프라이탁.jpg" style = width:500px;height:500px; alt="" /></a>
+                        src="/images/프라이탁.jpg" style=width:500px;height:500px; alt=""/></a>
             </div>
 
             <div class="shop_text">
@@ -226,12 +246,13 @@
                         <form>
                             QUANTITY <input type="text" name="amount" value="1" size="3"
                                             onchange="change();"> <input type="button" value=" + "
-                                                                         onclick="add();"> <input type="button" value=" - "
+                                                                         onclick="add();"> <input type="button"
+                                                                                                  value=" - "
                                                                                                   onclick="del();">
                         </form>
                         <div style="margin-top: 30px;">
-                            <input type="button" class= "listbtn" value="BUY NOW " onclick=""> <input
-                                type="button" class= "listbtn" value="ADD CART" onclick=""> <label><img
+                            <input type="button" class="listbtn" value="BUY NOW " onclick=""> <input
+                                type="button" class="listbtn" value="ADD CART" onclick=""> <label><img
                                 id="heart"
                                 style="vertical-align: middle; width: 40px; height: 40px; margin-left: 30px;"
                                 src="/images/하트.png"></label> <label><img
@@ -255,10 +276,10 @@
                         <a id="detail_a" class="nav_a" href="#detail">상세정보</a>
                     </td>
                     <td id="review_td" class="navbutton">
-                        <a id="review_a" class="nav_a"  href="#review_div">상품후기</a>
+                        <a id="review_a" class="nav_a" href="#review_div">상품후기</a>
                     </td>
                     <td id="qna_td" class="navbutton">
-                        <a id="qna_a" class="nav_a"  href="#qna_div">상품문의</a>
+                        <a id="qna_a" class="nav_a" href="#qna_div">상품문의</a>
                     </td>
                 </tr>
             </table>
@@ -287,46 +308,24 @@
             <div class="review_div_info">
                 <div>
                     <p id="review_notice">고객님의 소중한 상품후기에 <span class="point">포인트</span>를 드립니다.<br>
-                    다만 관련법에 위반이 되는표현이 포함된 경우,<br>
-                    부득이 삭제될 수 있으니 양해 바랍니다.</p>
+                        다만 관련법에 위반이 되는표현이 포함된 경우,<br>
+                        부득이 삭제될 수 있으니 양해 바랍니다.</p>
                     <input id="review_btn" type="button" value="후기작성" onclick="">
                 </div>
-                 <div>
+                <div>
                     <img src="/images/일반리뷰.png">
                     <p style="text-align: center">일반 후기 등록시 <br>
                         <span class="point">100Point</span> 지급
                     </p>
-                 </div>
-                 <div>
+                </div>
+                <div>
                     <img src="/images/포토리뷰.png">
-                     <p style="text-align: center">포토 후기 등록시 <br>
-                         <span class="point">300Point</span> 지급
-                     </p>
-                 </div>
+                    <p style="text-align: center">포토 후기 등록시 <br>
+                        <span class="point">300Point</span> 지급
+                    </p>
+                </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div id="qna_div">
@@ -335,7 +334,8 @@
 
             <div class="qna_div_info">
                 <div>
-                    <p id="qna_notice">문의하신 내역을 확인하시려면 <span class="point">마이페이지 > 문의내역 > 상품문의내역</span>에서 확인하실 수 있습니다.<br>
+                    <p id="qna_notice">문의하신 내역을 확인하시려면 <span class="point">마이페이지 > 문의내역 > 상품문의내역</span>에서 확인하실 수
+                        있습니다.<br>
                         상품에 대한 궁금한 사항을 남겨 주시면, 신속히 답변 드리겠습니다.
                     </p>
                 </div>
@@ -345,37 +345,44 @@
     </section>
 
 
-
-
-
-
     <!-- Footer -->
+    <div id="main_footer"></div>
 
 
 </body>
-    <!-- Scripts -->
-    <script
-            src="/js/jquery.min.js"></script>
-    <script
-            src="/js/jquery.dropotron.min.js"></script>
-    <script
-            src="/js/browser.min.js"></script>
-    <script
-            src="/js/breakpoints.min.js"></script>
-    <script src="/js/util.js"></script>
-    <script src="/js/main.js"></script>
-    <script language="JavaScript"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
-    </script>
-
+<!-- Scripts -->
+<script
+        src="/js/jquery.min.js"></script>
+<script
+        src="/js/jquery.dropotron.min.js"></script>
+<script
+        src="/js/browser.min.js"></script>
+<script
+        src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script language="JavaScript"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous">
+</script>
 <script>
-    $(document).ready(function() {
+
+    $(function () {
+        $("#main_header").load("header #header");
+        $("#shop_header").load("shop_header #shop_header");
+        $("#main_footer").load("footer #footer");
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+
         /*웹페이지 열었을 때*/
         $("#heart").show();
         $("#redheart").hide();
 
         /*빈하트를 클릭했을 때 빨간하트를 보여줌(해당상품찜)*/
-        $("#heart").click(function() {
+        $("#heart").click(function () {
             $("#heart").hide();
             $("#redheart").show();
             alert("찜 목록에 추가");
@@ -383,7 +390,7 @@
         });
 
         /*빨간하트를 클릭했을 때 빈하트를 보여줌(찜해제)*/
-        $("#redheart").click(function() {
+        $("#redheart").click(function () {
             $("#heart").show();
             $("#redheart").hide();
             return false;
@@ -391,54 +398,54 @@
 
         /* a 태그를 눌렀을 때 주는 효과*/
         /* 상세보기 눌렀을 때 효과 */
-        $("#detail_a").click(function(){
+        $("#detail_a").click(function () {
             $("#detail_td").css({
                 "border-top": "solid 3px",
-                "border-top-color" : "green",
-                "border-bottom" : "hidden"
+                "border-top-color": "green",
+                "border-bottom": "hidden"
             })
             $("#review_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
 
             })
             $("#qna_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
 
             });
         });
         /* 상품후기 눌렀을 때 효과 */
-        $("#review_a").click(function(){
+        $("#review_a").click(function () {
             $("#review_td").css({
                 "border-top": "solid 3px",
-                "border-top-color" : "green",
-                "border-bottom" : "hidden"
+                "border-top-color": "green",
+                "border-bottom": "hidden"
             })
             $("#detail_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
             })
             $("#qna_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
             });
         });
         /* 상품문의 눌렀을 때 효과 */
-        $("#qna_a").click(function(){
+        $("#qna_a").click(function () {
             $("#qna_td").css({
                 "border-top": "solid 3px",
-                "border-top-color" : "green",
-                "border-bottom" : "hidden"
+                "border-top-color": "green",
+                "border-bottom": "hidden"
             })
             $("#detail_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
 
             })
             $("#review_td").css({
-                "border-top" : "solid 1px",
-                "border-color" : "#d3d3d3"
+                "border-top": "solid 1px",
+                "border-color": "#d3d3d3"
             });
         });
 

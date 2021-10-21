@@ -1,7 +1,7 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 
-	/*Dopetrope by Pixelarity
+	Dopetrope by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
@@ -15,7 +15,7 @@ u, i, center, dl, dt, dd, ol, ul, li, fieldset,
 form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
-footer, header, hgroup, menu, nav, output, ruby,
+footer, , hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
@@ -1624,7 +1624,7 @@ input, select, textarea {
 		border: 0;
 		border-radius: 5px;
 		background: #35A14A;
-		color: #fff !important;
+		color: #fff;
 		font-weight: 700;
 		outline: 0;
 		font-size: 1.1em;
