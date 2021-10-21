@@ -47,7 +47,7 @@
     <!--작업은 완료되지만 현재 추가된 데이터의 PK값은 알 수 없다.-->
     <insert id="insertCommu">
         INSERT INTO TBL_COMMUBOARD (COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER)
-        VALUES(SEQ_BOARD.NEXTVAL, #{commuTitle}, #{commuContent}, #{commuWriter})
+        VALUES(SEQ_COMMUBOARD.NEXTVAL, #{commuTitle}, #{commuContent}, #{commuWriter})
     </insert>
 
     <!--

@@ -13,10 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
     <style>
-#boardTitleArea{
-    border: solid 1.5px #f4f4f5;
-    padding: 2%;
-}
+        #boardTitleArea{
+            border: solid 1.5px #f4f4f5;
+            padding: 2%;
+        }
         div.field input[name="commuBno"]{
             border: none;
             color: #fff;
@@ -42,24 +42,13 @@
         #boardWriterArea{
             display: flex;
         }
-        div#commuBoardMiddle{
-            width: 80%;
-            margin: 0 2%;
-        }
-#commuBoardRight{
-    width: 17%;
-    padding: 0 2% 0 2%;
-}
-#commuBoardLeft{
-    width: 17%;
-    padding: 0 0 0 5%;
-}
+
     </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
 <header>
-<div id="main_header"></div>
+    <div id="main_header"></div>
 </header>
 <!--<section id="communityBanner">
     <img src="/images/shopBannerAd.png">
@@ -71,10 +60,10 @@
 
             <!-- 상세보기 헤더 -없앰 -->
 
-           <!-- <header class="major">
-                <h1>Board</h1>
-                <p>게시글 상세보기</p>
-            </header>-->
+            <!-- <header class="major">
+                 <h1>Board</h1>
+                 <p>게시글 상세보기</p>
+             </header>-->
             <div id="goCommuListBtn">
                 <a id="goList" href="javascript:void(0)" class="button small">목록 보기</a>
             </div>
@@ -112,72 +101,72 @@
 
                 <div id="commuBoardMiddle">
 
-            <div class="content">
-                <div class="form">
-                    <form method="post" action="/commu/removeCommu">
-                        <div class="fields" th:object="${commu}">
-                            <!--글 번호 : 화이트/ 안보임-->
-                            <div class="field">
-                                <input name="bno" type="text" th:field="*{commuBno}" readonly/>
-                            </div>
-                            <!--제목 공간-->
-                            <div id="boardTitleArea">
-                            <div class="field">
-                                <input name="title" type="text" th:field="*{commuTitle}" readonly/>
-                            </div>
-                            <div class="field" id="boardWriterArea">
-                                <h4 id="commuWriterTitle">작성자 :</h4>
-                                <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
-                            </div>
-                            </div>
-                            <!--글 내용-->
-                            <div class="field">
+                    <div class="content">
+                        <div class="form">
+                            <form method="post" action="/commu/removeCommu">
+                                <div class="fields" th:object="${commu}">
+                                    <!--글 번호 : 화이트/ 안보임-->
+                                    <div class="field">
+                                        <input name="bno" type="text" th:field="*{commuBno}" readonly/>
+                                    </div>
+                                    <!--제목 공간-->
+                                    <div id="boardTitleArea">
+                                        <div class="field">
+                                            <input name="title" type="text" th:field="*{commuTitle}" readonly/>
+                                        </div>
+                                        <div class="field" id="boardWriterArea">
+                                            <h4 id="commuWriterTitle">작성자 :</h4>
+                                            <input name="writer" type="text" th:field="*{commuWriter}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!--글 내용-->
+                                    <div class="field">
 
-                                <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
-                            </div>
+                                        <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
+                                    </div>
 
+                                </div>
+                                <ul class="actions special">
+                                    <li>
+                                        <input type="button" class="button" value="수정" onclick="goUpdate()"/>
+                                        <input type="submit" class="button" value="삭제"/>
+                                    </li>
+                                </ul>
+                                <!--댓글-->
+                                <ul class="icons">
+                                    <li style="display: block">
+                                        <span class="icon solid fa-envelope"></span>
+                                        <strong>댓글</strong>
+                                    </li>
+                                </ul>
+                                <a href="javascript:void(0)" class="register button primary small" style="width: 100%">댓글 등록</a>
+                                <div style="display: none" class="register-form">
+                                    <div>
+                                        <h4>작성자</h4>
+                                        <input type="text" name="replier" placeholder="Replier">
+                                    </div>
+                                    <div>
+
+                                        <h4>댓글</h4>
+                                        <textarea rows="6" name="reply" placeholder="Reply" style="resize: none"></textarea>
+                                    </div>
+                                    <div style="text-align: right">
+                                        <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                                        <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                                    </div>
+                                </div>
+                                <ul class="replies"></ul>
+                            </form>
+                            <div class="paging" style="text-align: center"></div>
                         </div>
-                        <ul class="actions special">
-                            <li>
-                                <input type="button" class="button" value="수정" onclick="goUpdate()"/>
-                                <input type="submit" class="button" value="삭제"/>
-                            </li>
-                        </ul>
-                        <!--댓글-->
-                        <ul class="icons">
-                            <li style="display: block">
-                                <span class="icon solid fa-envelope"></span>
-                                <strong>댓글</strong>
-                            </li>
-                        </ul>
-                        <a href="javascript:void(0)" class="register button primary small" style="width: 100%">댓글 등록</a>
-                        <div style="display: none" class="register-form">
-                            <div>
-                                <h4>작성자</h4>
-                                <input type="text" name="replier" placeholder="Replier">
-                            </div>
-                            <div>
-
-                                <h4>댓글</h4>
-                                <textarea rows="6" name="reply" placeholder="Reply" style="resize: none"></textarea>
-                            </div>
-                            <div style="text-align: right">
-                                <a href="javascript:void(0)" class="finish button primary small">등록</a>
-                                <a href="javascript:void(0)" class="cancel button primary small">취소</a>
-                            </div>
-                        </div>
-                        <ul class="replies"></ul>
-                    </form>
-                    <div class="paging" style="text-align: center"></div>
-                </div>
-            </div>
-                </div>
-                    <!--게시판 목록 오른쪽 사이드-->
-                    <div id="commuBoardRight">
-                        <img src="/images/nogreenAd.png">
-                        <img src="/images/leftAd.png">
                     </div>
                 </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+                    <img src="/images/leftAd.png">
+                </div>
+            </div>
 
         </div>
     </div>
