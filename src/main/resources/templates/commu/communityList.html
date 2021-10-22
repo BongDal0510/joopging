@@ -167,7 +167,7 @@
                             <tbody>
                             <th:block th:each="announce : ${announceList}">
                                 <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
-                                    <td class="bno"><img src="/images/commu/siren.png"></td>
+                                    <td class="boardStatus" th:text="*{commuBoardStatus}"><img src="/images/commu/siren.png"></td>
                                     <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>

@@ -25,12 +25,12 @@ public class CommuController {
     private final CommuService commuService;
 
     @GetMapping("communityList")
-    public String commuList(Criteria criteria, Model model, int commuBoardStatus) {
+    public String commuList(Criteria criteria, Model model) {
         log.info("--------------------------------");
         log.info("communityList");
         log.info("--------------------------------");
 
-        model.addAttribute("announceList", commuService.getAnnounceList(commuBoardStatus));
+        model.addAttribute("announceList", commuService.getAnnounceList(2));
         model.addAttribute("commuList", commuService.getCommuList(criteria));
         model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
         return "commu/communityList";

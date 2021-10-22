@@ -36,6 +36,7 @@ public class ControllerTest {
         log.info(mockMvc.perform(MockMvcRequestBuilders.get("/commu/communityList")
                 .param("pageNum", "1")
                 .param("amount", "10")
+                .param("commuBoardStatus", "2")
         )
                 .andReturn().getModelAndView().getModelMap().toString());
     }
