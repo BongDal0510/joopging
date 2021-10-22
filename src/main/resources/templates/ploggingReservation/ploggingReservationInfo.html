@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<!-- 성윤 : 플로깅 예약 상세페이지 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>줍깅</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        .list{
+            width:300px;
+            margin: 5px;
+            padding: 5px;
+
+        }
+
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        /* 브라우저 마진과 패딩 리셋 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* INPUT 가리기 */
+        .section {
+            margin-right: 17%;
+            margin-left: 17%;
+            padding: 0 5%;
+            background-color: #ffffff;
+        }
+
+        .section input[id*="slide"] {
+            display: none;
+        }
+
+        /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
+        .section .slidewrap {
+            max-width: 1300px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .section .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+        }
+
+        .section .slidelist>li {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+        }
+
+        .section .slidelist>li>a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        } /* 화살표 화면 밖으로 나가면 안보이도록 OVERFLOW로 가림처리 */
+        .section .slidelist>li>a img {
+            width: 100%;
+        }
+
+        /* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+        .section .slidelist label {
+            position: absolute;
+            z-index: 1;
+            transform: translateY(-50%);
+            padding: 50px;
+            cursor: pointer;
+        }
+
+        .section .slidelist .left {
+            left: -300px;
+            background: url('/images/left.png') center center/100% no-repeat;
+        } /* LEFT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+        .section .slidelist .right {
+            right: -300px;
+            background: url('/images/right.png') center center/100% no-repeat;
+        } /* RIGHT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+
+        /* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(0%);
+        }
+
+        .section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-100%);
+        }
+
+        .section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-200%);
+        }
+
+        /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+
+        .actions input {
+            line-height: 1.5em !important;
+        }
+
+        .ploggingPageTitle {
+            text-align: left;
+            font-family: yg-jalnan;
+        }
+
+        .jooplist {
+            justify-content: center;
+        }
+
+        .joop {
+            padding: 50px 0 0 0 !important;
+        }
+
+        #main {
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+        }
+
+        .row {
+            margin: 0 !important;
+        }
+
+        .col-12 {
+            padding-left: 0 !important;
+        }
+
+        .ploggingBanner {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        .box {
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        .actions > li > input {
+            font-family: 'S-CoreDream-3Light' !important;
+        }
+
+        /*플로깅 안내*/
+        .event_subtitle {
+            text-align: center;
+            margin-bottom: 2em;
+            margin-top: 5%;
+        }
+
+        .container {
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+            width: auto !important;
+        }
+
+        #center {
+            margin: 0;
+        }
+
+        .image.featured {
+            margin: 0 !important;
+        }
+
+        .eventImage {
+            margin: 0 !important;
+        }
+
+        .eventDate {
+            margin: 0;
+            font-size: 13pt;
+        }
+
+        .boxinner {
+            padding: 1em 1em 1em 1em !important;
+            font-family: 'S-CoreDream-3Light';
+            text-align: left !important;
+        }
+
+        .alt {
+            font-size: 17px !important;
+            padding: 0.2em 1em !important;
+        }
+
+        .eventButton {
+            float: right;
+            margin-left: auto;
+            margin-top: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<section id="main" style="padding: 5px; display: flex; justify-content: space-around;">
+    <div style="width: 1200px; margin: 0px 0px 0px 400px;">
+        <div class="container">
+            <div class="row" style="width: 960px;">
+
+                <div class="col-8 col-12-medium imp-medium">
+                    <article class="box post">
+
+                        <!-- 샘플 상세페이지 이미지 -->
+                        <!-- 이미지는 한장으로 표현할 것 -->
+                        <a class="image featured"><img src="/images/마포대교.png"/></a>
+
+                        <!-- 샘플 상세페이지 내용(텍스트) -->
+                        <!-- 스프링 작업 후 데이터의 연산 필요 -->
+                        <header>
+                            <h2>마포대교 플로깅</h2>
+                        </header>
+                        <h4>마표대교에서 달려라! 주워라!</h4>
+
+                        <p>
+                            장소 : 마포대교<br> <br> 일시 : 2021-09-27 AM 10:00 ~ PM 13:00<br>
+                            <br> 내용 : 마포대교 일대 플로깅 켐페인 진행<br> <br> 참가비 : 2000원
+                            (예약 신청시 결제 페이지 이동)<br> <br>
+                        </p>
+
+
+                        <section>
+                            <header>
+                                <h3>주의 사항</h3>
+                            </header>
+                            <p style="color: red;">
+                                1. 모든 신청은 선착순 예약이며, 가용 인원 초과 시 조기 예약 마감할 수 있습니다.<br> 2. 신청
+                                시 소액의 신청 금액이 부과 될 수 있습니다.<br> 3. 개인 사유로 인해 예약을 취소할 경우 규정에
+                                따라 환불이 불가능 할 수 있습니다.<br> 4. 우천 등의 사유로 플로깅 일정이 취소될 수 있으며,
+                                이에 따른 모든 예약은 환불됩니다.<br>
+                            </p>
+                        </section>
+
+
+                    </article>
+                </div>
+
+                <!-- 오른쪽 사이드바 -->
+                <!-- 피드백 요청 : 사이드 스크롤에 맞춰 움직이도록 애니메이션 추가 -->
+                <!-- 상세페이지 div태그 밖에서 별도 처리할 것 -->
+                <div class="col-4 col-12-medium"
+                     style="text-align: center; padding: 10px; width: 280px; margin-top: 40px;">
+                    <div style="border: 1px solid #d3d3d3;">
+                        <div>
+                            <a class="image featured"><img src="/images/마포대교.png"/></a>
+                            <header>
+                                <h3>마포대교 플로깅</h3>
+                            </header>
+                            <!-- 현재 플로깅 신청 현황 보여주기 -->
+                            <!-- 예약은 선착순을 기본으로 하며 -->
+                            <!-- 모든 플로깅의 예약 최대 가능인원은 30명이다. -->
+                            현재 신청 현황 : (20/30)<br> <br> 선착순 신청, <br>가용 인원 초과
+                            시 조기 마감
+                        </div>
+                        <div style="margin: 1px; padding: 5px;">
+                            <br>
+                            인원 수
+                            <br>
+                            <!-- 인원수 추가 감소 버튼 -->
+                            <input type="submit" id="add" onclick="" value=" - " style="padding: revert;">
+                            <input type="text" style="width: 23%;" id="people" type="text" value="1" readonly>
+                            <input type="submit" id="min" onclick="" value=" + " style="padding: revert;">
+                            <!-- 결제 페이지 이동 폼 -->
+                            <form action="" name="paymentForm" id="paymentForm">
+                                <input type="text" value="2000원" style="color: red; width:100%; border:none; text-align:center;" id="pay" name="pay">
+                                <button type="button" value="예약 및 결제하기" onclick="" style="font-size:17px; margin: 5px; width: 80%;">예약 및 결제하기</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<!--<script src="/app/plogging_res/ploggingPay.js"></script>-->
+<!-- 결제 팝업창 띄우는 스크립트 코드 -->
+<!--<script>-->
+<!--    function ploggingPayment() {-->
+<!--        var url = "/app/plogging_res/payMent.jsp?pay="-->
+<!--            + pay.value;-->
+<!--        var name = "_blank";-->
+<!--        var option = "width=450, height=600, top=100, left=200, location=no";-->
+<!--        window.open(url, name, option);-->
+<!--    }-->
+<!--</script>-->
+</html>

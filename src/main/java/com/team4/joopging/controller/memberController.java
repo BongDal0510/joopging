@@ -121,8 +121,15 @@ public class memberController {
 //        }
     }
 
+//    여기부터 플로깅 예약 관련 컨트롤러
     @GetMapping("ploggingReservationList")
     public String ploggingReservationList(){
         return "ploggingReservation/ploggingReservationList";
     }
+
+    @GetMapping("ploggingReservationInfo")
+    public String ploggingReservationInfo(){
+        return "ploggingReservation/ploggingReservationInfo";
+    }
+
 }
