@@ -25,10 +25,8 @@ public class MemberVO {
     private String member_birth;
     private String member_gender;
     private String member_email_id;
+    private String member_email_site;
     private String member_zipcode;
     private String member_address;
     private String member_address_detail;
-    private String member_address_etc;
-
-
 }

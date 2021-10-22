@@ -73,27 +73,27 @@
             <!--아이디-->
             <div>
                 <p>아이디</p>
-                <input type="text">
+                <input id="member_id" type="text">
             </div>
             <!--비밀번호-->
             <div>
                 <p>비밀번호</p>
-                <input type="password">
+                <input id="member_pw" type="password">
             </div>
             <!--이름 생일-->
             <div class="object">
                 <div style="width:42%; margin-right:3%; border-color: #94c477;">
                     <p>이름</p>
-                    <input type="text">
+                    <input id="member_name" type="text">
                 </div>
                 <!--<div style="border-right: 2px solid #94c477; margin-top: 20px;"></div>-->
                 <div style="width:55%;">
                     <p>주민 번호</p>
                     <div style="display: flex;">
-                        <input type="text" style="width:37%">
+                        <input id="member_birth" type="text" style="width:37%">
                         <span style="font-size: 30px; ">-</span>
                         <input type="text" style="width:18%">
-                        <span style="font-size: 30px;">******</span>
+                        <span id="member_gender" style="font-size: 30px;">******</span>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
             <div>
                 <p >이메일</p>
                 <div class="object">
-                    <input type="text" style="margin-right:6px; width: 65%;">
+                    <input id="member_email_id" type="text" style="margin-right:6px; width: 65%;">
                     <span>@</span>
                     <div>
                         <select id="member_email_site" style="margin-left:6px; width:95%;">
@@ -133,10 +133,10 @@
                 <p>주소</p>
                 <div class="object">
                     <input type="text" style="margin-right: 5%;">
-                    <input type="button" onclick="AddressSearch()" value="검색" style="background: #94c477;">
+                    <input type="button" onclick="AddressSearch()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
                 </div>
                 <div id="addressDetail" style="display: none;">
-                    <span>해당 자리에 선택한 주소가 나옵니다.</span>
+                    <span style="margin-left:5px;">해당 자리에 선택한 주소가 나옵니다.</span>
                     <!--상세주소-->
                     <p>상세 주소</p>
                     <input type="text">
@@ -150,11 +150,11 @@
                     <a onclick="terms()">서비스 이용 및 개인정보 수집 약관</a>
                     동의
                     </span>
-                    <input type="checkbox" style="margin:10px; width: 20px !important; height: 20px !important;"></input>
+                    <input type="checkbox" style="margin:10px; width: 20px !important; height: 20px !important;">
                 </div>
                 <!--완료 버튼-->
-                <div style="margin-top:10px;">
-                    <input type="button" value="완료" onclick="formSubmit()" style="background:#94c477"/>
+                <div style="margin-top:25px;">
+                    <input type="button" value="완료" onclick="formSubmit()" style="background:#94c477; font-size: 19px; padding:4.8px 16px !important"/>
                 </div>
             </div>
 
