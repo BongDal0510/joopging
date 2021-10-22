@@ -40,6 +40,14 @@ public class ControllerTest {
                 .andReturn().getModelAndView().getModelMap().toString());
     }
 
+    @Test
+    public void testAnnounceList() throws Exception {           //Get 방식
+        log.info(mockMvc.perform(MockMvcRequestBuilders.get("/commu/communityList")
+                .param("commuBoardStatus", "2")
+        )
+                .andReturn().getModelAndView().getModelMap().toString());
+    }
+
 
     @Test
     public void testRegisterCommu() throws Exception {

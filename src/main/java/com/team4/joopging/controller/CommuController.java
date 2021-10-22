@@ -25,11 +25,12 @@ public class CommuController {
     private final CommuService commuService;
 
     @GetMapping("communityList")
-    public String commuList(Criteria criteria, Model model) {
+    public String commuList(Criteria criteria, Model model, int commuBoardStatus) {
         log.info("--------------------------------");
         log.info("communityList");
         log.info("--------------------------------");
 
+        model.addAttribute("announceList", commuService.getAnnounceList(commuBoardStatus));
         model.addAttribute("commuList", commuService.getCommuList(criteria));
         model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
         return "commu/communityList";
@@ -116,5 +117,16 @@ public class CommuController {
     @GetMapping("footer")
     public String footer() {
         return "footer";
+    }
+
+
+    /*꼭 지우기!!!!!!!!!!!!*/
+    @GetMapping("left-sidebar")
+    public String sidebar() {
+        return "left-sidebar";
+    }
+    @GetMapping("index")
+    public String index() {
+        return "index";
     }
 }

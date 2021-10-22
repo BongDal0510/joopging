@@ -124,8 +124,13 @@
     </style>
 </head>
 
-<body class="homepage is-preload">
-<div id="main_header" style="display: flex"></div>
+<body class="is-preload">
+<!--header 위치-->
+<header id="commuHeaderWrapper">
+    <div id="main_header"></div>
+</header>
+
+
 <div id="supersideBar">
     <!-- 회원정보 사이드바 -->
     <div id="sideBarInner">
@@ -201,12 +206,21 @@
         </div>
     </div>
 </div>
-<!--</section>-->
-<div id="main_footer"></div>
-</body>
+
+<!--footer 위치-->
+<footer>
+    <div id="main_footer"></div>
+</footer>
+
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 <script src="/js/header.js"></script>
+</body>
 <script>
     function goEvent(){
         location.href = "/main/eventInfo";

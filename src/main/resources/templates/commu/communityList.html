@@ -19,9 +19,18 @@
 
         div#searchWrap{display: flex;}
 
-        select[name='type']{width: 30%; margin-right: 1%;}
+        select[name='type']{
+            width: 25%;
+            margin-right: 1%;
+            padding: 1%;
+            font-size: 13px;}
 
-        input[name='keyword']{width: 56%; margin-right: 1%;}
+        input[name='keyword']{
+            width: 56%;
+            margin-right: 1%;
+            padding: 0.8%;
+            font-size: 13px;
+        }
 
         form[name='searchForm']{overflow: hidden;}
 
@@ -30,10 +39,23 @@
             .bno {display: none;}
             .writer {display: block; }
             .regDate {display: none; }
-            .updateDate { display: none;}
+            .viewCnt { display: none;}
             .big-width { display: none;}
             .small-width { display: block;}
+            #commuHeaderWrapper{
+                display: none;
+            }
 
+
+
+            div#commuBoardRight, div#commuBoardLeft{
+                display: none;
+            }
+
+            div#commuBoardMiddle{
+                width: 100%;
+                margin: 0% 3%;
+            }
 
             div#searchWrap{
                 display: block;
@@ -56,6 +78,41 @@
 <header id="commuHeaderWrapper">
     <div id="main_header"></div>
 </header>
+
+<!--반응형 네비게이션 실험중-->
+<div id="navPanel">
+    <nav id="navLeftBar">
+        <a class="link depth-0" href="index.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <span class="indent-0"></span>Home</a>
+        <a class="link depth-0" href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Dropdown</a><a class="link depth-1" href="#"
+                                                   style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Lorem ipsum dolor</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Magna phasellus</a><a class="link depth-1" href="#"
+                                                          style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Etiam dolore nisl</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Phasellus consequat</a><a class="link depth-2" href="#"
+                                                              style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Magna phasellus</a><a class="link depth-2" href="#"
+                                                          style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Etiam dolore nisl</a><a class="link depth-2" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Veroeros feugiat</a><a class="link depth-2" href="#"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Nisl sed aliquam</a><a class="link depth-2" href="#"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Dolore adipiscing</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Veroeros feugiat</a><a class="link depth-0" href="left-sidebar.html"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Left Sidebar</a><a class="link depth-0" href="right-sidebar.html"
+                                                       style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Right Sidebar</a><a class="link depth-0" href="no-sidebar.html"
+                                                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>No Sidebar</a></nav>
+</div>
 
 
 <!-- Main -->
@@ -99,7 +156,33 @@
                     <div class="table-wrapper">
                         <table>
                             <thead>
-                            <tr class="tHead">
+                            <tr class="tHead" id="commuAnnounceTh">
+                                <th class="bno">번호</th>
+                                <th class="title">제목</th>
+                                <th class="writer">작성자</th>
+                                <th class="regDate">작성일</th>
+                                <th class="viewCnt">조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="announce : ${announceList}">
+                                <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
+                                    <td class="bno"><img src="/images/commu/siren.png"></td>
+                                    <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
+                                    <td class="writer" th:text="*{commuWriter}"></td>
+                                    <td class="regDate" th:text="*{commuRegDate}"></td>
+                                    <td class="viewCnt" th:text="*{commuViewCnt}"></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr class="tHead" id="commuBoardTh">
                                 <th class="bno">번호</th>
                                 <th class="title">제목</th>
                                 <th class="writer">작성자</th>
@@ -109,7 +192,7 @@
                             </thead>
                             <tbody>
                             <th:block th:each="commu : ${commuList}">
-                                <tr class="tBody" th:object="${commu}">
+                                <tr class="tBody" id="commuBoardThList" th:object="${commu}">
                                     <td class="bno" th:text="*{commuBno}"></td>
                                     <td class="title"><a id="goRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
@@ -126,7 +209,7 @@
                 <!--게시판 목록 오른쪽 사이드-->
                 <div id="commuBoardRight">
                     <img src="/images/nogreenAd.png">
-                    <img src="/images/leftAd.png">
+<!--                    <img src="/images/leftAd.png">-->
                 </div>
 
             </div>

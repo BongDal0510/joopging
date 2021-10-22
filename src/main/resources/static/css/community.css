@@ -44,12 +44,13 @@ a.button{
     width: 17%;
     overflow: hidden;
     text-align: center;
-    padding: 5% 0 0 5.6%
+    padding: 5% 0 0 5.6%;
+    margin-left:2%;
 }
 #commuBoardLeft tr{
     text-align: left;
     font-size: 16px;
-}
+    }
 #commuBoardLeft img{
     width: 100%;
 }
@@ -58,16 +59,17 @@ a.button{
 }
 #commuBoardMiddle{
     width: 56%;
-    margin: 0 5% 0 3%;
+    margin: 0 3% 0 3%;
 }
 #commuBoardRight{
     width: 17%;
     padding: 0 2% 0 0;
     overflow: hidden;
     text-align: center;
+    margin-top: 6%;
 }
 #commuSearchWrap{
-    padding: 0 25%;
+    padding: 0 25% 0 23%;
 }
 #communityBanner{
     padding: 0 10%;
@@ -190,4 +192,42 @@ a#reportBtn.button.small{
 
 .note-btn dropdown-toggle{
     background-color: #f4f4f5;
+}
+
+#pagingStyle a{
+    text-decoration: none !important;
+}
+
+#pagingStyle code{
+    font-family: 'S-CoreDream-4Regular';
+    text-decoration: none;
+    font-size: 13px;
+}
+
+#commuSearchWrap input{
+    padding: 0.8%;
+    font-size: 13px;
+}
+
+.indent-2{
+    z-index: 1000;
+}
+
+#navLeftBar{
+    background-color: #F3F9ED;
+    z-index: 10000;
+}
+#navLeftBar a.depth-0, a.depth-1, a.depth-2, a.indent-0, a.indent-1, a.indent-2{
+    webkit-tap-highlight-color: #5d5d5d;
+}
+
+#navPanel {
+    box-shadow: -3px 0px 3px 3px #3c763d;
+    top: 8%;
+}
+#commuBoardTh th{
+    text-align: center;
+}
+#commuBoardThList td.bno, td.writer, td.regDate, td.viewCnt{
+    text-align: center;
 }

@@ -59,4 +59,10 @@ public class CommuDAO_test {
         commuDAO.getCommuList(criteria).forEach(commu -> log.info(commu.toString()));
     }
 
+    @Test
+    public void testGetAnnounceList(){
+        CommuVO announce = new CommuVO();
+        commuDAO.getAnnounceList(announce.getCommuBoardStatus());
+    }
+
 }
