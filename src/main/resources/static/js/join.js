@@ -28,57 +28,81 @@ function terms() {
 
 // var check = false;
 
+
 function formSubmit(){
 	let form = document.joinForm;
 
 	/*아이디*/
-	if(!form.member_id.value){
+	if(!form.memberId.value){
 		alert("아이디를 입력해주세요.");
 		return;
 	}
 	/*비밀번호*/
-	if(!form.member_pw.value){
+	if(!form.memberPw.value){
 		alert("비밀번호를 입력해주세요.");
 		return;
 	}
+	/*전화번호*/
+	if(!form.memberPhone.value){
+		alert("전화번호를 입력해주세요.");
+		return;
+	}
 	/*이름*/
-	if(!form.member_name.value){
+	if(!form.memberName.value){
 		alert("이름을 입력해주세요.");
 		return;
 	}
-	/*생년월일*/
-	if(!form.member_birth.value){
+	/*주민번호 앞 6자리 (생일)*/
+	if(!form.memberBirth.value){
 		alert("주민번호 앞 6자리를 입력해주세요.");
-		return;
-	}
-	/*생년월일*/
-	if(!form.member_gender.value){
-		alert("주민번호 뒤 1자리를 입력해주세요.");
-		return;
-	}
-	/*생년월일*/
-	if(!form.member_email_id.value){
-		alert("이메일을 입력해주세요.");
-		return;
-	}
-	/*생년월일*/
-	if(!form.member_email_site.value){
-		alert("이메일을 입력해주세요.");
-		return;
-	}
-	console.log(form.member_zipcode.value);
-	/*성별*/
-	if(form.member_gender.value == "선택 안함"){
-		alert("성별을 선택해주세요.");
 		return;
 	}
 
 	/*생년월일*/
 	var format = /^([0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-	if(!format.test(document.getElementById("member_birth").value)){
-		alert("옳바른 생년월일을 입력해주세요.");
+	if(!format.test(document.getElementById("memberBirth").value)){
+		alert("옳바르지 않은 주민번호 형식입니다.");
 		return;
 	}
+
+	/*주민번호 뒤 1자리 (성별)*/
+	if(!form.memberGender.value){
+		alert("주민번호 뒤 1자리를 입력해주세요.");
+		return;
+	}
+
+	/*이메일 아이디*/
+	if(!form.memberEmailId.value){
+		alert("이메일을 입력해주세요.");
+		return;
+	}
+
+	/*이메일 사이트*/
+	if(!form.memberEmailSite.value == "선택 안함"){
+		alert("이메일을 입력해주세요.");
+		return;
+	}
+
+	console.log(form.memberEmailSite.value);
+
+	/*우편번호*/
+	if(!form.memberZipcode.value){
+		alert("주소를 선택해주세요.");
+		return;
+	}
+
+	console.log(form.memberZipcode.value);
+	// /*주소 : 우편번호를 입력하면 자동입력이기 때문에 형식적인 유효성 검사*/
+	// if(!form.memberAddress.value){
+	// 	alert("주소을 입력해주세요.");
+	// 	return;
+	// }
+	/*상세주소 : 나머지주소*/
+	if(!form.memberAddressDetail.value){
+		alert("상세주소를 입력해주세요.");
+		return;
+	}
+
 
 	check = false;
 
@@ -87,7 +111,7 @@ function formSubmit(){
 			check = true;
 		}
 	});
-	
+
 	if(check){
 		alert("이용약관 동의가 필요합니다.");
 		return;
@@ -99,12 +123,12 @@ function formSubmit(){
 
 function checkId(id){
 	check = false;
-	
+
 	if(id == ""){
 		$("#idCheck_text").text("");
 		return;
 	}
-	
+
 	$.ajax({
 		url:contextPath+"/member/MemberCheckIdOk.me?id=" + id,
 		type:"get",

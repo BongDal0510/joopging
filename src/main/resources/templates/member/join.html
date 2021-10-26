@@ -73,27 +73,32 @@
             <!--아이디-->
             <div>
                 <p>아이디</p>
-                <input id="member_id" type="text">
+                <input id="memberId" name="memberId" type="text" placeholder="영문과 숫자를 포함한 8~16자리" maxlength="16">
             </div>
             <!--비밀번호-->
             <div>
                 <p>비밀번호</p>
-                <input id="member_pw" type="password">
+                <input id="memberPw" name="memberPw" type="password" placeholder="영문과 숫자를 포함한 8~12자리" maxlength="12">
+            </div>
+            <!--전화번호-->
+            <div>
+                <p>전화번호</p>
+                <input id="memberPhone" name="memberPhone" type="text" placeholder="'-'를 제외한 숫자 11자리" maxlength="11">
             </div>
             <!--이름 생일-->
             <div class="object">
                 <div style="width:42%; margin-right:3%; border-color: #94c477;">
                     <p>이름</p>
-                    <input id="member_name" type="text">
+                    <input id="memberName" type="text">
                 </div>
                 <!--<div style="border-right: 2px solid #94c477; margin-top: 20px;"></div>-->
                 <div style="width:55%;">
                     <p>주민 번호</p>
                     <div style="display: flex;">
-                        <input id="member_birth" type="text" style="width:37%" maxlength="6">
+                        <input id="memberBirth" name="memberBirth" type="text" style="width:37%" maxlength="6">
                         <span style="font-size: 30px; margin-top:5px;">-</span>
-                        <input type="text" style="width:18%" maxlength="1">
-                        <span id="member_gender" style="font-size: 30px; margin-top:15px;">******</span>
+                        <input id="memberGender" name="memberGender" type="text" style="width:18%" maxlength="1">
+                        <span style="font-size: 30px; margin-top:15px;">******</span>
                     </div>
                 </div>
             </div>
@@ -101,11 +106,10 @@
             <div>
                 <p >이메일</p>
                 <div class="object">
-                    <input id="member_email_id" type="text" style="margin-right:6px; width: 65%;">
+                    <input id="memberEmailId" name="memberEmailId" type="text" style="margin-right:6px; width: 65%;">
                     <span style="margin-top:8px;">@</span>
                     <div>
-                        <select id="member_email_site" style="margin-left:6px; width:95%;">
-                            <option value="null" selected="">선택 안함</option>
+                        <select id="memberEmailSite" name="memberEmailSite" style="margin-left:6px; width:95%;">
                             <option value="chol.com">chol.com</option>
                             <option value="yahoo.com">yahoo.com</option>
                             <option value="empal.com">empal.com</option>
@@ -119,7 +123,7 @@
                             <option value="korea.com">korea.com</option>
                             <option value="lycos.co.kr">lycos.co.kr</option>
                             <option value="nate.com">nate.com</option>
-                            <option value="naver.com">naver.com</option>
+                            <option value="naver.com" selected="">naver.com</option>
                             <option value="netian.com">netian.com</option>
                             <option value="paran.com">paran.com</option>
                             <option value="yahoo.co.kr">yahoo.co.kr</option>
@@ -132,14 +136,14 @@
             <div id="address">
                 <p>주소</p>
                 <div class="object">
-                    <input type="text" style="margin-right: 5%;">
-                    <input type="button" id="member_zipcode" onclick="AddressSearch()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
+                    <input type="text" id="memberZipcode" name="memberZipcode" style="margin-right: 5%;">
+                    <input type="button" onclick="AddressSearch()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
                 </div>
-                <div id="detail_address" style="display: none;">
-                    <span id="member_address" style="margin-left:5px;">해당 자리에 선택한 주소가 나옵니다.</span>
+                <div id="detailAddress" style="display: none;">
+                    <span id="memberAddress" name="memberAddress" style="margin-left:5px;">해당 자리에 선택한 주소가 나옵니다.</span>
                     <!--상세주소-->
                     <p>상세 주소</p>
-                    <input id="member_addressDetail" type="text">
+                    <input id="memberAddressDetail" name="memberAddressDetail" type="text">
                 </div>
             </div>
             <!--약관 / 완료 버튼-->
@@ -167,7 +171,7 @@
 <script src="/js/header.js"></script>
 <script>
     function AddressSearch(){
-        $('#detail_address').css('display', 'block');
+        $('#detailAddress').css('display', 'block');
     }
 </script>
 </html>
