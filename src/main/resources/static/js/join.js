@@ -13,7 +13,9 @@ function terms() {
 	window.open(url, name, option);
 }
 
-$("#term").on("click", function(){
+
+//이전 게시판 예제에서 사용한 체크박스 두개 동시에 체크하는 알고리즘
+/*$("#term").on("click", function(){
 	if($(this).is(":checked")){
 		//체크가 되어 있다면,
 		$(".terms").prop("checked", true);
@@ -21,10 +23,10 @@ $("#term").on("click", function(){
 		//체크되어 있지 않다면
 		$(".terms").prop("checked", false);
 	}
-})
+})*/
 
 
-var check = false;
+// var check = false;
 
 function formSubmit(){
 	let form = document.joinForm;
@@ -46,10 +48,25 @@ function formSubmit(){
 	}
 	/*생년월일*/
 	if(!form.member_birth.value){
-		alert("생년월일 6자리를 입력해주세요.");
+		alert("주민번호 앞 6자리를 입력해주세요.");
 		return;
 	}
-	console.log(form.member_gender.value);
+	/*생년월일*/
+	if(!form.member_gender.value){
+		alert("주민번호 뒤 1자리를 입력해주세요.");
+		return;
+	}
+	/*생년월일*/
+	if(!form.member_email_id.value){
+		alert("이메일을 입력해주세요.");
+		return;
+	}
+	/*생년월일*/
+	if(!form.member_email_site.value){
+		alert("이메일을 입력해주세요.");
+		return;
+	}
+	console.log(form.member_zipcode.value);
 	/*성별*/
 	if(form.member_gender.value == "선택 안함"){
 		alert("성별을 선택해주세요.");

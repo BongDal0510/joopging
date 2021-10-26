@@ -90,10 +90,10 @@
                 <div style="width:55%;">
                     <p>주민 번호</p>
                     <div style="display: flex;">
-                        <input id="member_birth" type="text" style="width:37%">
-                        <span style="font-size: 30px; ">-</span>
-                        <input type="text" style="width:18%">
-                        <span id="member_gender" style="font-size: 30px;">******</span>
+                        <input id="member_birth" type="text" style="width:37%" maxlength="6">
+                        <span style="font-size: 30px; margin-top:5px;">-</span>
+                        <input type="text" style="width:18%" maxlength="1">
+                        <span id="member_gender" style="font-size: 30px; margin-top:15px;">******</span>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                 <p >이메일</p>
                 <div class="object">
                     <input id="member_email_id" type="text" style="margin-right:6px; width: 65%;">
-                    <span>@</span>
+                    <span style="margin-top:8px;">@</span>
                     <div>
                         <select id="member_email_site" style="margin-left:6px; width:95%;">
                             <option value="null" selected="">선택 안함</option>
@@ -133,24 +133,22 @@
                 <p>주소</p>
                 <div class="object">
                     <input type="text" style="margin-right: 5%;">
-                    <input type="button" onclick="AddressSearch()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
+                    <input type="button" id="member_zipcode" onclick="AddressSearch()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
                 </div>
-                <div id="addressDetail" style="display: none;">
-                    <span style="margin-left:5px;">해당 자리에 선택한 주소가 나옵니다.</span>
+                <div id="detail_address" style="display: none;">
+                    <span id="member_address" style="margin-left:5px;">해당 자리에 선택한 주소가 나옵니다.</span>
                     <!--상세주소-->
                     <p>상세 주소</p>
-                    <input type="text">
+                    <input id="member_addressDetail" type="text">
                 </div>
             </div>
             <!--약관 / 완료 버튼-->
             <div style="text-align: center;">
                 <!--약관-->
                 <div style="margin-top:20px;">
-                    <span style="margin:10px;">
-                    <a onclick="terms()">서비스 이용 및 개인정보 수집 약관</a>
-                    동의
-                    </span>
-                    <input type="checkbox" style="margin:10px; width: 20px !important; height: 20px !important;">
+                    <a onclick="terms()" style="vertical-align: middle;">서비스 이용 및 개인정보 수집 약관</a>
+                    <input type="checkbox" id="term" name="term" style="margin:0px 0px 0px 20px; width: 20px !important; height: 20px !important; vertical-align: middle;">
+                    <span style="margin:0px; vertical-align: middle;">동의</span>
                 </div>
                 <!--완료 버튼-->
                 <div style="margin-top:25px;">
@@ -169,7 +167,7 @@
 <script src="/js/header.js"></script>
 <script>
     function AddressSearch(){
-        $('#addressDetail').css('display', 'block');
+        $('#detail_address').css('display', 'block');
     }
 </script>
 </html>
