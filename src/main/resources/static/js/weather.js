@@ -49,8 +49,14 @@ $(function(){
             case 'Atmosphere':
                 str = "/images/weather/smog.png";
                 break;
+            case 'Mist':
+                str = "/images/weather/smog.png";
+                break;
             case 'weather-default':
                 str = "/images/weather/cloud.png";
+                break;
+            default :
+                str = "/images/weather/sunny_cloud.png";
                 break;
         }
         return str;

@@ -64,13 +64,13 @@
 
         #supersideBar {
             position: fixed;
-            width: 260px;
-            margin-left: 6%;
+            width: 20%;
             margin-top: 7.5%;
         }
 
         #sideBarInner{
-            width: 100%;
+            width: 260px;
+            float: right;
             height: auto;
             border: 2px solid #35A14A;
             border-radius: 20px;
@@ -100,14 +100,6 @@
             border-top: solid 2px #35A14A;
         }
 
-        #center {
-            margin: 0;
-        }
-
-        .image.featured {
-            margin: 0 !important;
-        }
-
         #attendTable {
             border-color: #ffffff;
             background-color: #e2f0d9;
@@ -128,6 +120,8 @@
             font-family: 'S-CoreDream-4Regular';
         }
 
+
+        /* 이벤트 박스 관련 CSS */
         .eventImage {
             margin: 0 !important;
         }
@@ -135,6 +129,14 @@
         .eventDate {
             margin: 0;
             font-size: 13pt;
+        }
+
+        #center {
+            margin: 0;
+        }
+
+        .image.featured {
+            margin: 0 !important;
         }
 
         .boxinner {
@@ -160,7 +162,7 @@
 <body class="homepage is-preload">
 <div id="main_header" style="display: flex"></div>
 <div id="supersideBar">
-<!-- 회원정보 사이드바 -->
+    <!-- 회원정보 사이드바 -->
     <div id="sideBarInner">
         <div>
             <div>
@@ -192,7 +194,7 @@
             </div>
             <table id="attendTable">
                 <tr class="attendTr">
-                    <td></td>
+                    <td style="padding: 0; text-align: center;"><img src="/images/event/check.png" style="height: 20px"></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -210,146 +212,147 @@
                 <input id="attendButton" type="button" value="출석 체크하기">
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 <!-- Main -->
 <!--<section id="main">-->
-    <div class="container">
-        <div class="row">
-            <div class="col-12" style=clear:both;>
+<div class="container">
 
-                <!-- Portfolio -->
-                <section>
-                    <div class="event_subtitle">
-                        <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 이벤트</h2>
+    <div class="row">
+        <div class="col-12" style=clear:both;>
+
+            <!-- Portfolio -->
+            <section>
+                <div class="event_subtitle">
+                    <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 이벤트</h2>
+                </div>
+                <div class="row">
+
+
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/신규가입.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        11월 신규가입
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo3" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 1일-11월 30일</p>
+                            </div>
+                        </section>
                     </div>
-                    <div class="row">
 
 
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/신규가입.png"/></a>
-                            </section>
-                            <section class="box boxinner">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                            11월 신규가입
-                                        </h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a href="#" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">11월 1일-11월 30일</p>
-                                </div>
-                            </section>
-                        </div>
-
-
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_seoul01.jpg"/></a>
-                            </section>
-                            <section class="box boxinner">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                            서울새활용 플로깅
-                                        </h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a href="/main/eventInfo3" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">10월 23일-11월 5일</p>
-                                </div>
-                            </section>
-                        </div>
-
-
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_hyundae01.png"/></a>
-                            </section>
-                            <section class="box boxinner">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                            더현대 플로깅
-                                        </h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a href="/main/eventInfo4" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">11월 17일-12월 2일</p>
-                                </div>
-                            </section>
-                        </div>
-
-
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>
-                            </section>
-                            <section class="box boxinner">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                            플로깅 인증이벤트
-                                        </h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a href="#" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">11월 1일-11월 30일</p>
-                                </div>
-                            </section>
-                        </div>
-
-
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>
-                            </section>
-                            <section class="box boxinner">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                            플로깅 인증이벤트
-                                        </h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a href="#" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">9월 1일-09월 30일</p>
-                                </div>
-                            </section>
-                        </div>
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_seoul01.jpg"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        서울새활용 플로깅
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo3" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">10월 23일-11월 5일</p>
+                            </div>
+                        </section>
                     </div>
-                </section>
-            </div>
+
+
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_hyundae01.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        더현대 플로깅
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo4" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 17일-12월 2일</p>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        플로깅 인증이벤트
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 1일-11월 30일</p>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        플로깅 인증이벤트
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="#" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">9월 1일-09월 30일</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
+</div>
 <!--</section>-->
 <div id="main_footer"></div>
 </body>
