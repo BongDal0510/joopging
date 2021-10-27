@@ -179,6 +179,10 @@
         position: relative;
     }
 
+    table.numberPage{
+        font-size: 1.3rem;
+    }
+
     /* Button */
 
     button, input[type="button"]{
@@ -220,7 +224,7 @@
     }
 
     ul li.list {
-        font-family: S-CoreDream-4Regular;
+        font-family: S-CoreDream-5Medium;
         font-weight: bold;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -476,29 +480,29 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>예약번호</th>
+                                    <th>예약 번호</th>
                                       <th>장소</th>
                                     <th>날짜</th>
                                     <th>시간</th>
+                                    <th>예약 취소</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><!--번호--></td>
                                     <td>
                                         <!--링크 연결된 예약번호-->
                                     </td>
                                     <td><!--장소--></td>
                                     <td><!--날짜--></td>
                                     <td><!--시간--></td>
+                                    <td>x</td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table style="font-size:1.3rem">
+                            <table class="numberPage">
                                 <tr align="center" valign="middle">
                                     <td>
                                     </td>
@@ -522,7 +526,7 @@
                                 <thead>
                                 <tr>
                                     <th>날짜</th>
-                                    <th>이유</th>
+                                    <th colspan="2">내역</th>
                                     <th>금액</th>
                                 </tr>
                                 </thead>
@@ -532,14 +536,17 @@
                                     <td>
                                         <!--이유-->
                                     </td>
+                                    <td>
+                                        <!--지급/사용/취소-->
+                                    </td>
                                     <td><!--금액--></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" align="center">포인트 내역이 없습니다.</td>
+                                    <td colspan="4" align="center">포인트 내역이 없습니다.</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table style="font-size:1.3rem">
+                            <table class="numberPage">
                                 <tr align="center" valign="middle">
                                     <td>
                                     </td>
@@ -562,35 +569,29 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>사진</th>
+                                    <th>주문 번호</th>
                                     <th>상품 명</th>
                                     <th>가격</th>
                                     <th>수량</th>
-                                    <th>옵션</th>
                                     <th>상태</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><!--번호--></td>
-                                    <td>
-                                        <!--사진-->
-                                    </td>
+                                    <td><!--주문 번호--></td>
                                     <td>
                                         <!--상품명//상세보기-->
                                     </td>
                                     <td><!--가격--></td>
                                     <td><!--수량--></td>
-                                    <td><!--옵션--></td>
                                     <td><!--상태--></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" align="center">구매한 상품이 없습니다.</td>
+                                    <td colspan="5" align="center">구매한 상품이 없습니다.</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table style="font-size:1.3rem">
+                            <table class="numberPage">
                                 <tr align="center" valign="middle">
                                     <td>
                                     </td>
@@ -613,30 +614,28 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>상품 명</th>
-                                    <th>가격</th>
                                     <th>선택</th>
+                                    <th>상품명</th>
+                                    <th>가격</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                             <tr>
-                                                <td><!--번호--></td>
+                                                <td><input type="checkbox" ></td>
                                                 <td>
                                                     <!--상품명//상세보기-->
                                                 </td>
                                                 <td><!--가격--></td>
-                                                <td><!--선택 체크박스로--></td>
                                             </tr>
                                         <tr>
-                                            <td colspan="6" align="center">찜 내역이 없습니다.</td>
+                                            <td colspan="3" align="center">찜 내역이 없습니다.</td>
                                         </tr>
                                 </tbody>
                             </table>
                             <p style="text-align: right;">
                                 <button class= "listbtn">선택 삭제</button>
                             </p>
-                            <table style="font-size:1.3rem">
+                            <table class="numberPage">
                                 <tr align="center" valign="middle">
                                     <td>
                                     </td>
@@ -660,8 +659,7 @@
                                 </tr>
                                 <tr>
                                     <th>비밀번호</th>
-                                    <td style="display: flex;"><input type="password" id = "newPw" name="newMemberPw" style="display: none;">
-                                        &nbsp;&nbsp;
+                                    <td>
                                         <input type="button" id = "changePw" value="비밀번호 변경">
                                     </td>
                                 </tr>
@@ -740,7 +738,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="text-align: center;">
+                                    <td colspan="2" style="text-align: center; ">
                                         <input type="button" value="회원 정보 변경" id="changeMemberInfo" class= "listbtn" style="margin-top: 1.5em">
                                     </td>
                                 </tr>
@@ -828,20 +826,20 @@
                         <div>
                             <table class = boardList>
                                 <caption>
-                                    내 플로깅 예약 횟수 :
+                                    내가 작성한 게시글 : 개
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>예약번호</th>
-                                    <th>장소</th>
-                                    <th>날짜</th>
-                                    <th>시간</th>
+                                    <th>게시글 번호</th>
+                                    <th>제목</th>
+                                    <th>작성일</th>
+                                    <th>조회수</th>
+                                    <th>댓글수</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><!--번호-->ggsfgf</td>
+                                    <td><!--번호--></td>
                                     <td>
                                         <!--링크 연결된 예약번호-->
                                     </td>
@@ -854,7 +852,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <table style="font-size:1.3rem">
+                            <table class="numberPage">
                                 <tr align="center" valign="middle">
                                     <td>
                                     </td>

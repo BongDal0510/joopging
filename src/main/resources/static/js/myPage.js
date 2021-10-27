@@ -104,18 +104,6 @@ $('#selectBox').change(function() {
     }
 });
 
-
-$('#changePw').on("click", function(){
-    if($('#newPw').css("display")=="none"){
-        $(this).val("비밀번호 변경 취소");
-        $('#newPw').show();
-    }else{
-        $(this).val("비밀번호 변경");
-        $('#newPw').val("");
-        $('#newPw').hide();
-    }
-});
-
 $("#deleteMember").on("click", function(){
     var form = $("form[name=deleteForm]");
 
