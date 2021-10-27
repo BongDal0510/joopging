@@ -8,20 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/main/*")
+@RequestMapping("/event/*")
 @RequiredArgsConstructor
-public class MainpageController {
+public class EventController {
 
-    @GetMapping("mainpage")
-    public String mainpage() {
-        return "mainpage";
+    @GetMapping("eventlist")
+    public String event() {
+        return "event/eventlist";
     }
 
-    @GetMapping("cs")
-    public String cs() {
-        return "cs";
+    @GetMapping("eventInfo3")
+    public String eventInfo3() {
+        return "event/eventInfo3";
     }
 
+    @GetMapping("eventInfo4")
+    public String eventInfo4() {
+        return "event/eventInfo4";
+    }
+
+    /* 위의 @RequestMapping 의 경로와 다를경우 '/' 슬래쉬를 붙여준다. */
+    /* /event/pageframe/header → /pageframe/header */
     @GetMapping("/pageframe/header")
     public String header() {
         return "/pageframe/header";
@@ -31,15 +38,4 @@ public class MainpageController {
     public String footer() {
         return "/pageframe/footer";
     }
-
-    @GetMapping("eventInfo3")
-    public String eventInfo3() {
-        return "eventInfo3";
-    }
-
-    @GetMapping("eventInfo4")
-    public String eventInfo4() {
-        return "eventInfo4";
-    }
-
 }

@@ -1,8 +1,8 @@
 /*헤더 푸터 js*/
 
 $(function(){
-    $("#main_header").load("header #header");
-    $("#main_footer").load("footer #footer");
+    $("#main_header").load("pageframe/header #header");
+    $("#main_footer").load("pageframe/footer #footer");
 });
     //헤더 위치에 놓기
     // <div id="main_header"></div>
