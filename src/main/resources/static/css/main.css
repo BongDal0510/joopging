@@ -1624,7 +1624,7 @@ input, select, textarea {
 		border: 0;
 		border-radius: 5px;
 		background: #35A14A;
-		color: #fff !important;
+		color: #fff;
 		font-weight: 700;
 		outline: 0;
 		font-size: 1.1em;
