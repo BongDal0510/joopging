@@ -29,4 +29,14 @@ public class InterviewController {
     @GetMapping("inquiry")
     public String inquiry() { return "/inquiry/inquiry";}
 
+    @GetMapping("header")
+    public String header() {
+        return "header";
+    }
+
+    @GetMapping("footer")
+    public String footer() {
+        return "footer";
+    }
+
 }
