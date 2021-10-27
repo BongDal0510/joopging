@@ -86,7 +86,7 @@ a.button{
     font-family: 'S-CoreDream-3Light';
     font-size: 13px;
 }
-#goRead{
+#goRead, #goAnnounceRead{
     text-decoration-line: none;
 }
 .tHead{
@@ -225,9 +225,16 @@ a#reportBtn.button.small{
     box-shadow: -3px 0px 3px 3px #3c763d;
     top: 8%;
 }
-#commuBoardTh th{
+#commuBoardTh th, #commuAnnounceTh th{
     text-align: center;
 }
 #commuBoardThList td.bno, td.writer, td.regDate, td.viewCnt{
     text-align: center;
+}
+#commuAnnounceThList td.bno, td.writer, td.regDate, td.viewCnt{
+    text-align: center;
+}
+
+td.boardStatus > img{
+    width: 20%;
 }

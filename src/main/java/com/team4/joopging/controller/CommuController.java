@@ -30,6 +30,7 @@ public class CommuController {
         log.info("communityList");
         log.info("--------------------------------");
 
+
         model.addAttribute("announceList", commuService.getAnnounceList(2));
         model.addAttribute("commuList", commuService.getCommuList(criteria));
         model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));

@@ -129,26 +129,27 @@
                 <div id="commuBoardLeft">
                     <table id="commuLeftCategory">
                         <tr>
-                            <td>커뮤니티 게시판</td>
+                            <td><a href="javascript:void(0)" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
                         </tr>
                         <tr>
-                            <th>인터뷰</th>
+                            <td><a href="javascript:void(0)" id="interview" class="commu">인터뷰</a></td>
                         </tr>
+<!--                        <tr>
+                            <th class="commu">이벤트</th>
+                        </tr>-->
                         <tr>
-                            <th>이벤트</th>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu">문의하기</a></td>
                         </tr>
+                        <!--admin 계정만 보이게-->
                         <tr>
-                            <th>문의하기</th>
-                        </tr>
-                        <tr>
-                            <th>신고된 글</th>
+                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
                         </tr>
 
                     </table>
                 </div>
 
                 <!--게시판 목록-->
-                <div id="commuBoardMiddle">
+                <div id="commuBoardMiddle" class="rotateMainContent">
                     <div id="registerBtn">
                         <div>커뮤니티 게시판</div>
                         <div id="registerBtnArea"><a href="/commu/communityRegister" class="button small">글 등록</a></div>
@@ -157,7 +158,7 @@
                         <table>
                             <thead>
                             <tr class="tHead" id="commuAnnounceTh">
-                                <th class="bno">번호</th>
+                                <th class="bno" style="color:white;">번호</th>
                                 <th class="title">제목</th>
                                 <th class="writer">작성자</th>
                                 <th class="regDate">작성일</th>
@@ -167,7 +168,7 @@
                             <tbody>
                             <th:block th:each="announce : ${announceList}">
                                 <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
-                                    <td class="boardStatus" th:text="*{commuBoardStatus}"><img src="/images/commu/siren.png"></td>
+                                    <td class="boardStatus"><img src="/images/commu/siren.png"></td>
                                     <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>
@@ -176,12 +177,13 @@
                             </th:block>
                             </tbody>
                             <tfoot>
+                            <!--th:text="*{commuBoardStatus}"-->
                             </tfoot>
                         </table>
                     </div>
                     <div class="table-wrapper">
                         <table>
-                            <thead>
+<!--                            <thead>
                             <tr class="tHead" id="commuBoardTh">
                                 <th class="bno">번호</th>
                                 <th class="title">제목</th>
@@ -189,7 +191,7 @@
                                 <th class="regDate">작성일</th>
                                 <th class="viewCnt">조회수</th>
                             </tr>
-                            </thead>
+                            </thead>-->
                             <tbody>
                             <th:block th:each="commu : ${commuList}">
                                 <tr class="tBody" id="commuBoardThList" th:object="${commu}">
@@ -201,12 +203,109 @@
                                 </tr>
                             </th:block>
                             </tbody>
-                            <tfoot>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
-                <!--게시판 목록 오른쪽 사이드-->
+
+
+                <!--인터뷰-->
+                <div id="interviewLists" class="rotateMainContent" style="display: none">
+                    <div id="interviewArea">
+                        <div>이달의 인터뷰</div>
+                        <!--admin 계정일때만 보이게-->
+                        <div id="interviewBtn"><a href="/interview/interviewRegister" class="button small">글 등록</a></div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style=clear:both;>
+
+                                <!-- Portfolio -->
+                                <section>
+                                    <div class="event_subtitle">
+                                        <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 이벤트</h2>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="col-4 col-6-medium col-12-small">
+                                            <section class="eventImage">
+                                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/신규가입.png"/></a>
+                                            </section>
+                                            <section class="box boxinner">
+                                                <div style="display: flex">
+                                                    <header id="center1">
+                                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                                            11월 신규가입 이벤트
+                                                        </h4>
+                                                    </header>
+                                                    <footer class="eventButton">
+                                                        <ul class="actions">
+                                                            <li><a href="#" class="button alt">상세보기</a></li>
+                                                        </ul>
+                                                    </footer>
+                                                </div>
+                                                <div>
+                                                    <p class="eventDate">11월 1일-11월 30일</p>
+                                                </div>
+                                            </section>
+                                        </div>
+
+
+                                        <div class="col-4 col-6-medium col-12-small">
+                                            <section class="eventImage">
+                                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_attendance.png"/></a>
+                                            </section>
+                                            <section class="box boxinner">
+                                                <div style="display: flex">
+                                                    <header id="center2">
+                                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                                            11월 출석 이벤트
+                                                        </h4>
+                                                    </header>
+                                                    <footer class="eventButton">
+                                                        <ul class="actions">
+                                                            <li><a href="#" class="button alt">상세보기</a></li>
+                                                        </ul>
+                                                    </footer>
+                                                </div>
+                                                <div>
+                                                    <p class="eventDate">11월 1일-11월 30일</p>
+                                                </div>
+                                            </section>
+                                        </div>
+
+
+                                        <div class="col-4 col-6-medium col-12-small">
+                                            <section class="eventImage">
+                                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_seoul01.jpg"/></a>
+                                            </section>
+                                            <section class="box boxinner">
+                                                <div style="display: flex">
+                                                    <header id="center">
+                                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                                            서울새활용 플로깅
+                                                        </h4>
+                                                    </header>
+                                                    <footer class="eventButton">
+                                                        <ul class="actions">
+                                                            <li><a href="/main/eventInfo3" class="button alt">상세보기</a></li>
+                                                        </ul>
+                                                    </footer>
+                                                </div>
+                                                <div>
+                                                    <p class="eventDate">10월 23일-11월 5일</p>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--오른쪽 사이드-->
                 <div id="commuBoardRight">
                     <img src="/images/nogreenAd.png">
 <!--                    <img src="/images/leftAd.png">-->
@@ -277,13 +376,22 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/header.js"></script>
+<script src="/js/commu.js"></script>
 </body>
 <script th:inline="javascript">
     // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
+/*
+    var date = input.split(" ")[0];
+    var tmpDate = date.split("-");
+    return "~" + tmpDate[1] + "/" + tmpDate[2];
 
+    if(input.length >= 14){
+        return input.substr(0,14)+"...";
+    }
+    */
     //게시글 등록시 몇 번째 글 등록인지 확인시켜주기
     $(document).ready(function () {
         let commuBno = [[${commuBno}]];

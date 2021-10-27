@@ -17,7 +17,6 @@ public class InterviewController {
     @GetMapping("interviewRead")
     public String read() { return "/interview/interviewRead";}
 
-
     /*admin 계정일 경우에만 등록가능*/
     @GetMapping("interviewRegister")
     public String eventRegister() { return "/interview/interviewRegister"; }
@@ -25,5 +24,9 @@ public class InterviewController {
     /*admin 계정일 경우에만 수정가능*/
     @GetMapping("interviewModify")
     public String eventModify() { return "/interview/interviewModify"; }
+
+
+    @GetMapping("inquiry")
+    public String inquiry() { return "/inquiry/inquiry";}
 
 }
