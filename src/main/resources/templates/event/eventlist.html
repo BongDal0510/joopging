@@ -100,6 +100,18 @@
             border-top: solid 2px #35A14A;
         }
 
+        #attendInfo {
+            font-size: 17px;
+            padding: 0 0.5em 0 0.5em;
+            height: 1.5em;
+            line-height: 1.5em;
+            background: #94C477;
+        }
+
+        #attendInfo:hover {
+            background: #5d5d5d;
+        }
+
         #attendTable {
             border-color: #ffffff;
             background-color: #e2f0d9;
@@ -188,7 +200,7 @@
             </div>
             <div>
                 <strong>출석체크</strong>
-                <a></a>
+                <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
                 <div class="sideBarInfo" >
                     <span>1/10</span>
                 </div>
@@ -361,9 +373,10 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
-<script>
-    function goEvent(){
-        location.href = "pageframe/eventInfo";
-    }
-</script>
+<script src="/js/event.js"></script>
+<!--<script>-->
+<!--    function goEvent(){-->
+<!--        location.href = "pageframe/eventInfo";-->
+<!--    }-->
+<!--</script>-->
 </html>
