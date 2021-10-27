@@ -55,7 +55,7 @@ public class ControllerTest {
     @Test
     public void testReadCommu() throws Exception {
         String commu = mockMvc.perform(MockMvcRequestBuilders.get("/commu/communityRead")
-                .param("commuBno", "10584076")
+                .param("commuBno", "2100251")
         ).andReturn().getModelAndView().getViewName();/*getModelMap().toString();*///모델 객체 있는거 확인했던거.
 
         log.info(commu);
