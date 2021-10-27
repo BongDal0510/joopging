@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/main/*")
 @RequiredArgsConstructor
-public class MainpageController {
+public class HeaderFooterController {
 
     @GetMapping("header")
     public String header() {
