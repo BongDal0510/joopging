@@ -108,13 +108,14 @@ public class CommuController {
     @GetMapping("communityRegister")
     public void goPage(){}
 
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
 
-    @GetMapping("footer")
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
+
 }
