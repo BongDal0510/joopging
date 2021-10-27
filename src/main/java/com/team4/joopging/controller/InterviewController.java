@@ -29,14 +29,14 @@ public class InterviewController {
     @GetMapping("inquiry")
     public String inquiry() { return "/inquiry/inquiry";}
 
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
 
-    @GetMapping("footer")
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
 
 }

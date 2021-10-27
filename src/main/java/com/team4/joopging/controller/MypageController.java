@@ -29,13 +29,14 @@ public class MypageController {
     @GetMapping("deliveryTracking")
     public String deliveryTracking(){ return "mypage/deliveryTracking"; }
 
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
 
-    @GetMapping("footer")
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
+
 }

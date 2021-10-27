@@ -23,13 +23,14 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class memberController {
     /*헤더, 푸터*/
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
-    @GetMapping("footer")
+
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
 
     /*플로깅 소개 페이지*/

@@ -34,15 +34,16 @@ public class shopController {
     @GetMapping("failPayment")
     public String failPayment() {return "failPayment";}
 
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
 
-    @GetMapping("footer")
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
+
 
 
 
