@@ -17,6 +17,11 @@ public class EventController {
         return "event/eventlist";
     }
 
+    @GetMapping("attendInfo")
+    public String attendInfo() {
+        return "event/attendInfo";
+    }
+
     @GetMapping("eventInfo3")
     public String eventInfo3() {
         return "event/eventInfo3";
