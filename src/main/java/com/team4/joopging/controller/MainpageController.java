@@ -41,5 +41,4 @@ public class MainpageController {
     public String eventInfo4() {
         return "eventInfo4";
     }
-
 }
