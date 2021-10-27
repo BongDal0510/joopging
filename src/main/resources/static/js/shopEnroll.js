@@ -12,12 +12,36 @@ const add_textbox = () => {
     const goods_option = document.getElementById("goods_option");
     const newP = document.createElement('p');
     num++;
-    newP.innerHTML = "색상<input type='text' name='goods_option_color" + num + "' style='width:20%;'>사이즈<input type='text' name='goods_option_size" + num + "' style='width:20%;'>수량<input type='text' name='goods_stock_color" + num + "' style='width:20%;'><input type='button' value='삭제' onclick='remove(this)'>";
+    newP.innerHTML = "색상<input type='text' id='goodsColor' name='goods_option_color" + num + "' style='width:20%;'>사이즈<input type='text' id='goodsSize' name='goods_option_size" + num + "' style='width:20%;'><input type='button' value='삭제' onclick='remove(this)'>";
     goods_option.appendChild(newP);
 }
 const remove = (obj) => {
     document.getElementById('goods_option').removeChild(obj.parentNode);
 }
+
+// $(document).ready (function (){
+//     var num = 0;
+//    $('#goods_option_btn').click(function(){
+//       $('#goods_option').append(
+//           "색상<input type='text' id='goodsColor' name='goods_option_color" + num + "' style='width:20%;'>" +
+//           "사이즈<input type='text' id='goodsSize' name='goods_option_size" + num + "' style='width:20%;'>" +
+//           "<input type='button' value='삭제' onclick='remove(this)'>"
+// //     goods_option.appendChild(newP);
+//
+//       )
+//
+//    });
+//
+//
+// });
+
+
+
+
+
+
+
+
 
 
 var frm = document.enrollform;
