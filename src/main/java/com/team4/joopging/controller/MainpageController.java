@@ -32,13 +32,4 @@ public class MainpageController {
         return "/pageframe/footer";
     }
 
-    @GetMapping("eventInfo3")
-    public String eventInfo3() {
-        return "eventInfo3";
-    }
-
-    @GetMapping("eventInfo4")
-    public String eventInfo4() {
-        return "eventInfo4";
-    }
 }
