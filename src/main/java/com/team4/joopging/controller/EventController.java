@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/event/*")
 @RequiredArgsConstructor
-public class Event22Controller {
+public class EventController {
 
     @GetMapping("eventlist")
     public String event() {
