@@ -29,13 +29,13 @@ public class EventController {
 
     /* 위의 @RequestMapping 의 경로와 다를경우 '/' 슬래쉬를 붙여준다. */
     /* /event/pageframe/header → /pageframe/header */
-    @GetMapping("/pageframe/header")
-    public String header() {
-        return "/pageframe/header";
-    }
-
-    @GetMapping("/pageframe/footer")
-    public String footer() {
-        return "/pageframe/footer";
-    }
+//    @GetMapping("/pageframe/header")
+//    public String header() {
+//        return "/pageframe/header";
+//    }
+//
+//    @GetMapping("/pageframe/footer")
+//    public String footer() {
+//        return "/pageframe/footer";
+//    }
 }
