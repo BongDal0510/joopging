@@ -11,7 +11,7 @@ public class reservationDAO {
 
     private final MypageMapper mapper;
 
-    public void reservationList(reservationVO reservation){
+    public void reservationList(){
         mapper.getReservationList();
     }
 }
