@@ -17,6 +17,7 @@ public class CommonExceptionAdvice {
         model.addAttribute("exception", e);
         log.error(model.toString());
         return "error_page";
+
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
