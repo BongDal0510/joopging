@@ -238,88 +238,28 @@
     </style>
 </head>
 <body>
-<section id="main" style="padding: 5px; display: flex; justify-content: space-around;">
-    <div style="width: 1200px; margin: 0px 0px 0px 400px;">
-        <div class="container">
-            <div class="row" style="width: 960px;">
+<div id="main_header" style="display: flex"></div>
 
-                <div class="col-8 col-12-medium imp-medium">
-                    <article class="box post">
+<!--상세페이지-->
+<!--전체 틀-->
+<div style="margin:auto;">
+    <!--선택한 플로깅 상세페이지-->
+    <div>ㅎㅇ</div>
+    <!--인원수 선택 밑 결제버튼-->
+    <div>ㅇㅎ</div>
 
-                        <!-- 샘플 상세페이지 이미지 -->
-                        <!-- 이미지는 한장으로 표현할 것 -->
-                        <a class="image featured"><img src="/images/마포대교.png"/></a>
-
-                        <!-- 샘플 상세페이지 내용(텍스트) -->
-                        <!-- 스프링 작업 후 데이터의 연산 필요 -->
-                        <header>
-                            <h2>마포대교 플로깅</h2>
-                        </header>
-                        <h4>마표대교에서 달려라! 주워라!</h4>
-
-                        <p>
-                            장소 : 마포대교<br> <br> 일시 : 2021-09-27 AM 10:00 ~ PM 13:00<br>
-                            <br> 내용 : 마포대교 일대 플로깅 켐페인 진행<br> <br> 참가비 : 2000원
-                            (예약 신청시 결제 페이지 이동)<br> <br>
-                        </p>
+</div>
 
 
-                        <section>
-                            <header>
-                                <h3>주의 사항</h3>
-                            </header>
-                            <p style="color: red;">
-                                1. 모든 신청은 선착순 예약이며, 가용 인원 초과 시 조기 예약 마감할 수 있습니다.<br> 2. 신청
-                                시 소액의 신청 금액이 부과 될 수 있습니다.<br> 3. 개인 사유로 인해 예약을 취소할 경우 규정에
-                                따라 환불이 불가능 할 수 있습니다.<br> 4. 우천 등의 사유로 플로깅 일정이 취소될 수 있으며,
-                                이에 따른 모든 예약은 환불됩니다.<br>
-                            </p>
-                        </section>
 
 
-                    </article>
-                </div>
 
-                <!-- 오른쪽 사이드바 -->
-                <!-- 피드백 요청 : 사이드 스크롤에 맞춰 움직이도록 애니메이션 추가 -->
-                <!-- 상세페이지 div태그 밖에서 별도 처리할 것 -->
-                <div class="col-4 col-12-medium"
-                     style="text-align: center; padding: 10px; width: 280px; margin-top: 40px;">
-                    <div style="border: 1px solid #d3d3d3;">
-                        <div>
-                            <a class="image featured"><img src="/images/마포대교.png"/></a>
-                            <header>
-                                <h3>마포대교 플로깅</h3>
-                            </header>
-                            <!-- 현재 플로깅 신청 현황 보여주기 -->
-                            <!-- 예약은 선착순을 기본으로 하며 -->
-                            <!-- 모든 플로깅의 예약 최대 가능인원은 30명이다. -->
-                            현재 신청 현황 : (20/30)<br> <br> 선착순 신청, <br>가용 인원 초과
-                            시 조기 마감
-                        </div>
-                        <div style="margin: 1px; padding: 5px;">
-                            <br>
-                            인원 수
-                            <br>
-                            <!-- 인원수 추가 감소 버튼 -->
-                            <input type="submit" id="add" onclick="" value=" - " style="padding: revert;">
-                            <input type="text" style="width: 23%;" id="people" type="text" value="1" readonly>
-                            <input type="submit" id="min" onclick="" value=" + " style="padding: revert;">
-                            <!-- 결제 페이지 이동 폼 -->
-                            <form action="" name="paymentForm" id="paymentForm">
-                                <input type="text" value="2000원" style="color: red; width:100%; border:none; text-align:center;" id="pay" name="pay">
-                                <button type="button" value="예약 및 결제하기" onclick="" style="font-size:17px; margin: 5px; width: 80%;">예약 및 결제하기</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</section>
+<div id="main_footer"></div>
 </body>
+<script src="/js/join.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/header.js"></script>
 <!--<script src="/app/plogging_res/ploggingPay.js"></script>-->
 <!-- 결제 팝업창 띄우는 스크립트 코드 -->
 <!--<script>-->

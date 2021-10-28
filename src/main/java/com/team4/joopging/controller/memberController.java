@@ -1,5 +1,8 @@
 package com.team4.joopging.controller;
 
+import com.team4.joopging.beans.dao.MemberDAO;
+import com.team4.joopging.beans.vo.MemberVO;
+import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import net.nurigo.java_sdk.api.Message;
@@ -9,11 +12,14 @@ import org.apache.logging.log4j.message.Message;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Service;
+import java.lang.management.MemoryManagerMXBean;
+import java.lang.reflect.Member;
 import java.util.HashMap;
 
 /*성윤 : 회원 관련 기능 컨트롤러*/
@@ -22,6 +28,8 @@ import java.util.HashMap;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class memberController {
+    private final MemberService memberService;
+
     /*헤더, 푸터*/
     @GetMapping("header")
     public String header() {
@@ -50,18 +58,53 @@ public class memberController {
         return "member/login";
     }
 
+    /*아이디 중복 체크*/
+    @PostMapping("checkId")
+    @ResponseBody
+    public int checkId(@RequestParam("id") String id){
+        MemberVO vo = new MemberVO();
+        vo.setMemberId(id);
+
+        System.out.println(vo.getMemberId());
+
+        log.info("실행");
+        int result = memberService.memberIdCheck(vo);
+        log.info("확인 : " + result);
+        return result;
+    }
+
     /*로그인하기 : 회원정보 조회 연산 필요*/
     @PostMapping("login")
-    public String loginAction(){
+    public String loginAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr){
+        HttpSession session = req.getSession();
         /*연산 작업*/
-
-        return "/mainpage";
+        if(memberService.memberLogin(vo) != 0){
+            /*로그인 성공*/
+            /*세션 생성할 것*/
+            String id = vo.getMemberId();
+            session.setAttribute("memberId",id);
+            return "/mainpage";
+        }else{
+            /*로그인 실패*/
+            return "member/loginFail";
+        }
     }
 
     /*로그인 페이지에서 회원가입 버튼 누르기*/
     @GetMapping("join")
     public String join() {
         return "member/join";
+    }
+
+    /*회원 가입*/
+    @PostMapping("memberJoin")
+    public String memberjoin(MemberVO vo, String memberEmailSite, String memberAddressDetail){
+        /*디비에 회원정보 저장*/
+        vo.setMemberEmail(vo.getMemberEmail()+ "@" + memberEmailSite);
+        vo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
+        memberService.memberJoin(vo);
+        /*회원 가입 후 로그인 페이지 이동*/
+        return "member/login";
     }
 
     /*아이디 찾기 버튼 클릭*/

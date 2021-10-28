@@ -13,21 +13,36 @@ function terms() {
 	window.open(url, name, option);
 }
 
+var check = false;
+function checkId(){
+	var id = $('#memberId').val();
 
-//이전 게시판 예제에서 사용한 체크박스 두개 동시에 체크하는 알고리즘
-/*$("#term").on("click", function(){
-	if($(this).is(":checked")){
-		//체크가 되어 있다면,
-		$(".terms").prop("checked", true);
-	}else{
-		//체크되어 있지 않다면
-		$(".terms").prop("checked", false);
+	if(id == ""){
+		$("#idCheck_text").text("");
+		return;
 	}
-})*/
-
-
-// var check = false;
-
+	$.ajax({
+		url:'/member/checkId/',
+		type:'post',
+		data:{id:id},
+		success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다
+			if(result != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+				// console.log("성공");
+				$("#idCheck_text").val("사용 가능");
+				$("#idCheck_text").css("color", "blue");
+				check=true;
+			} else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+				// console.log("실패");
+				$("#idCheck_text").val("사용 불가");
+				$("#idCheck_text").css("color", "red");
+				check=false;
+			}
+		},
+		error:function(){
+			console.log("오류");
+		}
+	});
+}
 
 function formSubmit(){
 	let form = document.joinForm;
@@ -72,7 +87,7 @@ function formSubmit(){
 	}
 
 	/*이메일 아이디*/
-	if(!form.memberEmailId.value){
+	if(!form.memberEmail.value){
 		alert("이메일을 입력해주세요.");
 		return;
 	}
@@ -83,7 +98,7 @@ function formSubmit(){
 		return;
 	}
 
-	console.log(form.memberEmailSite.value);
+	// console.log(form.memberEmailSite.value);
 
 	/*우편번호*/
 	if(!form.memberZipcode.value){
@@ -91,7 +106,7 @@ function formSubmit(){
 		return;
 	}
 
-	console.log(form.memberZipcode.value);
+	// console.log(form.memberZipcode.value);
 	// /*주소 : 우편번호를 입력하면 자동입력이기 때문에 형식적인 유효성 검사*/
 	// if(!form.memberAddress.value){
 	// 	alert("주소을 입력해주세요.");
@@ -103,59 +118,22 @@ function formSubmit(){
 		return;
 	}
 
+	var chk1 = document.joinForm.term.checked;
+	// console.log(chk1);
 
-	check = false;
-
-	$.each($(".terms"), function(index, item){
-		if(!$(item).is(":checked")){
-			check = true;
-		}
-	});
-
-	if(check){
+	if(!chk1){
 		alert("이용약관 동의가 필요합니다.");
 		return;
 	}
 
-	alert("줍깅에 오신 것을 환영합니다! 로그인 후 이용해주세요 ^^");
-	form.submit();
-}
-
-function checkId(id){
-	check = false;
-
-	if(id == ""){
-		$("#idCheck_text").text("");
+	if(!check){
+		alert("아이디를 다시 입력하세요.")
 		return;
 	}
 
-	$.ajax({
-		url:contextPath+"/member/MemberCheckIdOk.me?id=" + id,
-		type:"get",
-		dataType:"json",
-		success:function(result){
-			if(result.status == "ok"){
-				//DOM
-				$("#idCheck_text").text("사용 가능");
-				$("#idCheck_text").css("color", "blue");
-				check = true;
-			}else{
-				//DOM
-				$("#idCheck_text").text("사용 불가");
-				$("#idCheck_text").css("color", "red");
-			}
-		},
-		error:function(){
-			console.log("오류");
-		}
-	});
+	alert("줍깅 가입 기념 2000 포인트 지급! 로그인 후 이용해주세요 ^^");
+	form.submit();
 }
-
-$("input[name='member_id']").keyup(function(){
-	//중복 검사
-	checkId($(this).val())
-})
-
 
 
 

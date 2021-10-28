@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.MemberMapper">
+    <!--아이디 중복 체크-->
+    <select id="idCheck" resultType="_int">
+        SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBERID=#{memberId}
+    </select>
+    <!--신규 회원 가입-->
+    <insert id="join">
+        INSERT INTO TBL_MEMBER
+        (
+            MEMBERNUM, MEMBERID, MEMBERPW, MEMBERPHONE, MEMBERNAME,
+            MEMBERBIRTH, MEMBERGENDER, MEMBEREMAIL, MEMBERZIPCODE,
+            MEMBERADDRESS, memberPloggingCnt, memberPoint,
+            memberSavedPoint, memberAttend, memberLevel
+        )
+        VALUES
+        (
+            SEQ_MEMBER.NEXTVAL, #{memberId}, #{memberPw}, #{memberPhone}, #{memberName},
+            #{memberBirth}, #{memberGender}, #{memberEmail}, #{memberZipcode},
+            #{memberAddress}, 0 , 2000, 2000, 0, 1
+        )
+    </insert>
+    <!--로그인-->
+    <select id="login" resultType="_int">
+        SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBERID=#{memberId} AND MEMBERPW=#{memberPw}
+    </select>
+</mapper>

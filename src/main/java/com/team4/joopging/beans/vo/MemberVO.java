@@ -19,15 +19,20 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class MemberVO {
+    private int memberNum;
     private String memberId;
     private String memberPw;
     private String memberPhone;
     private String memberName;
     private String memberBirth;
-    private String memberGender;
-    private String memberEmailId;
-    private String memberEmailSite;
+    private int memberGender;
+    private String memberEmail;
+    private String memberRegidate;
     private String memberZipcode;
     private String memberAddress;
-    private String memberAddressDetail;
+    private int memberPloggingCnt;
+    private int memberPoint;
+    private int memberSavedPoint;
+    private int memberAttend;
+    private int memberLevel;
 }
