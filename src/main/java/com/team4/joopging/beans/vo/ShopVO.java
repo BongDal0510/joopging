@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 // 상품카테고리
 // 상품설명
 // 상품가격
-
 @Component
 @Data
 public class ShopVO {
