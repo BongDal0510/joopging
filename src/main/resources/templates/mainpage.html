@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>줍깅</title>
     <meta charset="utf-8" />
@@ -77,18 +76,18 @@
         .section .slidelist label {
             position: absolute;
             z-index: 1;
-            transform: translateY(-60%);
+            transform: translateY(-50%);
             padding: 50px;
             cursor: pointer;
         }
 
         .section .slidelist .left {
             left: -300px;
-            background: url('/images/mainpage/left.png') center center/50% no-repeat;
+            background: url('/images/left.png') center center/100% no-repeat;
         } /* LEFT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
         .section .slidelist .right {
             right: -300px;
-            background: url('/images/mainpage/right.png') center center/50% no-repeat;
+            background: url('/images/right.png') center center/100% no-repeat;
         } /* RIGHT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
 
         /* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
@@ -140,8 +139,31 @@
             line-height: 1.5em !important;
         }
 
+        .ploggingPageTitle {
+            text-align: left;
+            font-family: yg-jalnan;
+        }
+
+        .jooplist {
+            justify-content: center;
+        }
+
+        .joop {
+            padding: 50px 0 0 0 !important;
+        }
+
+        #main {
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+        }
+
         .col-12 {
             clear: both;
+        }
+
+        .ploggingBanner {
+            font-family: 'S-CoreDream-4Regular';
         }
 
         .box {
@@ -207,31 +229,31 @@
 <body class="homepage is-preload">
 <div id="main_header" style="display: flex"></div>
 <div id="page-wrapper" style="margin-top: 5.1em;">
-    <div class="section">
-        <input type="radio" name="slide" id="slide01" checked>
-        <input type="radio" name="slide" id="slide02">
-        <input type="radio" name="slide" id="slide03">
+        <div class="section">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
 
         <div class="slidewrap">
             <ul class="slidelist" style=height:400px;margin-bottom:85px;margin-top:-140px;>
                 <li><a>
                     <label for="slide03" class="left" style="top: 37%;"></label>
-                    <img src="/images/mainpage/banner_01.png">
+                    <img src="/images/플로깅.png">
                     <label for="slide02" class="right" style="top: 37%;"></label>
                 </a></li>
                 <li><a>
-                    <label for="slide01" class="left" style="top: 37%;"></label>
-                    <img src="/images/mainpage/banner_02.png">
-                    <label for="slide03" class="right" style="top: 37%;"></label>
+                    <label for="slide01" class="left" style="top: 35%;"></label>
+                    <img src="/images/이벤트예시사진.jpg">
+                    <label for="slide03" class="right" style="top: 35%;"></label>
                 </a></li>
-                <li><a> <label for="slide02" class="left" style="top: 37%;"></label>
-                    <img src="/images/mainpage/banner_03.png">
-                    <label for="slide01" class="right" style="top: 37%;"></label>
+                <li><a> <label for="slide02" class="left" style="top: 33%;"></label>
+                    <img src="/images/이벤트예시2.jpg">
+                    <label for="slide01" class="right" style="top: 33%;"></label>
                 </a></li>
             </ul>
         </div>
+        </div>
     </div>
-</div>
 
 <!-- Main -->
 <!--<section id="main">-->
@@ -339,9 +361,10 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/headerfooter.js"></script>
+<script src="/js/header.js"></script>
 <script src="/js/weather.js"></script>
 <script type="text/javascript">
+
 
 </script>
 </html>
