@@ -24,4 +24,26 @@ public class MemberServiceImple implements MemberService{
     public int memberLogin(MemberVO vo) {
         return memberDAO.memberLogin(vo);
     }
+
+    @Override
+    public String memberSearchId(MemberVO vo) {
+        return memberDAO.memberSearchId(vo);
+    }
+
+    @Override
+    public String memberSearchPw(MemberVO vo) {
+        return memberDAO.memberSearchPw(vo);
+    }
+
+    @Override
+    public void memberUpdatePw(MemberVO vo) {
+        memberDAO.memberUpdatePw(vo);
+    }
+
+    @Override
+    public MemberVO memberAllSelect(MemberVO vo) {
+        return memberDAO.memberAllSelect(vo);
+    }
+
+
 }

@@ -35,4 +35,5 @@ public class MemberVO {
     private int memberSavedPoint;
     private int memberAttend;
     private int memberLevel;
+    private int status;
 }
