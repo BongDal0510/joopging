@@ -5,10 +5,16 @@
 
     <!--상품목록-->
     <select id="getGoodsList" resultType="shopVO">
-        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
-        FROM TBL_GOODSLIST
         <![CDATA[
-        WHERE goodsNum > 0
+        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK) */
+            ROWNUM R, goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+            FROM TBL_GOODSLIST
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
         ]]>
     </select>
 

@@ -1,6 +1,7 @@
 package com.team4.joopging.services;
 
 import com.team4.joopging.beans.dao.ShopDAO;
+import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ShopServiceImple implements ShopService{
     }
 
     @Override
-    public List<ShopVO> goodsGetList() {
-        return shopDAO.goodsGetList();
+    public List<ShopVO> goodsGetList(ShopCriteria shopCriteria) {
+        return shopDAO.goodsGetList(shopCriteria);
     }
 }

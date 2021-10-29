@@ -1,6 +1,7 @@
 package com.team4.joopging.mappers;
 
 
+import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface ShopMapper {
     /*상품목록*/
-    public List<ShopVO> getGoodsList();
+    public List<ShopVO> getGoodsList(ShopCriteria shopCriteria);
     /*상품 추가*/
     public void goodsInsert(ShopVO shop);
     /*상품 추가(PK 가져오기)*/

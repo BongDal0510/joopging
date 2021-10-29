@@ -75,10 +75,6 @@
     <!-- Main -->
     <section id="main"  style = margin-top:-40px;>
         <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>
-
-        <!--
-                <a><input type="button" value="상품 등록" style="margin-left: 76%;"></a>
-        -->
         <!-- 			<button id = "btnAdd" style="visibility: hidden; margin-left: 80%;">상품 등록</button>-->
         <div class="container">
             <div class="row">
@@ -142,71 +138,31 @@
                     <!--상품목록 -->
                     <table style="border-collapse:collapse">
                         <tr>
-                            <th:block th:each="shop, status : ${shop}">
-                            <td th:object="${shop}">
-                                <th:block th:if="${status.odd}">
+                            <td>
+                                <th:block th:each="shop : ${shop}">
                                 <div style= width:380px;height:700px;float:left;>
                                     <a th:href ="@{/shop/shopDetail(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
-                                        <h3 th:text="*{goodsName}"></h3>
-                                        <span th:text="*{goodsPrice}"></span></a><br>
+                                        <h3>플로깅&프라이탁</h3>
+                                        <span th:object="*{goodsPrice}">55,000원</span></a><br>
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
-                                    <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                 </div>
                                 </th:block>
-                               <!-- <th:block th:unless="${status.odd}">
-                                    <div style= width:380px;height:700px;float:left;>
-                                        <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
-                                            <h3 th:text="*{goodsName}"></h3>
-                                            <span th:text="*{goodsPrice}"></span></a><br>
-                                        <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
-                                        <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
-                                        <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
-                                    </div>-->
                             </td>
-                            </th:block>
+
+                            <td>
+                                <div style= width:380px;height:700px;float:right;>
+                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">
+                                        <h3>플로깅 에코백</h3>
+                                        <span>25,000원</span></a><br>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                </div>
+                            </td>
                         </tr>
-<!--                            <td>-->
-<!--                                <div style= width:380px;height:700px;float:right;>-->
-<!--                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">-->
-<!--                                        <h3>플로깅 에코백</h3>-->
-<!--                                        <span>25,000원</span></a><br>-->
-<!--                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>-->
-<!--                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>-->
-<!--                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>-->
-<!--                                </div>-->
-<!--                            </td>-->
-<!--                        </tr>-->
                         <tr>
-                            <th:block th:each="shop, status : ${shop}">
-                                <td th:object="${shop}">
-                                    <th:block th:if="${status.even}">
-                                        <div style= width:380px;height:700px;float:left;>
-                                            <a th:href ="@{/shop/shopDetail(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
-                                                <h3 th:text="*{goodsName}"></h3>
-                                                <span th:text="*{goodsPrice}"></span></a><br>
-                                            <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
-                                            <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
-                                            <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
-                                        </div>
-                                    </th:block>
-                                </td>
-                            <!--<th:block th:each="shop, status : ${shop}">
-                                <td th:object="${shop}">
-                                    <th:block th:switch="${status.even}">
-                                        <div style= width:380px;height:700px;float:left;>
-                                            <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
-                                                <h3 th:if="${status.even}" th:text="*{goodsName}"></h3>
-                                                <span th:if="${status.even}" th:text="*{goodsPrice}"></span></a><br>
-                                            <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
-                                            <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
-                                            <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
-                                        </div>
-                                    </th:block>
-                                </td>
-                            </th:block>-->
-                        </tr>
-                   <!--     <tr>
                             <td>
                                 <div style= width:380px;height:700px;float:left;>
                                     <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/티셔츠.jpg">
@@ -226,8 +182,17 @@
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                 </div>
-                            </td>-->
+                            </td>
 
+                    </table>
+
+               <!--     <table style="font-size:1.3rem">
+                        <tr align="center" valign="middle">
+                            <td>
+                                <a href="">&lt;</a>
+                                <a href="">&gt;</a>
+                            </td>
+                        </tr>-->
                     </table>
                     <div th:object="${pageMaker}">
                         <div class="big-width" style="text-align: center">
@@ -238,16 +203,6 @@
                             </th:block>
                             <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                         </div>
-                    </div>
-                    <table style="font-size:1.3rem">
-                        <tr align="center" valign="middle">
-                            <td>
-                                <a href="">&lt;</a>
-                                <a href="">&gt;</a>
-                            </td>
-                        </tr>
-                    </table>
-
                 </div>
             </div>
         </div>
@@ -266,6 +221,19 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/header.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        let goodsNum = [[${goodsNum}]];
+        if(goodsNum == null){
+            return;
+        }
+        alert("상품번호 " + goodsNum +" 번이 등록되었습니다.")
+
+    });
+
+
+
+</script>
 
 
 

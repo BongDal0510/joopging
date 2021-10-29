@@ -1,5 +1,6 @@
 package com.team4.joopging.mappers;
 
+import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,8 @@ public class ShopMapperTest {
 
     @Test
     public void testGetGoodsList(){
-        mapper.getGoodsList().forEach(goodslist ->log.info(goodslist.toString()));
+        ShopCriteria shopCriteria = new ShopCriteria();
+        mapper.getGoodsList(shopCriteria).forEach(goodslist ->log.info(goodslist.toString()));
 
     }
 

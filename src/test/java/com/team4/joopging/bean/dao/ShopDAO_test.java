@@ -2,6 +2,7 @@ package com.team4.joopging.bean.dao;
 
 
 import com.team4.joopging.beans.dao.ShopDAO;
+import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,11 @@ public class ShopDAO_test {
         log.info(shop.getGoodsNum() + "");
         log.info("-------------------------------");
     }
-
+    @Test
+    public void testGoodsGetList(){
+        ShopCriteria shopCriteria = new ShopCriteria();
+        shopDAO.goodsGetList(shopCriteria).forEach(shop -> log.info(shop.toString()));
+    }
 
     @Test
     public void testGoodsGet(){

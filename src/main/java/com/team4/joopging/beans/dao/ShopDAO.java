@@ -1,5 +1,6 @@
 package com.team4.joopging.beans.dao;
 
+import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.mappers.ShopMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +28,8 @@ public class ShopDAO {
     public boolean goodsDelete(Long goodsNum){
         return mapper.goodsDelete(goodsNum) == 1;
     }
-    public List<ShopVO> goodsGetList(){
-        return mapper.getGoodsList();
+    public List<ShopVO> goodsGetList(ShopCriteria shopCriteria){
+        return mapper.getGoodsList(shopCriteria);
     }
 
 }

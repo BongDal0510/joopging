@@ -94,4 +94,34 @@ public class ControllerTest {
         log.info(result);
     }
 
+
+    @Test
+    public void testGoodsList() throws Exception {
+        log.info(mockMvc.perform(MockMvcRequestBuilders.get("/shop/shop")
+        .param("pageNum","1")
+        .param("amount", "4")
+        ).andReturn().getModelAndView().getModelMap().toString());
+    }
+
+    @Test
+    public void testGoodsRegister() throws Exception{
+        String goodsNum = mockMvc.perform(MockMvcRequestBuilders.post("/shop/shopEnroll")
+                .param("goodsName", "컨트롤러테스트상품2")
+                .param("goodsCategory","Bottom")
+                .param("goodsPrice", "20,000")
+                .param("goodsContent", "컨트롤러테스트 상품2 입니다.")
+        ).andReturn().getFlashMap().toString();
+        log.info(goodsNum);
+    }
+
+    @Test
+    public void testGoodsRead() throws Exception{
+        String goods = mockMvc.perform(
+                MockMvcRequestBuilders.get("/shop/shopDetail")
+                .param("goodsNum","10000")
+        ).andReturn().getModelAndView().getViewName();
+
+        log.info(goods);
+
+    }
 }
