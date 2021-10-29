@@ -63,7 +63,7 @@
     }
 
     #ploggingAdv{
-        background : url('/images/KakaoTalk_20210916_170736157_05.jpg');
+        background : url('/images/shopBannerAd.png');
         background-size : 100%;
         margin-top : 16px;
         text-align: right;
@@ -144,6 +144,14 @@
         border-top: 3px solid #35A14A;
         border-bottom: none;
         font-size: 16px;
+    }
+
+    table.boardList th, table.boardList td{
+        margin-left: 0.2em !important;
+        margin-right: 0.2em !important;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+        text-align: center;
     }
 
     table.boardList tbody{
@@ -614,9 +622,9 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>선택</th>
-                                    <th>상품명</th>
-                                    <th>가격</th>
+                                    <th width="10%">선택</th>
+                                    <th width="60%">상품명</th>
+                                    <th width="30%">가격</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -732,9 +740,6 @@
                                         </div>
                                         <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1" style="width:235px;margin-right:5px;background:#fbfbfb;">
                                         <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2" style="width:235px;margin-right:5px;background:#fbfbfb">
-                                        <!-- <input type="hidden" id="addrGbn" name="addrGbn" value="1" />
-                                        <input type="hidden" id="addr" name="addr" value="" />
-                                        <p class="address">우편물 수령 정보를 변경하시면 개인정보의 주소정보도 함께 변경됩니다.</p> -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -756,7 +761,7 @@
                         </header>
                         <div id="deleteNotice">
                             <p style="text-align:center;">
-                                <a href="#"><img src="../images/leavecheck.png" style="max-width:100%; height:auto;"></a>
+                                <a href="#"><img src="../images/leavecheck.png" style="max-width:100%; height:auto;margin-top: 30px;"></a>
                             </p>
                             <ol>
                                 <li>
@@ -789,12 +794,14 @@
                                 </tr>
                                 <tr>
                                     <th>비밀번호</th>
-                                    <td><input type="password" name="deleteMember_pw"></td>
+                                    <td style="text-align: left">
+                                        <input type="password" name="deleteMember_pw" style="width: 70%;display: inherit">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>탈퇴사유</th>
-                                    <td>
-                                        <select name="deleteReason" id="selectBox"><!--style="appearance:"-->
+                                    <td style="text-align: left">
+                                        <select style="width: 70%;display: inherit" name="deleteReason" id="selectBox">
                                             <option value="deleteReason">탈퇴 사유를 선택해 주세요.</option>
                                             <option value="infoLeaking">개인정보 누출 우려</option>
                                             <option value="uncomfortable">서비스 이용 불편</option>
@@ -805,7 +812,7 @@
                                 </tr>
                                 <tr id=etcReason style="display: none;">
                                     <th>기타</th>
-                                    <td><input type="text" name = 'etcReason'></td>
+                                    <td><input style="width: 70%;display: inherit" type="text" name = 'etcReason'></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: center;">
@@ -830,11 +837,11 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>게시글 번호</th>
-                                    <th>제목</th>
-                                    <th>작성일</th>
-                                    <th>조회수</th>
-                                    <th>댓글수</th>
+                                    <th width="18%">게시글 번호</th>
+                                    <th width="36%">제목</th>
+                                    <th width="20%">작성일</th>
+                                    <th width="13%">조회수</th>
+                                    <th width="13%">댓글수</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -907,6 +914,8 @@
 </div>
 <div id="main_footer"></div>
 <!-- Scripts -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
 <script src="/js/browser.min.js"></script>
@@ -914,6 +923,7 @@
 <script src="/js/util.js"></script>
 <script src="/js/mypage.js"></script>
 <script type="text/javascript"></script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
