@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!-- 성윤 : 회원가입 페이지 -->
+<html>
+<head>
+    <title>줍깅 가입하깅</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        input[type='button'], input[type='submit'] {
+            border-radius: 0;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        label {
+            margin-top: 3%;
+        }
+
+        div.preview {
+            overflow: hidden;
+        }
+
+        div.preview img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body style="margin: 0px;">
+<div id="main_header" style="display: flex"></div>
+<!-- 회원가입 인사말 -->
+<section id="join_header" style="margin-bottom:0px; display: flex; justify-content: space-around;">
+    <div style="text-align: center; width:1200px; margin-top: 90px;">
+        <span>
+            환영합니다 고객님
+            <br>
+            회원가입하깅 진행 후 정상적인 서비스를 이용하실 수 있습니다.
+        </span>
+    </div>
+</section>
+
+<!-- 회원가입 시작 -->
+<section id="main" style="padding:5px; display: flex; justify-content: space-around;">
+    <form method="post" action="" name="joinForm" style="width:500px; padding: 5px;">
+
+        <!-- 필수 항목 입력 -->
+        <p style="background: #fd3a3a2e">
+            <span style="color: red; font-size: 2rem; font-weight: bold;">*</span>
+            <span>아래 항목은 모두 작성해주세요.</span>
+        </p>
+
+        <div style="width: 100%">
+            <!-- 아이디 -->
+            <p style="margin: 0;">
+                <span>아이디</span>
+                <input type="text" name="member_id" id="member_id" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/>
+            </p><br>
+            <!-- 비밀번호 -->
+            <p style="margin: 0;">
+                <span>비밀번호</span>
+                <input type="password" name="member_pw" id="member_pw" value="" placeholder="영문 4자 이상, 최대 20자" />
+            </p><br>
+
+            <!--한 줄에서 두 개의 인풋을 받기 위해 div로 한번 더 묶음-->
+            <div style="display: flex; justify-content: space-between;">
+                <!-- 이름 -->
+                <div style="width: 55%;">
+                    <p style="margin: 0;">
+                        <span>이름</span>
+                        <input type="text" name="member_name" id="member_name" value="" />
+                    </p>
+                </div>
+
+                <!-- 생년월일 -->
+                <div style="width: 40%;">
+                    <p style="margin:0;">
+                        <span>생년월일 6자리</span>
+                        <input type="text" name="member_birth" id="member_birth" value="" maxlength="6"/>
+                    </p>
+                </div>
+            </div><br>
+
+            <!-- 성별 선택 -->
+            <p style="margin: 0;">
+                <span>성별 선택</span>
+            </p>
+            <div style="width: 100%; text-align: center;">
+                <select id="gender" name="member_gender" class="sel" aria-label="성별">
+                    <option id="none" value="선택 안함" selected>선택 안함</option>
+                    <option id="male" value="남자">남자</option>
+                    <option id="female" value="여자">여자</option>
+                </select>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- 선택 항목 입력 -->
+        <p style="background: #3a6dfd2e">
+            <span>아래 항목은 선택 사항입니다.</span>
+        </p>
+
+        <!-- 이메일 -->
+        <p style="margin: 0;">이메일</p>
+        <div style="display: flex;">
+            <!--이메일 아이디-->
+            <div style="width: 70%;">
+              <input type="text" id="member_email_id" name="member_email_id" style="width: 97.5%; margin-left: 0px; padding:8.55px 14px;">
+            </div>
+            <!--@-->
+            <div>
+               <p style="vertical-align: middle; margin-top:9px; font-size:17px">@</p>
+            </div>
+            <!--메일 주소-->
+            <div>
+                <select id="member_email_site" style="width:138px; margin-left:8px;">
+                    <option value="null" selected="">선택 안함</option>
+                    <option value="chol.com">chol.com</option>
+                    <option value="yahoo.com">yahoo.com</option>
+                    <option value="empal.com">empal.com</option>
+                    <option value="freechal.com">freechal.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="hanafos.com">hanafos.com</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                    <option value="hanmir.com">hanmir.com</option>
+                    <option value="hitel.net">hitel.net</option>
+                    <option value="hotmail.com">hotmail.com</option>
+                    <option value="korea.com">korea.com</option>
+                    <option value="lycos.co.kr">lycos.co.kr</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="netian.com">netian.com</option>
+                    <option value="paran.com">paran.com</option>
+                    <option value="yahoo.co.kr">yahoo.co.kr</option>
+                    <option value="dreamwiz.com">dreamwiz.com</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 우편번호 -->
+        <p style="margin: 0;">
+            <span>우편번호</span>
+        </p>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 75%; margin-bottom: 15px;">
+                <input type="text" name="member_zipcode" id="member_zipcode" class="postcodify_postcode5"/>
+            </div>
+            <div style="width: 20%;">
+                <input type="button" id="postcodify_search_button" class="button primary" style="border-radius: 0; background:#94c477;" value="검색">
+            </div>
+        </div>
+
+        <!-- 주소 -->
+        <p style="margin: 0;">주소</p>
+        <input type="text" name="member_address" id="member_address" class="postcodify_address" value="" /> <br>
+        <!--상세 주소-->
+        <p style="margin: 0;">상세주소</p>
+        <input type="text" name="member_address_detail" id="member_address_detail" class="postcodify_details" value="" />
+        <br>
+        <!--기타-->
+        <p style="margin: 0;">참고항목</p>
+        <input type="text" name="member_address_etc" id="member_address_etc" class="postcodify_extra_info" value="" />
+
+        <br>
+
+        <!-- 약관 동의 -->
+        <label for="term" style="font-size: 1.1em; font-weight: bold; text-align: center;">
+            <a onclick="terms()">서비스 이용 및 개인정보 수집 약관</a>
+            <span>에 전체 동의합니다.</span>
+            <input type="checkbox" id="term" name="term"  style="width: 25px; height: 25px;">
+        </label>
+
+        <!--완료 버튼-->
+        <div style="text-align: center; margin-top:20px;" class="col-12">
+            <input type="button" value="완료" class="primary" onclick="formSubmit()" style="background:#94c477"/>
+        </div>
+
+    </form>
+</section>
+<div id="main_footer"></div>
+</body>
+<script src="/js/join.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/header.js"></script>
+</html>
