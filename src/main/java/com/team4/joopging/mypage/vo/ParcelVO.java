@@ -1,6 +1,6 @@
 package com.team4.joopging.mypage.vo;
 
-public class parcelVO {
+public class ParcelVO {
     /*운송장 번호*/
     private String parcelNum;
     /*택배사*/

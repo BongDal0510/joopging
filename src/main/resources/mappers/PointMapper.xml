@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.PointMapper">
+    <!--포인트 목록-->
+    <select id="getPointList" resultType="com.team4.joopging.mypage.vo.pointVO">
+        <![CDATA[
+        SELECT pointNum, memberNum, history, point, pointDate
+        FROM TBL_POINT WHERE memberNum = #{memberNum}
+        ]]>
+    </select>
+
+    <!--포인트 추가-->
+    <insert id="addPoint">
+        INSERT INTO TBL_POINT(pointNum, memberNum, history, point, pointDate)
+        VALUE (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE)
+    </insert>
+</mapper>
