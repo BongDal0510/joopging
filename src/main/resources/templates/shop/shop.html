@@ -141,7 +141,7 @@
                             <td>
                                 <th:block th:each="shop : ${shop}">
                                 <div style= width:380px;height:700px;float:left;>
-                                    <a th:href ="@{/shop/shopDetail(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                    <a href ="javascript:void(0)" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
                                         <h3>플로깅&프라이탁</h3>
                                         <span th:object="*{goodsPrice}">55,000원</span></a><br>
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
@@ -203,6 +203,10 @@
                             </th:block>
                             <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                         </div>
+                        <form action="/shop/shop" th:object="${shopCriteria}" name="pageForm">
+                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                            <input type="hidden" name="amount" th:field="*{amount}">
+                        </form>
                 </div>
             </div>
         </div>
@@ -224,6 +228,9 @@
 <script th:inline="javascript">
     $(document).ready(function(){
         let goodsNum = [[${goodsNum}]];
+        let pageForm = ${document.pageForm);
+
+
         if(goodsNum == null){
             return;
         }
@@ -231,6 +238,11 @@
 
     });
 
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
 
 
 </script>

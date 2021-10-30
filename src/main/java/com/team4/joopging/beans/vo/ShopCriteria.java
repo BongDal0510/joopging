@@ -24,9 +24,7 @@ public class ShopCriteria {
     public String getListLink(){
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 .queryParam("pageNum", pageNum)
-                .queryParam("amount", amount)
-                .queryParam("type", type)
-                .queryParam("keyword", keyword);
+                .queryParam("amount", amount);
         return builder.toUriString();
     }
 

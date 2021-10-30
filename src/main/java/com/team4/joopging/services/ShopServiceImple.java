@@ -38,4 +38,7 @@ public class ShopServiceImple implements ShopService{
     public List<ShopVO> goodsGetList(ShopCriteria shopCriteria) {
         return shopDAO.goodsGetList(shopCriteria);
     }
+
+    @Override
+    public int goodsGetTotal() {return shopDAO.goodsGetTotal();}
 }

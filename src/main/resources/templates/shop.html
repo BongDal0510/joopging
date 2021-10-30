@@ -88,8 +88,8 @@
                     <section class="box" style=text-align:left;>
                         <a href="#" class="image featured"><img
                                 src="/images/여자둘.png" alt="" /></a>
-                        <header>
-                            <h3>All products()</h3>
+                        <header th:object="${pageMaker}">
+                            <h3>All products ( <span th:text="*{total}"></span> ) </h3>
                         </header>
                         <div>
                             <a href="#">T-shirts()</a>
@@ -146,7 +146,7 @@
                             <td th:object="${shop}">
                                 <th:block th:if="${status.odd}">
                                 <div style= width:380px;height:700px;float:left;>
-                                    <a th:href ="@{/shop/shopDetail(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                    <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
                                         <h3 th:text="*{goodsName}"></h3>
                                         <span th:text="*{goodsPrice}"></span></a><br>
                                     <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
@@ -182,7 +182,7 @@
                                 <td th:object="${shop}">
                                     <th:block th:if="${status.even}">
                                         <div style= width:380px;height:700px;float:left;>
-                                            <a th:href ="@{/shop/shopDetail(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                            <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
                                                 <h3 th:text="*{goodsName}"></h3>
                                                 <span th:text="*{goodsPrice}"></span></a><br>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
@@ -229,6 +229,7 @@
                             </td>-->
 
                     </table>
+
                     <div th:object="${pageMaker}">
                         <div class="big-width" style="text-align: center">
                             <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
@@ -238,17 +239,14 @@
                             </th:block>
                             <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                         </div>
-                    </div>
-                    <table style="font-size:1.3rem">
-                        <tr align="center" valign="middle">
-                            <td>
-                                <a href="">&lt;</a>
-                                <a href="">&gt;</a>
-                            </td>
-                        </tr>
-                    </table>
 
-                </div>
+                    <form action="/shop/shop" th:object="${shopCriteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                    </form>
+                    </div>
+
+
             </div>
         </div>
 
@@ -266,7 +264,22 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/header.js"></script>
+<script th:inline="javascript">
+    let pageForm = $(document.pageForm);
+    let paging = [[${pageMaker.shopCriteria.listLink}]];
 
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    $("a.goDetail").on("click", function(e){
+        e.preventDefault();
+        location.href = "/shop/shopDetail" + paging + "&goodsNum=" + $(this).attr("href");
+    })
+
+</script>
 
 
 </body>

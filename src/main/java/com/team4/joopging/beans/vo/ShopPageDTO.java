@@ -20,7 +20,7 @@ public class ShopPageDTO {
         this.total = total;
         this.pageCount = pageCount;
         this.shopCriteria = shopCriteria;
-
+        //getPageNum() = 사용자가 있는 현재페이지
         this.endPage = (int)(Math.ceil(shopCriteria.getPageNum() * 1.0 / pageCount)) * pageCount;
         this.startPage = endPage - (pageCount - 1);
 

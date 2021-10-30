@@ -13,4 +13,5 @@ public interface ShopService {
     public boolean goodsModify(ShopVO Shop);
     public boolean goodsRemove(Long goodsNum);
     public List<ShopVO> goodsGetList(ShopCriteria shopCriteria);
+    public int goodsGetTotal();
 }

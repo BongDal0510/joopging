@@ -31,7 +31,7 @@ public class shopController {
         log.info("list");
         log.info("-----------------------------------");
         model.addAttribute("shop", shopService.goodsGetList(shopCriteria));
-        model.addAttribute("pageMaker", new ShopPageDTO(20, 4, shopCriteria));
+        model.addAttribute("pageMaker", new ShopPageDTO(shopService.goodsGetTotal(), 4, shopCriteria));
         return "shop";
     }
 
@@ -58,12 +58,13 @@ public class shopController {
     }
 
     @GetMapping("shopDetail")
-    public void shopDetail(@RequestParam("goodsNum") Long goodsNum, Model model) {
+    public void shopDetail(@RequestParam("goodsNum") Long goodsNum, ShopCriteria shopCriteria, Model model) {
         log.info("----------------------");
         log.info("detail : " + goodsNum);
         log.info("----------------------");
 
         model.addAttribute("shop", shopService.goodsGet(goodsNum));
+        model.addAttribute("shopCriteria", shopCriteria);
 
       }
 

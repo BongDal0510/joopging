@@ -50,6 +50,9 @@
         DELETE FROM TBL_GOODSLIST WHERE goodsNum = #{goodsNum}
     </delete>
 
+    <select id="goodsGetTotal" resultType="_int">
+        SELECT COUNT(goodsNum) FROM TBL_GOODSLIST
+    </select>
 
 
 </mapper>

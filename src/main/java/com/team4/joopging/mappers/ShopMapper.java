@@ -21,4 +21,6 @@ public interface ShopMapper {
     public int goodsUpdate(ShopVO shop);
     /* 상품 삭제 */
     public int goodsDelete(Long goodsNum);
+    /* 상품 전체 갯수*/
+    public int goodsGetTotal();
 }

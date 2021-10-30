@@ -25,11 +25,15 @@ public class ShopDAO {
     public boolean goodsModify(ShopVO shop){
         return mapper.goodsUpdate(shop) == 1;
     }
+
     public boolean goodsDelete(Long goodsNum){
         return mapper.goodsDelete(goodsNum) == 1;
     }
+
     public List<ShopVO> goodsGetList(ShopCriteria shopCriteria){
         return mapper.getGoodsList(shopCriteria);
     }
+
+    public int goodsGetTotal(){return mapper.goodsGetTotal();}
 
 }
