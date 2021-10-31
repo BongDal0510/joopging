@@ -43,21 +43,25 @@ $(".list").on("click", function(){
 });
 
 $('li').on("click", function(){
-    var value = $(this).text();
+    let value = $(this).text();
 
     if(value.includes("My Home")){
+        /*메인페이지로 이동하기*/
         $("#myHome").show();
         $(".imp-medium").not($("#myHome")).hide();
     }
     else if(value.includes("플로깅 예약 확인")){
+        /*에이젝스로 플로깅 내역 뽑기*/
         $("#checkPloggingMain").show();
         $(".imp-medium").not($("#checkPloggingMain")).hide();
     }
     else if(value.includes("포인트 내역")){
+        /*에이젝스로 포인트 내역뽑기*/
         $("#checkPoint").show();
         $(".imp-medium").not($("#checkPoint")).hide();
     }
     else if(value.includes("내 상품")){
+        /*에이젝스로 내상품 뽑기*/
         $(".payment").not($(this)).css("color","#5d5d5d");
         $("#paymentMainList").css("color","#94c477");
 
@@ -65,6 +69,7 @@ $('li').on("click", function(){
         $(".imp-medium").not($("#paymentMain")).hide();
     }
     else if(value=="- 찜 목록"){
+        /*에이젝스로 찜록록 뽑끼*/
         $(this).css("color","#94c477");
         $(".payment").not($(this)).css("color","#5d5d5d");
 
@@ -86,17 +91,19 @@ $('li').on("click", function(){
         $(".imp-medium").not($("#deleteInfo")).hide();
     }
     else if(value.includes("게시글")){
+        /*에이젝스로 뽑기*/
         $("#myWriting").show();
         $(".imp-medium").not($("#myWriting")).hide();
     }
     else if(value.includes("문의하기")){
+        /*에이젝스로 뽑기*/
         $("#question").show();
         $(".imp-medium").not($("#question")).hide();
     }
 });
 
 $('#selectBox').change(function() {
-    var reason = $('#selectBox option:selected').val();
+    let reason = $('#selectBox option:selected').val();
     if (reason=='etc') {
         $("#etcReason").show();
     } else {
@@ -104,8 +111,9 @@ $('#selectBox').change(function() {
     }
 });
 
+
 $("#deleteMember").on("click", function(){
-    var form = $("form[name=deleteForm]");
+    let form = $("form[name=deleteForm]");
 
     if($('input[name=deleteMember_pw]').val()==""){
         alert("비밀번호를 입력해주세요.");
@@ -125,6 +133,7 @@ $("#deleteMember").on("click", function(){
     }
 
     if(confirm("회원 탈퇴를 진행하겠습니까?")){
+        /*에이젝스로 결과 가져오기*/
         alert("회원 탈퇴가 완료되었습니다.")
         form.submit();
     }else{
