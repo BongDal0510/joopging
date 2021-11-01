@@ -4,43 +4,55 @@
 <mapper namespace="com.team4.joopging.mappers.OrderHistoryMapper">
 
 
-<!--    &lt;!&ndash;구매 상품 목록&ndash;&gt;-->
-<!--    <select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">-->
-<!--<![CDATA[-->
-<!--SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/-->
-<!--    orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,-->
-<!--    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,-->
-<!--    parcelMessage,usePoint,orderStatus-->
-<!--FROM TBL_GOODS_ORDER WHERE memberNum = #{memberNum}-->
-<!--]]>-->
-<!--</select>-->
+    <!--구매 상품 목록-->
+    <select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
+SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
+    parcelMessage,usePoint,orderStatus
+    FROM (
+        <![CDATA[
+SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
+    ROWNUM R, orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
+    parcelMessage,usePoint,orderStatus
+FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+</select>
 
-<!--    &lt;!&ndash;상품 택배&ndash;&gt;-->
-<!--    <select id="getParcel" resultType="com.team4.joopging.mypage.vo.ParcelVO">-->
-<!--<![CDATA[-->
-<!--SELECT parcelNum, parcelCode, orderNum-->
-<!--FROM TBL_PARCEL WHERE orderNum = #{orderNum}-->
-<!--]]>-->
-<!--</select>-->
+    <!--내가 구매하 상품의 전체 개수-->
+    <select id="totalOrderCnt" resultType="_int">
+        SELECT COUNT(orderNum) FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
+    </select>
 
-<!--    &lt;!&ndash;구매 취소&ndash;&gt;-->
-<!--    <update id="deleteGoodsOrder">-->
-<!--UPDATE TBL_GOODS_ORDER-->
-<!--SET orderStatus = 1-->
-<!--WHERE orderNum = #{orderNum}-->
-<!--</update>-->
+    <!--상품 택배-->
+    <select id="getParcel" resultType="com.team4.joopging.mypage.vo.ParcelVO">
+<![CDATA[
+SELECT parcelNum, parcelCode, orderNum
+FROM TBL_PARCEL WHERE orderNum = #{orderNum}
+]]>
+</select>
 
-<!--    &lt;!&ndash;구매취소된 상품 불러오기&ndash;&gt;-->
-<!--    <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">-->
-<!--    SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,-->
-<!--    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,-->
-<!--    parcelMessage,usePoint,orderStatus-->
-<!--FROM TBL_GOODS_ORDER WHERE orderStatus = 1;-->
-<!--    </select>-->
+    <!--구매 취소-->
+    <update id="deleteGoodsOrder">
+UPDATE TBL_GOODS_ORDER
+SET orderStatus = 1
+WHERE orderNum = #{orderNum}
+</update>
 
-<!--    &lt;!&ndash;내가 구매한 상품의 상품 정보&ndash;&gt;-->
-<!--    <select id="getOrderGoodsinfo">-->
+    <!--구매취소된 상품 불러오기-->
+    <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
+    SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
+    parcelMessage,usePoint,orderStatus
+FROM TBL_GOODS_ORDER WHERE orderStatus = 1;
+    </select>
 
-<!--    </select>-->
+    <!--내가 구매한 상품의 상품 정보-->
+    <select id="getOrderGoodsinfo">
+
+    </select>
 
 </mapper>
