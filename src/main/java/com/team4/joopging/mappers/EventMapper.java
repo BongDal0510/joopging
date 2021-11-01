@@ -7,9 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface EventMapper {
-    //이벤트 목록
-    public List<EventVO> getEventList();
-
     //이벤트 등록
     public void insertEvent(EventVO event);
 
@@ -21,5 +18,11 @@ public interface EventMapper {
 
     //이벤트 삭제
     public int deleteEvent(Long eventNum);
+
+    //이벤트 목록
+    public List<EventVO> getEventList();
+
+    //이벤트 전체 개수
+    public int getTotal();
 
 }
