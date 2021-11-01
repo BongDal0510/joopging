@@ -23,7 +23,7 @@ public interface CommuReplyMapper {
     public int updateCommuReply(CommuReplyVO commuReplyVO);
 
     //댓글 목록
-    public List<CommuReplyVO> getCommuReplyListWithPaging(@Param("commuBno")Long commuBno, @Param("criteria") Criteria criteria);
+    public List<CommuReplyVO> getCommuReplyPagingList(@Param("commuBno")Long commuBno, @Param("criteria") Criteria criteria);
 
     //댓글 개수
     public int getCommuReplyTotal(Long commuBno);

@@ -30,7 +30,6 @@ public class CommuController {
         log.info("communityList");
         log.info("--------------------------------");
 
-
         model.addAttribute("announceList", commuService.getAnnounceList(2));
         model.addAttribute("commuList", commuService.getCommuList(criteria));
         model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
@@ -91,7 +90,7 @@ public class CommuController {
 
     //  삭제
     @PostMapping("removeCommu")
-    public RedirectView remove(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr) {
+    public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr) {
         log.info("--------------------------------");
         log.info("removeCommu : " + commuBno);
         log.info("--------------------------------");

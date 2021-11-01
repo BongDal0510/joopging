@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.CommuAttachFileMapper">
+    <insert id="commuInsert">
+        INSERT INTO TBL_COMMUATTACH (COMMUUUID, COMMUUPLOADPATH, COMMUFILENAME, COMMUIMAGE, COMMUBNO)
+        VALUES (#{commuUuid}, #{commuUploadPath}, #{commuFileName}, #{commuImage}, #{commuBno})
+    </insert>
+
+    <delete id="commuDelete">
+        DELETE FROM TBL_COMMUATTACH WHERE COMMUUUID = #{commuUuid}
+    </delete>
+
+    <select id="commuFindByBno" resultType="commuAttachFileVO">
+        SELECT COMMUUUID, COMMUUPLOADPATH, COMMUFILENAME, COMMUIMAGE, COMMUBNO
+        FROM TBL_COMMUATTACH
+        WHERE BNO = #{commuBno}
+    </select>
+
+    <delete id="commuDeleteAll">
+        DELETE FROM TBL_COMMUATTACH WHERE BNO = #{commuBno}
+    </delete>
+
+    <select id="commuGetOldFiles" resultType="commuAttachFileVO">
+        SELECT COMMUUUID, COMMUUPLOADPATH, COMMUFILENAME, COMMUIMAGE, COMMUBNO
+        FROM TBL_COMMUATTACH
+        WHERE COMMUUPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+</mapper>
