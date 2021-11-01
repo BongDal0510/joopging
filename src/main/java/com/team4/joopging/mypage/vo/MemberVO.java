@@ -1,5 +1,10 @@
 package com.team4.joopging.mypage.vo;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+@Component
+@Data
 public class MemberVO {
     /*회원 번호 시퀀스로 들어감*/
     private int memberNum;

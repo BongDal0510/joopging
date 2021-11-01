@@ -1,5 +1,10 @@
 package com.team4.joopging.mypage.vo;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+@Component
+@Data
 public class ParcelVO {
     /*운송장 번호*/
     private String parcelNum;

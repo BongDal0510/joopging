@@ -4,51 +4,50 @@
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
     <!--플로깅 예약 목록-->
-<select id="getReservationList" resultType="com.team4.joopging.mypage.vo.PloResVO">
+<select id="getPloResList" resultType="com.team4.joopging.mypage.vo.PloResVO">
+
+    SELECT ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+    FROM(
     <![CDATA[
-    SELECT ploResNum, memberNum, ploggingNum, reservationDate,reservationTime,reservationStatus
+    SELECT /** INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
+    ROWNUM R, ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
-    ]]>
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
 </select>
 
-    <!--구매 상품 목록-->
-<select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
-<![CDATA[
-SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
-    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
-    parcelMessage,usePoint,orderStatus
-FROM TBL_GOODS_ORDER WHERE memberNum = #{memberNum}
-]]>
-</select>
-
-<!--상품 택배-->
-<select id="getParcel" resultType="com.team4.joopging.mypage.vo.ParcelVO">
-<![CDATA[
-SELECT parcelNum, parcelCode, orderNum
-FROM TBL_PARCEL WHERE orderNum = #{orderNum}
-]]>
-</select>
+    <!--내가 예약한 플로깅 내역 전체 개수-->
+    <select id="totalPloResCnt" resultType="_int">
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
+    </select>
 
 <!--찜 목록-->
 <select id="getGoodsLikeList" resultType="com.team4.joopging.mypage.vo.goodsLikeListVO">
-<![CDATA[
 SELECT goodsLikeListNum, memberNum, goodsNum
-FROM TBL_GOODS_LIKE_LIST WHERE memberNum = #{memberNum}
-]]>
+FROM(
+    <![CDATA[
+SELECT /** INDEX_DESC(TBL_GOODS_LIKE_LIST GOODS_LIKE_LIST_PK)*/
+ROWNUM R,goodsLikeListNum, memberNum, goodsNum
+FROM TBL_GOODS_LIKE_LIST
+WHERE memberNum = #{memberNum}
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
 </select>
+
+    <!--내가 찜한 목록 전체 개수-->
+    <select id="totalGoodsLikeCnt" resultType="_int">
+        SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberNum = #{memberNum}
+    </select>
 
 <!--플로깅 예약 취소-->
 <update id="deleteReservation">
 UPDATE TBL_RESERVATION
 SET reservationStatus = 1
 WHERE ploResNum = #{ploResNum}
-</update>
-
-<!--구매 취소-->
-<update id="deleteGoodsOrder">
-UPDATE TBL_GOODS_ORDER
-SET orderStatus = 1
-WHERE orderNum = #{orderNum}
 </update>
 
 <!--아이디로 멤버 번호 찾기-->
@@ -67,7 +66,8 @@ WHERE orderNum = #{orderNum}
 <update id="deleteMember">
     UPDATE TBL_MEMBER
     SET status = 1
-    WHERE memberNum = #{memberNum} AND memberPw = #{memberPw}
+    WHERE memberId = #{memberId} AND memberPw = #{memberPw}
 </update>
+
 
 </mapper>

@@ -1,5 +1,10 @@
 package com.team4.joopging.mypage.vo;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+@Component
+@Data
 public class OrderHistoryVO {
     /*구매한 상품 주문번호(PK)*/
     private int orderNum;
@@ -7,6 +12,8 @@ public class OrderHistoryVO {
     private int memberNum;
     /*상품번호(FK)*/
     private int goodsNum;
+    /*결제 총액*/
+    private String goodsTotalCost;
     /*구매 상품 개수*/
     private int goodsCnt;
     /*상품 옵션(색상)*/
