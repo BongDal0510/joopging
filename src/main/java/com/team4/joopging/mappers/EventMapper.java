@@ -7,7 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface EventMapper {
-
     //이벤트 목록
     public List<EventVO> getEventList();
 

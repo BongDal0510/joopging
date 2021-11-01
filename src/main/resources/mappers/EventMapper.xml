@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.EventMapper">
+    <select id="getEventList">
+        SELECT EVENTNUM, EVENTTITLE, EVENTDATE
+        FROM TBL_EVENT_INFO
+    </select>
+    
+    <insert id="insertEvent">
+        INSERT INTO TBL_EVENT_INFO
+        (EVENTNUM, EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE)
+        VALUES (SEQ_EVENT, #{eventTitle}, #{eventSubtitle}, #{eventContent}, #{eventDate})
+    </insert>
+    
+    <select id="readEvent" resultType="eventVO">
+        SELECT EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE
+        FROM TBL_EVENT_INFO
+        WHERE EVENTNUM = #{eventNum}
+    </select>
+
+    <update id="updateEvent">
+        UPDATE TBL_EVENT_INFO
+        SET
+        WHERE EVENTNUM = #{eventNum}
+    </update>
+</mapper>
