@@ -261,7 +261,7 @@
                                 </footer>
                             </div>
                             <div>
-                                <p>신청일 : </p>
+                                <p class="eventDate">신청일 </p>
                                 <p class="eventDate">11월 1일-11월 30일</p>
                             </div>
                         </section>
@@ -280,13 +280,13 @@
                                     </header>
                                     <footer class="eventButton">
                                         <ul class="actions">
-                                            <li><a href="/event/eventInfo" class="button alt">상세보기</a></li>
+                                            <li><a id="goRead" th:href="*{eventNum}" class="button alt">상세보기</a></li>
                                         </ul>
                                     </footer>
                                 </div>
-                                <div class="eventDate">
-                                    <p>신청일 : </p>
-                                    <p th:text="*{eventDate}"></p>
+                                <div>
+                                    <p class="eventDate">신청일 </p>
+                                    <p class="eventDate" th:text="*{eventDate}"></p>
                                 </div>
                             </section>
                         </div>
@@ -401,9 +401,12 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 <script src="/js/event.js"></script>
-<!--<script>-->
-<!--    function goEvent(){-->
-<!--        location.href = "pageframe/eventInfo";-->
-<!--    }-->
-<!--</script>-->
+<script th:inline="javascript">
+
+    $("a#goRead").on("click", function(e){
+        e.preventDefault();
+        location.href = "/event/eventInfo?eventNum=" + $(this).attr("href");
+    })
+
+</script>
 </html>
