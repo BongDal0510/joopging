@@ -1,15 +1,12 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.beans.dao.MemberDAO;
+//import net.nurigo.java_sdk.api.Message;
+//import net.nurigo.java_sdk.exceptions.CoolsmsException;
+//import org.json.simple.JSONObject;
 import com.team4.joopging.beans.vo.MemberVO;
 import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-//import net.nurigo.java_sdk.api.Message;
-//import net.nurigo.java_sdk.exceptions.CoolsmsException;
-//import org.json.simple.JSONObject;
-import org.apache.logging.log4j.message.Message;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Service;
-import java.lang.management.MemoryManagerMXBean;
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -29,7 +23,9 @@ import java.util.Random;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class memberController {
+
     private final MemberService memberService;
+
 
     /*헤더, 푸터*/
     @GetMapping("header")
@@ -52,6 +48,8 @@ public class memberController {
     public String terms(){
         return "member/terms";
     }
+
+
 
     /*아무 연산 없이 로그인 페이지로 이동*/
     @GetMapping("login")
@@ -82,6 +80,32 @@ public class memberController {
         }else{
             /*로그인 실패*/
             return "member/loginFail";
+        }
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
+    }
+
+    /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
+    @PostMapping("loginKAKAO")
+    public String loginKAKAOAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr){
+        HttpSession session = req.getSession();
+        String id = vo.getMemberId();
+
+        /*연산 작업*/
+        if(memberService.memberLoginKAKAO(vo) != 0){
+            /*로그인 성공*/
+            session.setAttribute("memberId",id);
+            return "/mainpage";
+        }else{
+            /*로그인 실패시 디비 입력 후 성공*/
+            memberService.memberJoinKAKAO(vo);
+            session.setAttribute("memberId",id);
+            return "/mainpage";
         }
     }
 

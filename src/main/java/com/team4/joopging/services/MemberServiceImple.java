@@ -21,8 +21,18 @@ public class MemberServiceImple implements MemberService{
     }
 
     @Override
+    public void memberJoinKAKAO(MemberVO vo) {
+        memberDAO.memberJoinKAKAO(vo);
+    }
+
+    @Override
     public int memberLogin(MemberVO vo) {
         return memberDAO.memberLogin(vo);
+    }
+
+    @Override
+    public int memberLoginKAKAO(MemberVO vo) {
+        return memberDAO.memberLoginKAKAO(vo);
     }
 
     @Override

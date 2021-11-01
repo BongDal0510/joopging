@@ -9,8 +9,12 @@ public interface MemberMapper {
     public int idCheck(MemberVO memberVO);
     /*회원 가입*/
     public void join(MemberVO memberVO);
+    /*카카오 회원 가입*/
+    public void joinKAKAO(MemberVO memberVO);
     /*로그인*/
     public int login(MemberVO memberVO);
+    /*카카오로그인*/
+    public int loginKAKAO(MemberVO memberVO);
     /*아이디 찾기*/
     public String searchId(MemberVO memberVO);
     /*비밀번호 검색*/

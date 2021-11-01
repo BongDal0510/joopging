@@ -17,10 +17,18 @@ public class MemberDAO {
     public void memberJoin(MemberVO vo){
         mapper.join(vo);
     }
+    /*카카오 회원가입*/
+    public void memberJoinKAKAO(MemberVO vo){
+        mapper.joinKAKAO(vo);
+    }
 
     /*로그인*/
     public int memberLogin(MemberVO vo){
         return mapper.login(vo);
+    }
+    /*카카오로그인*/
+    public int memberLoginKAKAO(MemberVO vo){
+        return mapper.loginKAKAO(vo);
     }
 
     /*아이디 찾기*/
