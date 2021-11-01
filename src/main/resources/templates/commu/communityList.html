@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/community.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+    <style>
+
+        .big-width {display: block;}
+
+        .small-width { display: none;}
+
+        div#searchWrap{display: flex;}
+
+        select[name='type']{
+            width: 25%;
+            margin-right: 1%;
+            padding: 1%;
+            font-size: 13px;}
+
+        input[name='keyword']{
+            width: 56%;
+            margin-right: 1%;
+            padding: 0.8%;
+            font-size: 13px;
+        }
+
+        form[name='searchForm']{overflow: hidden;}
+
+
+        @media (max-width: 768px) {
+            .bno {display: none;}
+            .writer {display: block; }
+            .regDate {display: none; }
+            .viewCnt { display: none;}
+            .big-width { display: none;}
+            .small-width { display: block;}
+            #commuHeaderWrapper{
+                display: none;
+            }
+
+
+
+            div#commuBoardRight, div#commuBoardLeft{
+                display: none;
+            }
+
+            div#commuBoardMiddle{
+                width: 100%;
+                margin: 0% 3%;
+            }
+
+            div#searchWrap{
+                display: block;
+                text-align: center;
+            }
+            select[name='type']{width: 100%;}
+            input[name='keyword']{width: 100%;}
+            a.search{width: 100%;}
+            form[name='searchForm']{
+                overflow: hidden;}
+        }
+        header.major{
+            border:none !important;
+        }
+
+    </style>
+</head>
+<body class="is-preload">
+<!--header 위치-->
+<header id="commuHeaderWrapper">
+    <div id="main_header"></div>
+</header>
+
+<!--반응형 네비게이션 실험중-->
+<div id="navPanel">
+    <nav id="navLeftBar">
+        <a class="link depth-0" href="index.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <span class="indent-0"></span>Home</a>
+        <a class="link depth-0" href="#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Dropdown</a><a class="link depth-1" href="#"
+                                                   style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Lorem ipsum dolor</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Magna phasellus</a><a class="link depth-1" href="#"
+                                                          style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Etiam dolore nisl</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Phasellus consequat</a><a class="link depth-2" href="#"
+                                                              style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Magna phasellus</a><a class="link depth-2" href="#"
+                                                          style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Etiam dolore nisl</a><a class="link depth-2" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Veroeros feugiat</a><a class="link depth-2" href="#"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Nisl sed aliquam</a><a class="link depth-2" href="#"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-2"></span>Dolore adipiscing</a><a class="link depth-1" href="#"
+                                                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-1"></span>Veroeros feugiat</a><a class="link depth-0" href="left-sidebar.html"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Left Sidebar</a><a class="link depth-0" href="right-sidebar.html"
+                                                       style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>Right Sidebar</a><a class="link depth-0" href="no-sidebar.html"
+                                                        style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span
+            class="indent-0"></span>No Sidebar</a></nav>
+</div>
+
+
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+
+            <!-- 게시판 헤더-->
+            <header class="major">
+                <p></p>
+            </header>
+            <div id="commuBoardWrapper">
+                <!--게시판 목록 왼쪽 사이드-->
+                <div id="commuBoardLeft">
+                    <table id="commuLeftCategory">
+                        <tr>
+                            <td><a href="javascript:void(0)" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="javascript:void(0)" id="interview" class="commu">인터뷰</a></td>
+                        </tr>
+<!--                        <tr>
+                            <th class="commu">이벤트</th>
+                        </tr>-->
+                        <tr>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu">문의하기</a></td>
+                        </tr>
+                        <!--admin 계정만 보이게-->
+                        <tr>
+                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <!--게시판 목록-->
+                <div id="commuBoardMiddle" class="rotateMainContent">
+                    <div id="registerBtn">
+                        <div>커뮤니티 게시판</div>
+                        <div id="registerBtnArea"><a href="/commu/communityRegister" class="button small">글 등록</a></div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr class="tHead" id="commuAnnounceTh">
+                                <th class="bno" style="color:white;">번호</th>
+                                <th class="title">제목</th>
+                                <th class="writer">작성자</th>
+                                <th class="regDate">작성일</th>
+                                <th class="viewCnt">조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="announce : ${announceList}">
+                                <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
+                                    <td class="boardStatus"><img src="/images/commu/siren.png"></td>
+                                    <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
+                                    <td class="writer" th:text="*{commuWriter}"></td>
+                                    <td class="regDate" th:text="*{commuRegDate}"></td>
+                                    <td class="viewCnt" th:text="*{commuViewCnt}"></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                            <tfoot>
+                            <!--th:text="*{commuBoardStatus}"-->
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+<!--                            <thead>
+                            <tr class="tHead" id="commuBoardTh">
+                                <th class="bno">번호</th>
+                                <th class="title">제목</th>
+                                <th class="writer">작성자</th>
+                                <th class="regDate">작성일</th>
+                                <th class="viewCnt">조회수</th>
+                            </tr>
+                            </thead>-->
+                            <tbody>
+                            <th:block th:each="commu : ${commuList}">
+                                <tr class="tBody" id="commuBoardThList" th:object="${commu}">
+                                    <td class="bno" th:text="*{commuBno}"></td>
+                                    <td class="title"><a id="goRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
+                                    <td class="writer" th:text="*{commuWriter}"></td>
+                                    <td class="regDate" th:text="*{commuRegDate}"></td>
+                                    <td class="viewCnt" th:text="*{commuViewCnt}"></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <!--인터뷰-->
+                <div id="interviewLists" class="rotateMainContent" style="display: none">
+                    <div id="interviewArea">
+                        <div>이달의 인터뷰</div>
+                        <!--admin 계정일때만 보이게-->
+                        <div id="interviewBtn"><a href="/interview/interviewRegister" class="button small">글 등록</a></div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style=clear:both;>
+
+                                <!-- Portfolio -->
+                                <section>
+                                    <div class="event_subtitle">
+                                        <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 이벤트</h2>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="col-4 col-6-medium col-12-small">
+                                            <section class="eventImage">
+                                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/신규가입.png"/></a>
+                                            </section>
+                                            <section class="box boxinner">
+                                                <div style="display: flex">
+                                                    <header id="center1">
+                                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                                            11월 신규가입 이벤트
+                                                        </h4>
+                                                    </header>
+                                                    <footer class="eventButton">
+                                                        <ul class="actions">
+                                                            <li><a href="#" class="button alt">상세보기</a></li>
+                                                        </ul>
+                                                    </footer>
+                                                </div>
+                                                <div>
+                                                    <p class="eventDate">11월 1일-11월 30일</p>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+<!--                    <img src="/images/leftAd.png">-->
+                </div>
+
+            </div>
+            <!--검색 기능-->
+            <form action="/commu/communityList" name="searchForm">
+                <div class="fields" id="commuSearchWrap">
+                    <div class="field">
+                        <div id="searchWrap"th:object="${pageMaker}">
+                            <select name="type" th:object="${criteria}">
+                                <option value="">검색 기준</option>
+                                <option value="T" th:selected="*{type} == 'T'">제목</option>
+                                <option value="C" th:selected="*{type} == 'C'">내용</option>
+                                <option value="W" th:selected="*{type} == 'W'">작성자</option>
+                                <option value="TC" th:selected="*{type} == 'TC'">제목 또는 내용</option>
+                                <option value="TW" th:selected="*{type} == 'TW'">제목 또는 작성자</option>
+                                <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
+                            </select>
+                            <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}">
+                            <a href="javascript:void(0)" id="commuSearchBtn" class="search button primary icon solid fa-search"></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <!--페이징 처리-->
+            <div th:object="${pageMaker}">
+                <div class="big-width" id="pagingStyle">
+                    <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                    <th:block
+                            th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                        <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                        <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
+                           th:href="${num}"><code th:text="${num}"></code></a>
+                    </th:block>
+                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                </div>
+                <!--반응형 paging 처리-->
+                <div class="small-width" style="text-align: center">
+                    <a class="changePage" th:if="*{criteria.pageNum > 1}" th:href="*{criteria.pageNum - 1}"><code>&lt;</code></a>
+                    <code th:text="*{criteria.pageNum}"></code>
+                    <a class="changePage" th:if="*{criteria.pageNum < realEnd}"
+                       th:href="*{criteria.pageNum + 1}"><code>&gt;</code></a>
+                </div>
+                <form action="/commu/communityList" th:object="${criteria}" name="pageForm">
+                    <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                    <input type="hidden" name="amount" th:field="*{amount}">
+                    <input type="hidden" name="type" th:field="*{type}">
+                    <input type="hidden" name="keyword" th:field="*{keyword}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--footer 위치-->
+<footer>
+    <div id="main_footer"></div>
+</footer>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<script src="/js/commu.js"></script>
+</body>
+<script th:inline="javascript">
+    // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
+    let pageForm = $(document.pageForm);
+    let paging = [[${pageMaker.criteria.listLink}]];
+    let searchForm = $(document.searchForm);
+/*
+    var date = input.split(" ")[0];
+    var tmpDate = date.split("-");
+    return "~" + tmpDate[1] + "/" + tmpDate[2];
+
+    if(input.length >= 14){
+        return input.substr(0,14)+"...";
+    }
+    */
+    //게시글 등록시 몇 번째 글 등록인지 확인시켜주기
+    $(document).ready(function () {
+        let commuBno = [[${commuBno}]];
+        if (commuBno == null) {
+            return;
+        }
+        alert("게시글 " + commuBno + "번이 등록되었습니다.");
+    });
+
+    //페이지 이동시 이전 페이지 번호 넘기기
+    $("a.changePage").click(function (e) {
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    //read페이지에 이전 페이지 번호 기억 시키기
+    $("a#goRead").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/commu/communityRead" + paging + "&commuBno=" + $(this).attr("href");
+    })
+
+    //검색 진행시 예외처리 1 (검색 종류를 선택하지 않음.)
+    $("a.search").on("click", function(e){
+        e.preventDefault();
+        if(!searchForm.find("option:selected").val()){
+            alert("검색 종류를 선택하세요");
+            return;
+        }
+        //검색 진행시 예외처리 2 (키워드를 입력하지 않음.)
+        if(!searchForm.find("input#keyword").val()){
+            alert("키워드를 입력하세요.")
+            return;
+        }
+        searchForm.submit();
+    })
+
+    //검색 진행시 예외처리 3 (입력값없이 enter를 누를 경우 아무 이벤트도 발생하지 않도록 막음)
+    $("input#keyword").on("keydown", function(e){
+        if(e.keyCode == 13){
+            e.preventDefault();
+        }
+    })
+</script>
+</html>
