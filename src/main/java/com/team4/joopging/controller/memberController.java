@@ -83,12 +83,12 @@ public class memberController {
         }
     }
 
-    @RequestMapping("/logout")
-    public ModelAndView logout(HttpSession session) {
-        session.invalidate();
-        ModelAndView mv = new ModelAndView("redirect:/");
-        return mv;
-    }
+//    @RequestMapping("/logout")
+//    public ModelAndView logout(HttpSession session) {
+//        session.invalidate();
+//        ModelAndView mv = new ModelAndView("redirect:/");
+//        return mv;
+//    }
 
     /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
     @PostMapping("loginKAKAO")
