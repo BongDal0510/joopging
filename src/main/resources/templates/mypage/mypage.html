@@ -444,7 +444,7 @@
                         </header>
                         <div id = "ploggingAdv">
                             <!--임시로 실험해봄-->
-                            <button th:onclick="'location.href\' =' + @{mypage.html} + '\''">
+                            <button th:onclick="|location.href='@{/mypage/orderInfo}'|">
                                 이벤트 확인하러 가기
                             </button>
                         </div>
