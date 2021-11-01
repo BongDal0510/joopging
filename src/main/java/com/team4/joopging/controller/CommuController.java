@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommuController {
     private final CommuService commuService;
 
+    //커뮤니티 전체목록 + 페이징
     @GetMapping("communityList")
     public String commuList(Criteria criteria, Model model) {
         log.info("--------------------------------");
@@ -36,7 +37,7 @@ public class CommuController {
         return "commu/communityList";
     }
 
-
+    //커뮤니티 글쓰기
     @PostMapping("communityRegister")
     public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr) {
         log.info("--------------------------------");
@@ -52,6 +53,7 @@ public class CommuController {
         return new RedirectView("communityList");
     }
 
+    //커뮤니티 글 읽기/수정하기 경로이동 + 경로 이동 전 페이지 기억하기
     @GetMapping({"communityRead", "communityModify"})
     public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, CommuVO commuVO, HttpServletRequest request) {
         String reqURI = request.getRequestURI();
@@ -67,14 +69,7 @@ public class CommuController {
         model.addAttribute("criteria", criteria);
     }
 
-//조회수 증가 /commu/communityRead POST bno
-
-//조회 = read할때 같이 진행되야하는데
-    //modify 요청을 처리할 수 있는 비지니스 로직 작성
-    //수정 성공시 result에 "success"를 담아서 전달한다.
-    //단위 테스트로 View에 전달할 파라미터를 조회한다.
-    //      수정 처리     /board/modify        POST      모든 항목       필요            이동
-
+    //커뮤니티 수정하기
     @PostMapping("communityModify")
     public RedirectView modifyCommu(CommuVO commu, RedirectAttributes rttr) {
         log.info("--------------------------------");
@@ -97,36 +92,26 @@ public class CommuController {
 
         if (commuService.removeCommu(commuBno)) {
             rttr.addFlashAttribute("result", "success");
-            rttr.addFlashAttribute("commuBno", commuBno);
         }else {
             rttr.addFlashAttribute("result", "fail");
         }
         return new RedirectView("communityList");
     }
-    //페이지 이동만 할 때..
-    //여러 요청을 하나의 메소드로 받을 때에는 {}를 사용하여 콤마로 구분한다.
 
+    //페이지 이동만
+    //글 등록으로
     @GetMapping("communityRegister")
     public void goPage(){}
 
+    //헤더
     @GetMapping("/pageframe/header")
     public String header() {
         return "/pageframe/header";
     }
 
+    //푸터
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
-    }
-
-
-    /*꼭 지우기!!!!!!!!!!!!*/
-    @GetMapping("left-sidebar")
-    public String sidebar() {
-        return "left-sidebar";
-    }
-    @GetMapping("index")
-    public String index() {
-        return "index";
     }
 }

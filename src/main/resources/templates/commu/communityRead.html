@@ -190,7 +190,7 @@
 <script src="/js/weather.js"></script>
 </body>
 <script th:inline="javascript">
-    let Bno = [[${commu.getCommuBno()}]];
+    let bno = [[${commu.getCommuBno()}]];
     let paging = [[${criteria.listLink}]];
     let replyUL = $("ul.replies");
     let pageNum = 1;
@@ -222,7 +222,7 @@
 
         if(!replier || !reply){return;}
 
-        replyService.add({commuBno:commuBno, commuReply:commuReply, commuReplier:commuReplier},
+        commuReplyService.add({bno:bno, reply:reply, replier:replier},
             function(result){
                 alert(result);
                 $("input[name='replier']").val("");
@@ -236,7 +236,7 @@
 
     //업데이트 = 수정하기
     function goUpdate(){
-        location.href = "/commu/communityModify" + paging + "&commuBno=" + commuBno;
+        location.href = "/commu/communityModify" + paging + "&commuBno=" + bno;
     }
 
     //목록보러 가기
@@ -297,7 +297,7 @@
 
     /*댓글 목록*/
     function showList(page){
-        replyService.getList({bno:bno, page:page || 1},
+        commuReplyService.getList({bno:bno, page:page || 1},
             function(replyCnt, list){
                 if(list == null || list.length == 0){
                     replyUL.html("댓글이 없습니다.");
@@ -311,9 +311,9 @@
                     str += "<strong>" + list[i].replier + "</strong>"
                     str += "<div>"
                     str += "<p class='reply" + list[i].rno +"'>" + list[i].reply + "</p>"
-                    str += "<p><strong class='date'>" + replyService.displayTime(list[i].replyDate);
+                    str += "<p><strong class='date'>" + commuReplyService.displayTime(list[i].replyDate);
                     if(list[i].replyDate != list[i].updateDate){
-                        str += "<br>수정된 날짜 " + replyService.displayTime(list[i].updateDate);
+                        str += "<br>수정된 날짜 " + commuReplyService.displayTime(list[i].updateDate);
                     }
                     str += "</strong></p></div>"
                     str += "<div style='text-align: right'><a class='modify' href='" + list[i].rno + "'>수정</a>"
@@ -356,7 +356,7 @@
 
         if(newReply == ""){return;}
 
-        replyService.update({rno:rnoValue, reply:newReply},
+        commuReplyService.update({rno:rnoValue, reply:newReply},
             function(result){
                 alert(result);
                 check = false;//수정 확인이 완료되면, 수정하기 false. (수정 기능 종료)
@@ -369,7 +369,7 @@
     $(".replies").on("click", "a.remove", function(e){
         e.preventDefault();
         let rnoValue = $(this).attr("href");
-        replyService.remove(rnoValue,
+        commuReplyService.remove(rnoValue,
             function(result){
                 alert(result);
                 showList(pageNum);

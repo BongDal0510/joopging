@@ -1,7 +1,9 @@
-/*reply ajax 모듈*/
+/*
+    commu reply ajax 모듈화
+ */
 console.log("Reply Module.......");
 
-let replyService = (function(){
+let commuReplyService = (function(){
 
     //댓글 등록
     function add(replyInfo, callback, error){
@@ -9,14 +11,15 @@ let replyService = (function(){
         $.ajax({
             url:"/replies/new",
             type:"post",
-            data:JSON.stringify(replyInfo),//stringify 함수로 키 값을 문자열 처리
-            contentType:"application/json; charset=utf-8", //전달할 타입
-            success:function(result, status, xhr){//성공시
+            data:JSON.stringify(replyInfo),
+            contentType:"application/json; charset=utf-8",
+            success:function(result, status, xhr){
                 if(callback){
+                    //외부에서 전달받은 값이 있다면 결과를 해당 함수의 매개변수로 전달하여 사용한다.
                     callback(result);
                 }
             },
-            error:function(xhr, status, err){//실패시
+            error:function(xhr, status, err){
                 if(error){
                     error(err);
                 }
@@ -70,7 +73,7 @@ let replyService = (function(){
         // get방식으로 요청 후 JSON으로 응답
         // $.getJSON(url, callback).fail(callback)
         $.getJSON(
-            "/replies/pages/" + commuBno + "/" + page,
+            "/replies/pages/" + bno + "/" + page,
             function(result){
                 if(callback){
                     callback(result.replyCnt, result.list);
