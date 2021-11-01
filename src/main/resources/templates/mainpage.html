@@ -341,7 +341,7 @@
 <script src="/js/main.js"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
-<script type="text/javascript">
-
+<script th:inline="javascript">
+    console.log([[${session.memberId}]]);
 </script>
 </html>

@@ -10,10 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.http.HttpClient;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -28,13 +31,14 @@ public class memberController {
 
 
     /*헤더, 푸터*/
-    @GetMapping("header")
+    @GetMapping("/pageframe/header")
     public String header() {
-        return "header";
+        return "/pageframe/header";
     }
-    @GetMapping("footer")
+
+    @GetMapping("/pageframe/footer")
     public String footer() {
-        return "footer";
+        return "/pageframe/footer";
     }
 
     /*플로깅 소개 페이지*/
@@ -48,8 +52,6 @@ public class memberController {
     public String terms(){
         return "member/terms";
     }
-
-
 
     /*아무 연산 없이 로그인 페이지로 이동*/
     @GetMapping("login")
@@ -83,12 +85,12 @@ public class memberController {
         }
     }
 
-//    @RequestMapping("/logout")
-//    public ModelAndView logout(HttpSession session) {
-//        session.invalidate();
-//        ModelAndView mv = new ModelAndView("redirect:/");
-//        return mv;
-//    }
+    /*로그아웃*/
+    @GetMapping("logout")
+    public RedirectView logout(HttpSession session, RedirectAttributes rttr){
+        session.invalidate();
+        return new RedirectView("/main/mainpage");
+    }
 
     /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
     @PostMapping("loginKAKAO")
