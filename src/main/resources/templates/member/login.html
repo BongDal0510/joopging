@@ -2,7 +2,7 @@
 <!--
 	성윤 : 로그인 페이지
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>줍깅 로깅</title>
     <meta charset="utf-8" />
@@ -98,14 +98,14 @@
             </div>
 
             <!--form 태그-->
-            <form method="post" action="/member/login" name="loginForm">
+            <form method="post" action="/member/login" id="loginForm" name="loginForm">
                 <div style="width:850px; margin: auto;">
 
                     <div style="width: 38%; margin:auto;">
                         <!--아이디 비밀번호 입력-->
                         <div>
-                            <input type="text" id="memberId" name="memberId" value="" placeholder="아이디"/> <br>
-                            <input type="password" id="memberPw" name="memberPw" value="" placeholder="비밀번호"/>
+                            <input type="text" id="memberId" name="memberId" placeholder="아이디"/> <br>
+                            <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호"/>
                         </div>
 
                         <!--아이디 비밀번호 찾기-->
@@ -131,18 +131,36 @@
                         <!--소셜 로그인-->
                         <div>
                             <div class="hr-sect" style="font-color:#000000;">소셜 로그인하깅</div>
-                            <a href="/member/ploggingInfo"><img src="/images/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
+                            <a onclick="kakaoLogin()"><img src="/images/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
                             <a href="/member/ploggingInfo"><img src="/images/naver_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
                         </div>
 
                     </div>
+                </div>
+                <!-- 네이버 로그인 버튼 노출 영역 -->
+                <div id="naver_id_login"></div>
+
+
+                <div style="display: none">
+                    <input type="text" id="memberName" name="memberName">
+                    <input type="text" id="memberBirth" name="memberBirth">
+                    <input type="text" id="memberEmail" name="memberEmail">
                 </div>
            </form>
         </div>
 </section>
 <div id="main_footer"></div>
 <!-- Scripts -->
-<script>
+<script th:inline="javascript">
+    /*현재 로그인 세션이 존재한다면*/
+    /*메인페이지로 바로 이동한다.*/
+    let session = [[${session.memberId}]];
+    if(!(session == null)){
+        document.location.href="/main/mainpage";
+    }
+    // console.log(session);
+
+    /*아이디 찾기*/
     function findId() {
         /* var url = "http://www.daum.net"; */
         var url = "findId";
@@ -151,6 +169,8 @@
 
         window.open(url, name, option);
     }
+
+    /*비밀번호 찾기*/
     function findPw() {
         /* var url = "http://www.daum.net"; */
         var url = "findPw";
@@ -178,5 +198,87 @@
 <script src="/js/main.js"></script>
 <script type="text/javascript"></script>
 <script src="/js/header.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script>
+    /*카카오 로그인*/
+    let form = document.getElementById("loginForm");
+
+    Kakao.init('5fa1d4826fe6e8d11410cb571085e69d'); //발급받은 키 중 javascript키를 사용해준다.
+    //console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+    //카카오로그인
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        /*console.log(response)
+                        console.log(response.id);
+                        console.log(response.properties.nickname);
+                        console.log(response.kakao_account.birthday);
+                        console.log(response.kakao_account.gender);
+                        console.log(response.kakao_account.email);*/
+
+                        /*response의 정보를 가져와서 input 태그에 넣기*/
+                        document.getElementById("memberId").value=response.id;
+                        document.getElementById("memberName").value=response.properties.nickname;
+                        document.getElementById("memberBirth").value=response.kakao_account.birthday;
+                        document.getElementById("memberEmail").value=response.kakao_account.email;
+
+                        /*카카오 로그인으로 액션 변경*/
+                        form.action="/member/loginKAKAO";
+                        form.submit();
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                })
+            },
+            fail: function (error) {
+                console.log(error)
+            },
+        })
+    }
+    //카카오로그아웃
+    // function kakaoLogout() {
+    //     if (Kakao.Auth.getAccessToken()) {
+    //         Kakao.API.request({
+    //             url: '/v1/user/unlink',
+    //             success: function (response) {
+    //                 console.log(response)
+    //             },
+    //             fail: function (error) {
+    //                 console.log(error)
+    //             },
+    //         })
+    //         Kakao.Auth.setAccessToken(undefined)
+    //     }
+    // }
+</script>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("OAU8mmDRIAGPllfANyWA", "http://localhost:10004/");
+    // 접근 토큰 값 출력
+    alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        // alert(naver_id_login.getProfileData('email'));
+        // alert(naver_id_login.getProfileData('nickname'));
+        // alert(naver_id_login.getProfileData('age'));
+    }
+</script>
+<!-- //네이버 로그인 버튼 노출 영역 -->
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("OAU8mmDRIAGPllfANyWA", "http://localhost:10004/");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2,40);
+    naver_id_login.setDomain("YOUR_SERVICE_URL");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+</script>
 </body>
 </html>

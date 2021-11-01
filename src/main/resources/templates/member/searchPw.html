@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>아이디 찾깅 성공</title>
+    <title>비밀번호 찾기 SMS인증 페이지</title>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
 </head>
 <style>
     /* Button */
+
     input[type="button"],
     input[type="submit"],
     input[type="reset"],
@@ -38,7 +39,7 @@
     input[type="reset"]:hover,
     button:hover,
     .button:hover {
-    background: #24b886;
+        background: #24b886;
     }*/
 
     input[type="button"]:active,
@@ -63,7 +64,7 @@
     input[type="reset"].alt:hover,
     button.alt:hover,
     .button.alt:hover {
-    background: #066514;
+        background: #066514;
     }*/
 
     input[type="button"].alt:active,
@@ -121,24 +122,97 @@
     }
 </style>
 <body>
+<!--SMS 인증 페이지-->
 <div style="width: 75%; margin-left:45px;">
-    <div style="text-align:center">
-        <h3>현재 가입 중 아이디</h3>
+    <!--제목-->
+    <div>
+        <h3 style="text-align:center">SMS 인증으로 비밀번호 찾기</h3>
         <hr>
     </div>
 
-    <div style="text-align:center;">
-        <!--검색된 아이디 출력하기-->
-        <div class="col-6 col-12-xsmall" style="width:100%;">
-            <input type="text" th:value="${result}" style="border:none; text-align:center; width: 100%;" readonly/>
+    <form method="post" action="/member/resultRePw" id="resultFindPw" name="resultFindPw">
+        <p style="margin:0;">인증번호</p>
+
+        <!--인증번호 입력 칸-->
+        <input class="line" type="text" name="certifyNum" id="certifyNum" placeholder="숫자 6자리 입력" style="width:100%; height:50px;"/>
+        <br>
+
+        <div style="text-align: center;">
+            <input type="button" value="완료" onclick="check()" style="width:150px; height:50px;"/>
+
+            <!--띄어쓰기용 스판태그-->
+            <span style="padding:1px"></span>
+
+            <input type="button" value="취소" onclick="window.close()" style="width:150px; height:50px;"/>
+            <input type="text" id="result" name="result" th:value="${result}" style="display: none">
+
+            <!--데이터 전송용 인풋 태그-->
+            <input type="text" id="memberId" name="memberId" style="display: none;">
         </div>
-        <!--줄바꾸기-->
-        <p></p>
-        <!--창 종료-->
-        <div class="col-12">
-            <input type="button" value="확인" style="width:100px; font-size:1em;" onclick="window.close()"/>
-        </div>
-    </div>
+
+    </form>
 </div>
 </body>
+<script src="/js/findId.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript"></script>
+<script th:inline="javascript">
+    let result = [[${result}]]
+
+    if(result == "fail"){
+        alert("가입하신 아이디가 없습니다.");
+
+        location.href="/member/findPw";
+    }else{
+        document.getElementById("memberId").value = result;
+    }
+
+    let random = [[${random}]];
+
+    console.log(random);
+
+    function check() {
+        let form = document.resultFindPw;
+
+        if(!form.certifyNum.value){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+
+        var certifyNum = $('#certifyNum').val();
+
+        if (random === certifyNum) {
+            alert("성공");
+        } else {
+            alert("실패");
+            window.close();
+        }
+
+        form.submit();
+    }
+</script>
+<!--<script>-->
+<!--    // var randomNum = "";-->
+<!--    // console.log(randomNum);-->
+<!--    // var randomId = "";-->
+<!--    // console.log(randomId);-->
+<!--    // function check(){-->
+<!--    //     var certifyNum = $('#certifyNum').val();-->
+<!--    //     /* console.log(typeof(certifyNum)); */-->
+<!--    //     console.log(certifyNum);-->
+<!--    //     if(randomNum === certifyNum){-->
+<!--    //         alert("성공");-->
+<!--    //     }else{-->
+<!--    //         alert("실패");-->
+<!--    //         window.close();-->
+<!--    //     }-->
+
+
+<!--        /* var url = "${pageContext.request.contextPath}/app/member/searchId.jsp";-->
+<!--    var name = "_parent";-->
+<!--    var option = "width=450, height=600, top=100, left=200, location=no";-->
+
+<!--    window.open(url, name, option); */-->
+<!--    }-->
+<!--</script>-->
 </html>

@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>아이디 찾깅 성공</title>
+    <title>비밀번호 찾기 SMS인증 페이지</title>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
 </head>
 <style>
     /* Button */
+
     input[type="button"],
     input[type="submit"],
     input[type="reset"],
@@ -38,7 +39,7 @@
     input[type="reset"]:hover,
     button:hover,
     .button:hover {
-    background: #24b886;
+        background: #24b886;
     }*/
 
     input[type="button"]:active,
@@ -63,7 +64,7 @@
     input[type="reset"].alt:hover,
     button.alt:hover,
     .button.alt:hover {
-    background: #066514;
+        background: #066514;
     }*/
 
     input[type="button"].alt:active,
@@ -121,24 +122,58 @@
     }
 </style>
 <body>
-<div style="width: 75%; margin-left:45px;">
-    <div style="text-align:center">
-        <h3>현재 가입 중 아이디</h3>
-        <hr>
-    </div>
-
-    <div style="text-align:center;">
-        <!--검색된 아이디 출력하기-->
-        <div class="col-6 col-12-xsmall" style="width:100%;">
-            <input type="text" th:value="${result}" style="border:none; text-align:center; width: 100%;" readonly/>
+<!--전체 틀-->
+    <div style="width: 80%; justify-content: space-around; margin: auto;">
+        <div style="text-align: center">
+            <h1>비밀번호 재설정</h1>
         </div>
-        <!--줄바꾸기-->
-        <p></p>
-        <!--창 종료-->
-        <div class="col-12">
-            <input type="button" value="확인" style="width:100px; font-size:1em;" onclick="window.close()"/>
-        </div>
+        <!--비밀번호 -->
+        <form action="/member/rePassWordResult" method="post" id="rePassWord" name="rePassWord">
+            <!--현재 내가 찾은 아이디-->
+            <div style="text-align: center;">
+                <span style="text-align: center;">아이디</span>
+                <input type="text" name="memberId" id="memberId" th:value="${result}" style="width: 70%; border:none; text-align: center;" readonly/>
+            </div>
+            <!--비밀번호 입력-->
+            <div>
+                <!--새 비밀번호 입력-->
+                <p style="margin: 0px 0px 0px 65px;">새로운 비밀번호</p>
+                <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호 입력" style="width: 70%;" />
+                <!--새 비밀번호 확인-->
+                <p style="margin: 15px 0px 0px 65px;">비밀번호 확인</p>
+                <input type="password" name="memberPw_re" id="memberPw_re" placeholder="비밀번호 확인" style="width: 70%;"/><br>
+            </div>
+            <!--비밀번호 일치하는지 확인 후 submit-->
+            <div style="text-align: center;">
+                <input type="button" value="확인" onclick="newPassWord()" />
+            </div>
+        </form>
     </div>
-</div>
 </body>
+<script>
+    function newPassWord(){
+        var form = document.rePassWord;
+
+        // console.log(form.memberPw.value);
+        // console.log(form.memberPw_re.value);
+
+        if(!form.memberPw.value){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+        if(!form.memberPw_re.value){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+
+        if(form.memberPw.value === form.memberPw_re.value){
+            form.submit();
+        }else{
+            alert("비밀번호 확인이 일치하지 않습니다.");
+            window.close();
+        }
+    }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
 </html>

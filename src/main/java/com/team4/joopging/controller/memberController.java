@@ -1,15 +1,12 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.beans.dao.MemberDAO;
+//import net.nurigo.java_sdk.api.Message;
+//import net.nurigo.java_sdk.exceptions.CoolsmsException;
+//import org.json.simple.JSONObject;
 import com.team4.joopging.beans.vo.MemberVO;
 import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-//import net.nurigo.java_sdk.api.Message;
-//import net.nurigo.java_sdk.exceptions.CoolsmsException;
-//import org.json.simple.JSONObject;
-import org.apache.logging.log4j.message.Message;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Service;
-import java.lang.management.MemoryManagerMXBean;
-import java.lang.reflect.Member;
 import java.util.HashMap;
+import java.util.Random;
 
 /*성윤 : 회원 관련 기능 컨트롤러*/
 @Controller
@@ -28,7 +23,9 @@ import java.util.HashMap;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class memberController {
+
     private final MemberService memberService;
+
 
     /*헤더, 푸터*/
     @GetMapping("header")
@@ -52,6 +49,8 @@ public class memberController {
         return "member/terms";
     }
 
+
+
     /*아무 연산 없이 로그인 페이지로 이동*/
     @GetMapping("login")
     public String login() {
@@ -64,12 +63,7 @@ public class memberController {
     public int checkId(@RequestParam("id") String id){
         MemberVO vo = new MemberVO();
         vo.setMemberId(id);
-
-        System.out.println(vo.getMemberId());
-
-        log.info("실행");
         int result = memberService.memberIdCheck(vo);
-        log.info("확인 : " + result);
         return result;
     }
 
@@ -80,13 +74,38 @@ public class memberController {
         /*연산 작업*/
         if(memberService.memberLogin(vo) != 0){
             /*로그인 성공*/
-            /*세션 생성할 것*/
             String id = vo.getMemberId();
             session.setAttribute("memberId",id);
             return "/mainpage";
         }else{
             /*로그인 실패*/
             return "member/loginFail";
+        }
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
+    }
+
+    /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
+    @PostMapping("loginKAKAO")
+    public String loginKAKAOAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr){
+        HttpSession session = req.getSession();
+        String id = vo.getMemberId();
+
+        /*연산 작업*/
+        if(memberService.memberLoginKAKAO(vo) != 0){
+            /*로그인 성공*/
+            session.setAttribute("memberId",id);
+            return "/mainpage";
+        }else{
+            /*로그인 실패시 디비 입력 후 성공*/
+            memberService.memberJoinKAKAO(vo);
+            session.setAttribute("memberId",id);
+            return "/mainpage";
         }
     }
 
@@ -115,23 +134,30 @@ public class memberController {
 
     /*아이디 찾기 SMS 인증 페이지*/
     @PostMapping("searchId")
-    public String searchId(@RequestParam("memberPhone") String phone, Model model) {
-      String str = "123456";
+    public String searchId(MemberVO vo, Model model) {
+        /*난수 메소드 사용*/
+        String str = random();
+        /*모델에 난수 담아주기*/
+        model.addAttribute("random", str);
 
-      log.info(phone);
+        /*데이터베이스 조회*/
+        if(memberService.memberSearchId(vo) == null){
+            model.addAttribute("result", "회원가입되지 않은 사용자입니다.");
+        }else{
+            model.addAttribute("result", memberService.memberSearchId(vo));
+        }
 
 //      내돈 20원.......
 //      SMS보내기 메소드 주석풀면 돈나감
 //      SendSMS(str, phone);
-        
-	  model.addAttribute("random", str);
 
-      return "member/searchId";
+        return "member/searchId";
     }
 
     /*아이디 결과 띄워주기(연산)*/
     @GetMapping("resultFindId")
-    public String resultFindId(){
+    public String resultFindId(String result, Model model){
+        model.addAttribute("result", result);
         return "member/resultFindId";
     }
 
@@ -139,6 +165,42 @@ public class memberController {
     public String findPw() {
         return "member/findPw";
     }
+
+    @PostMapping("searchPw")
+    public String searchPw(MemberVO vo, Model model){
+        /*난수 메소드 사용*/
+        String str = random();
+        /*모델에 난수 담아주기*/
+        model.addAttribute("random", str);
+
+        /*데이터베이스 조회*/
+        if(memberService.memberSearchId(vo) == null){
+            model.addAttribute("result", "fail");
+        }else{
+            model.addAttribute("result", memberService.memberSearchPw(vo));
+        }
+
+        return "member/searchPw";
+    }
+
+    @PostMapping("resultRePw")
+    public String resultRePw(MemberVO vo, Model model){
+        model.addAttribute("result", vo.getMemberId());
+        return "member/resultRePw";
+    }
+
+    @PostMapping("rePassWordResult")
+    public String rePassWordResult(MemberVO vo, Model model){
+        /*비밀번호 수정 쿼리문*/
+        try {
+            memberService.memberUpdatePw(vo);
+            model.addAttribute("result", "success");
+        } catch (Exception e) {
+            model.addAttribute("result", "fail");
+        }
+        return "member/rePassWordResult";
+    }
+
 
     /*쿨 SMS API*/
     private void SendSMS(String str, String phone) {
@@ -162,6 +224,25 @@ public class memberController {
 //            System.out.println(e.getMessage());
 //            System.out.println(e.getCode());
 //        }
+    }
+
+    /*랜덤 난수 6자리 생성*/
+    private String random(){
+        Random rand = new Random();
+        String str = ""; //난수가 저장될 변수
+
+        for(int i=0;i<6;i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            str += ran;
+        }
+        return str;
+    }
+
+//    특정 회원 전체 정보 조회
+    @PostMapping("allSelect")
+    public void allSelect(MemberVO vo){
+        vo = memberService.memberAllSelect(vo);
+        log.info(vo.toString());
     }
 
 //    여기부터 플로깅 예약 관련 컨트롤러
