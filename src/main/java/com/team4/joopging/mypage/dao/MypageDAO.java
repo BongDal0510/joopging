@@ -40,7 +40,7 @@ public class MypageDAO {
     }
 
     /*회원정보 수정*/
-    public boolean updateMember(MemberVO vo){
+    public boolean updateMember(TempMemberVO vo){
         return mapper.updateMember(vo) == 1;
     }
 

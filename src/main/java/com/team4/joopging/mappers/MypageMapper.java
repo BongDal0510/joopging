@@ -3,7 +3,7 @@ package com.team4.joopging.mappers;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mypage.vo.GoodsLikeListVO;
-import com.team4.joopging.mypage.vo.MemberVO;
+import com.team4.joopging.mypage.vo.TempMemberVO;
 import com.team4.joopging.mypage.vo.PloResVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,7 +29,7 @@ public interface MypageMapper {
     /*세션 아이디로 세션 넘 찿기*/
     public int selectMemberNum(String id);
     /*회원정보 수정*/
-    public int updateMember(MemberVO vo);
+    public int updateMember(TempMemberVO vo);
     /*회원정보 탈퇴*/
     public int deleteMember(String memberId, String memberPw);
 }

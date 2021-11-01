@@ -4,7 +4,7 @@ import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mypage.dao.MypageDAO;
 import com.team4.joopging.mypage.dao.OrderHistoryDAO;
-import com.team4.joopging.mypage.vo.MemberVO;
+import com.team4.joopging.mypage.vo.TempMemberVO;
 import com.team4.joopging.point.dao.PointDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class MypageController {
     private final MypageDAO mypagedao;
     private final PointDAO pointdao;
     private final OrderHistoryDAO orderHistorydao;
-    private final MemberVO membervo;
+    private final TempMemberVO membervo;
 
 
     /*마이페이지 메인으로 이동*/
@@ -61,7 +61,7 @@ public class MypageController {
 
     /*회원 정보 수정*/
     @PostMapping("updateMember")
-    public RedirectView updateMember(MemberVO vo, RedirectAttributes rttr){
+    public RedirectView updateMember(TempMemberVO vo, RedirectAttributes rttr){
         if(mypagedao.updateMember(vo)){
             rttr.addFlashAttribute("result", "success");
         }else{
