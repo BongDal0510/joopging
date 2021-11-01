@@ -12,7 +12,7 @@ const add_textbox = () => {
     const goods_option = document.getElementById("goods_option");
     const newP = document.createElement('p');
     num++;
-    newP.innerHTML = "색상<input type='text' id='goodsColor' name='goods_option_color" + num + "' style='width:20%;'>사이즈<input type='text' id='goodsSize' name='goods_option_size" + num + "' style='width:20%;'><input type='button' value='삭제' onclick='remove(this)'>";
+    newP.innerHTML = "색상<input type='text' id='goodsColor' name='goodsOptionColor" + num + "' style='width:20%;'>사이즈<input type='text' id='goodsSize' name='goodsOptionSize" + num + "' style='width:20%;'><input type='button' value='삭제' onclick='remove(this)'>";
     goods_option.appendChild(newP);
 }
 const remove = (obj) => {
@@ -68,7 +68,7 @@ function enrollSubmit(){
     var maxSize = 5 * 1024 * 1024;
     var fileSize;
 
-    if($('#board_file1').val() == "") {
+/*    if($('#board_file1').val() == "") {
         alert("첨부파일은 필수!");
         $("#board_file1").focus();
         return;
@@ -82,7 +82,7 @@ function enrollSubmit(){
         alert("첨부파일은 필수!");
         $("#board_file1").focus();
         return;
-    }
+    }*/
     if(!frm.goods_content.value){
         alert("상품 설명을 입력해주세요");
         frm.goods_content.focus();
