@@ -26,7 +26,8 @@
     </delete>
 
     <select id="getEventList" resultType="eventVO">
-        SELECT EVENTNUM, EVENTTITLE, EVENTDATE
+        SELECT /*+ INDEX_DESC(TBL_EVENT_INFO EVENTREGDATE) */
+        EVENTNUM, EVENTTITLE, EVENTDATE
         FROM TBL_EVENT_INFO
     </select>
 
