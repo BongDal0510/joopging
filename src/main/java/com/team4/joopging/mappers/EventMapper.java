@@ -1,5 +1,6 @@
 package com.team4.joopging.mappers;
 
+import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,7 +21,7 @@ public interface EventMapper {
     public int deleteEvent(Long eventNum);
 
     //이벤트 목록
-    public List<EventVO> getEventList();
+    public List<EventVO> getEventList(EventCriteria eventCriteria);
 
     //이벤트 전체 개수
     public int getTotal();

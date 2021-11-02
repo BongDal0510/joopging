@@ -1,5 +1,7 @@
 package com.team4.joopging.controller;
 
+import com.team4.joopging.event.vo.EventCriteria;
+import com.team4.joopging.event.vo.EventPageDTO;
 import com.team4.joopging.services.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +30,9 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping("eventlist")
-    public String event(Model model) {
-        model.addAttribute("list", eventService.getList());
+    public String event(EventCriteria eventCriteria, Model model) {
+        model.addAttribute("list", eventService.getList(eventCriteria));
+        model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
         return "event/eventlist";
     }
 

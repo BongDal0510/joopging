@@ -26,9 +26,17 @@
     </delete>
 
     <select id="getEventList" resultType="eventVO">
+        <![CDATA[
+        SELECT EVENTNUM, EVENTTITLE, EVENTDATE
+        FROM
+        (
         SELECT /*+ INDEX_DESC(TBL_EVENT_INFO EVENT_INFO_PK) */
-        EVENTNUM, EVENTTITLE, EVENTDATE
+        ROWNUM R, EVENTNUM, EVENTTITLE, EVENTDATE
         FROM TBL_EVENT_INFO
+        WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
     </select>
 
     <select id="getTotal" resultType="_int">
