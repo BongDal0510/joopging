@@ -36,9 +36,14 @@ public class EventController {
         return "event/eventlist";
     }
 
-    @GetMapping("attendInfo")
-    public String attendInfo() {
-        return "event/attendInfo";
+    @GetMapping("joinInfo")
+    public String joinInfo() {
+        return "event/joinInfo";
+    }
+
+    @GetMapping("attendPopup")
+    public String attendPopup() {
+        return "event/attendPopup";
     }
 
     @GetMapping("eventInfo")
