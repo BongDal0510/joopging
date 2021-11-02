@@ -8,18 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/main/*")
+@RequestMapping("/admin/*")
 @RequiredArgsConstructor
-public class HeaderFooterController {
+public class AdminController {
 
-    @GetMapping("header")
-    public String header() {
-        return "/pageframe/header";
-    }
-
-    @GetMapping("footer")
-    public String footer() {
-        return "/pageframe/footer";
-    }
+    @GetMapping("admin")
+    public String adminMain() { return "/admin/admin"; }
 
 }

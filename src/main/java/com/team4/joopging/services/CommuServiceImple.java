@@ -45,5 +45,6 @@ public class CommuServiceImple implements CommuService{
     @Override
     public boolean updateCommuViewCnt(Long commuBno) { return commuDAO.updateCommuViewCnt(commuBno); }
 
-
+    @Override
+    public List<CommuVO> getAnnounceList(int commuBoardStatus) { return commuDAO.getAnnounceList(commuBoardStatus); }
 }

@@ -40,8 +40,8 @@ public class CommuReplyService {
     }
 
     /*댓글 목록*/
-    public CommuReplyPageDTO getCommuReplyList(Long commuBno, Criteria criteria) {
+    public CommuReplyPageDTO getCommuReplyPagingList(Long commuBno, Criteria criteria) {
         log.info("getList..............");
-        return new CommuReplyPageDTO(commuReplyDAO.getCommuReplyTotal(commuBno), commuReplyDAO.getCommuReplyList(commuBno, criteria));
+        return new CommuReplyPageDTO(commuReplyDAO.getCommuReplyTotal(commuBno), commuReplyDAO.getCommuReplyPagingList(commuBno, criteria));
     }
 }

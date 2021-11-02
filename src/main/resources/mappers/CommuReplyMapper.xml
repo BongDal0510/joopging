@@ -22,16 +22,16 @@
         WHERE COMMURNO = #{commuRno}
     </update>
 
-    <select id="getCommuReplyListWithPaging" resultType="commuReplyVO">
+    <select id="getCommuReplyPagingList" resultType="commuReplyVO">
     <![CDATA[
-    SELECT COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDAE, COMMUREPLYUPDATEDATE
+    SELECT COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDATE, COMMUREPLYUPDATEDATE
     FROM
         (
         SELECT /*+ INDEX_DESC(TBL_COMMUREPLY PK_COMMUREPLY)*/
         ROWNUM R, COMMURNO, COMMUBNO, COMMUREPLY, COMMUREPLIER, COMMUREPLYDATE, COMMUREPLYUPDATEDATE
         FROM TBL_COMMUREPLY
         WHERE COMMUBNO = #{commuBno}
-        AND ROWNUM <= #{criteria.pagaNum} * #{criteria.amount}
+        AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
         )
         WHERE R > (#{criteria.pageNum} -1) * #{criteria.amount}
     ]]>
