@@ -71,6 +71,7 @@
     }
 
     .detail {
+        margin-top: 10%;
         text-align: center;
         clear: both;
         margin-bottom: 30px;
@@ -289,8 +290,11 @@
             </table>
         </nav>
 
+        <div class="uploadResult">
+            <ul></ul>
+        </div>
 
-        <div id="detail" class="detail">
+        <div class="detail">
             <img
                     style="text-algin: center; width: 550px; height: 500px; margin-top: 200px;"
                     src="/images/프라이탁.jpg">
@@ -370,7 +374,7 @@
         crossorigin="anonymous">
 </script>
 <script>
-
+    /*헤더 불러오는거*/
     $(function () {
         $("#main_header").load("header #header");
         $("#shop_header").load("shop_header #shop_header");
@@ -378,6 +382,37 @@
     });
 </script>
 <script>
+
+    let goodsNum = [[${shop.getGoodsNum()}]];
+    let uploadResult = $(".uploadResult ul");
+    let mainImgUploadResult = $(".stock_img");
+
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
+                 function(arr){
+
+                     let str = "";
+                     let mainStr ="";
+                     $(arr).each(function(i, attach){
+                    if(!attach.image){
+                        return;
+                    }else{
+                        let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                        str += "<div class=\"detail\">";
+                        str += "<img style=\"text-algin: center; width: 550px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                        str += "</div>";
+
+                    }
+                });
+                uploadResult.html(str);
+            });//getJSON
+        })();
+    })
+
+
+
+
 
     $(document).ready(function () {
 

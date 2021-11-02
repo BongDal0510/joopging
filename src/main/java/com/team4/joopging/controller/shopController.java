@@ -1,20 +1,21 @@
 package com.team4.joopging.controller;
 
 
+import com.team4.joopging.beans.vo.AttachFileVO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopPageDTO;
 import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.services.ShopService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -76,14 +77,6 @@ public class shopController {
 
 
 
-
-
-
-
-
-
-
-
     @GetMapping("successPayment")
     public String successPayment() {return "successPayment";}
 
@@ -106,6 +99,15 @@ public class shopController {
         return "footer";
     }
 
+
+    // produces는 리턴할 값
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    // rest 방식이므로
+    @ResponseBody
+    public List<AttachFileVO> getAttachList(Long goodsNum){
+        log.info("getAttachList" + goodsNum);
+        return shopService.getAttachList(goodsNum);
+    }
 
 }
 

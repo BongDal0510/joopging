@@ -1,5 +1,6 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.beans.vo.AttachFileVO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,5 @@ public interface ShopService {
     public boolean goodsRemove(Long goodsNum);
     public List<ShopVO> goodsGetList(ShopCriteria shopCriteria);
     public int goodsGetTotal();
+    public List<AttachFileVO> getAttachList(Long goodsNum);
 }
