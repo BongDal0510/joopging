@@ -14,8 +14,10 @@ public interface MypageMapper {
 
     /*플로깅 예약 목록*/
     public List<PloResVO> getPloResList(int memberNum, Criteria criteria);
-    /*플로긴 내역 토탈*/
+    /*플로깅 내역 토탈*/
     public int totalPloResCnt(int memberNum);
+    /*플로깅 내역 개수*/
+    public int realTotalPloResCnt(int memberNum);
     /*찜 목록*/
     public List<GoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria);
     /*찜목록 토탈*/

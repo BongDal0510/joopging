@@ -24,6 +24,11 @@ public class MypageDAO {
         return mapper.totalPloResCnt(memberNum);
     }
 
+    /*플로깅 내역 토탈*/
+    public int realTotalPloResCnt(int memberNum){
+        return mapper.realTotalPloResCnt(memberNum);
+    }
+
     /*찜목록 출력*/
     public List<GoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria){
         return mapper.getGoodsLikeList(memberNum, criteria);

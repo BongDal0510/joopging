@@ -42,6 +42,9 @@ public class MypageController {
         model.addAttribute("goodsLikePageMaker", new CommuPageDTO(mypagedao.totalGoodsLikeCnt(memberNum), 10, criteria));
         model.addAttribute("orderPageMaker", new CommuPageDTO(orderHistorydao.totalOrderCnt(memberNum), 10, criteria));
         model.addAttribute("pointPageMaker", new CommuPageDTO(pointdao.totalPointCnt(memberNum), 10, criteria));
+        model.addAttribute("ploResTotalCnt", mypagedao.realTotalPloResCnt(memberNum));
+        model.addAttribute("goodslikeTotalCnt", mypagedao.totalGoodsLikeCnt(memberNum));
+        model.addAttribute("orderTotalCnt", orderHistorydao.realTotalOrderCnt(memberNum));
         return "mypage/mypage";
     }
 

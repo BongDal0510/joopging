@@ -18,9 +18,14 @@
                         ]]>
 </select>
 
-    <!--내가 예약한 플로깅 내역 전체 개수-->
+    <!--내 플로깅 내역의 전체 개수-->
     <select id="totalPloResCnt" resultType="_int">
         SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
+    </select>
+
+    <!--내가 플로깅 개수-->
+    <select id="realTotalPloResCnt" resultType="_int">
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum} AND NOT ploResStatus = 1
     </select>
 
 <!--찜 목록-->

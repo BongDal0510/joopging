@@ -25,6 +25,10 @@ public class OrderHistoryDAO {
     public int totalOrderCnt(int memberNum){
         return mapper.totalOrderCnt(memberNum);
     }
+    /*구매한 상품 토탈*/
+    public int realTotalOrderCnt(int memberNum){
+        return mapper.realTotalOrderCnt(memberNum);
+    }
 
     /*택배 정보 출력(구매상품번호로)*/
     public ParcelVO getParcel(int orderNum){return mapper.getParcel(orderNum);}
