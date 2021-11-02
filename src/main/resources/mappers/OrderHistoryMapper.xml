@@ -22,9 +22,14 @@ FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
                         ]]>
 </select>
 
-    <!--내가 구매하 상품의 전체 개수-->
+    <!--내 상품의 전체 내역의 개수-->
     <select id="totalOrderCnt" resultType="_int">
         SELECT COUNT(orderNum) FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
+    </select>
+
+    <!--내가 구매하 상품의 전체 개수-->
+    <select id="realTotalOrderCnt" resultType="_int">
+        SELECT COUNT(orderNum) FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND NOT orderStatus = 1
     </select>
 
     <!--상품 택배-->

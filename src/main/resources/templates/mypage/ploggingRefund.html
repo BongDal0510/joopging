@@ -339,11 +339,10 @@
                                 <td><input type="text"></td>
                             </tr>
                             <tr>
-                                <th>환불액</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: center;"><button>환불하기</button></td>
+                                <td colspan="2" style="text-align: center;">
+                                    <form action=""><button>환불하기</button></form>
+                                    <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -364,4 +363,9 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
+<script>
+$("#close").on("click",function () {
+    self.close();
+})
+</script>
 </html>

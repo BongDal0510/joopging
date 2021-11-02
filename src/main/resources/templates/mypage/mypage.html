@@ -444,9 +444,11 @@
                         </header>
                         <div id = "ploggingAdv">
                             <!--임시로 실험해봄-->
-                            <button th:onclick="|location.href='@{/mypage/orderInfo}'|">
+                            <form action="/event/eventlist">
+                            <button>
                                 이벤트 확인하러 가기
                             </button>
+                            </form>
                         </div>
                         <div style="display: flex; justify-content: space-around;">
                             <div class = "smallBox1" >
@@ -485,7 +487,7 @@
                         <div>
                             <table class = boardList>
                                 <caption>
-                                    내 플로깅 예약 횟수 :
+                                    내 플로깅 예약 횟수 : <span th:text="${ploResTotalCnt}"/> 번
                                 </caption>
                                 <thead>
                                 <tr>
@@ -535,7 +537,7 @@
                         <div>
                             <table class = boardList>
                                 <caption>
-                                    현재 포인트 :
+                                    현재 포인트 : <span th:text=""/>
                                 </caption>
                                 <thead>
                                 <tr>
@@ -583,7 +585,7 @@
                         <div>
                             <table class = boardList>
                                 <caption>
-                                    내가 구매한 상품 :
+                                    내가 구매한 상품 : <span th:text="${orderTotalCnt}"/> 개
                                 </caption>
                                 <thead>
                                 <tr>
@@ -636,7 +638,7 @@
                         <div>
                             <table class = boardList>
                                 <caption>
-                                    내 찜 목록 : <!--개수--> 개
+                                    내 찜 목록 : <span th:text="${goodslikeTotalCnt}"/> 개
                                 </caption>
                                 <thead>
                                 <tr>
