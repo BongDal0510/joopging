@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class MemberVO {
+public class TempMemberVO {
     /*회원 번호 시퀀스로 들어감*/
     private int memberNum;
     /*아이디*/

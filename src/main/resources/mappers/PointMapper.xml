@@ -3,7 +3,7 @@
 
 <mapper namespace="com.team4.joopging.mappers.PointMapper">
     <!--포인트 목록-->
-    <select id="getPointList" resultType="com.team4.joopging.mypage.vo.pointVO">
+    <select id="getPointList" resultType="com.team4.joopging.point.vo.PointVO">
         SELECT pointNum, memberNum, history, point, pointDate, pointStatus
         FROM (
         <![CDATA[
@@ -26,12 +26,4 @@
         INSERT INTO TBL_POINT(pointNum, memberNum, history, point, pointDate, pointStatus)
         VALUE (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
     </insert>
-
-
-    <!--구매 취소된 상품 인지 확인 여부-->
-    <select id="checkDeletOrder" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
-    SELECT COUNT(orderNum) FROM TBL_GOODS_ORDER
-    WHERE orderNum=#{orderNum} AND orderStatus = 1;
-    </select>
-
 </mapper>
