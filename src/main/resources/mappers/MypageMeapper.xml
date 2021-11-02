@@ -3,6 +3,13 @@
 
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
+
+    <!--플로깅 번호로 찾기-->
+    <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.PloResVO">
+        SELECT  ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+        FROM TBL_PLO_RES WHERE ploggingNum = #{ploggingNum}
+    </select>
+
     <!--플로깅 예약 목록-->
 <select id="getPloResList" resultType="com.team4.joopging.mypage.vo.PloResVO">
 
@@ -47,6 +54,11 @@ WHERE memberNum = #{memberNum}
     <select id="totalGoodsLikeCnt" resultType="_int">
         SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberNum = #{memberNum}
     </select>
+
+    <!--찜 삭제-->
+    <delete id="deleteGoodsLike">
+        DELETE FROM TBL_GOODS_LIKE_LIST WHERE goodsLikeListNum = #{goodsLikeListNum}
+    </delete>
 
 <!--플로깅 예약 취소-->
 <update id="deleteReservation">

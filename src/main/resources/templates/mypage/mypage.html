@@ -444,9 +444,11 @@
                         </header>
                         <div id = "ploggingAdv">
                             <!--임시로 실험해봄-->
-                            <button th:onclick="|location.href='@{/mypage/orderInfo}'|">
+                            <form action="/event/eventlist">
+                            <button>
                                 이벤트 확인하러 가기
                             </button>
+                            </form>
                         </div>
                         <div style="display: flex; justify-content: space-around;">
                             <div class = "smallBox1" >

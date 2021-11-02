@@ -12,6 +12,8 @@ import java.util.List;
 @Mapper
 public interface MypageMapper {
 
+    /*예약번호로 플로깅 찾기*/
+    public PloResVO getPloRes(Long ploResNum);
     /*플로깅 예약 목록*/
     public List<PloResVO> getPloResList(int memberNum, Criteria criteria);
     /*플로깅 내역 토탈*/
@@ -28,6 +30,8 @@ public interface MypageMapper {
     public List<CommuVO> getMyQueList(int memberNum, Criteria criteria);
     /*플로깅 예약 취소*/
     public int deletePloRes(Long ploResNum);
+    /*찜목록 삭제*/
+    public int deleteGoodsLike(int goodsLikeNum);
     /*세션 아이디로 세션 넘 찿기*/
     public int selectMemberNum(String id);
     /*회원정보 수정*/

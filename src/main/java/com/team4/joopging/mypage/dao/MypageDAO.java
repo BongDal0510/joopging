@@ -14,6 +14,11 @@ public class MypageDAO {
 
     private final MypageMapper mapper;
 
+    /*예약번호로 플로깅 찾기*/
+    public PloResVO getPloRes(Long ploResNum){
+        return mapper.getPloRes(ploResNum);
+    };
+
     /*플로깅 내역 출력*/
     public List<PloResVO> getPloResList(int memberNum, Criteria criteria){
         return mapper.getPloResList(memberNum, criteria);
@@ -24,7 +29,7 @@ public class MypageDAO {
         return mapper.totalPloResCnt(memberNum);
     }
 
-    /*플로깅 내역 토탈*/
+    /*플로깅 현재 예약 건수*/
     public int realTotalPloResCnt(int memberNum){
         return mapper.realTotalPloResCnt(memberNum);
     }
@@ -43,6 +48,11 @@ public class MypageDAO {
     public boolean deletePloRes(Long ploResNum){
         return mapper.deletePloRes(ploResNum) == 1;
     }
+
+    /*찜목록 삭제*/
+    public boolean deleteGoodsLike(int goodsLikeNum){
+         return mapper.deleteGoodsLike(goodsLikeNum)==1;
+    };
 
     /*회원정보 수정*/
     public boolean updateMember(TempMemberVO vo){
