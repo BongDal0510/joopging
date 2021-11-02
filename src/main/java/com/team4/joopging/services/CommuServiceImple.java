@@ -1,10 +1,13 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.community.dao.AttachFileDAO;
 import com.team4.joopging.community.dao.CommuDAO;
+import com.team4.joopging.community.vo.AttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,20 +16,45 @@ import java.util.List;
 public class CommuServiceImple implements CommuService{
 
     private final CommuDAO commuDAO;
+    private final AttachFileDAO attachFileDAO;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void registerCommu(CommuVO commu) {
-        commuDAO.registerCommu(commu);
-    }
 
+        commuDAO.registerCommu(commu);
+
+
+        if(commu.getAttachList() == null || commu.getAttachList().size() == 0){
+            return;
+        }
+
+        commu.getAttachList().forEach(attach -> {
+            attach.setCommuBno(commu.getCommuBno());
+            attachFileDAO.insert(attach);
+        });
+    }
     @Override
     public CommuVO getCommu(Long commuBno) {
         return commuDAO.getCommu(commuBno);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean modifyCommu(CommuVO commu) {
-        return commuDAO.modifyCommu(commu);
+
+        boolean modifyCommuResult = false;
+
+        attachFileDAO.deleteAll(commu.getCommuBno());
+        modifyCommuResult = commuDAO.modifyCommu(commu);
+
+        if(modifyCommuResult && commu.getAttachList() != null && commu.getAttachList().size() != 0){
+            commu.getAttachList().forEach(attach -> {
+                attach.setCommuBno(commu.getCommuBno());
+                attachFileDAO.insert(attach);
+            });
+        }
+        return modifyCommuResult;
     }
 
     @Override
@@ -50,5 +78,9 @@ public class CommuServiceImple implements CommuService{
         return commuDAO.getAnnounceList(commuBoardStatus);
     }
 
+    @Override
+    public List<AttachFileVO> getAttachList(Long commuBno) {
+        return attachFileDAO.findByBno(commuBno);
+    }
 
 }

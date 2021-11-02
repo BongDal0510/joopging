@@ -1,21 +1,24 @@
 package com.team4.joopging.controller;
 
+import com.team4.joopging.community.vo.AttachFileVO;
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.services.CommuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -90,6 +93,8 @@ public class CommuController {
         log.info("removeCommu : " + commuBno);
         log.info("--------------------------------");
 
+        List<AttachFileVO> attachList = commuService.getAttachList(commuBno);
+
         if (commuService.removeCommu(commuBno)) {
             rttr.addFlashAttribute("result", "success");
         }else {
@@ -98,10 +103,42 @@ public class CommuController {
         return new RedirectView("communityList");
     }
 
-    //페이지 이동만
-    //글 등록으로
+
+    private void deleteFiles(List<AttachFileVO> attachList){
+        if(attachList == null || attachList.size() == 0){
+            return;
+        }
+
+        log.info("delete attach files...........");
+        log.info(attachList.toString());
+
+        attachList.forEach(attach -> {
+            try {
+                Path file = Paths.get("C:/upload/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
+                Files.delete(file);
+
+                if(Files.probeContentType(file).startsWith("image")){
+                    Path thumbnail = Paths.get("C:/upload/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
+                    Files.delete(thumbnail);
+                }
+            } catch (Exception e) {
+                log.error("delete file error " + e.getMessage());
+            }
+        });
+
+
+    }
+
     @GetMapping("communityRegister")
-    public void goPage(){}
+    public void register(){}
+
+    //    게시글 첨부파일
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<AttachFileVO> getAttachList(Long commuBno){
+        log.info("getAttachList " + commuBno);
+        return commuService.getAttachList(commuBno);
+    }
 
     //헤더
     @GetMapping("/pageframe/header")

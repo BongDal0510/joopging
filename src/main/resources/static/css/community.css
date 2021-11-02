@@ -238,3 +238,39 @@ a#reportBtn.button.small{
 td.boardStatus > img{
     width: 20%;
 }
+#boardTitleArea{
+    border: solid 1px #d3d3d3;
+    padding: 2%;
+}
+div.field input[name="commuBno"]{
+    border: none;
+    color: #fff;
+    padding: 0;
+    height: 0;
+}
+#commuWriterTitle{
+    padding: 0 0 0 2.5%;
+    font-size: x-small;
+    width:15%;
+}
+div.field input[name="commuWriter"]{
+    border: none;
+    padding:0 0 0 1.5%;
+    width:20%;
+    margin: 0;
+}
+div.field input[name="commuTitle"]{
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+#boardWriterArea{
+    display: flex;
+}
+div#commuContentArea textarea{
+    padding: 4%;
+}
+
+#commuLeftCategory a{
+    text-decoration: none !important;
+}

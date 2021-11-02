@@ -53,7 +53,7 @@ public class ControllerTest {
     @Test
     public void testRegisterCommu() throws Exception {
         String bno = mockMvc.perform(MockMvcRequestBuilders.post("/commu/communityRegister")
-                .param("commuTitle", "테스트 새 글 제목")
+                .param("commuTitle", "들어가는거 맞나")
                 .param("commuContent", "테스트 새 글 내용")
                 .param("commuWriter", "asd1234")
         ).andReturn().getFlashMap().toString();

@@ -7,7 +7,7 @@ let commuReplyService = (function(){
 
     //댓글 등록
     function add(replyInfo, callback, error){
-        console.log("add reply..........");
+        console.log("add reply.........." + replyInfo);
         $.ajax({
             url:"/replies/new",
             type:"post",
