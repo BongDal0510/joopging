@@ -11,19 +11,12 @@ public class EventCriteria {
     private int amount;
 
     public EventCriteria(){
-        this(1, 10);
+        this(1, 8);
     }
 
     public EventCriteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
     }
-
-//    public String getListLink(){
-//        UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-//                .queryParam("pageNum", pageNum)
-//                .queryParam("amount", amount);
-//        return builder.toUriString();
-//    }
 
 }
