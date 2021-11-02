@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-    @font-face {
+@font-face {
     font-family: 'S-CoreDream-4Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
     font-weight: normal;
@@ -27,18 +27,25 @@ div#main{
     padding: 0;
     font-family: 'yg-jalnan';
 }
+
 a.button{
-    background-color: #94C477;
+    font-family: 'S-CoreDream-3Light';
+    background-color: #35A14A;
     text-align: right;
+    padding: 0.2em 1em;
+    font-size: 14px;
+    margin: 3.4% 0;
 }
+
 #commuBoardWrapper{
     display: flex;
 }
 #commuBoardLeft{
     width: 17%;
-    padding: 5% 0 0 7%;
     overflow: hidden;
     text-align: center;
+    padding: 5% 0 0 5.6%;
+    margin-left:2%;
 }
 #commuBoardLeft tr{
     text-align: left;
@@ -52,16 +59,17 @@ a.button{
 }
 #commuBoardMiddle{
     width: 56%;
-    margin: 0 5%;
+    margin: 0 3% 0 3%;
 }
 #commuBoardRight{
     width: 17%;
     padding: 0 2% 0 0;
     overflow: hidden;
     text-align: center;
+    margin-top: 6%;
 }
 #commuSearchWrap{
-    padding: 0 25%;
+    padding: 0 25% 0 23%;
 }
 #communityBanner{
     padding: 0 10%;
@@ -78,16 +86,14 @@ a.button{
     font-family: 'S-CoreDream-3Light';
     font-size: 13px;
 }
-#goRead{
+#goRead, #goAnnounceRead{
     text-decoration-line: none;
 }
 .tHead{
     font-family: 'S-CoreDream-4Regular';
     text-align: center;
 }
-#registerBtn, #goCommuListBtn{
-    text-align: right;
-}
+
 
 #commuSearchWrap{
     font-family: 'S-CoreDream-3Light';
@@ -110,13 +116,13 @@ header#headerWrapper{
 
 }
 div#goCommuListBtn{
-    padding: 0 17% 2% 0;
+    text-align: left;
+    display: flex;
 }
-a#goListButton.small{
-
+/*a#goListBtn.small{
     padding: 0.4% 1.5%;
     font-size: 12px;
-}
+}*/
 div#main{
     margin-top: 5%;
 }
@@ -127,7 +133,9 @@ header#commuHeaderWrapper{
     margin: 0;
     padding-top: 0;
 }
-
+#goCommuListBtn div{
+    width: 50%;
+}
 body{
     margin:0;
 }
@@ -136,4 +144,133 @@ body{
     font-family: 'S-CoreDream-5Medium';
     font-size: 16px;
     font-weight: bold;
+
+}
+
+
+#registerBtn{
+    border-bottom: solid 3px #35A14A;
+    display: flex;
+}
+
+#registerBtn div{
+    font-family: 'yg-jalnan';
+    color:#35A14A;
+    text-align: left;
+    padding:2% 0%;
+    margin:0;
+    width: 70%;
+    float: left;
+    font-size: 20px;
+}
+div#registerBtnArea{
+    text-align: right;
+    padding: 0;
+}
+
+#commuLeftCategory tr{
+    border:none;
+}
+
+header.major{
+    border:none !important;
+}
+
+a#reportBtn.button.small{
+    background-color: #ffffff;
+}
+
+#goReportBtn{
+
+    text-align: right;
+}
+
+#goReportBtn img{
+    width:50%;
+    padding: 0;
+}
+
+.note-btn dropdown-toggle{
+    background-color: #f4f4f5;
+}
+
+#pagingStyle a{
+    text-decoration: none !important;
+}
+
+#pagingStyle code{
+    font-family: 'S-CoreDream-4Regular';
+    text-decoration: none;
+    font-size: 13px;
+}
+
+#commuSearchWrap input{
+    padding: 0.8%;
+    font-size: 13px;
+}
+
+.indent-2{
+    z-index: 1000;
+}
+
+#navLeftBar{
+    background-color: #F3F9ED;
+    z-index: 10000;
+}
+#navLeftBar a.depth-0, a.depth-1, a.depth-2, a.indent-0, a.indent-1, a.indent-2{
+    webkit-tap-highlight-color: #5d5d5d;
+}
+
+#navPanel {
+    box-shadow: -3px 0px 3px 3px #3c763d;
+    top: 8%;
+}
+#commuBoardTh th, #commuAnnounceTh th{
+    text-align: center;
+}
+#commuBoardThList td.bno, td.writer, td.regDate, td.viewCnt{
+    text-align: center;
+}
+#commuAnnounceThList td.bno, td.writer, td.regDate, td.viewCnt{
+    text-align: center;
+}
+
+td.boardStatus > img{
+    width: 20%;
+}
+#boardTitleArea{
+    border: solid 1px #d3d3d3;
+    padding: 2%;
+}
+div.field input[name="commuBno"]{
+    border: none;
+    color: #fff;
+    padding: 0;
+    height: 0;
+}
+#commuWriterTitle{
+    padding: 0 0 0 2.5%;
+    font-size: x-small;
+    width:15%;
+}
+div.field input[name="commuWriter"]{
+    border: none;
+    padding:0 0 0 1.5%;
+    width:20%;
+    margin: 0;
+}
+div.field input[name="commuTitle"]{
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+#boardWriterArea{
+    display: flex;
+}
+div#commuContentArea textarea{
+    padding: 4%;
+}
+
+#commuLeftCategory a{
+    text-decoration: none !important;
 }

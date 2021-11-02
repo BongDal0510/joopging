@@ -15,4 +15,5 @@ public interface CommuService {
     public List<CommuVO> getCommuList(Criteria criteria);
     public int getCommuTotal(Criteria criteria);
     public boolean updateCommuViewCnt(Long commuBno);
+    public List<CommuVO> getAnnounceList(int commuBoardStatus);
 }

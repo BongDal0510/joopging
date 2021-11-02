@@ -31,4 +31,7 @@ public interface CommuMapper {
 
     //게시글 조회수
     public int updateCommuViewCnt(Long commuBno);
+
+    //공지글 가져오기
+    public List<CommuVO> getAnnounceList(int commuBoardStatus);
 }
