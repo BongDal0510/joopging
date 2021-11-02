@@ -2,6 +2,9 @@ package com.team4.joopging.beans.vo;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 // 상품번호
 // 상품이름
 // 상품카테고리
@@ -16,4 +19,5 @@ public class ShopVO {
     private String goodsCategory;
     private String goodsPrice;
     private String goodsContent;
+    private List<AttachFileVO> attachList;
 }

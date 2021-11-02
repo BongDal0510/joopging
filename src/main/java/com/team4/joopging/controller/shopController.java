@@ -41,6 +41,12 @@ public class shopController {
         log.info("----------------------");
         log.info("register : " + shopVO.toString());
         log.info("----------------------");
+
+
+        if(shopVO.getAttachList() != null){
+            shopVO.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
+
         /* 뷰딴에 전달하려고 model 객체 필요(받는것은 자동으로됨) */
         shopService.goodsRegister(shopVO);
         /* 샵뒤에 쿼리스트링 결과가 나타남 */

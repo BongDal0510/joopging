@@ -1,10 +1,12 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.beans.dao.AttachFileDAO;
 import com.team4.joopging.beans.dao.ShopDAO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,10 +15,20 @@ import java.util.List;
 public class ShopServiceImple implements ShopService{
 
     private final ShopDAO shopDAO;
+    private final AttachFileDAO attachFileDAO;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void goodsRegister(ShopVO shop) {
         shopDAO.goodsRegister(shop);
+        if(shop.getAttachList() ==null || shop.getAttachList().size() ==0){
+            return;
+        }
+        shop.getAttachList().forEach(attach ->{
+            attach.setGoodsNum(shop.getGoodsNum());
+            attachFileDAO.insert(attach);
+
+        });
     }
 
     @Override

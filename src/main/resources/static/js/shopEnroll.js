@@ -57,16 +57,16 @@ function enrollSubmit(){
         frm.goods_name.focus();
         return false;
     }
-    if(frm.goods_category.value =="no select"){
+    if(frm.goodsCategory.value =="no select"){
         alert("상품 카테고리를 선택해주세요");
         frm.goods_category.focus();
         return false;
     }
 
-    var imgFile = $('#board_file1').val();
+/*    var imgFile = $('#board_file1').val();
     var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
     var maxSize = 5 * 1024 * 1024;
-    var fileSize;
+    var fileSize;*/
 
 /*    if($('#board_file1').val() == "") {
         alert("첨부파일은 필수!");
@@ -83,14 +83,14 @@ function enrollSubmit(){
         $("#board_file1").focus();
         return;
     }*/
-    if(!frm.goods_content.value){
+    if(!frm.goodsContent.value){
         alert("상품 설명을 입력해주세요");
-        frm.goods_content.focus();
+        frm.goodsContent.focus();
         return false;
     }
-    if(!frm.goods_price.value){
+    if(!frm.goodsPrice.value){
         alert("가격을 입력해주세요");
-        frm.goods_price.focus();
+        frm.goodsPrice.focus();
         return false;
     }
 
