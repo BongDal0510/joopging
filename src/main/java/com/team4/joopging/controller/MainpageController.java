@@ -14,12 +14,12 @@ public class MainpageController {
 
     @GetMapping("mainpage")
     public String mainpage() {
-        return "mainpage";
+        return "/main/mainpage";
     }
 
     @GetMapping("cs")
     public String cs() {
-        return "cs";
+        return "/main/cs";
     }
 
     @GetMapping("/pageframe/header")
