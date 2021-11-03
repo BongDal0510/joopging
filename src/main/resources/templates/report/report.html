@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<!--
+	Hypothesis by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html>
+<head>
+    <title>Report</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/report.css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="is-preload">
+
+<div id="main" class="modal-wrapper">
+    <div id="wrapper" class="modal">
+        <div class="inner head">
+
+            <div class="reportWrapper content">
+                <form method="" action="">
+                    <div id="joopgingLogoLeaf"><img src="/images/commu/leaf_icon.png"/></div>
+                    <div class="reportBackground">
+                        <div class="reportInfo">
+                            <h3> 게시물 신고하기 </h3>
+                        </div>
+                        <div class="reportAnnounce">
+                            <div>
+                           <pre class="reportAnnounceDetail">
+해당 게시판은 모든 연령이 이용 가능한 공간입니다.
+비방글, 도배, 불법광고, 청소년 유해글 등
+누군가에게 불편을 줄 수 있는 글은 삼가주세요.
+
+신고된 글은 줍깅 커뮤니티의 이용 수칙에 따라 검토 후
+알맞은 조치가 취해질 예정입니다.
+늘 깨끗하고 건전한 커뮤니티를 만들기 위해 최선을 다하겠습니다.
+감사합니다.</pre>
+                            </div>
+                            <div class="reportWarning">
+                                **허위 신고시 향후 활동에 불이익이 있을 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <!--신고자 정보-->
+                    <div>
+                        <div id="boardTitleArea">
+                            <div class="field">
+                                <h4>해당 글을 신고합니다.</h4>
+                                <input name="commuTitle" type="text" placeholder="신고된 글의 제목이 들어갈 예정입니다." readonly/>
+                                <!--신고당한 글 제목-->
+                            </div>
+                            <div class="field" id="boardWriterArea">
+                                <h4 id="sessionId">신고자 :</h4>
+                                <input name="sessionId" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
+                                <h4 id="reportDate">신고일 :</h4>
+                                <input name="reportDate" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>신고 사유를 선택해주세요</h4>
+                        </div>
+                        <div class="reportSelections">
+                            <select>
+                                <option>불법광고</option>
+                                <option>욕설/비방글</option>
+                                <option>도배글</option>
+                                <option>청소년유해글</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                        <div>
+                            <pre><textarea name="" id="" cols="30" rows="4" style="resize: none"
+                                           placeholder="기타 사유를 입력해주세요. 명확한 사유는 신속한 대응에 도움이 될 수 있습니다."></textarea></pre>
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="javascript:void(0)" class="button btn-close trigger">취소
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                        <input type="button" class="button btn-close trigger" value="신고하기">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    >
+
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+</body>
+</html>
