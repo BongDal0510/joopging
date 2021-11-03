@@ -26,5 +26,5 @@ public interface MemberMapper {
     /*비밀번호 변경*/
     public void updatePw(MemberVO memberVO);
     /*회원정보 전체 조회*/
-    public MemberVO allSelect(MemberVO memberVO);
+    public MemberVO allSelect(String id);
 }

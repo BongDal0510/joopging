@@ -26,5 +26,5 @@ public interface MemberService {
     /*비밀번호 변경*/
     public void memberUpdatePw(MemberVO vo);
     /*회원정보 전체 조회*/
-    public MemberVO memberAllSelect(MemberVO vo);
+    public MemberVO memberAllSelect(String id);
 }

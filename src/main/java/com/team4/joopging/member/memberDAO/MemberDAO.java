@@ -49,5 +49,5 @@ public class MemberDAO {
     public void memberUpdatePw(MemberVO vo){ mapper.updatePw(vo); }
 
     /*회원정보 전체 조회*/
-    public MemberVO memberAllSelect(MemberVO vo){ return mapper.allSelect(vo); }
+    public MemberVO memberAllSelect(String id){ return mapper.allSelect(id); }
 }
