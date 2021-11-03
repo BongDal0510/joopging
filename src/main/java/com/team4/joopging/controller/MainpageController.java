@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/main/*")
 @RequiredArgsConstructor
-public class HeaderFooterController {
+public class MainpageController {
 
-    @GetMapping("header")
+    @GetMapping("mainpage")
+    public String mainpage() {
+        return "mainpage";
+    }
+
+    @GetMapping("cs")
+    public String cs() {
+        return "cs";
+    }
+
+    @GetMapping("/pageframe/header")
     public String header() {
         return "/pageframe/header";
     }
 
-    @GetMapping("footer")
+    @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
-    }
-
-    @GetMapping("terms")
-    public String terms() {
-        return "pageframe/terms";
-    }
-
-    @GetMapping("privacy")
-    public String privacy() {
-        return "pageframe/privacy";
     }
 
 }
