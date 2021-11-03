@@ -392,9 +392,11 @@
             $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
                 function(arr){
                     let str = "";
+                    let mainstr ="";
+
                     $(arr).each(function(i, attach){
                         if(!attach.image){
-
+                            return;
                         }else{
                             let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
                             str += "<div class=\"detail\">";
@@ -402,7 +404,19 @@
                             str += "</div>";
 
                         }
+                        if(i==0){
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            mainstr += "<div class=\"stock_img\">";
+                            mainstr += "<a href=\"#\" class=\"stock_detail\">";
+                            mainstr += "<img style=\"text-algin: center; width: 500px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                            mainstr += "</a></div>"
+                            return;
+                        } else{
+
+                        }
                     });
+
+                    mainImgUploadResult.html(mainstr);
                     uploadResult.html(str);
                 });//getJSON
         })();
