@@ -5,7 +5,6 @@ package com.team4.joopging.controller;
 //import net.nurigo.java_sdk.exceptions.CoolsmsException;
 //import org.json.simple.JSONObject;
 
-/*네이버 로그인 회원가입*/
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
