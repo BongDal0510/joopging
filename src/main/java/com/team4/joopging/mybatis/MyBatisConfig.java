@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
-@MapperScan("com.example.joopging.mappers")
+@MapperScan("com.team4.joopging.mappers")
 public class MyBatisConfig {
     private final ApplicationContext applicationContext;
 
