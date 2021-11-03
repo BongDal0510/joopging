@@ -61,8 +61,8 @@ public class MemberServiceImple implements MemberService{
     }
 
     @Override
-    public MemberVO memberAllSelect(MemberVO vo) {
-        return memberDAO.memberAllSelect(vo);
+    public MemberVO memberAllSelect(String id) {
+        return memberDAO.memberAllSelect(id);
     }
 
 

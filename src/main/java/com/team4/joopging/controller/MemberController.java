@@ -263,13 +263,6 @@ public class MemberController {
         return str;
     }
 
-    //    특정 회원 전체 정보 조회
-    @PostMapping("allSelect")
-    public void allSelect(MemberVO vo) {
-        vo = memberService.memberAllSelect(vo);
-        log.info(vo.toString());
-    }
-
     /*로그인 창에서 네이버 로그인 진행*/
     /*login.html에서 요청*/
     @GetMapping("callback")
