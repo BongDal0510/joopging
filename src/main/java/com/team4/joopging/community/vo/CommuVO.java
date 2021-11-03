@@ -20,5 +20,5 @@ public class CommuVO {
     //input 태그의 name에
     //attachList[i].fileName...
     //방식으로 submit하면 자동으로 List에 add할 수 있게 된다.
-    private List<AttachFileVO> attachList;
+    private List<CommuAttachFileVO> attachList;
 }

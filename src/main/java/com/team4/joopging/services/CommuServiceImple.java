@@ -1,8 +1,8 @@
 package com.team4.joopging.services;
 
-import com.team4.joopging.community.dao.AttachFileDAO;
+import com.team4.joopging.community.dao.CommuAttachFileDAO;
 import com.team4.joopging.community.dao.CommuDAO;
-import com.team4.joopging.community.vo.AttachFileVO;
+import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CommuServiceImple implements CommuService{
 
     private final CommuDAO commuDAO;
-    private final AttachFileDAO attachFileDAO;
+    private final CommuAttachFileDAO commuAttachFileDAO;
 
     //게시글 등록 with 첨부파일
     @Transactional(rollbackFor = Exception.class)
@@ -29,7 +29,7 @@ public class CommuServiceImple implements CommuService{
 
         commu.getAttachList().forEach(attach -> {
             attach.setCommuBno(commu.getCommuBno());
-            attachFileDAO.insert(attach);
+            commuAttachFileDAO.insert(attach);
         });
     }
 
@@ -44,13 +44,13 @@ public class CommuServiceImple implements CommuService{
     public boolean modifyCommu(CommuVO commu) {
         boolean boardModifyResult = false;
 
-        attachFileDAO.deleteAll(commu.getCommuBno());
+        commuAttachFileDAO.deleteAll(commu.getCommuBno());
         boardModifyResult = commuDAO.modifyCommu(commu);
 
         if(boardModifyResult && commu.getAttachList() != null && commu.getAttachList().size() != 0){
             commu.getAttachList().forEach(attach -> {
                 attach.setCommuBno(commu.getCommuBno());
-                attachFileDAO.insert(attach);
+                commuAttachFileDAO.insert(attach);
             });
         }
         return boardModifyResult;
@@ -81,7 +81,7 @@ public class CommuServiceImple implements CommuService{
 
     //첨부파일
     @Override
-    public List<AttachFileVO> getAttachList(Long commuBno) {
-        return attachFileDAO.findByBno(commuBno);
+    public List<CommuAttachFileVO> getAttachList(Long commuBno) {
+        return commuAttachFileDAO.findByBno(commuBno);
     }
 }

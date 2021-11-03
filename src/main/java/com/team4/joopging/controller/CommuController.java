@@ -1,18 +1,16 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.community.vo.AttachFileVO;
+import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.services.CommuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -98,7 +96,7 @@ public class CommuController {
         log.info("remove : " + commuBno);
         log.info("-------------------------------");
 
-        List<AttachFileVO> attachList = commuService.getAttachList(commuBno);
+        List<CommuAttachFileVO> attachList = commuService.getAttachList(commuBno);
 
         if (commuService.removeCommu(commuBno)) {
             deleteFiles(attachList);
@@ -106,10 +104,12 @@ public class CommuController {
         } else {
             rttr.addFlashAttribute("result", "fail");
         }
-        return new RedirectView("list");
+        return new RedirectView("communityList");
     }
 
-    private void deleteFiles(List<AttachFileVO> attachList){
+
+    //파일삭제
+    private void deleteFiles(List<CommuAttachFileVO> attachList){
         if(attachList == null || attachList.size() == 0){
             return;
         }
@@ -119,11 +119,11 @@ public class CommuController {
 
         attachList.forEach(attach -> {
             try {
-                Path file = Paths.get("C:/upload/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
+                Path file = Paths.get("C:/upload/commu/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
                 Files.delete(file);
 
                 if(Files.probeContentType(file).startsWith("image")){
-                    Path thumbnail = Paths.get("C:/upload/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
+                    Path thumbnail = Paths.get("C:/upload/commu/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
                     Files.delete(thumbnail);
                 }
             } catch (Exception e) {
@@ -149,5 +149,14 @@ public class CommuController {
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
+    }
+
+
+    //    게시글 첨부파일
+    @GetMapping(value = "getCommuAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<CommuAttachFileVO> getCommuAttachList(Long commuBno){
+        log.info("getCommuAttachList " + commuBno);
+        return commuService.getAttachList(commuBno);
     }
 }

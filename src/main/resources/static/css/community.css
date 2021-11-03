@@ -274,3 +274,12 @@ div#commuContentArea textarea{
 #commuLeftCategory a{
     text-decoration: none !important;
 }
+
+ul{
+    list-style: none !important;
+}
+
+a{
+    text-decoration: none !important;
+    color: #5d5d5d;
+}

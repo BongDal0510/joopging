@@ -1,6 +1,6 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.community.vo.AttachFileVO;
+import com.team4.joopging.community.vo.CommuAttachFileVO;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.core.io.FileSystemResource;
@@ -28,19 +28,19 @@ import java.util.UUID;
 
 @Controller
 @Slf4j
-@RequestMapping("/upload/*")
+@RequestMapping("/commuupload/*")
 
 
 /*업로드 되는 첨부파일들이 저장될 폴더 경로 설정을 위한 컨트롤러
 * upload 경로:
 * "C:/upload/commu/";*/
-public class AttachFileController {
+public class CommuAttachFileController {
 
     @PostMapping(value = "uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<AttachFileVO> uploadAjaxAction(MultipartFile[] uploadFiles){
+    public List<CommuAttachFileVO> uploadAjaxAction(MultipartFile[] uploadFiles){
         log.info("upload ajax action...........");
-        List<AttachFileVO> fileList = new ArrayList<>();
+        List<CommuAttachFileVO> fileList = new ArrayList<>();
 
         String uploadFolder = "C:/upload/commu/";
         String uploadFolderPath = getFolder();
@@ -55,7 +55,7 @@ public class AttachFileController {
             log.info("Upload File Name : " + multipartFile.getOriginalFilename());
             log.info("Upload File Size : " + multipartFile.getSize());
 
-            AttachFileVO attachFileVO = new AttachFileVO();
+            CommuAttachFileVO commuAttachFileVO = new CommuAttachFileVO();
 
             String uploadFileName = multipartFile.getOriginalFilename();
 
@@ -68,18 +68,18 @@ public class AttachFileController {
             uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
             log.info("file name : " + uploadFileName);
 
-            attachFileVO.setFileName(uploadFileName);
+            commuAttachFileVO.setFileName(uploadFileName);
 
             try {
                 File saveFile = new File(uploadPath,uploadFileName);
                 multipartFile.transferTo(saveFile);
                 InputStream in = new FileInputStream(saveFile);
 
-                attachFileVO.setUuid(uuid.toString());
-                attachFileVO.setUploadPath(uploadFolderPath);
+                commuAttachFileVO.setUuid(uuid.toString());
+                commuAttachFileVO.setUploadPath(uploadFolderPath);
 
                 if(checkImageType(saveFile)) {
-                    attachFileVO.setImage(true);
+                    commuAttachFileVO.setImage(true);
                     FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
                     Thumbnailator.createThumbnail(in, thumbnail, 100, 100);
                     thumbnail.close();
@@ -91,7 +91,7 @@ public class AttachFileController {
                 //가비지 컬렉터가 포착한 해제 필드들을 모두 즉시 해제
                 System.runFinalization();
 
-                fileList.add(attachFileVO);
+                fileList.add(commuAttachFileVO);//파일 리스트에 가져온 파일 정보 추가
             } catch (IOException e) {
                 log.error(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e){
@@ -148,6 +148,7 @@ public class AttachFileController {
         String resourceName = resource.getFilename();
         HttpHeaders headers = new HttpHeaders();
 //        UUID 제거
+        assert resourceName != null;
         String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
         try {
             headers.add("Content-Disposition", "attachment; filename=" + new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1"));

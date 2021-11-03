@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class AttachFileVO {
+public class CommuAttachFileVO {
     private String fileName;
     private String uploadPath;
     private String uuid;

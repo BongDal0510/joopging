@@ -13,9 +13,6 @@
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
-    <style>
-
-    </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
@@ -77,7 +74,7 @@
                                                   style="resize:none"></textarea>
                                     </div>
                                     <div class="field">
-                                        <h4>*첨부파일</h4>
+                                        <h4>첨부파일</h4>
                                         <input type="file" name="uploadFiles" multiple>
                                     </div>
                                     <div class="field">
@@ -192,7 +189,7 @@
 
                     str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                     str += "<div>";
-                    str += "<a href='/upload/commu/download?fileName=" + fileCallPath + "'>";
+                    str += "<a href='/commuupload/download?fileName=" + fileCallPath + "'>";
                     str += "<img src='/images/attach.png' width='100px'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
                     str += "</a>"
                     str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
@@ -207,7 +204,7 @@
                     str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                     str += "<div>";
                     str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
-                    str += "<img src='/upload/commu/display?fileName=" + fileCallPath + "'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "<img src='/commuupload/display?fileName=" + fileCallPath + "'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
                     str += "</a>";
                     str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
                     str += "</div>";
@@ -222,8 +219,9 @@
             let type = $(this).data("type");
             let li = $(this).parents("li");
 
+            //attachController 경로로 보내기
             $.ajax({
-                url: "/upload/deleteFile",
+                url: "/commuupload/deleteFile",
                 type: "POST",
                 data: {fileName:targetFile, type:type},
                 dataType: "text",
@@ -261,7 +259,7 @@
             }
 
             $.ajax({
-                url: "/upload/uploadAjaxAction",
+                url: "/commuupload/uploadAjaxAction",
                 type: "post",
                 data: formData,
                 contentType: false,
