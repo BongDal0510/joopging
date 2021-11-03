@@ -53,7 +53,7 @@ public class EventController {
     }
 
 
-
+//  내가 수정한걸 반영해야 들어가지 않나
 
     @GetMapping("eventInfo3")
     public String eventInfo3() {
