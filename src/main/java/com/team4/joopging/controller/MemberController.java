@@ -121,7 +121,6 @@ public class MemberController {
         HttpSession session = req.getSession();
         String id = vo.getMemberId();
 
-        /*연산 작업*/
         if (memberService.memberLoginKAKAO(vo) != 0) {
             /*로그인 성공*/
             session.setAttribute("memberId", id);
