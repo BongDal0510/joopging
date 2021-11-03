@@ -284,9 +284,7 @@
                         <section class="box boxinner">
                             <div style="display: flex">
                                 <header id="center">
-                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                        11월 신규가입
-                                    </h4>
+                                    <h4 id="joinEventTitle" style="font-family: 'S-CoreDream-4Regular';"></h4>
                                 </header>
                                 <footer class="eventButton">
                                     <ul class="actions">
@@ -296,7 +294,7 @@
                             </div>
                             <div>
                                 <p class="eventDate">신청일 </p>
-                                <p class="eventDate">11월 1일-11월 30일</p>
+                                <p class="eventDate" id="joinEventDate"></p>
                             </div>
                         </section>
                     </div>
@@ -446,6 +444,18 @@
         e.preventDefault();
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
         pageForm.submit();
+    });
+
+    $(document).ready(function(){
+       let today = new Date();
+       let year = today.getFullYear();
+       let month = today.getMonth() + 1;
+
+       let lastDate = new Date(year, month - 2, 0);
+
+       $("#joinEventTitle").html(month + "월 신규가입");
+       $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
+
     });
 
 </script>
