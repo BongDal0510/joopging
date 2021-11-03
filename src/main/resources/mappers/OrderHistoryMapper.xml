@@ -5,20 +5,21 @@
 
 
     <!--구매 상품 목록-->
-    <select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
+
+    <select id="getGoodsOrderList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
+        <![CDATA[
 SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
     FROM (
-        <![CDATA[
 SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
     ROWNUM R, orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
 FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
-                ROWNUM <= #{pageNum} * #{amount}
+                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
-        WHERE R > (#{pageNum} - 1) * #{amount}
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
 </select>
 

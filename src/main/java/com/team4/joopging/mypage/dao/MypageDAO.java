@@ -3,6 +3,7 @@ package com.team4.joopging.mypage.dao;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mappers.MypageMapper;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.mypage.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -56,7 +57,7 @@ public class MypageDAO {
     };
 
     /*회원정보 수정*/
-    public boolean updateMember(TempMemberVO vo){
+    public boolean updateMember(MemberVO vo){
         return mapper.updateMember(vo) == 1;
     }
 

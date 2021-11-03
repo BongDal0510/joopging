@@ -2,6 +2,7 @@ package com.team4.joopging.services;
 
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.mypage.vo.*;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public interface MypageService {
     public boolean deleteGoodsLike(int goodsLikeNum);
 
     /*회원정보 수정*/
-    public boolean updateMember(TempMemberVO vo);
+    public boolean updateMember(MemberVO vo);
 
     /*회원정보 탈퇴*/
     public boolean deleteMember(String memberId, String memberPw);

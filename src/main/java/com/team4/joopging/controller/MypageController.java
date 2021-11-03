@@ -2,7 +2,7 @@ package com.team4.joopging.controller;
 
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.Criteria;
-import com.team4.joopging.mypage.vo.TempMemberVO;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -24,12 +25,15 @@ public class MypageController {
 
     private final MypageService mypageSVC;
     private final PointService pointSVC;
-    HttpSession session;
-
 
     /*마이페이지 메인으로 이동*/
-    @GetMapping("mypageMain")
-    public String mypageMain(Model model, Criteria criteria) {
+    @GetMapping("mypage")
+    public String mypage(Model model, HttpServletRequest req, Criteria criteria) {
+
+        HttpSession session = req.getSession();
+
+        criteria = new Criteria();
+
         if(session.getAttribute("memberId")!=null) {
             String memberId = (String)session.getAttribute("memberId");
             int memberNum = mypageSVC.selectMemberNum(memberId);
@@ -39,17 +43,18 @@ public class MypageController {
             return "mypage/mypage";
         }else{
             model.addAttribute("msg","로그인 후 이용바랍니다.");
-            return "mainpage/mainpage";
+            return "main/mainpage";
         }
     }
 
     /*마이 페이지 플로깅 예약으로 이동*/
-    @GetMapping("mypageploRes")
-    public String mypageploRes(Model model, Criteria criteria) {
+    @GetMapping("mypagePloRes")
+    public String mypageploRes(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
+        model.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
         model.addAttribute("ploResPageMaker", new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria));
 
         return "mypage/mypage";
@@ -57,8 +62,10 @@ public class MypageController {
 
     /*마이 페이지 포인트로 이동*/
     @GetMapping("mypagePoint")
-    public String mypagePoint(Model model, Criteria criteria) {
+    public String mypagePoint(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
+
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
         model.addAttribute("pointPageMaker", new CommuPageDTO(pointSVC.totalPointCnt(memberNum), 10, criteria));
@@ -69,7 +76,8 @@ public class MypageController {
 
     /*마이 페이지 구매상품으로 이동*/
     @GetMapping("mypageOrderHistory")
-    public String mypageOrderHistory(Model model, Criteria criteria) {
+    public String mypageOrderHistory(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
@@ -81,7 +89,8 @@ public class MypageController {
     }
     /*마이 페이지 찜으로 이동*/
     @GetMapping("mypageGoodsLike")
-    public String mypageGoodsLike(Model model, Criteria criteria) {
+    public String mypageGoodsLike(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
@@ -93,7 +102,8 @@ public class MypageController {
     }
     /*마이 페이지 내 게시글로 이동*/
     @GetMapping("mypageCommu")
-    public String mypageCommu(Model model, Criteria criteria) {
+    public String mypageCommu(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
@@ -103,7 +113,8 @@ public class MypageController {
     }
     /*마이 페이지 1:1문의사항으로 이동*/
     @GetMapping("mypageQue")
-    public String mypageQue(Model model, Criteria criteria) {
+    public String mypageQue(Model model, Criteria criteria, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
@@ -124,7 +135,7 @@ public class MypageController {
 
     /*회원 정보 수정*/
     @PostMapping("updateMember")
-    public RedirectView updateMember(TempMemberVO vo, RedirectAttributes rttr){
+    public RedirectView updateMember(MemberVO vo, RedirectAttributes rttr){
         if(mypageSVC.updateMember(vo)){
             rttr.addFlashAttribute("msg", "회원 정보가 변경되었습니다.");
         }else{

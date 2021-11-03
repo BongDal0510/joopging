@@ -2,6 +2,7 @@ package com.team4.joopging.services;
 
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.mypage.dao.MypageDAO;
 import com.team4.joopging.mypage.dao.OrderHistoryDAO;
 import com.team4.joopging.mypage.vo.*;
@@ -25,7 +26,7 @@ public class MypageServicelmple implements MypageService{
 
     @Override
     public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria) {
-        return mDAO.getPloResList(memberNum,criteria);
+        return mDAO.getPloResList(memberNum, criteria);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public boolean updateMember(TempMemberVO vo) {
+    public boolean updateMember(MemberVO vo) {
         return mDAO.updateMember(vo);
     }
 

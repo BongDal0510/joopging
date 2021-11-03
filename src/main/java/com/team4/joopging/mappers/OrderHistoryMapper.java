@@ -4,6 +4,7 @@ import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mypage.vo.TempOrderHistoryVO;
 import com.team4.joopging.mypage.vo.TempParcelVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface OrderHistoryMapper {
 
     /*구매 상품 목록*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(@Param("memberNum") int memberNum,@Param("criteria") Criteria criteria);
     /*구매한 상품 내역 개수*/
     public int totalOrderCnt(int memberNum);
     /*구매한 상품 전체 개수*/

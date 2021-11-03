@@ -11,17 +11,18 @@
     </select>
 
     <!--플로깅 예약 목록-->
-<select id="getPloResList" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
+<select id="getPloResList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
 
+    <![CDATA[
     SELECT ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
-    <![CDATA[
     SELECT /** INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
     ROWNUM R, ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
-                ROWNUM <= #{pageNum} * #{amount}
+    AND
+                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
-        WHERE R > (#{pageNum} - 1) * #{amount}
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
 </select>
 
@@ -36,7 +37,7 @@
     </select>
 
 <!--찜 목록-->
-<select id="getGoodsLikeList" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
+<select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
 SELECT goodsLikeListNum, memberNum, goodsNum
 FROM(
     <![CDATA[
@@ -44,9 +45,9 @@ SELECT /** INDEX_DESC(TBL_GOODS_LIKE_LIST GOODS_LIKE_LIST_PK)*/
 ROWNUM R,goodsLikeListNum, memberNum, goodsNum
 FROM TBL_GOODS_LIKE_LIST
 WHERE memberNum = #{memberNum}
-                ROWNUM <= #{pageNum} * #{amount}
+                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
-        WHERE R > (#{pageNum} - 1) * #{amount}
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
 </select>
 
@@ -68,7 +69,7 @@ WHERE ploResNum = #{ploResNum}
 </update>
 
 <!--아이디로 멤버 번호 찾기-->
-<select id="seletMemberNum" resultType="_int">
+<select id="selectMemberNum" resultType="_int">
     SELECT memberNum FROM TBL_MEMBER WHERE memberId = #{memberId}
 </select>
 
@@ -87,7 +88,7 @@ WHERE ploResNum = #{ploResNum}
 </update>
 
     <!--내 게시글 목록-->
-    <select id="getMemberCommuList" resultType="commuVO">
+    <select id="getMemberCommuList" parameterType="map" resultType="commuVO">
         <![CDATA[
         SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE,COMMUVIEWCNT, COMMUBOARDSTATUS
         FROM
@@ -96,10 +97,10 @@ WHERE ploResNum = #{ploResNum}
                 ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
                 FROM TBL_COMMUBOARD
                 WHERE COMMUBOARDSTATUS = 0 AND
-                ROWNUM <= #{pageNum} * #{amount}
+                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
                 AND COMMUWRITER = #{memberId}
             )
-        WHERE R > (#{pageNum} - 1) * #{amount}
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
     </select>
 
