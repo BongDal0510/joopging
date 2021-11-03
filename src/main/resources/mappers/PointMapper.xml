@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.PointMapper">
+    <!--포인트 목록-->
+    <select id="getPointList" resultType="com.team4.joopging.point.vo.PointVO">
+        SELECT pointNum, memberNum, history, point, pointDate, pointStatus
+        FROM (
+        <![CDATA[
+        SELECT /** INDEX_DESC(TBL_POINT POINTNUM_PK)*/
+        ROWNUM R, pointNum, memberNum, history, point, pointDate, pointStatus
+        FROM TBL_POINT WHERE memberNum = #{memberNum}
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+    </select>
+
+    <!--내가 구매하 상품의 전체 개수-->
+    <select id="totalPointCnt" resultType="_int">
+        SELECT COUNT(pointNum) FROM TBL_POINT WHERE memberNum = #{memberNum}
+    </select>
+
+    <!--포인트 추가-->
+    <insert id="addPoint">
+        INSERT INTO TBL_POINT(pointNum, memberNum, history, point, pointDate, pointStatus)
+        VALUE (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
+    </insert>
+</mapper>
