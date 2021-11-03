@@ -39,7 +39,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
-public class MemberController {
+public class memberController {
 
     private final MemberService memberService;
 

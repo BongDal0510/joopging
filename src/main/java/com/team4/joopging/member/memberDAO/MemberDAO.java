@@ -41,10 +41,8 @@ public class MemberDAO {
 
     /*아이디 찾기*/
     public String memberSearchId(MemberVO vo){ return mapper.searchId(vo); }
-
     /*비밀번호 검색*/
     public String memberSearchPw(MemberVO vo){return mapper.searchPw(vo); }
-
     /*비밀번호 변경*/
     public void memberUpdatePw(MemberVO vo){ mapper.updatePw(vo); }
 
