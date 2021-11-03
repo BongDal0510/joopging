@@ -16,7 +16,6 @@ div.reportWarning {
     font-size: 9pt;
     color: red;
     font-style: italic;
-    text-align: right;
 }
 
 div.reportBackground {
@@ -138,4 +137,22 @@ a.btn {
 }
 .good-job h1 {
     font-size: 45px;
+}
+
+div > h4{
+    font-size: 16pt;
+    text-align: center;
+    margin: 5% 0 4% 0;
+    color: green;
+}
+
+#boardWriterArea{
+    display: flex;
+}
+
+div#boardTitleArea{
+    border: solid 1px #f4f4f5;
+    border-radius: 5px;
+    padding: 3%;
+    margin-top: 3%;
 }
