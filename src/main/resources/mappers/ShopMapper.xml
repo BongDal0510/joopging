@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.ShopMapper">
+
+    <!--상품목록-->
+    <select id="getGoodsList" resultType="shopVO">
+        <![CDATA[
+        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK) */
+            ROWNUM R, goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+            FROM TBL_GOODSLIST
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <!--상품추가-->
+    <insert id="goodsInsert">
+        INSERT INTO TBL_GOODSLIST
+        (goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent)
+        VALUES(GoodsNum.NEXTVAL, #{goodsName}, #{goodsCategory}, #{goodsPrice}, #{goodsContent})
+    </insert>
+
+
+   <!-- 상품번호도 가져오기
+    <insert id="goodsInsertSelectKey_goodsNum">
+        <selectKey keyProperty="goodsNum" order="BEFORE" resultType="long">
+            SELECT GoodsNum.NEXTVAL FROM DUAL
+        </selectKey>
+        /*위에서 전달받은 goodsNum 사용한다.*/
+        INSERT INTO TBL_GOODSLIST (goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent)
+        VALUES(#{goodsNum}, #{goodsName}, #{goodsCategory}, #{goodsPrice}, #{goodsContent})
+    </insert>-->
+
+    <!--상품번호도 가져오기-->
+    <insert id="goodsInsertSelectKey_goodsNum">
+        <selectKey keyProperty="goodsNum" order="BEFORE" resultType="long">
+            SELECT GoodsNum.NEXTVAL FROM DUAL
+        </selectKey>
+        /*위에서 전달받은 goodsNum 사용한다.*/
+        INSERT INTO TBL_GOODSLIST (goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent)
+        VALUES(#{goodsNum}, #{goodsName}, #{goodsCategory}, #{goodsPrice}, #{goodsContent})
+
+    </insert>
+
+
+
+
+
+
+
+    <!--상품정보 읽기-->
+    <select id="goodsRead" resultType="shopVO">
+        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent FROM TBL_GOODSLIST
+        WHERE goodsNum = #{goodsNum}
+    </select>
+
+    <update id="goodsUpdate">
+        UPDATE TBL_GOODSLIST
+        SET goodsName= #{goodsName}, goodsCategory=#{goodsCategory}, goodsPrice=#{goodsPrice}, goodsContent=#{goodsContent}
+        WHERE goodsNum= #{goodsNum}
+    </update>
+
+    <delete id="goodsDelete">
+        DELETE FROM TBL_GOODSLIST WHERE goodsNum = #{goodsNum}
+    </delete>
+
+    <select id="goodsGetTotal" resultType="_int">
+        SELECT COUNT(goodsNum) FROM TBL_GOODSLIST
+    </select>
+
+
+</mapper>

@@ -30,6 +30,7 @@
     <section id="main">
         <div class="container">
 
+            <!-- 상품 구매 후 리뷰 -->
             <div class="col-8 col-12-medium imp-medium"  id = "" style="display: block; padding: 50px 15% 50px 15%">
                 <article class="box post">
                     <header>
@@ -37,28 +38,27 @@
                     </header>
 
                     <!-- 폼태그 시작점 -->
-                    <form action="/shop/shopEnroll" method="post" id="registForm">
+                    <form action="" name="enrollform" method="post" enctype="multipart/form-data">
 
                         <!-- 상품명 입력 -->
                         <p>
                         <p style="margin: 0;text-align:left;">상품명</p>
-                        <input id="goodsName" name="goodsName" type="text" placeholder="등록 상품 이름">
+                        <input id="goods_name" name="goods_name" type="text" placeholder="등록 상품 이름">
                         </p>
 
                         <!-- 상품 카테고리선택 -->
                         <p style="margin: 0;text-align:left;">카테고리 선택</p>
-                        <select class="goodsCategory" name="goodsCategory">
-                            <option class="goodsCategory" value="no select" selected>선택</option>
-                            <option class="goodsCategory" value="T-shirts">T-shirts</option>
-                            <option class="goodsCategory" value="Bottom">Bottom</option>
-                            <option class="goodsCategory" value="Plogging_Bag">Plogging_Bag</option>
-                            <option class="goodsCategory" value="Plogging_Acc">Plogging_Acc</option>
+                        <select class="goods_category" name="goods_category">
+                            <option class="goods_category" value="no select" selected>선택</option>
+                            <option class="goods_category" value="T-shirts">T-shirts</option>
+                            <option class="goods_category" value="Bottom">Bottom</option>
+                            <option class="goods_category" value="Plogging_Bag">Plogging_Bag</option>
+                            <option class="goods_category" value="Plogging_Acc">Plogging_Acc</option>
                         </select> <br>
-
 
                         <!-- 상품 이미지 첨부 -->
                         <div style="margin-bottom:2%;text-align:left;">
-                            <span>상품 이미지파일(첫번째 첨부파일은 썸네일 입니다.)</span>
+                            <span>상품 이미지파일</span>
                         </div>
 
                         <div class="field">
@@ -70,49 +70,44 @@
                                 <ul></ul>
                             </div>
                         </div>
-                        <div class="bigPictureWrapper">
-                            <div class="bigPicture">
 
+
+                      <!--  <div style="display:flex;">
+                            <div class="files">
+                                <div>
+                                    <div>메인 사진</div>
+                                    <label for="board_file1" style="display:inline;">
+                                        <img id="board_file1Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
+                                    </label>
+                                </div>
+                                <input id="board_file1" name="board_file1" type="file" style="display:none;" accept="image/*" />
+                                <input type="button" onclick="cancelFile('board_file1')" value="첨부 삭제" class="deleteButton">
                             </div>
-                        </div>
 
 
-                        <!--  <div style="display:flex;">
-                              <div class="files">
-                                  <div>
-                                      <div>메인 사진</div>
-                                      <label for="board_file1" style="display:inline;">
-                                          <img id="board_file1Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
-                                      </label>
-                                  </div>
-                                  <input id="board_file1" name="board_file1" type="file" style="display:none;" accept="image/*" />
-                                  <input type="button" onclick="cancelFile('board_file1')" value="첨부 삭제" class="deleteButton">
-                              </div>
+                            <div class="files">
+                                <div>서브 사진1</div>
+                                <div>
+                                    <label for="board_file2" style="display:inline;">
+                                        <img id="board_file2Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
+                                    </label>
+                                </div>
+                                <input id="board_file2" name="board_file2" type="file" style="display:none;" accept="image/*" />
+                                <input type="button" onclick="cancelFile('board_file2')" value="첨부 삭제" class="deleteButton">
+                            </div>
 
 
-                              <div class="files">
-                                  <div>서브 사진1</div>
-                                  <div>
-                                      <label for="board_file2" style="display:inline;">
-                                          <img id="board_file2Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
-                                      </label>
-                                  </div>
-                                  <input id="board_file2" name="board_file2" type="file" style="display:none;" accept="image/*" />
-                                  <input type="button" onclick="cancelFile('board_file2')" value="첨부 삭제" class="deleteButton">
-                              </div>
-
-
-                              <div class="files">
-                                  <div>서브 사진2</div>
-                                  <div>
-                                      <label for="board_file3" style="display:inline;">
-                                          <img id="board_file3Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
-                                      </label>
-                                  </div>
-                                  <input id="board_file3" name="board_file3" type="file" style="display:none;" accept="image/*" />
-                                  <input type="button" onclick="cancelFile('board_file3')" value="첨부 삭제" class="deleteButton">
-                              </div>
-                          </div>-->
+                            <div class="files">
+                                <div>서브 사진2</div>
+                                <div>
+                                    <label for="board_file3" style="display:inline;">
+                                        <img id="board_file3Img" src="/images/filePlus3.png" width="110px" height="110px" style="display:inline;">
+                                    </label>
+                                </div>
+                                <input id="board_file3" name="board_file3" type="file" style="display:none;" accept="image/*" />
+                                <input type="button" onclick="cancelFile('board_file3')" value="첨부 삭제" class="deleteButton">
+                            </div>
+                        </div>-->
 
                         <!-- 상품설명작성란 -->
                         <div style="margin-top:3%;">
@@ -137,7 +132,7 @@
 
                         <!-- 등록 및 취소 버튼 -->
                         <ul class="actions" style="display:flex; justify-content:center; margin-top:3%;">
-                            <li><input type="submit" value="등록" class="primary"></li>
+                            <li><input type="button" value="등록" class="primary" onclick="enrollSubmit()"/></li>
                             <li><input type="button" value="취소" onclick="history.back()"/></li>
                         </ul>
                     </form>
@@ -162,27 +157,27 @@
 </body>
 <script>
 
-    /*
-        $(".files").change(function(e){
-            var file = e.target.files[0];
-            var img = $(this).find("img");
+/*
+    $(".files").change(function(e){
+        var file = e.target.files[0];
+        var img = $(this).find("img");
 
-            if(!file.type.match("image.*")){
-                img.attr("src", "/images/no_img.jpg");
-            }else{
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    img.attr("src", e.target.result)
-                }
-                reader.readAsDataURL(file);
+        if(!file.type.match("image.*")){
+            img.attr("src", "/images/no_img.jpg");
+        }else{
+            var reader = new FileReader();
+            reader.onload = function(e){
+                img.attr("src", e.target.result)
             }
-        })
+            reader.readAsDataURL(file);
+        }
+    })
 
-        function cancelFile(fileTagName){
+    function cancelFile(fileTagName){
 
-            $("input[name='" + fileTagName + "']").val("");
-            $("img#" + fileTagName + "Img").attr("src", "/images/filePlus3.png");
-        }*/
+        $("input[name='" + fileTagName + "']").val("");
+        $("img#" + fileTagName + "Img").attr("src", "/images/filePlus3.png");
+    }*/
 
 </script>
 

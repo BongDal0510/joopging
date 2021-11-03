@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.AttachFileMapper">
+    <insert id="insert">
+        INSERT INTO TBL_GOODSATTACH (UUID, UPLOADPATH, FILENAME, IMAGE, GOODSNUM)
+        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{goodsNum})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_GOODSATTACH WHERE UUID = #{uuid}
+    </delete>
+
+    <select id="findByGoodsNum" resultType="attachFileVO">
+        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, GOODSNUM
+        FROM TBL_GOODSATTACH
+        WHERE GOODSNUM = #{goodsNum}
+    </select>
+
+</mapper>
