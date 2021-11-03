@@ -1,12 +1,10 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.community.dao.CommuDAO;
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.Criteria;
-import com.team4.joopging.mypage.dao.MypageDAO;
-import com.team4.joopging.mypage.dao.OrderHistoryDAO;
 import com.team4.joopging.mypage.vo.TempMemberVO;
-import com.team4.joopging.point.dao.PointDAO;
+import com.team4.joopging.services.MypageService;
+import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,11 +22,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class MypageController {
 
-    private final MypageDAO mypagedao;
-    private final PointDAO pointdao;
-    private final OrderHistoryDAO orderHistorydao;
-    private final TempMemberVO membervo;
-    private final CommuDAO commudao;
+    private final MypageService mypageSVC;
+    private final PointService pointSVC;
     HttpSession session;
 
 
@@ -37,9 +32,9 @@ public class MypageController {
     public String mypageMain(Model model, Criteria criteria) {
         if(session.getAttribute("memberId")!=null) {
             String memberId = (String)session.getAttribute("memberId");
-            int memberNum = mypagedao.selectMemberNum(memberId);
+            int memberNum = mypageSVC.selectMemberNum(memberId);
 
-            model.addAttribute("ploRes", mypagedao.getPloResList(memberNum, criteria));
+            model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
 
             return "mypage/mypage";
         }else{
@@ -52,33 +47,35 @@ public class MypageController {
     @GetMapping("mypageploRes")
     public String mypageploRes(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("ploRes", mypagedao.getPloResList(memberNum, criteria));
-        model.addAttribute("ploResPageMaker", new CommuPageDTO(mypagedao.totalPloResCnt(memberNum), 10, criteria));
+        model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
+        model.addAttribute("ploResPageMaker", new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria));
 
         return "mypage/mypage";
     }
+
     /*마이 페이지 포인트로 이동*/
     @GetMapping("mypagePoint")
     public String mypagePoint(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("pointPageMaker", new CommuPageDTO(pointdao.totalPointCnt(memberNum), 10, criteria));
-        model.addAttribute("getPointList", pointdao.getPointList(memberNum, criteria));
+        model.addAttribute("pointPageMaker", new CommuPageDTO(pointSVC.totalPointCnt(memberNum), 10, criteria));
+        model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
 
         return "mypage/mypage";
     }
+
     /*마이 페이지 구매상품으로 이동*/
     @GetMapping("mypageOrderHistory")
     public String mypageOrderHistory(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("orderPageMaker", new CommuPageDTO(orderHistorydao.totalOrderCnt(memberNum), 10, criteria));
-        model.addAttribute("orderTotalCnt", orderHistorydao.realTotalOrderCnt(memberNum));
-        model.addAttribute("orderHistory", orderHistorydao.getOrderHistoryList(memberNum, criteria));
+        model.addAttribute("orderPageMaker", new CommuPageDTO(mypageSVC.totalOrderCnt(memberNum), 10, criteria));
+        model.addAttribute("orderTotalCnt", mypageSVC.realTotalOrderCnt(memberNum));
+        model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberNum, criteria));
 
         return "mypage/mypage";
     }
@@ -86,11 +83,11 @@ public class MypageController {
     @GetMapping("mypageGoodsLike")
     public String mypageGoodsLike(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("goodsLikePageMaker", new CommuPageDTO(mypagedao.totalGoodsLikeCnt(memberNum), 10, criteria));
-        model.addAttribute("goodslikeTotalCnt", mypagedao.totalGoodsLikeCnt(memberNum));
-        model.addAttribute("goodsLikeList", mypagedao.getGoodsLikeList(memberNum, criteria));
+        model.addAttribute("goodsLikePageMaker", new CommuPageDTO(mypageSVC.totalGoodsLikeCnt(memberNum), 10, criteria));
+        model.addAttribute("goodslikeTotalCnt", mypageSVC.totalGoodsLikeCnt(memberNum));
+        model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberNum, criteria));
 
         return "mypage/mypage";
     }
@@ -98,9 +95,9 @@ public class MypageController {
     @GetMapping("mypageCommu")
     public String mypageCommu(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("memberCommu", mypagedao.getMemberCommuList(memberId, criteria));
+        model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
 
         return "mypage/mypage";
     }
@@ -108,7 +105,7 @@ public class MypageController {
     @GetMapping("mypageQue")
     public String mypageQue(Model model, Criteria criteria) {
         String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypagedao.selectMemberNum(memberId);
+        int memberNum = mypageSVC.selectMemberNum(memberId);
 
         return "mypage/mypage";
     }
@@ -116,7 +113,7 @@ public class MypageController {
     /*회원 탈퇴*/
     @PostMapping("removeMember")
     public RedirectView removeMember(String memberId, String memberPw, RedirectAttributes rttr){
-        if(mypagedao.deleteMember(memberId, memberPw)){
+        if(mypageSVC.deleteMember(memberId, memberPw)){
             rttr.addFlashAttribute("msg", "회원 탈퇴가 성공적으로 이루어졌습니다.");
             return new RedirectView("mainpage/mainpage");
         }else{
@@ -128,7 +125,7 @@ public class MypageController {
     /*회원 정보 수정*/
     @PostMapping("updateMember")
     public RedirectView updateMember(TempMemberVO vo, RedirectAttributes rttr){
-        if(mypagedao.updateMember(vo)){
+        if(mypageSVC.updateMember(vo)){
             rttr.addFlashAttribute("msg", "회원 정보가 변경되었습니다.");
         }else{
             rttr.addFlashAttribute("msg", "회원 정보 변경에 실패하였습니다.");
@@ -139,14 +136,14 @@ public class MypageController {
     /*플로깅 취소(파업창)- 천천히 해결합세*/
     @RequestMapping(value = "/ploggingRefundPage", method = RequestMethod.GET)
     public String ploggingRefundPage(Model model, @RequestParam("ploResNum") Long ploResNum) throws IOException {
-        model.addAttribute("ploRes", mypagedao.getPloRes(ploResNum));
+        model.addAttribute("ploRes", mypageSVC.getPloRes(ploResNum));
         return "/mypage/ploggingRefund";
     }
 
     /*플로깅 취소하기*/
     @PostMapping("ploggingRefund")
     public void ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
-        if(mypagedao.deletePloRes(ploResNum)){
+        if(mypageSVC.deletePloRes(ploResNum)){
             model.addAttribute("result", "success");
         }else{
             model.addAttribute("result", "fail");
@@ -157,7 +154,7 @@ public class MypageController {
     /*찜 삭제*/
     @PostMapping("deleteGoodsLike")
     public void deleteGoodsLike(Model model, @RequestParam("goodsLikeNum") int goodsLikeNum){
-        if(mypagedao.deleteGoodsLike(goodsLikeNum)){
+        if(mypageSVC.deleteGoodsLike(goodsLikeNum)){
             model.addAttribute("msg","해당 상품에 찜을 삭제하였습니다.");
         }else{
             model.addAttribute("msg","찜 삭제에 실패하였습니다.");

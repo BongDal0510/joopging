@@ -34,7 +34,5 @@ public class PointDAO {
         return mapper.removeOrder(vo)==1;
     }
 
-    /*구매 취소된 상품 인지 확인 여부*/
-    public boolean checkDeletOrder(int orderNum){return mapper.checkDeletOrder(orderNum)==1;}
 
 }

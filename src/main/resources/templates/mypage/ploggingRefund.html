@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>PLOGGING REFUND</title>
     <meta charset="utf-8" />
@@ -367,11 +367,22 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
-<script>
+<script th:inline="javascript">
     window.opener.location.reload();
+
 $("#close").on("click",function () {
     self.close();
 })
-
+    $.ajax({
+        url: "/mypage/ploggingRefund",
+        type: 'GET',
+        success: function fail() {
+            let msg = [[${msg}]];
+            alert(msg);
+        },
+        error: function onError (error) {
+            console.error(error);
+        }
+    });
 </script>
 </html>

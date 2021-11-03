@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
-public class memberController {
+public class MemberController {
 
     private final MemberService memberService;
 

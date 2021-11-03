@@ -499,7 +499,7 @@
                                 <th:block th:each="ploRes : ${ploRes}">
                                 <tr class="ploRes" th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
                                     <td calss="ploResNum" th:text="*{ploResNum}"></td>
-                                    <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}" th:text="*{ploResLocation}"></a></td>
+                                    <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}" th:text="*{ploResLocation}"/></td>
                                     <td class="ploResDate" th:text="*{ploResDate}"></td>
                                     <td class="ploResTime" th:text="*{ploResTime}"></td>
                                     <td class="deletePloRes"><span id="ploResRefund">x</span></td>
@@ -970,6 +970,16 @@
         let ploResNum = [[${ploRes.getPloResNum()}]];
         let option = "width=470, height=600, top=100, left=200, location=no";
         window.open("/mypage/ploggingRefundPage?ploResNum=?"+ploResNum, option).focus();
+    });
+
+    $(document).ready(function(){
+        let msg = [[${msg}]];
+
+        if(msg!=null||msg!="null"||msg!=""){
+            return;
+        }else{
+            alert(msg);
+        }
     });
 
 </script>
