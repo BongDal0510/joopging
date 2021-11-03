@@ -1,3 +1,4 @@
+/* 날씨 API */
 $(function(){
     let today = new Date();
 
