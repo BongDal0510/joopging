@@ -51,7 +51,7 @@
         )
         VALUES
         (
-            SEQ_MEMBER_KAKAO.NEXTVAL, #{memberId}, #{memberName}, '입력 없음',
+            SEQ_MEMBER_NAVER.NEXTVAL, #{memberId}, #{memberName}, '입력 없음',
             #{memberBirth}, #{memberGender}, #{memberEmail},
             '입력 없음', '입력 없음', 0, 3000,
             3000, 0, 1, 0
