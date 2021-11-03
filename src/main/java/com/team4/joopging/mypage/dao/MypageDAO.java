@@ -1,5 +1,6 @@
 package com.team4.joopging.mypage.dao;
 
+import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mappers.MypageMapper;
 import com.team4.joopging.mypage.vo.*;
@@ -63,6 +64,11 @@ public class MypageDAO {
     public boolean deleteMember(String memberId, String memberPw){
         return mapper.deleteMember(memberId, memberPw) == 1;
     }
+
+    /*내 게시글*/
+    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria){
+        return mapper.getMemberCommuList(memberId, criteria);
+    };
 
     /*아이디로 회원 번호 가져오기*/
     public int selectMemberNum(String memberId){ return mapper.selectMemberNum(memberId);

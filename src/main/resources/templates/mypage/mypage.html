@@ -443,12 +443,9 @@
                             <h2><!--이름-->님 환영합니다.</h2>
                         </header>
                         <div id = "ploggingAdv">
-                            <!--임시로 실험해봄-->
-                            <form action="/event/eventlist">
-                            <button>
+                            <button onclick="goEvent()">
                                 이벤트 확인하러 가기
                             </button>
-                            </form>
                         </div>
                         <div style="display: flex; justify-content: space-around;">
                             <div class = "smallBox1" >
@@ -502,7 +499,7 @@
                                 <th:block th:each="ploRes : ${ploRes}">
                                 <tr class="ploRes" th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
                                     <td calss="ploResNum" th:text="*{ploResNum}"></td>
-                                    <td calss="ploResLocation" th:text="*{ploResLocation}"><a th:href=""></a></td>
+                                    <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}" th:text="*{ploResLocation}"></a></td>
                                     <td class="ploResDate" th:text="*{ploResDate}"></td>
                                     <td class="ploResTime" th:text="*{ploResTime}"></td>
                                     <td class="deletePloRes"><a th:href="">x</a></td>
@@ -524,6 +521,7 @@
                                     </th:block>
                                     <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                             </div>
+                        </div>
                         </div>
                     </article>
                 </div>
@@ -811,7 +809,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <form method="post" name="deleteForm"> <!--action="/mypage/DeleteMemberOk.my">-->
+                        <form method="post" name="deleteForm" action="/mypage/DeleteMember">
                                 <h3 style="padding-bottom: 0.5em; border-bottom: #35A14A 3px solid; width: 650px;">기본 정보</h3>
                             <table class = 'delete123'>
                                 <tr>
@@ -868,25 +866,23 @@
                                 <thead>
                                 <tr>
                                     <th width="18%">게시글 번호</th>
-                                    <th width="36%">제목</th>
+                                    <th width="49%">제목</th>
                                     <th width="20%">작성일</th>
                                     <th width="13%">조회수</th>
-                                    <th width="13%">댓글수</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><!--번호--></td>
-                                    <td>
-                                        <!--링크 연결된 예약번호-->
-                                    </td>
-                                    <td><!--장소--></td>
-                                    <td><!--날짜--></td>
-                                    <td><!--시간--></td>
+                                <th:block th:each="commu:${memberCommu}">
+                                <tr th:if="${#lists.size(commu)} != 0" th:object="${commu}">
+                                    <td th:text="*{commuBno}"/>
+                                    <td th:text="*{commuTitle}"><a th:href=""/></td>
+                                    <td th:text="*{commuRegDate}"/>
+                                    <td th:text="*{commuViewCnt}"/>
                                 </tr>
-                                <tr>
-                                    <td colspan="5" align="center">작성한 게시글이 없습니다.</td>
+                                <tr th:unless="${#lists.size(commu)} != 0">
+                                    <td colspan="4" align="center">작성한 게시글이 없습니다.</td>
                                 </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                             <table class="numberPage">
@@ -951,10 +947,24 @@
 <script src="/js/browser.min.js"></script>
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/mypage.js"></script>
+<script th:inline="javascript" src="/js/mypage.js"></script>
 <script type="text/javascript"></script>
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
+<script th:inline="javascript">
+    /*클릭시 이벤트 페이지로 이동*/
+    function goEvent() {
+    location.href="/event/eventList"
+    };
+
+    /*플로깅 상세보기로 이동*/
+    $("a#goPloggingDetail").on("click", function(e){
+        e.preventDefault();
+        location.href = "/plogging/ploggingDetail?=ploggingNum" + $(this).attr("href");
+    });
+
+
+</script>
 </html>

@@ -25,7 +25,7 @@ public interface MypageMapper {
     /*찜목록 토탈*/
     public int totalGoodsLikeCnt(int memberNum);
     /*내가 작성한 게시판 목록*/
-    public List<CommuVO> getMyCommuList(int memberNum, Criteria criteria);
+    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria);
     /*내가 작성한 1:1문의 목록*/
     public List<CommuVO> getMyQueList(int memberNum, Criteria criteria);
     /*플로깅 예약 취소*/

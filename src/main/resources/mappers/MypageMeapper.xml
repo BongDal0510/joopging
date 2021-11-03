@@ -86,5 +86,21 @@ WHERE ploResNum = #{ploResNum}
     WHERE memberId = #{memberId} AND memberPw = #{memberPw}
 </update>
 
+    <!--내 게시글 목록-->
+    <select id="getMemberCommuList" resultType="commuVO">
+        <![CDATA[
+        SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE,COMMUVIEWCNT, COMMUBOARDSTATUS
+        FROM
+            (
+                SELECT /*+ INDEX_DESC(TBL_COMMUBOARD PK_COMMUBOARD)*/
+                ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
+                FROM TBL_COMMUBOARD
+                WHERE COMMUBOARDSTATUS = 0 AND
+                ROWNUM <= #{pageNum} * #{amount}
+                AND COMMUWRITER = #{memberId}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+    </select>
 
 </mapper>

@@ -2,6 +2,7 @@
  * 내정보
  */
 
+
 var tempList= new Array;
 
 $(".list").each(function(index, item){
@@ -45,31 +46,34 @@ $(".list").on("click", function(){
 $('li').on("click", function(){
     let value = $(this).text();
 
+    /*메인페이지로 이동하기*/
     if(value.includes("My Home")){
-        /*메인페이지로 이동하기*/
-        $("#myHome").show();
-        $(".imp-medium").not($("#myHome")).hide();
+        location.href="mypage/mypageMain"
     }
+    /*플로깅 내역*/
     else if(value.includes("플로깅 예약 확인")){
-        /*에이젝스로 플로깅 내역 뽑기*/
+        location.href="mypage/mypageMain"
         $("#checkPloggingMain").show();
         $(".imp-medium").not($("#checkPloggingMain")).hide();
     }
+    /*포인트 내역*/
     else if(value.includes("포인트 내역")){
-        /*에이젝스로 포인트 내역뽑기*/
+        location.href="mypage/mypageMain"
         $("#checkPoint").show();
         $(".imp-medium").not($("#checkPoint")).hide();
     }
+    /*내 상품*/
     else if(value.includes("내 상품")){
-        /*에이젝스로 내상품 뽑기*/
+        location.href="mypage/mypageMain"
         $(".payment").not($(this)).css("color","#5d5d5d");
         $("#paymentMainList").css("color","#94c477");
 
         $("#paymentMain").show();
         $(".imp-medium").not($("#paymentMain")).hide();
     }
+    /*찜 목록*/
     else if(value=="- 찜 목록"){
-        /*에이젝스로 찜록록 뽑끼*/
+        location.href="mypage/mypageMain"
         $(this).css("color","#94c477");
         $(".payment").not($(this)).css("color","#5d5d5d");
 
@@ -90,13 +94,14 @@ $('li').on("click", function(){
         $("#deleteInfo").show();
         $(".imp-medium").not($("#deleteInfo")).hide();
     }
+    /*게시글*/
     else if(value.includes("게시글")){
-        /*에이젝스로 뽑기*/
+        location.href="mypage/mypageMain"
         $("#myWriting").show();
         $(".imp-medium").not($("#myWriting")).hide();
     }
+    /*문의하기*/
     else if(value.includes("문의하기")){
-        /*에이젝스로 뽑기*/
         $("#question").show();
         $(".imp-medium").not($("#question")).hide();
     }
