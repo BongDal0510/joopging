@@ -52,14 +52,14 @@ function enrollSubmit(){
 
     var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])(?=.*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣])/;
 
-    if(!frm.goods_name.value){
+    if(!frm.goodsName.value){
         alert("상품명을 입력해주세요");
-        frm.goods_name.focus();
+        frm.goodsName.focus();
         return false;
     }
     if(frm.goodsCategory.value =="no select"){
         alert("상품 카테고리를 선택해주세요");
-        frm.goods_category.focus();
+        frm.goodsCategory.focus();
         return false;
     }
 

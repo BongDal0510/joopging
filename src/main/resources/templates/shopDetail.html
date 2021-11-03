@@ -4,7 +4,7 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 -->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
 
     html {
@@ -71,6 +71,7 @@
     }
 
     .detail {
+        margin-top: 10%;
         text-align: center;
         clear: both;
         margin-bottom: 30px;
@@ -205,17 +206,21 @@
             </div>
 
             <div class="shop_text">
-                <div>
-                    <h2>프라이탁 그린 가방</h2>
-                    <p style="font-size: 20px;">₩55,000원</p>
+                <div th:object="${shop}">
+                    <h2 name="goodsName" th:text="*{goodsName}"></h2>
+                    <span style="font-size: 20px;">\</span><span th:text="*{goodsPrice}"style="font-size: 20px;"></span><span style="font-size: 20px;">원</span>
                     <p>
-                    <pre></pre>
+
+                    <div th:text="*{goodsContent}">
+                    <pre>
                     - 플로깅으로 모아진 플라스틱을 재활용해 만든 가방<br>
                     - 한정판 디자인으로 오직 줍깅에서만 구매가능<br>
                     - 누구나 휴대하기 편한 사이즈의 가방<br>
                     - 남녀공용<br>
                     - 전면 소뿔단추 활용<br>
                     - 프라이탁의 시그니쳐 로고<br>
+                    </pre>
+                    </div>
                     <h4>COLOR : GREEN, WHITE</h4>
                     </p>
                 </div>
@@ -285,8 +290,11 @@
             </table>
         </nav>
 
+        <div class="uploadResult">
+            <ul></ul>
+        </div>
 
-        <div id="detail" class="detail">
+        <div class="detail">
             <img
                     style="text-algin: center; width: 550px; height: 500px; margin-top: 200px;"
                     src="/images/프라이탁.jpg">
@@ -366,7 +374,7 @@
         crossorigin="anonymous">
 </script>
 <script>
-
+    /*헤더 불러오는거*/
     $(function () {
         $("#main_header").load("header #header");
         $("#shop_header").load("shop_header #shop_header");
@@ -374,6 +382,32 @@
     });
 </script>
 <script>
+
+    let goodsNum = [[${shop.getGoodsNum()}]];
+    let uploadResult = $(".uploadResult ul");
+    let mainImgUploadResult = $(".stock_img");
+
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
+                function(arr){
+                    let str = "";
+                    $(arr).each(function(i, attach){
+                        if(!attach.image){
+
+                        }else{
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<div class=\"detail\">";
+                            str += "<img style=\"text-algin: center; width: 550px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                            str += "</div>";
+
+                        }
+                    });
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+    })
+
 
     $(document).ready(function () {
 
