@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class GoodsLikeListVO {
+public class TempGoodsLikeListVO {
     /*찜번호(PK)*/
     private int goodsLikeListNum;
     /*맴버번호(FK)*/

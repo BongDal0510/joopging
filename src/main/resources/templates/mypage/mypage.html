@@ -502,7 +502,7 @@
                                     <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}" th:text="*{ploResLocation}"></a></td>
                                     <td class="ploResDate" th:text="*{ploResDate}"></td>
                                     <td class="ploResTime" th:text="*{ploResTime}"></td>
-                                    <td class="deletePloRes"><a th:href="">x</a></td>
+                                    <td class="deletePloRes"><span id="ploResRefund">x</span></td>
                                 </tr>
                                 <tr th:if="${#lists.size(ploRes)} != 0">
                                     <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
@@ -965,6 +965,12 @@
         location.href = "/plogging/ploggingDetail?=ploggingNum" + $(this).attr("href");
     });
 
+    /*플로깅 취소 페이지 이동*/
+    $("#ploResRefund").on("click", function () {
+        let ploResNum = [[${ploRes.getPloResNum()}]];
+        let option = "width=470, height=600, top=100, left=200, location=no";
+        window.open("/mypage/ploggingRefundPage?ploResNum=?"+ploResNum, option).focus();
+    });
 
 </script>
 </html>

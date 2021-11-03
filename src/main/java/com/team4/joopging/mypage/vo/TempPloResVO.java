@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class PloResVO {
+public class TempPloResVO {
     /*예약번호*/
     private Long ploResNum;
     /*멤버번호(FK)*/

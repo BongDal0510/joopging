@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class OrderHistoryVO {
+public class TempOrderHistoryVO {
     /*구매한 상품 주문번호(PK)*/
     private int orderNum;
     /*맴버번호(FK)*/

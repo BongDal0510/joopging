@@ -16,12 +16,12 @@ public class MypageDAO {
     private final MypageMapper mapper;
 
     /*예약번호로 플로깅 찾기*/
-    public PloResVO getPloRes(Long ploResNum){
+    public TempPloResVO getPloRes(Long ploResNum){
         return mapper.getPloRes(ploResNum);
     };
 
     /*플로깅 내역 출력*/
-    public List<PloResVO> getPloResList(int memberNum, Criteria criteria){
+    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria){
         return mapper.getPloResList(memberNum, criteria);
     }
 
@@ -36,7 +36,7 @@ public class MypageDAO {
     }
 
     /*찜목록 출력*/
-    public List<GoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria){
+    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria){
         return mapper.getGoodsLikeList(memberNum, criteria);
     }
 

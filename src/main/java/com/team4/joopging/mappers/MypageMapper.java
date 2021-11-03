@@ -2,9 +2,9 @@ package com.team4.joopging.mappers;
 
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
-import com.team4.joopging.mypage.vo.GoodsLikeListVO;
+import com.team4.joopging.mypage.vo.TempGoodsLikeListVO;
 import com.team4.joopging.mypage.vo.TempMemberVO;
-import com.team4.joopging.mypage.vo.PloResVO;
+import com.team4.joopging.mypage.vo.TempPloResVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
 public interface MypageMapper {
 
     /*예약번호로 플로깅 찾기*/
-    public PloResVO getPloRes(Long ploResNum);
+    public TempPloResVO getPloRes(Long ploResNum);
     /*플로깅 예약 목록*/
-    public List<PloResVO> getPloResList(int memberNum, Criteria criteria);
+    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria);
     /*플로깅 내역 토탈*/
     public int totalPloResCnt(int memberNum);
     /*플로깅 내역 개수*/
     public int realTotalPloResCnt(int memberNum);
     /*찜 목록*/
-    public List<GoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria);
+    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria);
     /*찜목록 토탈*/
     public int totalGoodsLikeCnt(int memberNum);
     /*내가 작성한 게시판 목록*/

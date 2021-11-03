@@ -5,7 +5,7 @@
 
 
     <!--구매 상품 목록-->
-    <select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
+    <select id="getGoodsOrderList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
 SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
@@ -33,7 +33,7 @@ FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
     </select>
 
     <!--상품 택배-->
-    <select id="getParcel" resultType="com.team4.joopging.mypage.vo.ParcelVO">
+    <select id="getParcel" resultType="com.team4.joopging.mypage.vo.TempParcelVO">
 <![CDATA[
 SELECT parcelNum, parcelCode, orderNum
 FROM TBL_PARCEL WHERE orderNum = #{orderNum}
@@ -48,7 +48,7 @@ WHERE orderNum = #{orderNum}
 </update>
 
     <!--구매취소된 상품 불러오기-->
-    <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.OrderHistoryVO">
+    <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
     SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus

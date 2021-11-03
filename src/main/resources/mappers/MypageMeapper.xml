@@ -5,13 +5,13 @@
 
 
     <!--플로깅 번호로 찾기-->
-    <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.PloResVO">
+    <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
         SELECT  ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
         FROM TBL_PLO_RES WHERE ploggingNum = #{ploggingNum}
     </select>
 
     <!--플로깅 예약 목록-->
-<select id="getPloResList" resultType="com.team4.joopging.mypage.vo.PloResVO">
+<select id="getPloResList" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
 
     SELECT ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
@@ -36,7 +36,7 @@
     </select>
 
 <!--찜 목록-->
-<select id="getGoodsLikeList" resultType="com.team4.joopging.mypage.vo.GoodsLikeListVO">
+<select id="getGoodsLikeList" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
 SELECT goodsLikeListNum, memberNum, goodsNum
 FROM(
     <![CDATA[

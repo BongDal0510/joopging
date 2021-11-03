@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ParcelVO {
+public class TempParcelVO {
     /*운송장 번호*/
     private String parcelNum;
     /*택배사*/
