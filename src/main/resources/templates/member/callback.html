@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<body>
+<!--아는 방법이 form태그 데이터 전송밖에 없었다-->
+<!--현재 callback.html을 한번 더 거쳐서 mainpage.html로 이동한다.-->
+<form id="naverLogin" name="naverLogin" action="/member/naverlogin" method="post" style="display: none">
+    <!--토큰을 담아줄 input 태그-->
+    <input id="token" name="token" type="text">
+
+    <input id="memberId" name="memberId" type="text">
+    <input id="memberName" name="memberName" type="text">
+    <input id="memberEmail" name="memberEmail" type="text">
+    <input id="memberBirth" name="memberBirth" type="text">
+    <input id="memberDay" name="memberDay" type="text">
+    <input id="memberPhone" name="memberPhone" type="text">
+</form>
+<!--기존과 동일한 스크립트 설정-->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    /*동일한 코드와 콜백 URL*/
+    var naver_id_login = new naver_id_login("OAU8mmDRIAGPllfANyWA", "http://localhost:10004/member/login");
+    // 접근 토큰 값 출력
+
+    /*네이버 로그인이 된 상태에서 naver_id_login.get_naver_userprofile()메소드가 실행되면 계정에 맞는 해당 토큰값이 발생한다. */
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        /*토큰값으로 데이터 조회하기기*/
+       // console.log("네이버 로그인 토큰 : " + naver_id_login.oauthParams.access_token);
+        // console.log("아이디 : " + naver_id_login.getProfileData('id'));
+        // console.log("이름 : " + naver_id_login.getProfileData('name'));
+        // console.log("이메일 : " + naver_id_login.getProfileData('email'));
+        // console.log("출생년도 : " + naver_id_login.getProfileData('birthyear'));
+        // console.log("출생월일 : " + naver_id_login.getProfileData('birthday'));
+        // console.log("휴대폰번호 : " + naver_id_login.getProfileData('mobile'));
+
+        let form = document.naverLogin;
+
+        /*발생한 토큰값 input 태그에 넣어주기*/
+        form.token.value=naver_id_login.oauthParams.access_token;
+        form.memberId.value=naver_id_login.getProfileData('id');
+        form.memberName.value=naver_id_login.getProfileData('name');
+        form.memberEmail.value=naver_id_login.getProfileData('email');
+        form.memberBirth.value=naver_id_login.getProfileData('birthyear');
+        form.memberDay.value=naver_id_login.getProfileData('birthday');
+        form.memberPhone.value=naver_id_login.getProfileData('mobile');
+        /*서브밋*/
+        form.submit();
+    }
+</script>
+</body>
+</html>
