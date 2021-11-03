@@ -81,7 +81,7 @@
     <!--비밀번호 검색-->
     <select id="searchPw" resultType="string">
         SELECT MEMBERID FROM TBL_MEMBER
-        WHERE MEMBERID=#{memberId} AND MEMBERNAME=#{memberName} AND MEMBERBIRTH=#{memberBirth} AND MEMBERGENDER=#{memberGender}
+        WHERE MEMBERID=#{memberId} AND MEMBERNAME=#{memberName} AND MEMBERBIRTH=#{memberBirth} AND MEMBERGENDER=#{memberGender} AND MEMBERPHONE=#{memberPhone}
     </select>
 
     <!--비밀번호 변경-->
@@ -99,5 +99,17 @@
         MEMBERSAVEDPOINT, MEMBERATTEND, MEMBERLEVEL, MEMBERSTATUS
         FROM TBL_MEMBER
         WHERE MEMBERID=#{memberId}
+    </select>
+
+
+    <!--네이버 카카오 일반 회원의 이름 조회-->
+    <select id="userName" resultType="MemberVO">
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER WHERE MEMBERID=#{id}
+    </select>
+    <select id="userNameKAKAO" resultType="MemberVO">
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER_KAKAO WHERE MEMBERID=#{id}
+    </select>
+    <select id="userNameNAVER" resultType="MemberVO">
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER_NAVER WHERE MEMBERID=#{id}
     </select>
 </mapper>

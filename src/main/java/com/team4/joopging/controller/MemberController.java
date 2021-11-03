@@ -176,7 +176,7 @@ public class MemberController {
 //      SMS보내기 메소드 주석풀면 돈나감
 //      SendSMS(str, phone);
 
-        return "member/searchId";
+        return "/member/searchId";
     }
 
     /*아이디 결과 띄워주기(연산)*/
@@ -186,11 +186,13 @@ public class MemberController {
         return "member/resultFindId";
     }
 
+    /*비밀번호 찾기*/
     @GetMapping("findPw")
     public String findPw() {
         return "member/findPw";
     }
 
+    /*비밀번호 찾기 sms인증*/
     @PostMapping("searchPw")
     public String searchPw(MemberVO vo, Model model) {
         /*난수 메소드 사용*/
@@ -208,12 +210,14 @@ public class MemberController {
         return "member/searchPw";
     }
 
+    /*비밀번호 재설정 입력*/
     @PostMapping("resultRePw")
     public String resultRePw(MemberVO vo, Model model) {
         model.addAttribute("result", vo.getMemberId());
         return "member/resultRePw";
     }
 
+    /*비밀번호 재설정 쿼리문*/
     @PostMapping("rePassWordResult")
     public String rePassWordResult(MemberVO vo, Model model) {
         /*비밀번호 수정 쿼리문*/
@@ -310,7 +314,6 @@ public class MemberController {
 //        System.out.println(jsonObj2.get("mobile"));
 //        System.out.println(jsonObj2.get("gender"));
 //        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
-        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
 
         /*???*/
 //        vo.setMemberEmail(jsonObj2.get("email"));
