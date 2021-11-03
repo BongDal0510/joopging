@@ -1,6 +1,7 @@
 package com.team4.joopging.services;
 
 import com.team4.joopging.event.dao.EventDAO;
+import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +31,8 @@ public class EventService {
         return eventDAO.remove(eventNum);
     }
 
-    public List<EventVO> getList(){
-        return eventDAO.getList();
+    public List<EventVO> getList(EventCriteria eventCriteria){
+        return eventDAO.getList(eventCriteria);
     }
 
     public int getTotal(){

@@ -1,5 +1,6 @@
 package com.team4.joopging.event.dao;
 
+import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventVO;
 import com.team4.joopging.mappers.EventMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class EventDAO {
 
     public boolean remove(Long eventNum) { return eventMapper.deleteEvent(eventNum) == 1; }
 
-    public List<EventVO> getList() { return eventMapper.getEventList(); }
+    public List<EventVO> getList(EventCriteria eventCriteria) { return eventMapper.getEventList(eventCriteria); }
 
     public int getTotal() { return eventMapper.getTotal(); }
 }

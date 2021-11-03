@@ -168,6 +168,40 @@
             margin-top: 0;
         }
 
+        /* 페이징 처리 관련 CSS */
+        .big-width {display: block;}
+        .small-width {display: none;}
+
+        @media (max-width: 918px) {
+            .big-width {display: none;}
+            .small-width {display: block;}
+        }
+
+        .paging {
+            margin: 100px 0 !important;
+        }
+
+        .paging a {
+            color: #78B162;
+            text-decoration:none;
+        }
+
+        .paging code {
+            font-size: 18px;
+        }
+
+        /* <code> 태그 관련 CSS */
+        code {
+            border-radius: 4px;
+            border: solid 1px rgba(144, 144, 144, 0.25);
+            background: rgba(144, 144, 144, 0.075);
+            font-family: "Courier New", monospace;
+            font-size: 0.9rem;
+            margin: 0 0.25rem;
+            padding: 0.25rem 0.65rem;
+        }
+
+
     </style>
 </head>
 
@@ -250,19 +284,17 @@
                         <section class="box boxinner">
                             <div style="display: flex">
                                 <header id="center">
-                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                        11월 신규가입
-                                    </h4>
+                                    <h4 id="joinEventTitle" style="font-family: 'S-CoreDream-4Regular';"></h4>
                                 </header>
                                 <footer class="eventButton">
                                     <ul class="actions">
-                                        <li><a href="/event/eventInfo3" class="button alt">상세보기</a></li>
+                                        <li><a href="/event/joinInfo" class="button alt">상세보기</a></li>
                                     </ul>
                                 </footer>
                             </div>
                             <div>
                                 <p class="eventDate">신청일 </p>
-                                <p class="eventDate">11월 1일-11월 30일</p>
+                                <p class="eventDate" id="joinEventDate"></p>
                             </div>
                         </section>
                     </div>
@@ -364,31 +396,30 @@
 <!--                            </div>-->
 <!--                        </section>-->
 <!--                    </div>-->
-
-
-<!--                    <div class="col-4 col-6-medium col-12-small">-->
-<!--                        <section class="eventImage">-->
-<!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>-->
-<!--                        </section>-->
-<!--                        <section class="box boxinner">-->
-<!--                            <div style="display: flex">-->
-<!--                                <header id="center">-->
-<!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
-<!--                                        플로깅 인증이벤트-->
-<!--                                    </h4>-->
-<!--                                </header>-->
-<!--                                <footer class="eventButton">-->
-<!--                                    <ul class="actions">-->
-<!--                                        <li><a href="#" class="button alt">상세보기</a></li>-->
-<!--                                    </ul>-->
-<!--                                </footer>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <p class="eventDate">9월 1일-09월 30일</p>-->
-<!--                            </div>-->
-<!--                        </section>-->
-<!--                    </div>-->
                 </div>
+
+
+                    <div class="paging" th:object="${pageMaker}">
+                        <div class="big-width" style="text-align: center">
+                            <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                            <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                                <code th:if="${pageMaker.eventCriteria.getPageNum() == num}" th:text="${num}"></code>
+                                <a class="changePage" th:unless="${pageMaker.eventCriteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                            </th:block>
+                            <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                        </div>
+                        <div class="small-width" style="text-align: center">
+                            <a class="changePage" th:if="*{eventCriteria.pageNum > 1}" th:href="*{eventCriteria.pageNum - 1}"><code>&lt;</code></a>
+                            <code th:text="*{eventCriteria.pageNum}"></code>
+                            <a class="changePage" th:if="*{eventCriteria.pageNum < realEnd}" th:href="*{eventCriteria.pageNum + 1}"><code>&gt;</code></a>
+                        </div>
+                        <form action="/event/eventlist" th:object="${eventCriteria}" name="pageForm">
+                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                            <input type="hidden" name="amount" th:field="*{amount}">
+                        </form>
+                    </div>
+
+
             </section>
         </div>
     </div>
@@ -402,11 +433,30 @@
 <script src="/js/weather.js"></script>
 <script src="/js/event.js"></script>
 <script th:inline="javascript">
+    let pageForm = $(document.pageForm);
 
     $("a#goRead").on("click", function(e){
         e.preventDefault();
         location.href = "/event/eventInfo?eventNum=" + $(this).attr("href");
     })
+
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    $(document).ready(function(){
+       let today = new Date();
+       let year = today.getFullYear();
+       let month = today.getMonth() + 1;
+
+       let lastDate = new Date(year, month - 2, 0);
+
+       $("#joinEventTitle").html(month + "월 신규가입");
+       $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
+
+    });
 
 </script>
 </html>
