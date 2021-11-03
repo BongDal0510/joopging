@@ -268,6 +268,15 @@
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.shopCriteria.listLink}]];
 
+    $(document).ready(function(){
+        let goodsNum = [[${goodsNum}]];
+        if(goodsNum == null || history.state){
+            return;
+        }
+        alert("상품 " + goodsNum + "번이 등록되었습니다.");
+        history.replaceState({}, null, null);
+    });
+
     $("a.changePage").click(function(e){
         e.preventDefault();
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
