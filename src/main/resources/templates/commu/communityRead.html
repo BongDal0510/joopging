@@ -114,8 +114,18 @@
                             </div>
                             <!--글 내용-->
                             <div class="field">
-
                                 <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
+                            </div>
+                            <div class="field">
+                                <h4>첨부파일</h4>
+                            </div>
+                            <div class="field">
+                                <div class="uploadResult">
+                                    <ul></ul>
+                                </div>
+                            </div>
+                            <div class="bigPictureWrapper">
+                                <div class="bigPicture"></div>
                             </div>
 
                         </div>
@@ -180,10 +190,64 @@
     let paging = [[${criteria.listLink}]];
     let replyUL = $("ul.replies");
     let pageNum = 1;
+    let uploadResult = $(".uploadResult ul");
+
+    let showCheck = false;
+    function showImage(fileCallPath){
+        if(showCheck) {return;}
+        $(".bigPictureWrapper").css("display", "flex").show();
+        $(".bigPicture").html("<img src='/commuupload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+            .animate({width:"100%", height:"100%"}, 1000);
+        showCheck = true;
+    }
+
+    $(".bigPictureWrapper").on("click", function(){
+        if(!showCheck){return;}
+        $(".bigPicture").animate({width: "0%", height: "0%"}, 1000);
+        setTimeout(function(){
+            showCheck = false;
+            $(".bigPictureWrapper").hide();
+        }, 1000)
+    })
+
+    $(document).ready(function(){
+        (function(){
+            console.log(commuBno);
+            $.getJSON("/commu/getCommuAttachList", {commuBno: commuBno},
+                function(arr){
+                    console.log(arr);
+                    let str = "";
+
+                    $(arr).each(function(i, attach){
+                        if(!attach.image){
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<a href='/commuupload/download?fileName=" + fileCallPath + "'>";
+                            str += "<img src='/images/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</a>"
+                            str += "</div>";
+                            str += "</li>";
+                        }else{
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                            str += "<img src='/commuupload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</a>";
+                            str += "</div>";
+                            str += "</li>";
+                        }
+                    });
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+    });
 
 
-
-
+/*###################################################댓글###########################################################*/
     /*댓글 영역의 첫 페이지를 항상 보여준다*/
     showList(pageNum);
     /*댓글 등록 버튼 클릭시, 댓글 작성폼 보여주기*/
@@ -224,7 +288,11 @@
 
     //업데이트 = 수정하기
     function goUpdate(){
-        location.href = "/commu/communityModify" + paging + "&commuBno=" + commuBno;
+        if (confirm("수정시 등록된 첨부파일이 삭제됩니다.\n계속 진행 하시겠습니까?") == true){    //확인
+            location.href = "/commu/communityModify" + paging + "&commuBno=" + commuBno;
+        }else{   //취소
+            return;
+        }
     }
 
     //목록보러 가기
@@ -367,6 +435,14 @@
             }
         );
     })
+    /*############################################수정시 예외처리############################*/
 
+    function beforeModify(){
+        if (confirm("수정시 등록된 첨부파일이 삭제됩니다'<br>'계속 진행 하시겠습니까?") == true){    //확인
+            document.form.submit();
+        }else{   //취소
+            return;
+        }
+    }
 </script>
 </html>

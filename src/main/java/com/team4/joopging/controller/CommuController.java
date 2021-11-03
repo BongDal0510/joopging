@@ -1,21 +1,24 @@
 package com.team4.joopging.controller;
 
+import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.services.CommuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -44,8 +47,11 @@ public class CommuController {
         log.info("register : " + commu.toString());
         log.info("--------------------------------");
 
-        commuService.registerCommu(commu);
+        if(commu.getAttachList() != null){
+            commu.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
 
+        commuService.registerCommu(commu);
         //세션의 flash 영역을 이용하여 전달
         rttr.addFlashAttribute("commuBno", commu.getCommuBno());
 
@@ -86,16 +92,46 @@ public class CommuController {
     //  삭제
     @PostMapping("removeCommu")
     public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr) {
-        log.info("--------------------------------");
-        log.info("removeCommu : " + commuBno);
-        log.info("--------------------------------");
+        log.info("-------------------------------");
+        log.info("remove : " + commuBno);
+        log.info("-------------------------------");
+
+        List<CommuAttachFileVO> attachList = commuService.getAttachList(commuBno);
 
         if (commuService.removeCommu(commuBno)) {
+            deleteFiles(attachList);
             rttr.addFlashAttribute("result", "success");
-        }else {
+        } else {
             rttr.addFlashAttribute("result", "fail");
         }
         return new RedirectView("communityList");
+    }
+
+
+    //파일삭제
+    private void deleteFiles(List<CommuAttachFileVO> attachList){
+        if(attachList == null || attachList.size() == 0){
+            return;
+        }
+
+        log.info("delete attach files...........");
+        log.info(attachList.toString());
+
+        attachList.forEach(attach -> {
+            try {
+                Path file = Paths.get("C:/upload/commu/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
+                Files.delete(file);
+
+                if(Files.probeContentType(file).startsWith("image")){
+                    Path thumbnail = Paths.get("C:/upload/commu/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
+                    Files.delete(thumbnail);
+                }
+            } catch (Exception e) {
+                log.error("delete file error " + e.getMessage());
+            }
+        });
+
+
     }
 
 
@@ -113,5 +149,14 @@ public class CommuController {
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
+    }
+
+
+    //    게시글 첨부파일
+    @GetMapping(value = "getCommuAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<CommuAttachFileVO> getCommuAttachList(Long commuBno){
+        log.info("getCommuAttachList " + commuBno);
+        return commuService.getAttachList(commuBno);
     }
 }

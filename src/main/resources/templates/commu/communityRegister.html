@@ -13,9 +13,6 @@
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
-    <style>
-
-    </style>
 </head>
 <body class="is-preload">
 <!--header 위치-->
@@ -76,7 +73,7 @@
                                         <textarea id="summernote" name="commuContent" rows="6" placeholder="Content"
                                                   style="resize:none"></textarea>
                                     </div>
-                                    <!--<div class="field">
+                                    <div class="field">
                                         <h4>첨부파일</h4>
                                         <input type="file" name="uploadFiles" multiple>
                                     </div>
@@ -87,7 +84,7 @@
                                     </div>
                                     <div class="bigPictureWrapper">
                                         <div class="bigPicture"></div>
-                                    </div>-->
+                                    </div>
                                 </div>
                                 <ul class="actions special">
                                     <li><input type="submit" class="button" value="등록"/></li>
@@ -130,6 +127,150 @@
             lang : 'ko-KR'
         });
     });
+</script>
+<script>
+    //파일이 있는지 없는지 확인
+    let check = false;
+    //이미지 보여주는 곳
+    function showImage(fileCallPath){
+        //만약 check이 false면 = 이미지 없음.
+        if(check) {return;}
+        //아닐경우 .bigPictureWrapper을 표시해준다.
+        $(".bigPictureWrapper").css("display", "flex").show();
+        //이미지 클릭시 원본 사이즈 이미지를 보여준다. 애니메이션 1초간.
+        $(".bigPicture").html("<img src='/upload/commu/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+            .animate({width:"100%", height:"100%"}, 1000);
+        //이미지 있음 = check true
+        check = true;
+    }
+    //이미지 사라지게 하는 곳
+    $(".bigPictureWrapper").on("click", function(){
+        //만약 이미지가 있다면?
+        if(!check){return;}
+        //이미지 클릭시 원본 이미지 없애기, 애니메이션 1초간
+        $(".bigPicture").animate({width: "0%", height: "0%"}, 1000);
+        setTimeout(function(){
+            //이미지 상태 = 없음으로 바꿈
+            check = false;
+            //이미지 숨기기
+            $(".bigPictureWrapper").hide();
+        }, 1000)
+    })
+    /*확장자 제한*/
+    $(document).ready(function(){
+        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        //사이즈 제한
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+
+        //등록 폼 submit시
+        $("input[type='submit']").on("click", function(e){
+            e.preventDefault();
+            let form = $("form#registForm");
+            let str = "";
+            /*첨부 파일마다 반복*/
+            $(".uploadResult ul li").each(function(i, obj){
+                str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            form.append(str).submit();
+        })
+        /*파일 업로드*/
+        function showUploadFile(uploadFiles){
+            let str = "";
+            $(uploadFiles).each(function(i, obj){
+                //업로드한 파일이 이미지가 아닐경우
+                if(!obj.image){
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href='/commuupload/download?fileName=" + fileCallPath + "'>";
+                    str += "<img src='/images/attach.png' width='100px'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>"
+                    str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                    //업로드한 파일이 이미지라면
+                }else{
+                    //썸네일 추가생성
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                    let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                    str += "<img src='/commuupload/display?fileName=" + fileCallPath + "'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>";
+                    str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                }
+            });
+            uploadResult.append(str);
+        }
+        /*생성된 파일/이미지 html에 넣어줌*/
+        $(".uploadResult").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            //attachController 경로로 보내기
+            $.ajax({
+                url: "/commuupload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                }
+            });
+
+        });
+
+        //파일 등록시 예외처리
+        function checkExtension(fileName, fileSize){
+            //1. 확장자 별 업로드 제한
+            if(regex.test(fileName)){
+                alert("업로드 할 수 없는 파일의 형식입니다.");
+                return false;
+            }
+            //2. 특정 크기 이상의 파일은 업로드 제한
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+        /*upload 폴더 경로에 파일 업로드*/
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='uploadFiles']");
+            let files = inputFile[0].files;
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+
+            $.ajax({
+                url: "/commuupload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
+    })
 </script>
 
 </html>

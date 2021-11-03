@@ -4,5 +4,6 @@
     <typeAliases>
         <typeAlias type="com.team4.joopging.community.vo.CommuVO" alias="commuVO"/>
         <typeAlias type="com.team4.joopging.community.vo.CommuReplyVO" alias="commuReplyVO"/>
+        <typeAlias type="com.team4.joopging.community.vo.CommuAttachFileVO" alias="commuAttachFileVO"/>
     </typeAliases>
 </configuration>

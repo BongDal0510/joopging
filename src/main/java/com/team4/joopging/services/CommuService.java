@@ -1,5 +1,6 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,5 @@ public interface CommuService {
     public int getCommuTotal(Criteria criteria);
     public boolean updateCommuViewCnt(Long commuBno);
     public List<CommuVO> getAnnounceList(int commuBoardStatus);
+    public List<CommuAttachFileVO> getAttachList(Long commuBno);
 }
