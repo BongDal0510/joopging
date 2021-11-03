@@ -263,7 +263,6 @@ public class MemberController {
         return str;
     }
 
-
     /*로그인 창에서 네이버 로그인 진행*/
     /*login.html에서 요청*/
     @GetMapping("callback")
