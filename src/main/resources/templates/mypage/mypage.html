@@ -654,7 +654,7 @@
                                                 </td>
                                                 <td calss="" th:text=""><!--가격--></td>
                                             </tr>
-                                        <tr th:if="${#lists.size(goodsLikeList)} != 0">
+                                        <tr th:unless="${#lists.size(goodsLikeList)} != 0">
                                             <td colspan="3" align="center">찜 내역이 없습니다.</td>
                                         </tr>
                                 </th:block>
