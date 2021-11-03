@@ -1,0 +1,193 @@
+@font-face {
+    font-family: 'S-CoreDream-5Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream-4Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+div#main{
+    padding: 0;
+    font-family: 'yg-jalnan';
+}
+
+a.button{
+    font-family: 'S-CoreDream-3Light';
+    background-color: #35A14A;
+    text-align: right;
+    padding: 0.2em 1em;
+    font-size: 14px;
+    margin: 3.4% 0;
+}
+
+#commuBoardWrapper{
+    display: flex;
+}
+#commuBoardLeft{
+    width: 17%;
+    overflow: hidden;
+    text-align: center;
+    padding: 5% 0 0 5.6%
+}
+#commuBoardLeft tr{
+    text-align: left;
+    font-size: 16px;
+}
+#commuBoardLeft img{
+    width: 100%;
+}
+#commuBoardRight img{
+    width: 100%;
+}
+#commuBoardMiddle{
+    width: 56%;
+    margin: 0 5% 0 3%;
+}
+#commuBoardRight{
+    width: 17%;
+    padding: 0 2% 0 0;
+    overflow: hidden;
+    text-align: center;
+}
+#commuSearchWrap{
+    padding: 0 25%;
+}
+#communityBanner{
+    padding: 0 10%;
+    text-align: center;
+    margin: 0;
+}
+#communityBanner img{
+    height: 200px;
+}
+#searchWrap a{
+    margin-left: 2%;
+}
+#commuBoardMiddle{
+    font-family: 'S-CoreDream-3Light';
+    font-size: 13px;
+}
+#goRead{
+    text-decoration-line: none;
+}
+.tHead{
+    font-family: 'S-CoreDream-4Regular';
+    text-align: center;
+}
+
+
+#commuSearchWrap{
+    font-family: 'S-CoreDream-3Light';
+}
+#pagingStyle{
+    text-align: center;
+    font-family: 'S-CoreDream-3Light';
+}
+ul.actions{
+    text-align: right;
+}
+
+input.button{
+    background-color: #94C477;
+}
+
+header#headerWrapper{
+    padding: 0;
+    margin: 0;
+
+}
+div#goCommuListBtn{
+    text-align: left;
+    display: flex;
+}
+/*a#goListBtn.small{
+    padding: 0.4% 1.5%;
+    font-size: 12px;
+}*/
+div#main{
+    margin-top: 5%;
+}
+div#main_header{
+    display: flex;
+}
+header#commuHeaderWrapper{
+    margin: 0;
+    padding-top: 0;
+}
+#goCommuListBtn div{
+    width: 50%;
+}
+body{
+    margin:0;
+}
+
+#commuLeftCategory{
+    font-family: 'S-CoreDream-5Medium';
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+
+#registerBtn{
+    border-bottom: solid 3px #35A14A;
+    display: flex;
+}
+
+#registerBtn div{
+    font-family: 'yg-jalnan';
+    color:#35A14A;
+    text-align: left;
+    padding:2% 0%;
+    margin:0;
+    width: 70%;
+    float: left;
+    font-size: 20px;
+}
+div#registerBtnArea{
+    text-align: right;
+    padding: 0;
+}
+
+#commuLeftCategory tr{
+    border:none;
+}
+
+header.major{
+    border:none !important;
+}
+
+a#reportBtn.button.small{
+    background-color: #ffffff;
+}
+
+#goReportBtn{
+
+    text-align: right;
+}
+
+#goReportBtn img{
+    width:50%;
+    padding: 0;
+}
+
+.note-btn dropdown-toggle{
+    background-color: #f4f4f5;
+}
