@@ -1,10 +1,35 @@
+/*배민 주아체*/
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*에스코어드림Lt*/
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*에스코어드림Md*/
+@font-face {
+    font-family: 'S-CoreDream-5Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
-    padding: 0 25%;
+    padding: 0 5%;
+    font-family: 'S-CoreDream-3Light';
 }
 
 div.reportInfo {
+    font-family: 'S-CoreDream-5Medium';
     text-align: center;
     margin: 2% 0;
+    color: red;
 }
 
 div.reportAnnounce {
@@ -23,7 +48,6 @@ div.reportBackground {
     padding: 5% 3% 3% 3%;
 }
 
-
 div#joopgingLogoLeaf {
     text-align: center;
 }
@@ -37,113 +61,12 @@ div.reportSelections{
     margin-bottom: 3%;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
-
-.page-wrapper {
-    width: 100%;
-    height: 100%;
-    background: url(https://goo.gl/OeVhun) center no-repeat;
-    background-size: cover;
-}
-
-.blur-it {
-    filter: blur(4px);
-}
-
-a.btn {
-    width: 200px;
-    padding: 18px 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #fff;
-    border-radius: 0;
-    background: #e2525c;
-}
-
-.modal-wrapper {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(41, 171, 164, 0.8);
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.25s ease-in-out;
-}
-
-.modal-wrapper.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal {
-    width: 600px;
-    height: 400px;
-    display: block;
-    margin: 50% 0 0 -300px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    background: #fff;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-}
-
-.modal-wrapper.open .modal {
-    margin-top: -200px;
-    opacity: 1;
-}
-
-.head {
-    width: 90%;
-    height: 32px;
-    padding: 12px 30px;
-    overflow: hidden;
-    background: #e2525c;
-}
-
-.btn-close {
-    font-size: 28px;
-    display: block;
-    float: right;
-    color: #fff;
-}
-
-.content {
-    padding: 10%;
-}
-
-.good-job {
-    text-align: center;
-    font-family: 'Montserrat', Arial,       Helvetica, sans-serif;
-    color: #e2525c;
-}
-.good-job .fa-thumbs-o-up {
-    font-size: 60px;
-}
-.good-job h1 {
-    font-size: 45px;
-}
-
-div > h4{
-    font-size: 16pt;
+.reportPage{
+    font-family: 'S-CoreDream-5Medium';
+    font-size: 14pt;
     text-align: center;
     margin: 5% 0 4% 0;
-    color: green;
+    color: #0b871e;
 }
 
 #boardWriterArea{
@@ -155,4 +78,38 @@ div#boardTitleArea{
     border-radius: 5px;
     padding: 3%;
     margin-top: 3%;
+}
+
+.reportSelections{
+    margin-bottom: 3%;
+}
+
+div.field input.reportedTitle{
+    border: none;
+    padding-left: 0;
+}
+
+div#boardWriterArea h4{
+    width: 30%;
+    margin: 3% 0;
+    font-size: 10pt;
+}
+
+div#boardWriterArea input{
+    margin: 0;
+    border: none;
+    width: 30%;
+}
+
+a.btn-close{
+    padding: 2.22% 6.3%;
+}
+
+input.btn-close{
+    padding: 2% 3%;
+}
+
+div.reportPageBtns{
+    text-align: center;
+    margin-top: 5%;
 }

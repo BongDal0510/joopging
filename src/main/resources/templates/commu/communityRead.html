@@ -95,7 +95,7 @@
                 <div id="commuBoardMiddle">
                     <div id="goCommuListBtn"> <!--href="javascript:void(0)"-->
                         <div><a id="goListBtn" href="javascript:void(0)" class="button small">목록 보기</a></div>
-                        <div id="goReportBtn"><a id="reportBtn" class="button small trigger"><img src="/images/commu/siren.png"></a></div>
+                        <div id="goReportBtn"><a id="reportBtn" class="button small trigger" onclick="popup()"><img src="/images/commu/siren.png"></a></div>
                     </div>
             <div class="content">
                 <div class="form">
@@ -449,12 +449,11 @@
     }
     /*#########################################팝업############################################*/
     /*신고하기 누르면 팝업*/
-/*    $( document ).ready(function() {
-        $('.trigger').on('click', function() {
-            $('.modal-wrapper').toggleClass('open');
-            $('.page-wrapper').toggleClass('blur-it');
-            return false;
-        });
-    });*/
+    function popup(){
+        var url = "/report/report";
+        var name = "신고하기";
+        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
 </script>
 </html>
