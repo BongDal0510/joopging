@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -32,33 +33,50 @@ public class MypageController {
 
         HttpSession session = req.getSession();
 
-        criteria = new Criteria();
-
         if(session.getAttribute("memberId")!=null) {
             String memberId = (String)session.getAttribute("memberId");
             int memberNum = mypageSVC.selectMemberNum(memberId);
 
             model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
+            model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
+            model.addAttribute("orderTotalCnt", mypageSVC.realTotalOrderCnt(memberNum));
+            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberNum, criteria));
+            model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
+            model.addAttribute("goodslikeTotalCnt", mypageSVC.totalGoodsLikeCnt(memberNum));
+            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberNum, criteria));
 
             return "mypage/mypage";
         }else{
             model.addAttribute("msg","로그인 후 이용바랍니다.");
-            return "main/mainpage";
+            return "/main/mainpage";
         }
     }
 
     /*마이 페이지 플로깅 예약으로 이동*/
-    @GetMapping("mypagePloRes")
-    public String mypageploRes(Model model, Criteria criteria, HttpServletRequest req) {
+    @RequestMapping(value = "mypagePloRes", method = RequestMethod.POST)
+    public RedirectView mypagePloRes(Criteria criteria, HttpServletRequest req, RedirectAttributes rttr) {
         HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
         int memberNum = mypageSVC.selectMemberNum(memberId);
 
-        model.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
-        model.addAttribute("ploResPageMaker", new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria));
-
-        return "mypage/mypage";
+        if(mypageSVC.getPloResList(memberNum,criteria).size()!=0) {
+            rttr.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
+//            rttr.addAttribute("bno", boardVO.getBno());
+        }
+        return new RedirectView("mypage");
     }
+
+//    @GetMapping("mypagePloRes")
+//    public void mypagePloRes(Model model, Criteria criteria, HttpServletRequest req) {
+//        HttpSession session = req.getSession();
+//        String memberId = (String)session.getAttribute("memberId");
+//        int memberNum = mypageSVC.selectMemberNum(memberId);
+//
+//        model.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
+//        model.addAttribute("ploResPageMaker", new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria));
+//
+//        return;
+//    }
 
     /*마이 페이지 포인트로 이동*/
     @GetMapping("mypagePoint")
@@ -70,6 +88,7 @@ public class MypageController {
 
         model.addAttribute("pointPageMaker", new CommuPageDTO(pointSVC.totalPointCnt(memberNum), 10, criteria));
         model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
+
 
         return "mypage/mypage";
     }

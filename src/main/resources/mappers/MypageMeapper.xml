@@ -38,13 +38,13 @@
 
 <!--찜 목록-->
 <select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
+        <![CDATA[
 SELECT goodsLikeListNum, memberNum, goodsNum
 FROM(
-    <![CDATA[
 SELECT /** INDEX_DESC(TBL_GOODS_LIKE_LIST GOODS_LIKE_LIST_PK)*/
 ROWNUM R,goodsLikeListNum, memberNum, goodsNum
 FROM TBL_GOODS_LIKE_LIST
-WHERE memberNum = #{memberNum}
+WHERE memberNum = #{memberNum} AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}

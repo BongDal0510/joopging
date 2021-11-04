@@ -6,7 +6,7 @@
 
     <!--구매 상품 목록-->
 
-    <select id="getGoodsOrderList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
+    <select id="getOrderHistoryList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
         <![CDATA[
 SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
@@ -16,7 +16,7 @@ SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
     ROWNUM R, orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
-FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum}
+FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}

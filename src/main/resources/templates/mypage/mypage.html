@@ -470,8 +470,8 @@
                                 <table>
                                     <th:block th:each="ploRes:${ploRes}">
                                         <tr th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
-                                            <td class="ploResLocation" th:text="*{ploResLocation}"></td>
-                                            <td class="ploResDate" th:text="*{ploResDate}"></td>
+                                            <td class="ploResLocation" th:text="${ploRes?.getPloResLocation()}"></td>
+                                            <td class="ploResDate" th:text="${ploRes?.getPloResDate()}"></td>
                                         </tr>
                                         <tr th:unless="${#lists.size(ploRes)} != 0">
                                             <td colspan="2" align="center">예약한 플로깅이 없습니다.</td>
@@ -513,14 +513,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="ploResAll : ${ploResAll}">
-                                    <tr class="ploRes" th:if="${#lists.size(ploRes)} != 0" th:object="${ploResAll}">
+                                <th:block th:each="ploRes : ${ploRes}">
+                                    <tr class="ploRes" th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
                                         <td calss="ploResNum" th:text="*{ploResNum}"></td>
                                         <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}"
                                                                       th:text="*{ploResLocation}"/></td>
                                         <td class="ploResDate" th:text="*{ploResDate}"></td>
                                         <td class="ploResTime" th:text="*{ploResTime}"></td>
-                                        <td class="deletePloRes"><span id="ploResRefund">x</span></td>
+                                        <td class="deletePloRes"><span id="ploResRefund" th:class="*{ploResNum}">x</span></td>
                                     </tr>
                                     <tr th:if="${#lists.size(ploRes)} != 0">
                                         <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
@@ -530,17 +530,17 @@
                             </table>
 <!--                            <div th:object="${ploResPageMaker}">-->
 <!--                                <div class="big-width" id="ploRespagingStyle">-->
-<!--                                    <a class="changePage" th:if="*{prev}"-->
-<!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
+<!--                                    <a class="changePage" th:if="${ploResPageMaker.isPrev()}"-->
+<!--                                       th:href="*{ploResPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
 <!--                                    <th:block-->
-<!--                                            th:each="num : ${#numbers.sequence(ploResPageMaker.getStartPage(), ploResPageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${ploResPageMaker.criteria.getPageNum() == num}"-->
-<!--                                              th:text="${num}"></code>-->
+<!--                                            th:each="ploresNum : ${#numbers.sequence(ploResPageMaker.getStartPage(), ploResPageMaker.getEndPage())}">-->
+<!--                                        <code th:if="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
+<!--                                              th:text="${ploResPageNum}"></code>-->
 <!--                                        <a class="changePage"-->
-<!--                                           th:unless="${ploResPageMaker.criteria.getPageNum() == num}"-->
-<!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
+<!--                                           th:unless="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
+<!--                                           th:href="${ploResPageNum}"><code th:text="${ploresNum}"></code></a>-->
 <!--                                    </th:block>-->
-<!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
+<!--                                    <a class="changePage" th:if="*{ploResPageMaker.isNext()}" th:href="*{ploResPageMaker.getEndPage() + 1}"><code>&gt;</code></a>-->
 <!--                                </div>-->
 <!--                            </div>-->
                         </div>
@@ -583,14 +583,14 @@
                             </table>
 <!--                            <div th:object="${pointPageMaker}">-->
 <!--                                <div class="big-width" id="pointPagingStyle">-->
-<!--                                    <a class="changePage" th:if="*{prev}"-->
-<!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
+<!--                                    <a class="changePage" th:if="${pointPageMaker.isPrev()}"-->
+<!--                                       th:href="${pointPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
 <!--                                    <th:block-->
 <!--                                            th:each="num : ${#numbers.sequence(pointPageMaker.getStartPage(), pointPageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${pointPageMaker.criteria.getPageNum() == num}"-->
-<!--                                              th:text="${num}"></code>-->
-<!--                                        <a class="changePage" th:unless="${pointPageMaker.criteria.getPageNum() == num}"-->
-<!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
+<!--                                        <code th:if="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
+<!--                                              th:text="${pointPageNum}"></code>-->
+<!--                                        <a class="changePage" th:unless="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
+<!--                                           th:href="${pointPageNum}"><code th:text="${pointPageNum}"></code></a>-->
 <!--                                    </th:block>-->
 <!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
 <!--                                </div>-->
@@ -999,7 +999,7 @@
 <script src="/js/browser.min.js"></script>
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
-<script th:inline="javascript" src="/js/mypage.js"></script>
+<script src="/js/mypage.js"></script>
 <script type="text/javascript"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
@@ -1018,7 +1018,7 @@
 
     /*플로깅 취소 페이지 이동*/
     $("#ploResRefund").on("click", function () {
-        let ploResNum = [[${ploRes?.getPloResNum()}]];
+        let ploresNum = parseInt($(this).attr("class"));
         let option = "width=470, height=600, top=100, left=200, location=no";
         window.open("/mypage/ploggingRefundPage?ploResNum=?" + ploResNum, option).focus();
     });
