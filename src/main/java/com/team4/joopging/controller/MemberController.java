@@ -299,7 +299,7 @@ public class MemberController {
         requestHeaders.put("Authorization", header);
         String responseBody = get(apiURL, requestHeaders);
 
-        /*String타입으로 전달받았기 때문에*/
+        /*String타입으로 REST 데이터를 전달받았기 때문에*/
         /*값을 사용하기 위해서 JSON 파싱이 필요하다.*/
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(responseBody);
@@ -315,7 +315,7 @@ public class MemberController {
 //        System.out.println(jsonObj2.get("gender"));
 //        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
 
-        /*???*/
+        /*질문 : 출력은 되는데 객체에 담기지 않는 이유*/
 //        vo.setMemberEmail(jsonObj2.get("email"));
 //        System.out.println(jsonObj2.get("id"));
 
