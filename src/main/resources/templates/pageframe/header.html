@@ -167,9 +167,9 @@
                         <li><a href="#">소개</a></li>
                         <li><a href="#">플로깅</a></li>
                         <li><a href="#">샵</a></li>
-                        <li><a href="javascript:void(0)" class="menuButton">이벤트</a></li>
+                        <li><a class="menuButton" href="javascript:void(0)">이벤트</a></li>
                         <li><a href="#">인터뷰</a></li>
-                        <li><a href="/main/cs" onclick="goPage()">고객센터</a></li>
+                        <li><a href="/main/cs">고객센터</a></li>
                     </ul>
                     <form action="/main/cs" name="sessionForm">
                         <input type="hidden" name="memberId" th:value="${session.memberId}">
@@ -188,10 +188,9 @@
     $("a.menuButton").click(function(e){
         e.preventDefault();
 
-        console.log(sessionForm.find("input[name='memberId']").val);
+        console.log(sessionForm.find("input[name='memberId']").val());
 
-        sessionForm.action = "/event/eventlist";
-        //sessionForm.submit();
+        //location.href = "/event/eventlist?memberId=" + $(this).attr("href");
     });
 
 </script>

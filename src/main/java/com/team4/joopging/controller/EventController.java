@@ -31,9 +31,6 @@ public class EventController {
     @GetMapping("eventlist")
     public String event(/*@RequestParam("memberId") String memberId,*/ EventCriteria eventCriteria, Model model) {
         model.addAttribute("list", eventService.getList(eventCriteria));
-
-
-
         model.addAttribute("member", memberService.memberAllSelect("최워너원"));
         model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
         return "event/eventlist";
