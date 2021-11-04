@@ -11,8 +11,15 @@
 
     <!--특정 게시글 가져오기-->
     <select id="readReportedCommu" resultType="commuVO">
-		SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
+		SELECT COMMUBNO, COMMUTITLE, COMMUWRITER, COMMUBOARDSTATUS
 		FROM TBL_COMMUBOARD WHERE COMMUBNO = #{commuBno}
 	</select>
+
+    <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
+    <update id="commuToReported">
+		UPDATE TBL_COMMUBOARD
+		SET COMMUBOARDSTATUS = 1
+		WHERE COMMUBNO = #{commuBno}
+	</update>
 
 </mapper>
