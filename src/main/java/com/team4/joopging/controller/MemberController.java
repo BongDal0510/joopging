@@ -96,7 +96,7 @@ public class MemberController {
             /*로그인 성공*/
             String id = vo.getMemberId();
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패*/
             return "member/loginFail";
@@ -112,7 +112,7 @@ public class MemberController {
 
     @GetMapping("mainpage")
     public String mainpage() {
-        return "/mainpage";
+        return "/main/mainpage";
     }
 
     /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
@@ -125,12 +125,12 @@ public class MemberController {
         if (memberService.memberLoginKAKAO(vo) != 0) {
             /*로그인 성공*/
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패시 디비 입력 후 성공*/
             memberService.memberJoinKAKAO(vo);
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         }
     }
 
@@ -328,13 +328,13 @@ public class MemberController {
             /*로그인 성공*/
             /*세션 생성*/
             session.setAttribute("memberId", jsonObj2.get("id"));
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패시 디비 입력 후 성공*/
             memberService.memberJoinNAVER(vo);
             /*세션 생성*/
             session.setAttribute("memberId", jsonObj2.get("id"));
-            return "/mainpage";
+            return "/main/mainpage";
         }
     }
 
