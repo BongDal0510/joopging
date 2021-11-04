@@ -19,7 +19,18 @@
     <update id="commuToReported">
 		UPDATE TBL_COMMUBOARD
 		SET COMMUBOARDSTATUS = 1
-		WHERE COMMUBNO = #{commuBno}
+		WHERE COMMUBNO = #{reportVO.commuBno}
 	</update>
+    <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
+<!--    <update id="commuToReported">
+		UPDATE
+		    (
+		        SELECT A.COMMUBOARDSTATUS A.COMMUBNO B.COMMUBNO
+		        FROM TBL_COMMUBOARD A, TBL_REPORT B
+		        WHERE A.COMMUBNO = B.COMMUBNO
+		    )
+		SET COMMUBOARDSTATUS = 1
+		WHERE A.COMMUBNO = #{commuBno}
+	</update>-->
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.team4.joopging.mappers;
 
 import com.team4.joopging.community.vo.CommuVO;
+import com.team4.joopging.report.vo.ReportVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,31 @@ public class ReportMapperTest {
     @Autowired
     private ReportMapper reportMapper;
 
+    @Autowired
+    private CommuMapper commuMapper;
+
     @Test
     public void testInsertReport() {
 
-        CommuVO commu = new CommuVO();
-        commu.setCommuTitle("새로 작성한 글 제목");
-        commu.setCommuContent("새로 작성한 글 내용");
-        commu.setCommuWriter("user009");
-        reportMapper.insertCommu(commu);
+        ReportVO report = new ReportVO();
+        report.setSessionId("신고한사람임");
+        report.setCommuWriter("신고받은사람임");
+        report.setPurpose("청소년 유해 매체");
+        report.setCommuBno(229548L);
+        report.setCommuTitle("안녕");
+        reportMapper.insertReport(report);
 
     }
 
+    @Test
+    public void testCommuToReported(){
+        CommuVO commu = new CommuVO();
+        ReportVO report = new ReportVO();
+        if (commuMapper.readCommu(229542L) == null) {
+            log.info("*****No such Board*****");
+        } else {
+            log.info("Update Count : " + reportMapper.commuToReported(229542L));
+        }
+    }
+/*(229548, '안녕', '신고글 테스트중이야', 'user06', 1);*/
 }
