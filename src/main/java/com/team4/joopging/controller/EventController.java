@@ -3,14 +3,12 @@ package com.team4.joopging.controller;
 import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventPageDTO;
 import com.team4.joopging.services.EventService;
+import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 //    프레젠테이션 계층의 구현
 
@@ -28,16 +26,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EventController {
 
     private final EventService eventService;
+    private final MemberService memberService;
 
-    @GetMapping("eventlist")
-    public String event(EventCriteria eventCriteria, Model model) {
+    @PostMapping("eventlist")
+    public String event(/*@RequestParam("memberId") String memberId,*/ EventCriteria eventCriteria, Model model) {
         model.addAttribute("list", eventService.getList(eventCriteria));
+
+
+
+        model.addAttribute("member", memberService.memberAllSelect("최워너원"));
         model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
         return "event/eventlist";
     }
 
     @GetMapping("joinInfo")
-    public String joinInfo() {
+    public String joinInfo(String memberId, Model model) {
+        model.addAttribute("member", memberService.memberAllSelect(memberId));
+        log.info(memberId);
         return "event/joinInfo";
     }
 
@@ -47,10 +52,13 @@ public class EventController {
     }
 
     @GetMapping("eventInfo")
-    public String eventInfo(@RequestParam("eventNum") Long eventNum, Model model) {
+    public String eventInfo(@RequestParam("memberId") String memberId, @RequestParam("eventNum") Long eventNum, Model model) {
+        model.addAttribute("member", memberService.memberAllSelect(memberId));
         model.addAttribute("event", eventService.get(eventNum));
         return "event/eventInfo";
     }
+
+
 
 
     @GetMapping("eventInfo3")
