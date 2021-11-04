@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 //    프레젠테이션 계층의 구현
 
 //    Task      URL             Method      Parameter   Form    URL 이동
@@ -29,10 +32,19 @@ public class EventController {
     private final MemberService memberService;
 
     @GetMapping("eventlist")
-    public String event(/*@RequestParam("memberId") String memberId,*/ EventCriteria eventCriteria, Model model) {
+    public String event(HttpServletRequest req, EventCriteria eventCriteria, Model model) {
+
+        HttpSession session = req.getSession();
+
+        /* 세션이 담겨있을 때 회원정보 가져오기 */
+        if(session.getAttribute("memberId")!=null){
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        }
+
         model.addAttribute("list", eventService.getList(eventCriteria));
-        model.addAttribute("member", memberService.memberAllSelect("최워너원"));
         model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
+
         return "event/eventlist";
     }
 

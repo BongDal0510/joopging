@@ -193,12 +193,12 @@
         /* <code> 태그 관련 CSS */
         code {
             border-radius: 4px;
-            border: solid 1px rgba(144, 144, 144, 0.25);
-            background: rgba(144, 144, 144, 0.075);
-            font-family: "Courier New", monospace;
-            font-size: 0.9rem;
-            margin: 0 0.25rem;
-            padding: 0.25rem 0.65rem;
+            border: solid 1px rgba(144, 144, 144, 0.25) !important;
+            background: rgba(144, 144, 144, 0.075) !important;
+            font-family: "Courier New", monospace !important;
+            font-size: 0.9rem !important;
+            margin: 0 0.25rem !important;
+            padding: 0.25rem 0.65rem !important;
         }
 
 
@@ -209,13 +209,13 @@
 <div id="main_header" style="display: flex"></div>
 <div id="supersideBar">
     <!-- 회원정보 사이드바 -->
-    <div id="sideBarInner">
+    <div id="sideBarInner" th:object="${member}">
         <div>
             <div>
                 <img class="grade" src="/images/level/level_leaf.png">
             </div>
             <div>
-                <strong id="memberName">최워너원 님</strong>
+                <strong id="memberName" th:text="|*{memberId} 님|"></strong>
             </div>
         </div>
         <hr id="memberLine">
@@ -223,37 +223,25 @@
             <div>
                 <strong>참여횟수</strong>
                 <div class="sideBarInfo">
-                    <span>35회</span>
+                    <span th:text="|*{memberPloggingCnt}회|"></span>
                 </div>
             </div>
             <div>
                 <strong>포인트</strong>
                 <div class="sideBarInfo">
-                    <span>3556P</span>
+                    <span th:text="|*{memberPoint}P|"></span>
                 </div>
             </div>
             <div>
                 <strong>출석체크</strong>
                 <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
                 <div class="sideBarInfo" >
-                    <span>1/10</span>
+                    <span th:text="|*{memberAttend}/10|"></span>
                 </div>
             </div>
             <table id="attendTable">
-                <tr class="attendTr">
-                    <td style="padding: 0; text-align: center;"><img src="/images/eventImage/check.png" style="height: 20px"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="attendTr">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <tr class="attendTr" id="attendTr_1"></tr>
+                <tr class="attendTr" id="attendTr_2"></tr>
             </table>
             <div style="text-align: center">
                 <input id="attendButton" type="button" value="출석 체크하기">
@@ -288,8 +276,11 @@
                                 </header>
                                 <footer class="eventButton">
                                     <ul class="actions">
-                                        <li><a href="/event/joinInfo" class="button alt">상세보기</a></li>
+                                        <li><a href="javascript:void(0)" id="joinInfoButton" class="button alt">상세보기</a></li>
                                     </ul>
+                                    <form action="/event/joinInfo" th:object="${member}" name="joinInfoForm">
+                                        <input type="hidden" th:field="*{memberId}">
+                                    </form>
                                 </footer>
                             </div>
                             <div>
@@ -326,98 +317,98 @@
 
 
 
-<!--                    <div class="col-4 col-6-medium col-12-small">-->
-<!--                        <section class="eventImage">-->
-<!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_seoul01.jpg"/></a>-->
-<!--                        </section>-->
-<!--                        <section class="box boxinner">-->
-<!--                            <div style="display: flex">-->
-<!--                                <header id="center">-->
-<!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
-<!--                                        서울새활용 플로깅-->
-<!--                                    </h4>-->
-<!--                                </header>-->
-<!--                                <footer class="eventButton">-->
-<!--                                    <ul class="actions">-->
-<!--                                        <li><a href="/event/eventInfo3" class="button alt">상세보기</a></li>-->
-<!--                                    </ul>-->
-<!--                                </footer>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <p class="eventDate">10월 23일-11월 5일</p>-->
-<!--                            </div>-->
-<!--                        </section>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-4 col-6-medium col-12-small">-->
+                    <!--                        <section class="eventImage">-->
+                    <!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_seoul01.jpg"/></a>-->
+                    <!--                        </section>-->
+                    <!--                        <section class="box boxinner">-->
+                    <!--                            <div style="display: flex">-->
+                    <!--                                <header id="center">-->
+                    <!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
+                    <!--                                        서울새활용 플로깅-->
+                    <!--                                    </h4>-->
+                    <!--                                </header>-->
+                    <!--                                <footer class="eventButton">-->
+                    <!--                                    <ul class="actions">-->
+                    <!--                                        <li><a href="/event/eventInfo3" class="button alt">상세보기</a></li>-->
+                    <!--                                    </ul>-->
+                    <!--                                </footer>-->
+                    <!--                            </div>-->
+                    <!--                            <div>-->
+                    <!--                                <p class="eventDate">10월 23일-11월 5일</p>-->
+                    <!--                            </div>-->
+                    <!--                        </section>-->
+                    <!--                    </div>-->
 
 
-<!--                    <div class="col-4 col-6-medium col-12-small">-->
-<!--                        <section class="eventImage">-->
-<!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_hyundae01.png"/></a>-->
-<!--                        </section>-->
-<!--                        <section class="box boxinner">-->
-<!--                            <div style="display: flex">-->
-<!--                                <header id="center">-->
-<!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
-<!--                                        더현대 플로깅-->
-<!--                                    </h4>-->
-<!--                                </header>-->
-<!--                                <footer class="eventButton">-->
-<!--                                    <ul class="actions">-->
-<!--                                        <li><a href="/event/eventInfo4" class="button alt">상세보기</a></li>-->
-<!--                                    </ul>-->
-<!--                                </footer>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <p class="eventDate">11월 17일-12월 2일</p>-->
-<!--                            </div>-->
-<!--                        </section>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-4 col-6-medium col-12-small">-->
+                    <!--                        <section class="eventImage">-->
+                    <!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/event_hyundae01.png"/></a>-->
+                    <!--                        </section>-->
+                    <!--                        <section class="box boxinner">-->
+                    <!--                            <div style="display: flex">-->
+                    <!--                                <header id="center">-->
+                    <!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
+                    <!--                                        더현대 플로깅-->
+                    <!--                                    </h4>-->
+                    <!--                                </header>-->
+                    <!--                                <footer class="eventButton">-->
+                    <!--                                    <ul class="actions">-->
+                    <!--                                        <li><a href="/event/eventInfo4" class="button alt">상세보기</a></li>-->
+                    <!--                                    </ul>-->
+                    <!--                                </footer>-->
+                    <!--                            </div>-->
+                    <!--                            <div>-->
+                    <!--                                <p class="eventDate">11월 17일-12월 2일</p>-->
+                    <!--                            </div>-->
+                    <!--                        </section>-->
+                    <!--                    </div>-->
 
 
-<!--                    <div class="col-4 col-6-medium col-12-small">-->
-<!--                        <section class="eventImage">-->
-<!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>-->
-<!--                        </section>-->
-<!--                        <section class="box boxinner">-->
-<!--                            <div style="display: flex">-->
-<!--                                <header id="center">-->
-<!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
-<!--                                        플로깅 인증이벤트-->
-<!--                                    </h4>-->
-<!--                                </header>-->
-<!--                                <footer class="eventButton">-->
-<!--                                    <ul class="actions">-->
-<!--                                        <li><a href="#" class="button alt">상세보기</a></li>-->
-<!--                                    </ul>-->
-<!--                                </footer>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <p class="eventDate">11월 1일-11월 30일</p>-->
-<!--                            </div>-->
-<!--                        </section>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-4 col-6-medium col-12-small">-->
+                    <!--                        <section class="eventImage">-->
+                    <!--                            <a href="#" class="image featured"><img style = height:330px; src="/images/event/인증이벤트.jpg"/></a>-->
+                    <!--                        </section>-->
+                    <!--                        <section class="box boxinner">-->
+                    <!--                            <div style="display: flex">-->
+                    <!--                                <header id="center">-->
+                    <!--                                    <h4 style="font-family: 'S-CoreDream-4Regular';">-->
+                    <!--                                        플로깅 인증이벤트-->
+                    <!--                                    </h4>-->
+                    <!--                                </header>-->
+                    <!--                                <footer class="eventButton">-->
+                    <!--                                    <ul class="actions">-->
+                    <!--                                        <li><a href="#" class="button alt">상세보기</a></li>-->
+                    <!--                                    </ul>-->
+                    <!--                                </footer>-->
+                    <!--                            </div>-->
+                    <!--                            <div>-->
+                    <!--                                <p class="eventDate">11월 1일-11월 30일</p>-->
+                    <!--                            </div>-->
+                    <!--                        </section>-->
+                    <!--                    </div>-->
                 </div>
 
 
-                    <div class="paging" th:object="${pageMaker}">
-                        <div class="big-width" style="text-align: center">
-                            <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
-                            <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
-                                <code th:if="${pageMaker.eventCriteria.getPageNum() == num}" th:text="${num}"></code>
-                                <a class="changePage" th:unless="${pageMaker.eventCriteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
-                            </th:block>
-                            <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
-                        </div>
-                        <div class="small-width" style="text-align: center">
-                            <a class="changePage" th:if="*{eventCriteria.pageNum > 1}" th:href="*{eventCriteria.pageNum - 1}"><code>&lt;</code></a>
-                            <code th:text="*{eventCriteria.pageNum}"></code>
-                            <a class="changePage" th:if="*{eventCriteria.pageNum < realEnd}" th:href="*{eventCriteria.pageNum + 1}"><code>&gt;</code></a>
-                        </div>
-                        <form action="/event/eventlist" th:object="${eventCriteria}" name="pageForm">
-                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
-                            <input type="hidden" name="amount" th:field="*{amount}">
-                        </form>
+                <div class="paging" th:object="${pageMaker}">
+                    <div class="big-width" style="text-align: center">
+                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.eventCriteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="changePage" th:unless="${pageMaker.eventCriteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                     </div>
+                    <div class="small-width" style="text-align: center">
+                        <a class="changePage" th:if="*{eventCriteria.pageNum > 1}" th:href="*{eventCriteria.pageNum - 1}"><code>&lt;</code></a>
+                        <code th:text="*{eventCriteria.pageNum}"></code>
+                        <a class="changePage" th:if="*{eventCriteria.pageNum < realEnd}" th:href="*{eventCriteria.pageNum + 1}"><code>&gt;</code></a>
+                    </div>
+                    <form action="/event/eventlist" th:object="${eventCriteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                    </form>
+                </div>
 
 
             </section>
@@ -434,10 +425,17 @@
 <script src="/js/event.js"></script>
 <script th:inline="javascript">
     let pageForm = $(document.pageForm);
+    let memberId = [[${member.memberId}]];
+    let attendCnt = [[${member.memberAttend}]];
+    let attendTable_1 = $("#attendTr_1");
+    let attendTable_2 = $("#attendTr_2");
+    let joinInfoForm = $(document.joinInfoForm);
+
+    showAttend();
 
     $("a#goRead").on("click", function(e){
         e.preventDefault();
-        location.href = "/event/eventInfo?eventNum=" + $(this).attr("href");
+        location.href = "/event/eventInfo?memberId=" + memberId + "&eventNum=" + $(this).attr("href");
     })
 
     $("a.changePage").click(function(e){
@@ -446,16 +444,20 @@
         pageForm.submit();
     });
 
+    $("#joinInfoButton").click(function(e){
+        e.preventDefault();
+        joinInfoForm.submit();
+    });
+
     $(document).ready(function(){
-       let today = new Date();
-       let year = today.getFullYear();
-       let month = today.getMonth() + 1;
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
 
-       let lastDate = new Date(year, month - 2, 0);
+        let lastDate = new Date(year, month - 2, 0);
 
-       $("#joinEventTitle").html(month + "월 신규가입");
-       $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
-
+        $("#joinEventTitle").html(month + "월 신규가입");
+        $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
     });
 
 </script>

@@ -130,13 +130,13 @@
 <div id="main_header" style="display: flex"></div>
 <div id="supersideBar">
     <!-- 회원정보 사이드바 -->
-    <div id="sideBarInner">
+    <div id="sideBarInner" th:object="${member}">
         <div>
             <div>
                 <img class="grade" src="/images/level/level_leaf.png">
             </div>
             <div>
-                <strong id="memberName">최워너원 님</strong>
+                <strong id="memberName" th:text="|*{memberId} 님|"></strong>
             </div>
         </div>
         <hr id="memberLine">
@@ -144,37 +144,25 @@
             <div>
                 <strong>참여횟수</strong>
                 <div class="sideBarInfo">
-                    <span>35회</span>
+                    <span th:text="|*{memberPloggingCnt}회|"></span>
                 </div>
             </div>
             <div>
                 <strong>포인트</strong>
                 <div class="sideBarInfo">
-                    <span>3556P</span>
+                    <span th:text="|*{memberPoint}P|"></span>
                 </div>
             </div>
             <div>
                 <strong>출석체크</strong>
                 <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
                 <div class="sideBarInfo" >
-                    <span>1/10</span>
+                    <span th:text="|*{memberAttend}/10|"></span>
                 </div>
             </div>
             <table id="attendTable">
-                <tr class="attendTr">
-                    <td style="padding: 0; text-align: center;"><img src="/images/eventImage/check.png" style="height: 20px"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="attendTr">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <tr class="attendTr" id="attendTr_1"></tr>
+                <tr class="attendTr" id="attendTr_2"></tr>
             </table>
             <div style="text-align: center">
                 <input id="attendButton" type="button" value="출석 체크하기">
@@ -196,5 +184,13 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
+<script src="/js/event.js"></script>
+<script type="text/javascript">
+    let attendCnt = [[${member.memberAttend}]];
+    let attendTable_1 = $("#attendTr_1");
+    let attendTable_2 = $("#attendTr_2");
 
+    showAttend();
+
+</script>
 </html>
