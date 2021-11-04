@@ -128,7 +128,7 @@
 
 <body class="homepage is-preload" style="margin: 0;">
 <div id="main_header" style="display: flex"></div>
-<div id="supersideBar">
+<div id="supersideBar" th:if="${member != null}">
     <!-- 회원정보 사이드바 -->
     <div id="sideBarInner" th:object="${member}">
         <div>
@@ -186,11 +186,13 @@
 <script src="/js/weather.js"></script>
 <script src="/js/event.js"></script>
 <script type="text/javascript">
-    let attendCnt = [[${member.memberAttend}]];
+    let member = [[${member}]];
     let attendTable_1 = $("#attendTr_1");
     let attendTable_2 = $("#attendTr_2");
 
-    showAttend();
+    if(member != null && member != 'null'){
+        showAttend();
+    }
 
 </script>
 </html>

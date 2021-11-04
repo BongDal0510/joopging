@@ -37,7 +37,7 @@ public class EventController {
         HttpSession session = req.getSession();
 
         /* 세션이 담겨있을 때 회원정보 가져오기 */
-        if(session.getAttribute("memberId")!=null){
+        if(session.getAttribute("memberId")!= null){
             String memberId = (String)session.getAttribute("memberId");
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
@@ -49,22 +49,37 @@ public class EventController {
     }
 
     @GetMapping("joinInfo")
-    public String joinInfo(String memberId, Model model) {
-        model.addAttribute("member", memberService.memberAllSelect(memberId));
-        log.info(memberId);
+    public String joinInfo(HttpServletRequest req, Model model) {
+
+        HttpSession session = req.getSession();
+
+        /* 세션이 담겨있을 때 회원정보 가져오기 */
+        if(session.getAttribute("memberId")!=null){
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        }
+
         return "event/joinInfo";
+    }
+
+    @GetMapping("eventInfo")
+    public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") Long eventNum, Model model) {
+
+        HttpSession session = req.getSession();
+
+        /* 세션이 담겨있을 때 회원정보 가져오기 */
+        if(session.getAttribute("memberId")!=null){
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        }
+
+        model.addAttribute("event", eventService.get(eventNum));
+        return "event/eventInfo";
     }
 
     @GetMapping("attendPopup")
     public String attendPopup() {
         return "event/attendPopup";
-    }
-
-    @GetMapping("eventInfo")
-    public String eventInfo(@RequestParam("memberId") String memberId, @RequestParam("eventNum") Long eventNum, Model model) {
-        model.addAttribute("member", memberService.memberAllSelect(memberId));
-        model.addAttribute("event", eventService.get(eventNum));
-        return "event/eventInfo";
     }
 
 

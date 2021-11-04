@@ -207,7 +207,7 @@
 
 <body class="homepage is-preload">
 <div id="main_header" style="display: flex"></div>
-<div id="supersideBar">
+<div id="supersideBar" th:if="${member != null}">
     <!-- 회원정보 사이드바 -->
     <div id="sideBarInner" th:object="${member}">
         <div>
@@ -276,11 +276,8 @@
                                 </header>
                                 <footer class="eventButton">
                                     <ul class="actions">
-                                        <li><a href="javascript:void(0)" id="joinInfoButton" class="button alt">상세보기</a></li>
+                                        <li><a href="/event/joinInfo" class="button alt">상세보기</a></li>
                                     </ul>
-                                    <form action="/event/joinInfo" th:object="${member}" name="joinInfoForm">
-                                        <input type="hidden" th:field="*{memberId}">
-                                    </form>
                                 </footer>
                             </div>
                             <div>
@@ -425,28 +422,23 @@
 <script src="/js/event.js"></script>
 <script th:inline="javascript">
     let pageForm = $(document.pageForm);
-    let memberId = [[${member.memberId}]];
-    let attendCnt = [[${member.memberAttend}]];
+    let member = [[${member}]];
     let attendTable_1 = $("#attendTr_1");
     let attendTable_2 = $("#attendTr_2");
-    let joinInfoForm = $(document.joinInfoForm);
 
-    showAttend();
+    if(member != null && member != 'null'){
+        showAttend();
+    }
 
     $("a#goRead").on("click", function(e){
         e.preventDefault();
-        location.href = "/event/eventInfo?memberId=" + memberId + "&eventNum=" + $(this).attr("href");
+        location.href = "/event/eventInfo?eventNum=" + $(this).attr("href");
     })
 
     $("a.changePage").click(function(e){
         e.preventDefault();
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
         pageForm.submit();
-    });
-
-    $("#joinInfoButton").click(function(e){
-        e.preventDefault();
-        joinInfoForm.submit();
     });
 
     $(document).ready(function(){

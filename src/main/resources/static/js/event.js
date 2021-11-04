@@ -11,6 +11,8 @@ function attendInfo() {
 
 /* 출석체크 테이블 연산 */
 function showAttend(){
+    let attendCnt = [[${member.memberAttend}]];
+
     tbl1 = "";
     tbl2 = "";
 
