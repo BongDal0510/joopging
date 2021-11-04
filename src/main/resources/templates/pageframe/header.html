@@ -171,7 +171,7 @@
                         <li><a href="#">인터뷰</a></li>
                         <li><a href="/main/cs" onclick="goPage()">고객센터</a></li>
                     </ul>
-                    <form method="post" name="sessionForm">
+                    <form action="/main/cs" name="sessionForm">
                         <input type="hidden" name="memberId" th:value="${session.memberId}">
                     </form>
                 </nav>
@@ -191,7 +191,7 @@
         console.log(sessionForm.find("input[name='memberId']").val);
 
         sessionForm.action = "/event/eventlist";
-        sessionForm.submit();
+        //sessionForm.submit();
     });
 
 </script>

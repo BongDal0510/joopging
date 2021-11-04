@@ -28,7 +28,7 @@ public class EventController {
     private final EventService eventService;
     private final MemberService memberService;
 
-    @PostMapping("eventlist")
+    @GetMapping("eventlist")
     public String event(/*@RequestParam("memberId") String memberId,*/ EventCriteria eventCriteria, Model model) {
         model.addAttribute("list", eventService.getList(eventCriteria));
 
