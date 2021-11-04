@@ -8,12 +8,12 @@
 
     <select id="getOrderHistoryList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
         <![CDATA[
-SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
     FROM (
 SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
-    ROWNUM R, orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+    ROWNUM R, orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
 FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
@@ -22,6 +22,14 @@ FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
 </select>
+
+    <!--주문번호로 내 상품 정보 가져오기-->
+    <select id="getOrderHistory" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
+        SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
+    recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
+    parcelMessage,usePoint,orderStatus
+    FROM TBL_ORDER_HISTORY WHERE orderNum=#{orderNum}
+    </select>
 
     <!--내 상품의 전체 내역의 개수-->
     <select id="totalOrderCnt" resultType="_int">
@@ -36,7 +44,7 @@ FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
     <!--상품 택배-->
     <select id="getParcel" resultType="com.team4.joopging.mypage.vo.TempParcelVO">
 <![CDATA[
-SELECT parcelNum, parcelCode, orderNum
+SELECT parcelNum, parcelCode, parcelKey, orderNum
 FROM TBL_PARCEL WHERE orderNum = #{orderNum}
 ]]>
 </select>
@@ -50,15 +58,9 @@ WHERE orderNum = #{orderNum}
 
     <!--구매취소된 상품 불러오기-->
     <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
-    SELECT orderNum,memberNum,goodsNum,goodsCnt,goodsColor,goodsSize,orderDate,
+    SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
 FROM TBL_GOODS_ORDER WHERE orderStatus = 1;
     </select>
-
-    <!--내가 구매한 상품의 상품 정보-->
-    <select id="getOrderGoodsinfo">
-
-    </select>
-
 </mapper>

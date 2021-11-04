@@ -43,11 +43,17 @@ public interface MypageService {
     /*내 게시글*/
     public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria);
 
+    /*내 게시글 개수*/
+    public int totalMemberCommuCnt(String memberId);
+
     /*아이디로 회원번호 가져오기*/
     public int selectMemberNum(String memberId);
 
     /*구매 상품 내역 출력(아이디로)*/
     public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria);
+
+    /*구매 상품 정보*/
+    public TempOrderHistoryVO getOrderHistory(int orderNum);
 
     /*구매한 상품 토탈*/
     public int totalOrderCnt(int memberNum);

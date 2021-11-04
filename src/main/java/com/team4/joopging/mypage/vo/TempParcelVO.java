@@ -10,6 +10,8 @@ public class TempParcelVO {
     private String parcelNum;
     /*택배사*/
     private String parcelCode;
+    /*key값*/
+    private String parcelKey;
     /*구매한 상품 예약 번호(FK)*/
     private int orderNum;
 }

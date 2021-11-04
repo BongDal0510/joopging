@@ -431,7 +431,7 @@
 
     <!-- Main -->
     <div id="main">
-        <div class="row">
+        <div class="row" th:object="${member}">
             <div class="col-4 col-12-medium" id="list">
                 <!-- Sidebar -->
                 <section class="box">
@@ -457,7 +457,7 @@
             <div class="col-8 col-12-medium imp-medium" id="myHome" style="display: block;">
                 <article class="box post" style="">
                     <header>
-                        <h2><!--이름-->님 환영합니다.</h2>
+                        <h2 th:text="*{memberName}">님 환영합니다.</h2>
                     </header>
                     <div id="ploggingAdv">
                         <button onclick="goEvent()">
@@ -468,15 +468,15 @@
                             <div class="smallBox1">
                                 <h4>나의 현황</h4>
                                 <table>
-                                    <th:block th:each="ploRes:${ploRes}">
-                                        <tr th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
-                                            <td class="ploResLocation" th:text="${ploRes?.getPloResLocation()}"></td>
-                                            <td class="ploResDate" th:text="${ploRes?.getPloResDate()}"></td>
-                                        </tr>
-                                        <tr th:unless="${#lists.size(ploRes)} != 0">
-                                            <td colspan="2" align="center">예약한 플로깅이 없습니다.</td>
+                                    <th:block th:each="plores:${ploRes}">
+                                        <tr th:if="${ploRes.size()!=0}" th:object="${plores}">
+                                            <td class="ploResTitle" th:text="${plores?.getPloResTitle()}"></td>
+                                            <td class="ploResDate" th:text="${plores?.getPloResDate()}"></td>
                                         </tr>
                                     </th:block>
+                                        <tr th:unless="${ploRes.size()!=0}">
+                                            <td colspan="2" align="center">예약한 플로깅이 없습니다.</td>
+                                        </tr>
                                 </table>
                             </div>
                             <div class="smallBox2">
@@ -506,26 +506,31 @@
                                 <thead>
                                 <tr>
                                     <th>예약 번호</th>
+                                    <th>플로깅명</th>
                                     <th>장소</th>
                                     <th>날짜</th>
-                                    <th>시간</th>
                                     <th>예약 취소</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="ploRes : ${ploRes}">
-                                    <tr class="ploRes" th:if="${#lists.size(ploRes)} != 0" th:object="${ploRes}">
+                                <th:block th:each="plores : ${ploRes}">
+                                    <tr class="ploRes" th:if="${ploRes.size()!=0}" th:object="${plores}">
                                         <td calss="ploResNum" th:text="*{ploResNum}"></td>
-                                        <td calss="ploResLocation"><a id="goPloggingDetail" th:href="*{ploggingNum}"
-                                                                      th:text="*{ploResLocation}"/></td>
-                                        <td class="ploResDate" th:text="*{ploResDate}"></td>
-                                        <td class="ploResTime" th:text="*{ploResTime}"></td>
-                                        <td class="deletePloRes"><span id="ploResRefund" th:class="*{ploResNum}">x</span></td>
-                                    </tr>
-                                    <tr th:if="${#lists.size(ploRes)} != 0">
-                                        <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
+                                        <td calss="ploResTitle"><a id="goPloggingDetail" th:href="*{ploggingNum}"
+                                                                      th:text="*{ploResTitle}"/></td>
+                                        <td class="ploResDate" th:text="*{ploResLocation}"/>
+                                        <td class="ploResTime" th:text="*{ploResDate}"/>
+                                        <td class="deletePloRes">
+                                            <th:block>
+                                                <span id="ploResRefund" th:if="*{ploResStatus==0}" th:class="*{ploResNum}">x</span>
+                                                <span id="ploResRefundSuccess" th:if="*{ploResStatus==1}">취소 됨</span>
+                                            </th:block>
+                                        </td>
                                     </tr>
                                 </th:block>
+                                    <tr th:if="${ploRes.size()==0}">
+                                        <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
+                                    </tr>
                                 </tbody>
                             </table>
 <!--                            <div th:object="${ploResPageMaker}">-->
@@ -558,7 +563,7 @@
                         <div>
                             <table class=boardList>
                                 <caption>
-                                    현재 포인트 :
+                                    현재 포인트 : <span th:text="*{memberPoint}"></span>
                                 </caption>
                                 <thead>
                                 <tr>
@@ -569,16 +574,16 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="pointList:${getPointList}">
-                                    <tr th:if="${#lists.size(pointList)} != 0" th:object="${pointList}">
+                                    <tr th:if="${getPointList.size()!=0}" th:object="${pointList}">
                                         <td class="pointDate" th:text="*{pointDate}"></td>
                                         <td class="history" th:text="*{history}"></td>
                                         <td class="pointStatus" th:text="*{pointStatus}"></td>
                                         <td calss="point" th:text="*{point}"></td>
                                     </tr>
-                                    <tr th:if="${#lists.size(pointList)} != 0">
+                                </th:block>
+                                    <tr th:if="${getPointList.size()==0}">
                                         <td colspan="4" align="center">포인트 내역이 없습니다.</td>
                                     </tr>
-                                </th:block>
                                 </tbody>
                             </table>
 <!--                            <div th:object="${pointPageMaker}">-->
@@ -622,20 +627,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="orderHistory:${orderHistory}">
-                                    <tr th:if="${#lists.size(orderHistory)} != 0" th:object="${orderHistory}">
-                                        <td calss="orderNum" th:text="*{orderNum}"><!--주문 번호--></td>
+                                <th:block th:each="orderhistory:${orderHistory}">
+                                    <tr th:if="${orderHistory.size()!=0}" th:object="${orderhistory}">
+                                        <td calss="orderNum" th:text="*{orderNum}"/>
                                         <td class="goodsName">
-                                            <!--상품명//상세보기-->
+                                            <a id="goOrderHistory" th:text="${orderhistory.getGoodsName()}" th:href="*{orderNum}"></a>
                                         </td>
-                                        <td calss="goodsTotalCost" th:text="*{goodsTotalCost}"><!--가격--></td>
-                                        <td class="goodsCnt" th:text="*{goodsCnt}"><!--수량--></td>
+                                        <td calss="goodsTotalCost" th:text="${orderhistory.getGoodsTotalCost()}"/>
+                                        <td class="goodsCnt" th:text="*{goodsCnt}"/>
                                         <td><!--택배 내역나오는 거에서 뽑기 상태--></td>
                                     </tr>
-                                    <tr th:unless="${#lists.size(orderHistory)} != 0">
+                                </th:block>
+                                    <tr th:if="${orderHistory.size()==0}">
                                         <td colspan="5" align="center">구매한 상품이 없습니다.</td>
                                     </tr>
-                                </th:block>
                                 </tbody>
                             </table>
 <!--                            <div th:object="${orderPageMaker}">-->
@@ -677,18 +682,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="goodsLikeList:${goodsLikeList}">
-                                    <tr th:if="${#lists.size(goodsLikeList)} != 0" th:object="goodsLikeList">
+                                <th:block th:each="goodsLike:${goodsLikeList}">
+                                    <tr th:if="${goodsLikeList.size()!=0}" th:object="goodsLike">
                                         <td class="deleteCheck"><input type="checkbox"></td>
                                         <td calss="goodsName" th:text="">
                                             <!--상품명//상세보기-->
                                         </td>
                                         <td calss="" th:text=""><!--가격--></td>
                                     </tr>
-                                    <tr th:unless="${#lists.size(goodsLikeList)} != 0">
+                                </th:block>
+                                    <tr th:if="${goodsLikeList.size()==0}">
                                         <td colspan="3" align="center">찜 내역이 없습니다.</td>
                                     </tr>
-                                </th:block>
                                 </tbody>
                             </table>
                             <p style="text-align: right;">
@@ -715,7 +720,6 @@
             </div>
             <!-- 회원정보변경 -->
             <div class="col-8 col-12-medium imp-medium" id="updateInfo">
-                <form method="post" name="updateForm" action="/mypage/updateMember">
                     <article class="box post">
                         <header style="margin-bottom: 0px; padding-bottom: 1.5em !important; border-bottom: 3px solid #35A14A; width: 650px">
                             <h2>개인 정보 변경</h2>
@@ -724,107 +728,88 @@
                         <table class='delete123'>
                             <tr>
                                 <th>아이디</th>
-                                <td></td>
+                                <td th:text="*{memberId}"></td>
                                 <th>등급</th>
-                                <td></td>
+                                <td th:text="*{memberAttend}"></td>
                             </tr>
                             <tr>
+                                <form method="post" name="pwForm" id="pwForm" >
                                 <th>비밀번호</th>
-                                <td>
+                                <td colspan="3">
                                     <input type="button" id="changePw" value="비밀번호 변경">
                                 </td>
+                                </form>
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td>이름</td>
+                                <td th:text="*{memberName}" colspan="3"></td>
                             </tr>
                             <tr>
                                 <th>성별</th>
-                                <td>성별</td>
+                                <td th:text="*{memberGender}" colspan="3"></td>
                             </tr>
                             <tr>
                                 <th>생일</th>
-                                <td>생일</td>
+                                <td th:text="*{memberBirth}" colspan="3"></td>
                             </tr>
+                            <form method="post" name="updateForm" id="updateForm" action="/mypage/updateMember">
                             <tr>
                                 <th>이메일</th>
-                                <td class="email">
-
-                                    <input type="text" id="emailId" name="emailId" style="width:175px;"
-                                           placeholder="이메일 입력">
-                                    <span style="line-height:32px;">@</span>
-                                    <input type="text" id="emailDomain" name="emailDomain" value="naver.com"
-                                           title="이메일 도메인" style="width:138px;margin-right:6px;">
-                                    <select id="user_email3" title="이메일 서비스를 선택하세요."
-                                            onchange="selectEmail(this.value, '#emailDomain' ); return false;"
-                                            style="width:138px; margin-left:2px;">
-
-                                        <option value="chol.com">chol.com</option>
-
-                                        <option value="yahoo.com">yahoo.com</option>
-
-                                        <option value="empal.com">empal.com</option>
-
-                                        <option value="freechal.com">freechal.com</option>
-
-                                        <option value="gmail.com">gmail.com</option>
-
-                                        <option value="hanafos.com">hanafos.com</option>
-
-                                        <option value="hanmail.net">hanmail.net</option>
-
-                                        <option value="hanmir.com">hanmir.com</option>
-
-                                        <option value="hitel.net">hitel.net</option>
-
-                                        <option value="hotmail.com">hotmail.com</option>
-
-                                        <option value="korea.com">korea.com</option>
-
-                                        <option value="lycos.co.kr">lycos.co.kr</option>
-
-                                        <option value="nate.com">nate.com</option>
-
-                                        <option value="naver.com" selected="">naver.com</option>
-
-                                        <option value="netian.com">netian.com</option>
-
-                                        <option value="paran.com">paran.com</option>
-
-                                        <option value="yahoo.co.kr">yahoo.co.kr</option>
-
-                                        <option value="dreamwiz.com">dreamwiz.com</option>
-
-                                    </select>
+                                <td class="email" colspan="3">
+                                    <div class="object" style="display: inline-flex;">
+                                        <input id="memberEmail" name="memberEmail" type="text" style="margin-right:6px; width: 50%;">
+                                        <span style="margin-top:8px;">@</span>
+                                        <div>
+                                            <select id="memberEmailSite" name="memberEmailSite" style="margin-left:6px; width:95%; display: inline-block">
+                                                <option value="chol.com">chol.com</option>
+                                                <option value="yahoo.com">yahoo.com</option>
+                                                <option value="empal.com">empal.com</option>
+                                                <option value="freechal.com">freechal.com</option>
+                                                <option value="gmail.com">gmail.com</option>
+                                                <option value="hanafos.com">hanafos.com</option>
+                                                <option value="hanmail.net">hanmail.net</option>
+                                                <option value="hanmir.com">hanmir.com</option>
+                                                <option value="hitel.net">hitel.net</option>
+                                                <option value="hotmail.com">hotmail.com</option>
+                                                <option value="korea.com">korea.com</option>
+                                                <option value="lycos.co.kr">lycos.co.kr</option>
+                                                <option value="nate.com">nate.com</option>
+                                                <option value="naver.com" selected="">naver.com</option>
+                                                <option value="netian.com">netian.com</option>
+                                                <option value="paran.com">paran.com</option>
+                                                <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                <option value="dreamwiz.com">dreamwiz.com</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><label style="line-height:24px;">주소<br>(우편물 수령지)</label></th>
                                 <!--for="user_address"-->
-                                <td>
-                                    <div style="margin: 0 5px 10px 0;">
-                                        <input type="text" name="member_zipcode" id="member_zipcode"
-                                               class="postcodify_postcode5" title="우편번호" maxlength="6"
-                                               readonly="readonly" value=""
-                                               style="width:88px; background:#fbfbfb; margin:0 5px 10px 0;">
-                                        <input type="button" id="postcodify_search_button"
-                                               class="button primary changeButton" value="우편번호">
+                                <td colspan="3">
+                                    <div id="address">
+                                        <div class="object">
+                                            <input type="text" id="memberZipcode" name="memberZipcode" style="margin-right: 5%;float: left; width: auto;" readonly>
+                                            <input type="button" onclick="sample5_execDaumPostcode()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
+                                        </div>
+                                        <div id="detailAddress" name="detailAddress" style="display: none;">
+                                            <input type="text" id="memberAddress" name="memberAddress" style="margin-right: 5%; margin-top:5%;" readonly>
+                                            <div id="map" style="width:390px;height:300px;margin-top:10px;display:none"></div>
+                                            <input id="memberAddressDetail" name="memberAddressDetail" type="text" placeholder="상세주소">
+                                        </div>
                                     </div>
-                                    <input type="text" id="addr" name="addr" value="" readonly="readonly" title="주소1"
-                                           style="width:235px;margin-right:5px;background:#fbfbfb;">
-                                    <input type="text" id="addrDtl" name="addrDtl" value="" maxlength="100" title="주소2"
-                                           style="width:235px;margin-right:5px;background:#fbfbfb">
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-align: center; ">
-                                    <input type="button" value="회원 정보 변경" id="changeMemberInfo"
+                                <td colspan="4" style="text-align: center; ">
+                                    <input type="button" value="회원 정보 변경" onclick="formSubmit()"
                                            style="margin-top: 1.5em">
                                 </td>
                             </tr>
+                            </form>
                         </table>
                     </article>
-                </form>
             </div>
 
             <!-- 회원 탈퇴 -->
@@ -864,11 +849,11 @@
                         <table class='delete123'>
                             <tr>
                                 <th>이름</th>
-                                <td>이름</td>
+                                <td th:text="*{memberName}"></td>
                             </tr>
                             <tr>
                                 <th>아이디</th>
-                                <td>아이디</td>
+                                <td th:text="*{memberId}"></td>
                             </tr>
                             <tr>
                                 <th>비밀번호</th>
@@ -924,16 +909,16 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="commu:${memberCommu}">
-                                    <tr th:if="${#lists.size(commu)} != 0" th:object="${commu}">
+                                    <tr th:if="${memberCommu.size()!=0}" th:object="${commu}">
                                         <td th:text="*{commuBno}"/>
                                         <td th:text="*{commuTitle}"><a th:href=""/></td>
                                         <td th:text="*{commuRegDate}"/>
                                         <td th:text="*{commuViewCnt}"/>
                                     </tr>
-                                    <tr th:unless="${#lists.size(commu)} != 0">
+                                </th:block>
+                                    <tr th:unless="${memberCommu.size()==0}">
                                         <td colspan="4" align="center">작성한 게시글이 없습니다.</td>
                                     </tr>
-                                </th:block>
                                 </tbody>
                             </table>
                             <table class="numberPage">
@@ -1002,25 +987,33 @@
 <script src="/js/mypage.js"></script>
 <script type="text/javascript"></script>
 <script src="/js/headerfooter.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5fa1d4826fe6e8d11410cb571085e69d&libraries=services"></script>
 <script src="/js/weather.js"></script>
 </body>
 <script th:inline="javascript">
     /*클릭시 이벤트 페이지로 이동*/
     function goEvent() {
-        location.href = "/event/eventList"
+        location.href = "/event/eventlist"
     };
 
     /*플로깅 상세보기로 이동*/
     $("a#goPloggingDetail").on("click", function (e) {
         e.preventDefault();
-        location.href = "/plogging/ploggingDetail?=ploggingNum" + $(this).attr("href");
+        location.href = "/plogging/ploggingDetail?ploggingNum=" + $(this).attr("href");
     });
 
     /*플로깅 취소 페이지 이동*/
-    $("#ploResRefund").on("click", function () {
+    $("span#ploResRefund").on("click", function () {
         let ploresNum = parseInt($(this).attr("class"));
         let option = "width=470, height=600, top=100, left=200, location=no";
-        window.open("/mypage/ploggingRefundPage?ploResNum=?" + ploResNum, option).focus();
+        window.open("/mypage/ploggingRefundPage?ploResNum=" + ploresNum,"",option).focus();
+    });
+
+    /*내 상품 상세보기*/
+    $("a#goOrderHistory").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/orderhistory/orderInfo?orderNum=" + $(this).attr("href");
     });
 
     $(document).ready(function () {
@@ -1033,5 +1026,65 @@
         }
     });
 
+    $("#changePw").on("click", function () {
+        let form = document.pwForm;
+        let title = "newPassword"
+        let option = "width=470, height=600, top=100, left=200, location=no";
+        window.open("",title,option);
+
+        form.action = "/mypage/resultRePw";
+        form.target = title;
+
+        form.submit();
+    });
+</script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("memberAddress").value = addr;
+                document.getElementById('memberZipcode').value = data.zonecode;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        $('#detailAddress').css('display', 'block');
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+        document.getElementById("memberAddressDetail").focus();
+    }
 </script>
 </html>

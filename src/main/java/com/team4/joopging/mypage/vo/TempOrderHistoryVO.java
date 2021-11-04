@@ -12,6 +12,8 @@ public class TempOrderHistoryVO {
     private int memberNum;
     /*상품번호(FK)*/
     private int goodsNum;
+    /*상품 명*/
+    private String goodsName;
     /*결제 총액*/
     private String goodsTotalCost;
     /*구매 상품 개수*/

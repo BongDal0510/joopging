@@ -66,12 +66,17 @@ public class MypageServicelmple implements MypageService{
 
     @Override
     public boolean deleteMember(String memberId, String memberPw) {
-        return mDAO.deleteMember(memberId,memberId);
+        return mDAO.deleteMember(memberId, memberPw);
     }
 
     @Override
     public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria) {
         return mDAO.getMemberCommuList(memberId,criteria);
+    }
+
+    @Override
+    public int totalMemberCommuCnt(String memberId) {
+        return mDAO.totalMemberCommuCnt(memberId);
     }
 
     @Override
@@ -82,6 +87,11 @@ public class MypageServicelmple implements MypageService{
     @Override
     public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria) {
         return oDAO.getOrderHistoryList(memberNum,criteria);
+    }
+
+    @Override
+    public TempOrderHistoryVO getOrderHistory(int orderNum) {
+        return oDAO.getOrderHistory(orderNum);
     }
 
     @Override

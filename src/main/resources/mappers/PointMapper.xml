@@ -16,7 +16,7 @@
                         ]]>
     </select>
 
-    <!--내가 구매하 상품의 전체 개수-->
+    <!--내 포인트 내역 개수-->
     <select id="totalPointCnt" resultType="_int">
         SELECT COUNT(pointNum) FROM TBL_POINT WHERE memberNum = #{memberNum}
     </select>

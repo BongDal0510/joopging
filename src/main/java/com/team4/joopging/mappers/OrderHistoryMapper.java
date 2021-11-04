@@ -13,6 +13,8 @@ public interface OrderHistoryMapper {
 
     /*구매 상품 목록*/
     public List<TempOrderHistoryVO> getOrderHistoryList(@Param("memberNum") int memberNum,@Param("criteria") Criteria criteria);
+    /*구매 상품 목록*/
+    public TempOrderHistoryVO getOrderHistory(int orderNum);
     /*구매한 상품 내역 개수*/
     public int totalOrderCnt(int memberNum);
     /*구매한 상품 전체 개수*/

@@ -3,6 +3,7 @@ package com.team4.joopging.controller;
 import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
+import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class MypageController {
 
     private final MypageService mypageSVC;
     private final PointService pointSVC;
+    private final MemberService memberSVC;
 
     /*마이페이지 메인으로 이동*/
     @GetMapping("mypage")
@@ -37,18 +39,17 @@ public class MypageController {
             String memberId = (String)session.getAttribute("memberId");
             int memberNum = mypageSVC.selectMemberNum(memberId);
 
+            model.addAttribute("member", memberSVC.memberAllSelect(memberId));
             model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
             model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
-            model.addAttribute("orderTotalCnt", mypageSVC.realTotalOrderCnt(memberNum));
             model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberNum, criteria));
             model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
-            model.addAttribute("goodslikeTotalCnt", mypageSVC.totalGoodsLikeCnt(memberNum));
             model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberNum, criteria));
 
             return "mypage/mypage";
         }else{
             model.addAttribute("msg","로그인 후 이용바랍니다.");
-            return "/main/mainpage";
+            return "/mainpage";
         }
     }
 
@@ -89,8 +90,16 @@ public class MypageController {
         model.addAttribute("pointPageMaker", new CommuPageDTO(pointSVC.totalPointCnt(memberNum), 10, criteria));
         model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
 
-
         return "mypage/mypage";
+    }
+
+    /*비밀번호 수정하는 곳으로 이동*/
+    @PostMapping("resultRePw")
+    public String resultRePw(Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+        model.addAttribute("result", memberId);
+        return "member/resultRePw";
     }
 
     /*마이 페이지 구매상품으로 이동*/
@@ -143,7 +152,7 @@ public class MypageController {
     /*회원 탈퇴*/
     @PostMapping("removeMember")
     public RedirectView removeMember(String memberId, String memberPw, RedirectAttributes rttr){
-        if(mypageSVC.deleteMember(memberId, memberPw)){
+        if(mypageSVC.deleteMember(memberId,memberPw)){
             rttr.addFlashAttribute("msg", "회원 탈퇴가 성공적으로 이루어졌습니다.");
             return new RedirectView("mainpage/mainpage");
         }else{
@@ -152,33 +161,34 @@ public class MypageController {
         }
     }
 
-    /*회원 정보 수정*/
+    /*회원 수정*/
     @PostMapping("updateMember")
-    public RedirectView updateMember(MemberVO vo, RedirectAttributes rttr){
-        if(mypageSVC.updateMember(vo)){
-            rttr.addFlashAttribute("msg", "회원 정보가 변경되었습니다.");
-        }else{
-            rttr.addFlashAttribute("msg", "회원 정보 변경에 실패하였습니다.");
-        }
-        return new RedirectView("mypage");
+    public String updateMember(MemberVO vo, String memberEmailSite, String memberAddressDetail) {
+        /*디비에 회원정보 저장*/
+        vo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
+        vo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
+        mypageSVC.updateMember(vo);
+        return "/mainpage";
     }
 
     /*플로깅 취소(파업창)- 천천히 해결합세*/
     @RequestMapping(value = "/ploggingRefundPage", method = RequestMethod.GET)
     public String ploggingRefundPage(Model model, @RequestParam("ploResNum") Long ploResNum) throws IOException {
-        model.addAttribute("ploRes", mypageSVC.getPloRes(ploResNum));
+        Long num = ploResNum;
+        log.info(String.valueOf(ploResNum));
+        model.addAttribute("ploRes", mypageSVC.getPloRes(num));
         return "/mypage/ploggingRefund";
     }
 
     /*플로깅 취소하기*/
     @PostMapping("ploggingRefund")
-    public void ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
+    public String ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
         if(mypageSVC.deletePloRes(ploResNum)){
-            model.addAttribute("result", "success");
+            model.addAttribute("msg", "플로깅 취소가 완료되었습니다.");
         }else{
-            model.addAttribute("result", "fail");
+            model.addAttribute("msg", "플로깅 취소에 실패하였습니다.");
         }
-        return;
+        return "mypage/close";
     }
 
     /*찜 삭제*/

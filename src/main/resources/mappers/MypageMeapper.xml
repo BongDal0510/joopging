@@ -4,20 +4,20 @@
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
 
-    <!--플로깅 번호로 찾기-->
+    <!--예약번호로 찾기-->
     <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
-        SELECT  ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
-        FROM TBL_PLO_RES WHERE ploggingNum = #{ploggingNum}
+        SELECT  ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+        FROM TBL_PLO_RES WHERE ploResNum = #{ploResNum}
     </select>
 
     <!--플로깅 예약 목록-->
 <select id="getPloResList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
 
     <![CDATA[
-    SELECT ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+    SELECT ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
     SELECT /** INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
-    ROWNUM R, ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+    ROWNUM R, ploResNum, memberNum,ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
     AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
@@ -62,9 +62,9 @@ WHERE memberNum = #{memberNum} AND
     </delete>
 
 <!--플로깅 예약 취소-->
-<update id="deleteReservation">
-UPDATE TBL_RESERVATION
-SET reservationStatus = 1
+<update id="deletePloRes">
+UPDATE TBL_PLO_RES
+SET ploResStatus = 1
 WHERE ploResNum = #{ploResNum}
 </update>
 
@@ -102,6 +102,11 @@ WHERE ploResNum = #{ploResNum}
             )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
                         ]]>
+    </select>
+
+    <!--내 게시글-->
+    <select id="totalMemberCommuCnt" resultType="_int">
+        SELECT COUNT(COMMUBNO) FROM TBL_COMMUBOARD WHERE COMMUWRITER = #{memberNum}
     </select>
 
 </mapper>

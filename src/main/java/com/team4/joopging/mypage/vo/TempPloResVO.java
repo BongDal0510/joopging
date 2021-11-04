@@ -12,6 +12,8 @@ public class TempPloResVO {
     private int memberNum;
     /*플로깅번호(FK)*/
     private int ploggingNum;
+    /*플로깅명*/
+    private String ploResTitle;
     /*예약한 장소*/
     private String ploResLocation;
     /*예약한 날짜*/

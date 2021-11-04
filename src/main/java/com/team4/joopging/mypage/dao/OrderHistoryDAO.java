@@ -19,7 +19,10 @@ public class OrderHistoryDAO {
     public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria){
         return mapper.getOrderHistoryList(memberNum, criteria);
     }
-
+    /*구매 상품 정보*/
+    public TempOrderHistoryVO getOrderHistory(int orderNum){
+        return mapper.getOrderHistory(orderNum);
+    };
     /*구매한 상품 토탈*/
     public int totalOrderCnt(int memberNum){
         return mapper.totalOrderCnt(memberNum);

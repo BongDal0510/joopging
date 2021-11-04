@@ -63,12 +63,16 @@ public class MypageDAO {
 
     /*회원정보 탈퇴*/
     public boolean deleteMember(String memberId, String memberPw){
-        return mapper.deleteMember(memberId, memberPw) == 1;
+        return mapper.deleteMember(memberId,memberPw) == 1;
     }
 
     /*내 게시글*/
     public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria){
         return mapper.getMemberCommuList(memberId, criteria);
+    };
+    /*내 게시글 전체 개수*/
+    public int totalMemberCommuCnt(String memberId){
+        return mapper.totalMemberCommuCnt(memberId);
     };
 
     /*아이디로 회원 번호 가져오기*/

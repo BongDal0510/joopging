@@ -27,6 +27,8 @@ public interface MypageMapper {
     public int totalGoodsLikeCnt(int memberNum);
     /*내가 작성한 게시판 목록*/
     public List<CommuVO> getMemberCommuList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
+    /*내 게시글 전체 개수*/
+    public int totalMemberCommuCnt(String memberId);
     /*내가 작성한 1:1문의 목록*/
     public List<CommuVO> getMyQueList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
     /*플로깅 예약 취소*/
@@ -38,5 +40,6 @@ public interface MypageMapper {
     /*회원정보 수정*/
     public int updateMember(MemberVO vo);
     /*회원정보 탈퇴*/
-    public int deleteMember(@Param("memberId") String memberId, @Param("memberPw")String memberPw);
+    public int deleteMember(String memberId, String memberPw);
+
 }

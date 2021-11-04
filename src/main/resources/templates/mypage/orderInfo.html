@@ -322,7 +322,7 @@
 <header>
     <div id="main_header" style="display: flex"></div>
 </header>
-<div id="page-wrapper">
+<div id="page-wrapper" th:object="${order}">
 
     <!-- Main -->
     <div id="main">
@@ -343,10 +343,10 @@
                         </colgroup>
                         <tr style="text-align: center">
                             <td>주문 일자</td>
-                            <td><strong>0000.00.00</strong></td>
+                            <td><strong th:text="*{orderDate}"></strong></td>
                             <td>주문 번호</td>
-                            <td>00000000</td>
-                            <td><input type="button" value="재구매"><input type="button" value="구매 취소" style="margin: 10px"></td>
+                            <td th:text="*{orderNum}"></td>
+                            <td><input type="button" th:id="repurchase" value="재구매"><input type="button" th:id="refundOrder" value="구매 취소" style="margin: 10px"></td>
                         </tr>
                     </table>
                 </div>
@@ -371,7 +371,7 @@
                         <tbody>
                         <tr class="group">
                             <td>
-                                <span class="thm ordernum2">상품 주문 번호</span>
+                                <span class="thm ordernum2" th:text="*{orderNum}"></span>
                             </td>
                             <td class="product">
                                 <div id="goodsMoreInfo">
@@ -380,18 +380,17 @@
                                         <dt>
                                             <strong class="name_seller">판매자</strong>
                                             <br>
-                                            <a href="" target="_blank">
-                                                상품 명 클릭시 해당 상품 페이지로 이동
+                                            <a th:href="*{goodsNum}" th:text="*{goodsName}">
                                             </a><!--N=a:odd.product-->
                                         </dt>
-                                        <dd>옵션: 선택한 옵션이 나옴
+                                        <dd>옵션: <span th:text="*{goodsColor}"/><span th:text="*{goodsSize}"/>(<span th:text="*{goodsCnt}"/> 개)
                                         </dd>
                                     </dl>
                                 </div>
                             </td>
                             <td class="money">
-                                <em class="thm">금액</em>원<br>
-                                <span>( 수량 개)</span>
+                                <em class="thm" th:text="*{goodsTotalCost}"></em>원<br>
+                                <span>( <span th:text="*{goodsCnt}"/> 개)</span>
                             </td>
                             <td class="bg_point state">
                                 진행 상태 (주문 접수/배송 중/ 배송 완료/구매 확정)<br>
@@ -445,7 +444,7 @@
                                                 </li>
                                                 <li>
                                                     <strong>쿠폰할인</strong>
-                                                    <p>-<em class="thm">90,000</em>원</p>
+                                                    <p>-<em class="thm">0</em>원</p>
                                                     <ul class="detail_price_list">
                                                         <li>
                                                             <strong>상품/스토어/주문 할인</strong>
@@ -466,7 +465,7 @@
                                             <ul class="price_list">
                                                 <li>
                                                     <strong>포인트 사용</strong>
-                                                    <p><em class="thm">사용한 포인트</em>원</p>
+                                                    <p><em class="thm" th:text="*{usePoint}"/> 포인트</p>
                                                     <ul class="detail_price_list">
                                                         <li>
                                                             <strong>적립포인트</strong>
@@ -479,7 +478,7 @@
                                             <ul class="price_list">
                                                 <li>
                                                     <strong>결제 수단</strong>
-                                                    <p><em class="thm">최종 금액</em>원</p>
+                                                    <p><em class="thm" th:text="*{goodsTotalCost}"/>원</p>
                                                 </li>
                                             </ul>
                                         </dd>
@@ -498,7 +497,7 @@
                                             </li>
                                             <li>
                                                 <strong>포인트 사용</strong>
-                                                <p><em class="thm">사용 포인트</em>원</p>
+                                                <p><em class="thm" th:text="*{usePoint}"/> 포인트</p>
                                             </li>
                                             <li>
                                                 <strong>결제 방법</strong>
@@ -537,27 +536,25 @@
                             <tbody>
                             <tr class="gap">
                                 <th scope="row">수령인</th>
-                                <td>홍길동</td>
+                                <td th:text="*{recipient}"/>
                             </tr>
                             <tr>
                                 <th scope="row">연락처</th>
                                 <td>
-                                    <span class="tel">수령인 연락처</span>
-                                    <span></span>
+                                    <span class="tel" th:text="*{recipientPhone}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">배송지</th>
                                 <td class="address">
-                                    집코드<br>
-                                    어드레스<br>
-                                    어드레스_etc
+                                    <span th:text="*{recipientZipCode}"/><br>
+                                    <span th:text="*{recipientAddress}"/>
                                 </td>
                             </tr>
 
                             <tr class="gap3">
-                                <th scope="row">배송메모</th>
-                                <td></td>
+                                <th scope="row">배송 메모</th>
+                                <td th:text="*{parcelMessage}></td>
                             </tr>
                             </tbody>
                         </table>
@@ -571,6 +568,7 @@
                 <h4>주문자 정보</h4>
             </header>
             <article class="box post">
+                <th:block th:object="${member}">
                 <div class="input_section2 _input_section">
                     <div class="inp_area _deliveryPlace">
                         <table cellspacing="0" border="1" class="tb_input2">
@@ -587,22 +585,23 @@
                             <tbody>
                             <tr class="gap">
                                 <th scope="row">주문자</th>
-                                <td>김봉달</td>
+                                <td th:text="*{memberName}"/>
                             </tr>
                             <tr>
                                 <th scope="row">연락처</th>
                                 <td>
-                                    <span class="tel">주문자 연락처</span>
+                                    <span class="tel" th:text="*{memberPhone}"/>
                                 </td>
                             </tr>
                             <tr class="gap3">
                                 <th scope="row">이메일</th>
-                                <td>주문자 이메일</td>
+                                <td th:text="*{memberEmail}"/>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                </th:block>
             </article>
         </div>
     </div>
