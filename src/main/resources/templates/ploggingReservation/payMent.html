@@ -1,9 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>비밀번호 찾기 SMS인증 페이지</title>
+    <title>줍깅 결제</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
 </head>
+<style>
+    input[type='button'], input[type='submit'] {
+        border-radius: 0;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    label {
+        margin-top: 3%;
+    }
+
+    div.preview {
+        overflow: hidden;
+    }
+
+    div.preview img {
+        width: 90%;
+        object-fit: cover;
+        margin-left: 10%;
+    }
+
+    #main {
+        display: flex;
+        margin-top: 80px;
+        justify-content: space-around;
+    }
+
+    .is-preload {
+        margin-top: 150px;
+    }
+
+    #finding{
+        text-align: center;
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #loginbutton input[type='button'] {
+        width: 17%;
+        height: 3em;
+        padding: 1px;
+        margin: 1px;
+        border-radius: 5px;
+        background: #94c477;
+    }
+    a{
+        text-decoration:none;
+        color:#5d5d5d;
+    }
+    .hr-sect {
+        display: flex;
+        flex-basis: 100%;
+        align-items: center;
+        font-size: 13px;
+        margin: 8px 0px;
+    }
+    .hr-sect::before,
+    .hr-sect::after {
+        border: 0px solid;
+        content: "";
+        flex-grow: 1;
+        background: rgba(0, 0, 0, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin: 0px 16px;
+    }
+
+    #naver_id_login > a > img {
+        margin-top:2px;
+        width: 100% !important;
+        height: 58px !important;
+    }
+</style>
 <body>
 <div class="out" >
     <h3 style="text-align:center">신용 카드 결제</h3>
@@ -40,7 +121,7 @@
         <br>
     </div>
     <div style="text-align:center;">
-        <input class="line" id="payMent" name="payMent" style="border:none; text-align:center; font-size:20px; font-color:red;" type="text" value="결제 금액 : ${param.pay}" readonly/>
+        <input class="line" id="payMent" name="payMent" style="border:none; text-align:center; font-size:20px; font-color:red;" type="text" value="결제 금액 : " readonly/>
         <br>
         <br>
         <input type="submit" value="결제" class="primary" onclick="payMent()" style="width:100px;"/>
@@ -66,25 +147,18 @@
             num.nextElementSibling.focus();
         }
     }
-    function inputValidThru(period) {
 
+    function inputValidThru(period) {
         // replace 함수를 사용하여 슬래시( / )을 공백으로 치환한다.
         var replaceCard = period.value.replace(/\//g, "");
-
         // 텍스트박스의 입력값이 4~5글자 사이가 되는 경우에만 실행한다.
         if(replaceCard.length >= 4 && replaceCard.length < 5) {
-
             var inputMonth = replaceCard.substring(0, 2);    // 선언한 변수 month에 월의 정보값을 담는다.
             var inputYear = replaceCard.substring(2, 4);       // 선언한 변수 year에 년의 정보값을 담는다.
 
-
-
             // 현재 날짜 값을 구한다.
-
             var nowDate = new Date();
-
             var nowMonth = autoLeftPad(nowDate.getMonth() + 1, 2);
-
             var nowYear = autoLeftPad(nowDate.getFullYear().toString().substr(2, 2), 2);
 
 
@@ -101,9 +175,6 @@
                 period.value = "12/" + inputYear;
                 return false;
             }
-
-
-
             // 입력한 유효기간을 현재날짜와 비교하여 사용 가능 여부를 판단한다.
             if((inputYear + inputMonth) <= (nowYear + nowMonth)) {
                 alert("유효기간이 만료된 카드는 사용하실 수 없습니다.");
@@ -114,8 +185,6 @@
             period.value = inputMonth + "/" + inputYear;
         }
     }
-
-
 
     // 1자리 문자열의 경우 앞자리에 숫자 0을 자동으로 채워 00형태로 출력하기위한 함수
     function autoLeftPad(num, digit) {
