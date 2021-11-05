@@ -4,16 +4,17 @@
 <mapper namespace="com.team4.joopging.mappers.PointMapper">
     <!--포인트 목록-->
     <select id="getPointList" resultType="com.team4.joopging.point.vo.PointVO">
-                <![CDATA[
+        <![CDATA[
         SELECT pointNum, memberNum, history, point, pointDate, pointStatus
-        FROM (
+        FROM
+        (
         SELECT /*+ INDEX_DESC(TBL_POINT POINTNUM_PK)*/
         ROWNUM R, pointNum, memberNum, history, point, pointDate, pointStatus
         FROM TBL_POINT WHERE memberNum = #{memberNum} AND
-                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
-            )
+        ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+        )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
-                        ]]>
+        ]]>
     </select>
 
     <!--내 포인트 내역 개수-->
@@ -23,7 +24,8 @@
 
     <!--포인트 추가-->
     <insert id="addPoint">
-        INSERT INTO TBL_POINT(pointNum, memberNum, history, point, pointDate, pointStatus)
+        INSERT INTO TBL_POINT
+        (pointNum, memberNum, history, point, pointDate, pointStatus)
         VALUES (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
     </insert>
 </mapper>

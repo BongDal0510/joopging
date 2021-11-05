@@ -2,6 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias type="com.team4.joopging.point.vo.PointVO" alias="pointVO"/>
         <typeAlias type="com.team4.joopging.member.memberVO.MemberVO" alias="MemberVO"/>
         <typeAlias type="com.team4.joopging.community.vo.CommuVO" alias="commuVO"/>
         <typeAlias type="com.team4.joopging.community.vo.CommuReplyVO" alias="commuReplyVO"/>

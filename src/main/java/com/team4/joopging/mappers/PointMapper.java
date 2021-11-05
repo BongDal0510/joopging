@@ -12,7 +12,7 @@ public interface PointMapper {
     /*포인트 목록*/
     public List<PointVO> getPointList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
 
-    /*포인트 전체개수*/
+    /*회원의 포인트 전체 내역 개수 */
     public int totalPointCnt(int memberNum);
 
     /*포인트 추가*/
