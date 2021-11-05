@@ -69,6 +69,9 @@ public class MemberServiceImple implements MemberService{
     public int memberAttendUpdate(String id) { return memberDAO.memberAttendUpdate(id); }
 
     @Override
+    public int memberGetAttendCnt(String id) { return memberDAO.memberGetAttendCnt(id); }
+
+    @Override
     public int memberPointUpdate(MemberVO memberVO) { return memberDAO.memberPointUpdate(memberVO); }
 
     /*아이디로 이름 조회하기 : 카카오, 네이버, 일반 회원 모두 사용 가능*/

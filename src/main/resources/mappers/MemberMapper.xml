@@ -60,34 +60,34 @@
 
     <!--로그인-->
     <select id="login" resultType="_int">
-        SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBERID=#{memberId} AND MEMBERPW=#{memberPw}
+        SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBERID = #{memberId} AND MEMBERPW = #{memberPw}
     </select>
     <!--카카오로그인-->
     <select id="loginKAKAO" resultType="_int">
-        SELECT COUNT(*) FROM TBL_MEMBER_KAKAO WHERE MEMBERID=#{memberId}
+        SELECT COUNT(*) FROM TBL_MEMBER_KAKAO WHERE MEMBERID = #{memberId}
     </select>
     <!--네이버로그인-->
     <select id="loginNAVER" resultType="_int">
-        SELECT COUNT(*) FROM TBL_MEMBER_NAVER WHERE MEMBERID=#{memberId}
+        SELECT COUNT(*) FROM TBL_MEMBER_NAVER WHERE MEMBERID = #{memberId}
     </select>
 
     <!--아이디 찾기-->
     <select id="searchId" resultType="String">
         SELECT MEMBERID FROM TBL_MEMBER WHERE
-        MEMBERNAME=#{memberName} AND MEMBERBIRTH=#{memberBirth} AND
-        MEMBERGENDER=#{memberGender} AND MEMBERPHONE=#{memberPhone}
+        MEMBERNAME = #{memberName} AND MEMBERBIRTH = #{memberBirth} AND
+        MEMBERGENDER = #{memberGender} AND MEMBERPHONE = #{memberPhone}
     </select>
 
     <!--비밀번호 검색-->
     <select id="searchPw" resultType="string">
         SELECT MEMBERID FROM TBL_MEMBER
-        WHERE MEMBERID=#{memberId} AND MEMBERNAME=#{memberName} AND MEMBERBIRTH=#{memberBirth} AND MEMBERGENDER=#{memberGender} AND MEMBERPHONE=#{memberPhone}
+        WHERE MEMBERID = #{memberId} AND MEMBERNAME = #{memberName} AND MEMBERBIRTH = #{memberBirth} AND MEMBERGENDER=#{memberGender} AND MEMBERPHONE=#{memberPhone}
     </select>
 
     <!--비밀번호 변경-->
     <update id="updatePw">
         UPDATE TBL_MEMBER SET MEMBERPW=#{memberPw}
-        WHERE MEMBERID=#{memberId}
+        WHERE MEMBERID = #{memberId}
     </update>
 
     <!--회원정보 전체 조회-->
@@ -98,7 +98,7 @@
         MEMBERZIPCODE, MEMBERADDRESS, MEMBERPLOGGINGCNT, MEMBERPOINT,
         MEMBERSAVEDPOINT, MEMBERATTEND, MEMBERATTENDSTATUS, MEMBERLEVEL, MEMBERSTATUS
         FROM TBL_MEMBER
-        WHERE MEMBERID=#{memberId}
+        WHERE MEMBERID = #{memberId}
     </select>
 
     <!-- 출석체크 -->
@@ -108,27 +108,42 @@
         WHERE MEMBERID = #{memberId}
     </update>
 
+    <!-- 출석회수 조회 -->
+    <select id="getAttendCnt" resultType="_int">
+        SELECT MEMBERATTEND
+        FROM TBL_MEMBER
+        WHERE MEMBERID = #{memberId}
+    </select>
+
     <!-- 포인트 추가 -->
     <update id="pointUpdate">
         UPDATE TBL_MEMBER
-        SET MEMBERPOINT = MEMBERPOINT + #{memberpoint}, MEMBERSAVEDPOINT = MEMBERSAVEDPOINT + #{memberpoint}
+        SET MEMBERPOINT = MEMBERPOINT + #{memberPoint}, MEMBERSAVEDPOINT = MEMBERSAVEDPOINT + #{memberPoint}
         WHERE MEMBERID = #{memberId}
     </update>
 
     <!--네이버 카카오 일반 회원의 이름 조회-->
     <select id="userName" resultType="MemberVO">
-        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER WHERE MEMBERID=#{id}
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL
+        FROM TBL_MEMBER
+        WHERE MEMBERID = #{id}
     </select>
     <select id="userNameKAKAO" resultType="MemberVO">
-        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER_KAKAO WHERE MEMBERID=#{id}
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL
+        FROM TBL_MEMBER_KAKAO
+        WHERE MEMBERID = #{id}
     </select>
     <select id="userNameNAVER" resultType="MemberVO">
-        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER_NAVER WHERE MEMBERID=#{id}
+        SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL
+        FROM TBL_MEMBER_NAVER
+        WHERE MEMBERID = #{id}
     </select>
 
     <!--로그인 시 회원 탈퇴 여부 판단-->
     <select id="loginStatus" resultType="_int">
-        SELECT MEMBERSTATUS FROM TBL_MEMBER WHERE MEMBERID=#{memberId}
+        SELECT MEMBERSTATUS
+        FROM TBL_MEMBER
+        WHERE MEMBERID = #{memberId}
     </select>
 
 </mapper>

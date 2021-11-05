@@ -31,7 +31,7 @@ public class MemberVO {
     private String memberZipcode;
     private String memberAddress;
     private int memberPloggingCnt;
-    private int memberPoint;
+    private Long memberPoint;
     private int memberSavedPoint;
     private int memberAttend;
     private int memberAttendStatus;

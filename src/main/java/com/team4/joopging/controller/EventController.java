@@ -55,25 +55,35 @@ public class EventController {
 
     @PostMapping("attendUpdate")
     @ResponseBody
-    public MemberVO attendUpdate(HttpServletRequest req, Model model){
+    public MemberVO attendUpdate(HttpServletRequest req){
         HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
 
-        /* 멤버 출석체크 */
-        memberService.memberAttendUpdate(memberId);
-
-        /* 멤버 테이블 포인트 추가 */
+        /* 멤버,포인트 테이블 포인트 추가 */
         MemberVO memberVO = new MemberVO();
+        PointVO pointVo = new PointVO();
 
+        if(memberService.memberGetAttendCnt(memberId) == 9){
+            memberVO.setMemberPoint(500L);
+            pointVo.setPoint(500L);
+            pointVo.setHistory("출석(10일)");
+        }else{
+            memberVO.setMemberPoint(50L);
+            pointVo.setPoint(50L);
+            pointVo.setHistory("출석");
+        }
+
+        /* 멤버 테이블 */
         memberVO.setMemberId(memberId);
         memberService.memberPointUpdate(memberVO);
 
-        /* 포인트 테이블 포인트내역 추가 */
-        PointVO pointVo = new PointVO();
-
-        pointVo.setHistory("출석");
+        /* 포인트 테이블 */
+        pointVo.setMemberId(memberId);
         pointVo.setPointStatus("적립");
         pointService.addPoint(pointVo);
+
+        /* 멤버 출석체크 */
+        memberService.memberAttendUpdate(memberId);
 
         return memberService.memberAllSelect(memberId);
     }

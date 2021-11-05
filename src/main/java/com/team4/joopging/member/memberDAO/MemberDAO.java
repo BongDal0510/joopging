@@ -54,6 +54,9 @@ public class MemberDAO {
     /* 출석체크 */
     public int memberAttendUpdate(String id) { return mapper.attendUpdate(id); }
 
+    /* 출석회수 조회 */
+    public int memberGetAttendCnt(String id) { return mapper.getAttendCnt(id); }
+
     /* 포인트 추가 */
     public int memberPointUpdate(MemberVO memberVO) { return mapper.pointUpdate(memberVO); }
 

@@ -29,6 +29,8 @@ public interface MemberMapper {
     public MemberVO allSelect(String id);
     /* 출석체크 */
     public int attendUpdate(String id);
+    /* 출석회수 조회 */
+    public int getAttendCnt(String id);
     /* 포인트 추가 */
     public int pointUpdate(MemberVO memberVO);
     /*네이버 카카오 일반 회원의 이름 조회*/
