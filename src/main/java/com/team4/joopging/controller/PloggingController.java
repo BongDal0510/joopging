@@ -20,6 +20,12 @@ public class PloggingController {
     }
 
     /*플로깅 결제 팝업 창*/
-    @PostMapping("payMent")
+    @GetMapping("payment")
     public String payMent(){ return "ploggingReservation/payMent"; }
+
+    /*플로깅 상세페이지*/
+    @GetMapping("ploresinfo")
+    public String ploResInfo(){
+        return "ploggingReservation/ploResInfo";
+    }
 }
