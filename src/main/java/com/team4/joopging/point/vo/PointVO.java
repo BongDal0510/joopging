@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class PointVO {
     /*포인트 번호*/
     private int pointNum;
-    /*멤버 번호(FK)*/
-    private int memberNum;
+    /*멤버 아이디(FK)*/
+    private String memberId;
     /*내역*/
     private String history;
     /*포인트 금액*/
