@@ -1009,7 +1009,6 @@
 <script src="/js/weather.js"></script>
 </body>
 <script th:inline="javascript">
-    var GoodsLikeJson = "";
     /*클릭시 이벤트 페이지로 이동*/
     function goEvent() {
         location.href = "/event/eventlist"
@@ -1052,29 +1051,6 @@
         form.submit();
     });
 
-    /*체크박스 선택시 선택한 체크박스 기록*/
-    function Chk() {
-        let result = Array();
-        let cnt = 0;
-        let chkbox = $(".chkselect");
-        for (i = 0; i < chkbox.length; i++) {
-            if (chkbox[i].checked == true) {
-                result[cnt] = chkbox[i].value;
-                cnt++;
-            }
-        }
-        GoodsLikeJson = {"deleteGoodsLike" : result};
-    }
-    //
-    // $("#deleteClick").on("click", function () {
-    //     let from = document.deleteGoodsLikeForm;
-    //     $("#result").val(JSON.stringify(GoodsLikeJson));
-    //
-    //     form.action = "/mypage/deleteGoodsLike";
-    //     from.submit();
-    // });
-
-
     //유저 정보 수정창으로 이동
     $("#memberInfoUpdate").on("click", function () {
         let form = document.updateForm;
@@ -1099,6 +1075,29 @@
 
         form.target = title;
         form.submit();
+    });
+</script>
+<script language="javascript">
+
+    /*체크박스 선택시 선택한 체크박스 기록을 input value에 String 타입으로 저장*/
+    function Chk() {
+        let result = Array();
+        let cnt = 0;
+        let chkbox = $(".chkselect");
+        for (i = 0; i < chkbox.length; i++) {
+            if (chkbox[i].checked == true) {
+                result[cnt] = chkbox[i].value;
+                cnt++;
+            }
+        }
+        $("#result").val(JSON.stringify({"deleteGoodsLike": result}));
+    }
+    /*저당된 value를 보냄*/
+    $("#deleteClick").on("click", function () {
+        let from = document.deleteGoodsLikeForm;
+        form.target = "deleteGoodsLike";
+        form.action = "/mypage/deleteGoodsLike";
+        from.submit();
     });
 </script>
 <script>

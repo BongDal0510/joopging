@@ -56,17 +56,6 @@ public class MypageController {
             return "mypage/resultpage";
         }
     }
-//
-//    /*마이 페이지 플로깅 예약으로 이동*/
-//    @RequestMapping(value = "mypagePloRes", method = RequestMethod.GET)
-//    public CommuPageDTO mypagePloRes(Criteria criteria, HttpServletRequest req) {
-//        HttpSession session = req.getSession();
-//        String memberId = (String)session.getAttribute("memberId");
-//        int memberNum = mypageSVC.selectMemberNum(memberId);
-//
-//        return new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria);
-//    }
-
 
     /*비밀번호 수정하는 곳으로 이동*/
     @PostMapping("resultRePw")
@@ -139,7 +128,7 @@ public class MypageController {
 
 
     /*찜 삭제*/
-    @PostMapping("deleteGoodsLike")
+    @RequestMapping("deleteGoodsLike")
     public String deleteGoodsLike(Model model, @RequestParam("goodsLikeNums") List goodsLikeNums){
         boolean check = false;
         for (int i = 0; i < goodsLikeNums.size(); i++) {
