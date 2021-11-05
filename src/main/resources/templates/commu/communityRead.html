@@ -95,7 +95,9 @@
                 <div id="commuBoardMiddle">
                     <div id="goCommuListBtn"> <!--href="javascript:void(0)"-->
                         <div><a id="goListBtn" href="javascript:void(0)" class="button small">목록 보기</a></div>
-                        <div id="goReportBtn"><a id="reportBtn" class="button small trigger" onclick="popup()"><img src="/images/commu/siren.png"></a></div>
+                        <div id="goReportBtn"><a id="reportBtn" class="button small trigger" onclick="popup()">
+                            <img src="/images/commu/siren.png"></a>
+                        </div>
                     </div>
             <div class="content">
                 <div class="form">
@@ -183,7 +185,6 @@
 <script src="/js/browser.min.js"></script>
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
 <script src="/js/reply.js"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
@@ -449,10 +450,15 @@
     }
     /*#########################################팝업############################################*/
     /*신고하기 누르면 팝업*/
+    let commuToReport = [[${commu.commuBno}]];
+
+    console.log(commuToReport + "1");
+
     function popup(){
-        var url = "/report/report";
-        var name = "신고하기";
-        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        let url = "/report/report?commuBno=" + commuToReport;
+        console.log(commuToReport + "2");
+        let name = "신고하기";
+        let option = "width = 500, height = 500, top = 100, left = 200, location = no"
         window.open(url, name, option);
     }
 </script>

@@ -27,17 +27,16 @@ public class ReportMapperTest {
         report.setCommuBno(229548L);
         report.setCommuTitle("안녕");
         reportMapper.insertReport(report);
-
     }
 
     @Test
     public void testCommuToReported(){
         CommuVO commu = new CommuVO();
         ReportVO report = new ReportVO();
-        if (commuMapper.readCommu(229542L) == null) {
+        if (commuMapper.readCommu(116960L) == null) {
             log.info("*****No such Board*****");
         } else {
-            log.info("Update Count : " + reportMapper.commuToReported(229542L));
+            log.info("Update Count : " + reportMapper.commuToReported(116960L));
         }
     }
 /*(229548, '안녕', '신고글 테스트중이야', 'user06', 1);*/

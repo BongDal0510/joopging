@@ -2,9 +2,11 @@ package com.team4.joopging.services;
 
 import com.team4.joopging.community.dao.CommuAttachFileDAO;
 import com.team4.joopging.community.dao.CommuDAO;
+import com.team4.joopging.community.dao.ReportDAO;
 import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.report.vo.ReportVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,4 +86,5 @@ public class CommuServiceImple implements CommuService{
     public List<CommuAttachFileVO> getAttachList(Long commuBno) {
         return commuAttachFileDAO.findByBno(commuBno);
     }
+
 }

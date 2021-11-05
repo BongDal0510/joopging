@@ -3,6 +3,7 @@ package com.team4.joopging.services;
 import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.report.vo.ReportVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
