@@ -25,7 +25,7 @@
     <!--포인트 추가-->
     <insert id="addPoint">
         INSERT INTO TBL_POINT
-        (pointNum, memberNum, history, point, pointDate, pointStatus)
-        VALUES (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
+        (pointNum, memberNum, history, point, pointStatus)
+        VALUES (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, #{pointStatus})
     </insert>
 </mapper>
