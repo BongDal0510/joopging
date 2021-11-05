@@ -251,15 +251,36 @@
 </div>
 <div id="main_footer"></div>
 </body>
-<!--<script src="/app/plogging_res/ploggingPay.js"></script>-->
-<!-- 결제 팝업창 띄우는 스크립트 코드 -->
-<!--<script>-->
-<!--    function ploggingPayment() {-->
-<!--        var url = "/app/plogging_res/payMent.jsp?pay="-->
-<!--            + pay.value;-->
-<!--        var name = "_blank";-->
-<!--        var option = "width=450, height=600, top=100, left=200, location=no";-->
-<!--        window.open(url, name, option);-->
-<!--    }-->
-<!--</script>-->
+<div class="col-4 col-12-medium"
+     style="text-align: center; padding: 10px; width: 280px; margin-top: 40px;">
+    <div style="border: 1px solid #d3d3d3;">
+        <div>
+            <a class="image featured"><img
+                    src="/images/ploggingReservation/마포대교.png" alt="" /></a>
+            <header>
+                <h3>마포대교 플로깅</h3>
+            </header>
+            <!-- 현재 플로깅 신청 현황 보여주기 -->
+            <!-- 예약은 선착순을 기본으로 하며 -->
+            <!-- 모든 플로깅의 예약 최대 가능인원은 30명이다. -->
+            현재 신청 현황 : (20/30)<br> <br> 선착순 신청, <br>가용 인원 초과
+            시 조기 마감
+        </div>
+        <div style="margin: 1px; padding: 5px;">
+            <br>
+            인원 수
+            <br>
+            <!-- 인원수 추가 감소 버튼 -->
+            <input type="submit" id="add" onclick="minPeople()" value=" - " style="padding: revert;">
+            <input type="text" style="width: 23%;" id="people" type="text" value="1" readonly>
+            <input type="submit" id="min" onclick="addPeople()" value=" + " style="padding: revert;">
+            <!-- 결제 페이지 이동 폼 -->
+            <form action="/plo/payMent" method="post" name="paymentForm" id="paymentForm">
+                <input type="text" value="2000원" style="color: red; width:100%; border:none; text-align:center;" id="pay" name="pay">
+                <button type="button" value="예약 및 결제하기" onclick="ploggingPayment()" style="font-size:17px; margin: 5px; width: 80%;">예약 및 결제하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="js/ploggingReservation/ploResInfo.js"></script>
 </html>
