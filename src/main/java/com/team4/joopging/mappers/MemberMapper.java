@@ -31,5 +31,7 @@ public interface MemberMapper {
     public MemberVO userName(String id);
     public MemberVO userNameKAKAO(String id);
     public MemberVO userNameNAVER(String id);
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    public int loginStatus(String id);
 
 }

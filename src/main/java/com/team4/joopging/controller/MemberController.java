@@ -31,6 +31,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Service;
 
 
 /*성윤 : 회원 관련 기능 컨트롤러*/
@@ -89,16 +90,22 @@ public class MemberController {
 
     /*로그인하기 : 회원정보 조회 연산 필요*/
     @PostMapping("login")
-    public String loginAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+    public String loginAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr, Model model) {
         HttpSession session = req.getSession();
         /*연산 작업*/
         if (memberService.memberLogin(vo) != 0) {
+            /*회원탈퇴 회원인지 검사*/
+            if(memberService.memberLoginStatus(vo.getMemberId()) == 1){
+                model.addAttribute("status", 1);
+                return "member/loginFail";
+            }
             /*로그인 성공*/
             String id = vo.getMemberId();
             session.setAttribute("memberId", id);
             return "/mainpage";
         } else {
             /*로그인 실패*/
+            model.addAttribute("status", 2);
             return "member/loginFail";
         }
     }

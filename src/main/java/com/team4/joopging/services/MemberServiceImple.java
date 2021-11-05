@@ -82,4 +82,10 @@ public class MemberServiceImple implements MemberService{
             return null;
         }
     }
+
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    @Override
+    public int memberLoginStatus(String id){
+        return memberDAO.loginStatus(id);
+    }
 }

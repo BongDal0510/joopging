@@ -55,4 +55,9 @@ public class MemberDAO {
     public MemberVO userName(String id){return mapper.userName(id); }
     public MemberVO userNameKAKAO(String id){return mapper.userNameKAKAO(id); }
     public MemberVO userNameNAVER(String id){return mapper.userNameNAVER(id); }
+
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    public int loginStatus(String id){
+        return mapper.loginStatus(id);
+    }
 }

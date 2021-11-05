@@ -112,4 +112,9 @@
     <select id="userNameNAVER" resultType="MemberVO">
         SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER_NAVER WHERE MEMBERID=#{id}
     </select>
+
+    <!--로그인 시 회원 탈퇴 여부 판단-->
+    <select id="loginStatus" resultType="_int">
+        SELECT MEMBERSTATUS FROM TBL_MEMBER WHERE MEMBERID=#{memberId}
+    </select>
 </mapper>
