@@ -29,4 +29,6 @@ public interface MemberService {
     public MemberVO memberAllSelect(String id);
     /*네이버 카카오 일반 회원의 이름 조회*/
     public MemberVO memberInfo(String id);
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    public int memberLoginStatus(String id);
 }
