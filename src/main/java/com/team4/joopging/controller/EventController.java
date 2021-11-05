@@ -73,7 +73,7 @@ public class EventController {
 
         pointVo.setHistory("출석");
         pointVo.setPointStatus("적립");
-
+        pointService.addPoint(pointVo);
 
         return memberService.memberAllSelect(memberId);
     }
