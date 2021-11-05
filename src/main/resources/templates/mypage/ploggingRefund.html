@@ -382,9 +382,26 @@ function refund() {
 
     form.method = "POST";
     form.action = "/mypage/ploggingRefund";
-    form.name.value = [[${ploRes.getPloResNum()}]];
 
-    form.submit();
+    if ($("#selectBox option:selected").val() == "etc") {
+        if ($('input[name=etcReason]').val() == "") {
+            alert("취소 사유를 작성해주세요.");
+            return;
+        }
+    }
+
+    if ($("#selectBox option:selected").val() == "ploggingRefundReason") {
+        alert("취소 사유를 선택해 주세요.");
+        return;
+    }
+
+    if($('input:checkbox[id="term1"]').prop('checked',true)){
+
+        form.submit();
+    }else{
+        alert("확인 버튼을 눌러주세요.");
+        return;
+    }
 }
 </script>
 </html>

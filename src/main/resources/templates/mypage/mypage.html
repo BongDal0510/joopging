@@ -464,30 +464,30 @@
                             이벤트 확인하러 가기
                         </button>
                     </div>
-                        <div style="display: flex; justify-content: space-around;">
-                            <div class="smallBox1">
-                                <h4>나의 현황</h4>
-                                <table>
-                                    <th:block th:each="plores:${ploRes}">
-                                        <tr th:if="${ploRes.size()!=0}" th:object="${plores}">
-                                            <td class="ploResTitle" th:text="${plores?.getPloResTitle()}"></td>
-                                            <td class="ploResDate" th:text="${plores?.getPloResDate()}"></td>
-                                        </tr>
-                                    </th:block>
-                                        <tr th:unless="${ploRes.size()!=0}">
-                                            <td colspan="2" align="center">예약한 플로깅이 없습니다.</td>
-                                        </tr>
-                                </table>
-                            </div>
-                            <div class="smallBox2">
-                                <h4>1:1 문의 내역</h4>
-                                <table>
-                                    <tr>
-                                        <td colspan="2" align="center">문의 내역이 없습니다.</td>
+                    <div style="display: flex; justify-content: space-around;">
+                        <div class="smallBox1">
+                            <h4>나의 현황</h4>
+                            <table>
+                                <th:block th:each="plores:${ploRes}">
+                                    <tr th:if="${ploRes.size()!=0}" th:object="${plores}">
+                                        <td class="ploResTitle" th:text="${plores?.getPloResTitle()}"></td>
+                                        <td class="ploResDate" th:text="${plores?.getPloResDate()}"></td>
                                     </tr>
-                                </table>
-                            </div>
+                                </th:block>
+                                <tr th:unless="${ploRes.size()!=0}">
+                                    <td colspan="2" align="center">예약한 플로깅이 없습니다.</td>
+                                </tr>
+                            </table>
                         </div>
+                        <div class="smallBox2">
+                            <h4>1:1 문의 내역</h4>
+                            <table>
+                                <tr>
+                                    <td colspan="2" align="center">문의 내역이 없습니다.</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </article>
             </div>
             <!-- 플로깅 예약확인 -->
@@ -517,37 +517,38 @@
                                     <tr class="ploRes" th:if="${ploRes.size()!=0}" th:object="${plores}">
                                         <td calss="ploResNum" th:text="*{ploResNum}"></td>
                                         <td calss="ploResTitle"><a id="goPloggingDetail" th:href="*{ploggingNum}"
-                                                                      th:text="*{ploResTitle}"/></td>
+                                                                   th:text="*{ploResTitle}"/></td>
                                         <td class="ploResDate" th:text="*{ploResLocation}"/>
                                         <td class="ploResTime" th:text="*{ploResDate}"/>
                                         <td class="deletePloRes">
                                             <th:block>
-                                                <span id="ploResRefund" th:if="*{ploResStatus==0}" th:class="*{ploResNum}">x</span>
+                                                <span id="ploResRefund" th:if="*{ploResStatus==0}"
+                                                      th:class="*{ploResNum}">x</span>
                                                 <span id="ploResRefundSuccess" th:if="*{ploResStatus==1}">취소 됨</span>
                                             </th:block>
                                         </td>
                                     </tr>
                                 </th:block>
-                                    <tr th:if="${ploRes.size()==0}">
-                                        <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
-                                    </tr>
+                                <tr th:if="${ploRes.size()==0}">
+                                    <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
+                                </tr>
                                 </tbody>
                             </table>
-<!--                            <div th:object="${ploResPageMaker}">-->
-<!--                                <div class="big-width" id="ploRespagingStyle">-->
-<!--                                    <a class="changePage" th:if="${ploResPageMaker.isPrev()}"-->
-<!--                                       th:href="*{ploResPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
-<!--                                    <th:block-->
-<!--                                            th:each="ploresNum : ${#numbers.sequence(ploResPageMaker.getStartPage(), ploResPageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
-<!--                                              th:text="${ploResPageNum}"></code>-->
-<!--                                        <a class="changePage"-->
-<!--                                           th:unless="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
-<!--                                           th:href="${ploResPageNum}"><code th:text="${ploresNum}"></code></a>-->
-<!--                                    </th:block>-->
-<!--                                    <a class="changePage" th:if="*{ploResPageMaker.isNext()}" th:href="*{ploResPageMaker.getEndPage() + 1}"><code>&gt;</code></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div th:object="${ploResPageMaker}">-->
+                            <!--                                <div class="big-width" id="ploRespagingStyle">-->
+                            <!--                                    <a class="changePage" th:if="${ploResPageMaker.isPrev()}"-->
+                            <!--                                       th:href="*{ploResPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
+                            <!--                                    <th:block-->
+                            <!--                                            th:each="ploresNum : ${#numbers.sequence(ploResPageMaker.getStartPage(), ploResPageMaker.getEndPage())}">-->
+                            <!--                                        <code th:if="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
+                            <!--                                              th:text="${ploResPageNum}"></code>-->
+                            <!--                                        <a class="changePage"-->
+                            <!--                                           th:unless="${ploResPageMaker.criteria.getPageNum() == ploResPageNum}"-->
+                            <!--                                           th:href="${ploResPageNum}"><code th:text="${ploresNum}"></code></a>-->
+                            <!--                                    </th:block>-->
+                            <!--                                    <a class="changePage" th:if="*{ploResPageMaker.isNext()}" th:href="*{ploResPageMaker.getEndPage() + 1}"><code>&gt;</code></a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </article>
                 </form>
@@ -581,25 +582,25 @@
                                         <td calss="point" th:text="*{point}"></td>
                                     </tr>
                                 </th:block>
-                                    <tr th:if="${getPointList.size()==0}">
-                                        <td colspan="4" align="center">포인트 내역이 없습니다.</td>
-                                    </tr>
+                                <tr th:if="${getPointList.size()==0}">
+                                    <td colspan="4" align="center">포인트 내역이 없습니다.</td>
+                                </tr>
                                 </tbody>
                             </table>
-<!--                            <div th:object="${pointPageMaker}">-->
-<!--                                <div class="big-width" id="pointPagingStyle">-->
-<!--                                    <a class="changePage" th:if="${pointPageMaker.isPrev()}"-->
-<!--                                       th:href="${pointPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
-<!--                                    <th:block-->
-<!--                                            th:each="num : ${#numbers.sequence(pointPageMaker.getStartPage(), pointPageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
-<!--                                              th:text="${pointPageNum}"></code>-->
-<!--                                        <a class="changePage" th:unless="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
-<!--                                           th:href="${pointPageNum}"><code th:text="${pointPageNum}"></code></a>-->
-<!--                                    </th:block>-->
-<!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div th:object="${pointPageMaker}">-->
+                            <!--                                <div class="big-width" id="pointPagingStyle">-->
+                            <!--                                    <a class="changePage" th:if="${pointPageMaker.isPrev()}"-->
+                            <!--                                       th:href="${pointPageMaker.getStartPage() - 1}"><code>&lt;</code></a>-->
+                            <!--                                    <th:block-->
+                            <!--                                            th:each="num : ${#numbers.sequence(pointPageMaker.getStartPage(), pointPageMaker.getEndPage())}">-->
+                            <!--                                        <code th:if="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
+                            <!--                                              th:text="${pointPageNum}"></code>-->
+                            <!--                                        <a class="changePage" th:unless="${pointPageMaker.criteria.getPageNum() == pointPageNum}"-->
+                            <!--                                           th:href="${pointPageNum}"><code th:text="${pointPageNum}"></code></a>-->
+                            <!--                                    </th:block>-->
+                            <!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </article>
                 </form>
@@ -630,137 +631,147 @@
                                 <th:block th:each="orderhistory:${orderHistory}">
                                     <tr th:if="${orderHistory.size()!=0}" th:object="${orderhistory}">
                                         <td calss="orderNum" th:text="*{orderNum}"/>
-                                        <td class="goodsName">
-                                            <a id="goOrderHistory" th:text="${orderhistory.getGoodsName()}" th:href="*{orderNum}"></a>
+                                        <td th:if="*{orderStatus!=1}" class="goodsName">
+                                            <a id="goOrderHistory" th:text="${orderhistory.getGoodsName()}"
+                                               th:href="*{orderNum}"></a>
+                                        </td>
+                                        <td th:unless="*{orderStatus!=1}" class="goodsName">
+                                            <a class="notGoHistory" th:text="${orderhistory.getGoodsName()}"></a>
                                         </td>
                                         <td calss="goodsTotalCost" th:text="${orderhistory.getGoodsTotalCost()}"/>
                                         <td class="goodsCnt" th:text="*{goodsCnt}"/>
-                                        <td><!--택배 내역나오는 거에서 뽑기 상태--></td>
+                                        <td th:if="*{orderStatus!=1}">주문 접수</td>
+                                        <td th:unless="*{orderStatus!=1}">구매 취소</td>
                                     </tr>
                                 </th:block>
-                                    <tr th:if="${orderHistory.size()==0}">
-                                        <td colspan="5" align="center">구매한 상품이 없습니다.</td>
-                                    </tr>
+                                <tr th:if="${orderHistory.size()==0}">
+                                    <td colspan="5" align="center">구매한 상품이 없습니다.</td>
+                                </tr>
                                 </tbody>
                             </table>
-<!--                            <div th:object="${orderPageMaker}">-->
-<!--                                <div class="big-width" id="OrderPagingStyle">-->
-<!--                                    <a class="changePage" th:if="*{prev}"-->
-<!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
-<!--                                    <th:block-->
-<!--                                            th:each="num : ${#numbers.sequence(orderPageMaker.getStartPage(), orderPageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${orderPageMaker.criteria.getPageNum() == num}"-->
-<!--                                              th:text="${num}"></code>-->
-<!--                                        <a class="changePage" th:unless="${orderPageMaker.criteria.getPageNum() == num}"-->
-<!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
-<!--                                    </th:block>-->
-<!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div th:object="${orderPageMaker}">-->
+                            <!--                                <div class="big-width" id="OrderPagingStyle">-->
+                            <!--                                    <a class="changePage" th:if="*{prev}"-->
+                            <!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
+                            <!--                                    <th:block-->
+                            <!--                                            th:each="num : ${#numbers.sequence(orderPageMaker.getStartPage(), orderPageMaker.getEndPage())}">-->
+                            <!--                                        <code th:if="${orderPageMaker.criteria.getPageNum() == num}"-->
+                            <!--                                              th:text="${num}"></code>-->
+                            <!--                                        <a class="changePage" th:unless="${orderPageMaker.criteria.getPageNum() == num}"-->
+                            <!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
+                            <!--                                    </th:block>-->
+                            <!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </article>
                 </form>
             </div>
             <!-- 상품 찜 목록 -->
             <div class="col-8 col-12-medium imp-medium" id="paymentDib">
-                <form method="get" action="/mypage/mypageGoodsLike">
-                    <article class="box post">
-                        <header>
-                            <h2>찜 목록</h2>
-                            ▶ 내가 찜한 상품들의 목록을 보여줍니다.
-                        </header>
-                        <div>
-                            <table class=boardList>
-                                <caption>
-                                    내 찜 목록 : <span th:text="${goodslikeTotalCnt}"/> 개
-                                </caption>
-                                <thead>
-                                <tr>
-                                    <th width="10%">선택</th>
-                                    <th width="60%">상품명</th>
-                                    <th width="30%">가격</th>
+                <article class="box post">
+                    <header>
+                        <h2>찜 목록</h2>
+                        ▶ 내가 찜한 상품들의 목록을 보여줍니다.
+                    </header>
+                    <div>
+                        <table class=boardList>
+                            <caption>
+                                내 찜 목록 : <span th:text="${goodslikeTotalCnt}"/> 개
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th width="10%">선택</th>
+                                <th width="60%">상품명</th>
+                                <th width="30%">가격</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="goodsLike:${goodsLikeList}">
+                                <tr th:if="${goodsLikeList.size()!=0}" th:object="goodsLike">
+                                    <td class="deleteCheck">
+                                        <input type="checkbox" th:value="*{goodsNum}" class='chkselect' onclick='Chk();'>
+                                    </td>
+                                    <td calss="goodsName">
+                                        <a id="goGoods" th:text="${goodsName}" th:href="*{goodsNum}"/>
+                                    </td>
+                                    <td calss="goodsPrice" th:text="*{goodsPrice}"/>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <th:block th:each="goodsLike:${goodsLikeList}">
-                                    <tr th:if="${goodsLikeList.size()!=0}" th:object="goodsLike">
-                                        <td class="deleteCheck"><input type="checkbox"></td>
-                                        <td calss="goodsName" th:text="">
-                                            <!--상품명//상세보기-->
-                                        </td>
-                                        <td calss="" th:text=""><!--가격--></td>
-                                    </tr>
-                                </th:block>
-                                    <tr th:if="${goodsLikeList.size()==0}">
-                                        <td colspan="3" align="center">찜 내역이 없습니다.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p style="text-align: right;">
-                                <button class="goodsLikeDalete">선택 삭제</button>
-                            </p>
-<!--                            <div th:object="${goodsLikePageMaker}">-->
-<!--                                <div class="big-width" id="pagingStyle">-->
-<!--                                    <a class="changePage" th:if="*{prev}"-->
-<!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
-<!--                                    <th:block-->
-<!--                                            th:each="num : ${#numbers.sequence(goodsLikePageMaker.getStartPage(), goodsLikePageMaker.getEndPage())}">-->
-<!--                                        <code th:if="${goodsLikePageMaker.criteria.getPageNum() == num}"-->
-<!--                                              th:text="${num}"></code>-->
-<!--                                        <a class="changePage"-->
-<!--                                           th:unless="${goodsLikePageMaker.criteria.getPageNum() == num}"-->
-<!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
-<!--                                    </th:block>-->
-<!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-                        </div>
-                    </article>
-                </form>
+                            </th:block>
+                            <tr th:if="${goodsLikeList.size()==0}">
+                                <td colspan="3" align="center">찜 내역이 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align: right;">
+                        <form name="deleteGoodsLikeForm" id="deleteGoodsLikeForm">
+                        <input type='hidden' id='result' name='result'>
+                        <button id="deleteClick">선택 삭제</button>
+                        </form>
+                        </p>
+                        <!--                            <div th:object="${goodsLikePageMaker}">-->
+                        <!--                                <div class="big-width" id="pagingStyle">-->
+                        <!--                                    <a class="changePage" th:if="*{prev}"-->
+                        <!--                                       th:href="*{startPage - 1}"><code>&lt;</code></a>-->
+                        <!--                                    <th:block-->
+                        <!--                                            th:each="num : ${#numbers.sequence(goodsLikePageMaker.getStartPage(), goodsLikePageMaker.getEndPage())}">-->
+                        <!--                                        <code th:if="${goodsLikePageMaker.criteria.getPageNum() == num}"-->
+                        <!--                                              th:text="${num}"></code>-->
+                        <!--                                        <a class="changePage"-->
+                        <!--                                           th:unless="${goodsLikePageMaker.criteria.getPageNum() == num}"-->
+                        <!--                                           th:href="${num}"><code th:text="${num}"></code></a>-->
+                        <!--                                    </th:block>-->
+                        <!--                                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                    </div>
+                </article>
             </div>
             <!-- 회원정보변경 -->
             <div class="col-8 col-12-medium imp-medium" id="updateInfo">
-                    <article class="box post">
-                        <header style="margin-bottom: 0px; padding-bottom: 1.5em !important; border-bottom: 3px solid #35A14A; width: 650px">
-                            <h2>개인 정보 변경</h2>
-                            ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
-                        </header>
-                        <table class='delete123'>
-                            <tr>
-                                <th>아이디</th>
-                                <td th:text="*{memberId}"></td>
-                                <th>등급</th>
-                                <td th:text="*{memberAttend}"></td>
-                            </tr>
-                            <tr>
-                                <form method="post" name="pwForm" id="pwForm" >
+                <article class="box post">
+                    <header style="margin-bottom: 0px; padding-bottom: 1.5em !important; border-bottom: 3px solid #35A14A; width: 650px">
+                        <h2>개인 정보 변경</h2>
+                        ▶ 회원가입 시 기재한 정보를 확인,변경할 수 있습니다.
+                    </header>
+                    <table class='delete123'>
+                        <tr>
+                            <th>아이디</th>
+                            <td th:text="*{memberId}"></td>
+                            <th>등급</th>
+                            <td th:text="*{memberAttend}"></td>
+                        </tr>
+                        <tr>
+                            <form method="post" name="pwForm" id="pwForm">
                                 <th>비밀번호</th>
                                 <td colspan="3">
                                     <input type="button" id="changePw" value="비밀번호 변경">
                                 </td>
-                                </form>
-                            </tr>
-                            <tr>
-                                <th>이름</th>
-                                <td th:text="*{memberName}" colspan="3"></td>
-                            </tr>
-                            <tr>
-                                <th>성별</th>
-                                <td th:text="*{memberGender}" colspan="3"></td>
-                            </tr>
-                            <tr>
-                                <th>생일</th>
-                                <td th:text="*{memberBirth}" colspan="3"></td>
-                            </tr>
-                            <form method="post" name="updateForm" id="updateForm" action="/mypage/updateMember">
+                            </form>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td th:text="*{memberName}" colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <th>성별</th>
+                            <td th:text="*{memberGender}" colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <th>생일</th>
+                            <td th:text="*{memberBirth}" colspan="3"></td>
+                        </tr>
+                        <form method="post" name="updateForm" id="updateForm" action="/mypage/updateMember">
                             <tr>
                                 <th>이메일</th>
                                 <td class="email" colspan="3">
                                     <div class="object" style="display: inline-flex;">
-                                        <input id="memberEmail" name="memberEmail" type="text" style="margin-right:6px; width: 50%;">
+                                        <input id="memberEmail" name="memberEmail" type="text"
+                                               style="margin-right:6px; width: 50%;">
                                         <span style="margin-top:8px;">@</span>
                                         <div>
-                                            <select id="memberEmailSite" name="memberEmailSite" style="margin-left:6px; width:95%; display: inline-block">
+                                            <select id="memberEmailSite" name="memberEmailSite"
+                                                    style="margin-left:6px; width:95%; display: inline-block">
                                                 <option value="chol.com">chol.com</option>
                                                 <option value="yahoo.com">yahoo.com</option>
                                                 <option value="empal.com">empal.com</option>
@@ -790,31 +801,36 @@
                                 <td colspan="3">
                                     <div id="address">
                                         <div class="object">
-                                            <input type="text" id="memberZipcode" name="memberZipcode" style="margin-right: 5%;float: left; width: auto;" readonly>
-                                            <input type="button" onclick="sample5_execDaumPostcode()" value="검색" style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
+                                            <input type="text" id="memberZipcode" name="memberZipcode"
+                                                   style="margin-right: 5%;float: left; width: auto;" readonly>
+                                            <input type="button" onclick="sample5_execDaumPostcode()" value="검색"
+                                                   style="background: #94c477; font-size:19px; padding:4.8px 16px !important">
                                         </div>
                                         <div id="detailAddress" name="detailAddress" style="display: none;">
-                                            <input type="text" id="memberAddress" name="memberAddress" style="margin-right: 5%; margin-top:5%;" readonly>
-                                            <div id="map" style="width:390px;height:300px;margin-top:10px;display:none"></div>
-                                            <input id="memberAddressDetail" name="memberAddressDetail" type="text" placeholder="상세주소">
+                                            <input type="text" id="memberAddress" name="memberAddress"
+                                                   style="margin-right: 5%; margin-top:5%;" readonly>
+                                            <div id="map"
+                                                 style="width:390px;height:300px;margin-top:10px;display:none"></div>
+                                            <input id="memberAddressDetail" name="memberAddressDetail" type="text"
+                                                   placeholder="상세주소">
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align: center; ">
-                                    <input type="button" value="회원 정보 변경" onclick="formSubmit()"
+                                    <input type="button" value="회원 정보 변경" id="memberInfoUpdate"
                                            style="margin-top: 1.5em">
                                 </td>
                             </tr>
-                            </form>
-                        </table>
-                    </article>
+                        </form>
+                    </table>
+                </article>
             </div>
 
             <!-- 회원 탈퇴 -->
             <div class="col-8 col-12-medium imp-medium" id="deleteInfo">
-                <form method="post" name="deleteForm" action="/mypage/DeleteMember">
+                <form method="post" name="deleteForm" action="/mypage/removeMember">
                     <article class="box post">
                         <header>
                             <h2>회원 탈퇴</h2>
@@ -858,7 +874,8 @@
                             <tr>
                                 <th>비밀번호</th>
                                 <td style="text-align: left">
-                                    <input type="password" name="deleteMember_pw" style="width: 70%;display: inherit">
+                                    <input type="password" name="deleteMemberPw" id="deleteMemberPw"
+                                           style="width: 70%;display: inherit">
                                 </td>
                             </tr>
                             <tr>
@@ -916,9 +933,9 @@
                                         <td th:text="*{commuViewCnt}"/>
                                     </tr>
                                 </th:block>
-                                    <tr th:unless="${memberCommu.size()==0}">
-                                        <td colspan="4" align="center">작성한 게시글이 없습니다.</td>
-                                    </tr>
+                                <tr th:if="${memberCommu.size()==0}">
+                                    <td colspan="4" align="center">작성한 게시글이 없습니다.</td>
+                                </tr>
                                 </tbody>
                             </table>
                             <table class="numberPage">
@@ -992,6 +1009,7 @@
 <script src="/js/weather.js"></script>
 </body>
 <script th:inline="javascript">
+    var GoodsLikeJson = "";
     /*클릭시 이벤트 페이지로 이동*/
     function goEvent() {
         location.href = "/event/eventlist"
@@ -1002,12 +1020,17 @@
         e.preventDefault();
         location.href = "/plogging/ploggingDetail?ploggingNum=" + $(this).attr("href");
     });
+    /*굿즈 페이지로 이동 이동*/
+    $("a#goPloggingDetail").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/shop/shopDetail?goodsNum=" + $(this).attr("href");
+    });
 
     /*플로깅 취소 페이지 이동*/
     $("span#ploResRefund").on("click", function () {
         let ploresNum = parseInt($(this).attr("class"));
         let option = "width=470, height=600, top=100, left=200, location=no";
-        window.open("/mypage/ploggingRefundPage?ploResNum=" + ploresNum,"",option).focus();
+        window.open("/mypage/ploggingRefundPage?ploResNum=" + ploresNum, "", option).focus();
     });
 
     /*내 상품 상세보기*/
@@ -1016,25 +1039,66 @@
         location.href = "/orderhistory/orderInfo?orderNum=" + $(this).attr("href");
     });
 
-    $(document).ready(function () {
-        let msg = [[${msg}]];
-
-        if (msg != null || msg != "null" || msg != "") {
-            return;
-        } else {
-            alert(msg);
-        }
-    });
-
+    //비밀번호 변경창으로 이동
     $("#changePw").on("click", function () {
         let form = document.pwForm;
         let title = "newPassword"
         let option = "width=470, height=600, top=100, left=200, location=no";
-        window.open("",title,option);
+        window.open("", title, option);
 
         form.action = "/mypage/resultRePw";
         form.target = title;
 
+        form.submit();
+    });
+
+    /*체크박스 선택시 선택한 체크박스 기록*/
+    function Chk() {
+        let result = Array();
+        let cnt = 0;
+        let chkbox = $(".chkselect");
+        for (i = 0; i < chkbox.length; i++) {
+            if (chkbox[i].checked == true) {
+                result[cnt] = chkbox[i].value;
+                cnt++;
+            }
+        }
+        GoodsLikeJson = {"deleteGoodsLike" : result};
+    }
+
+    $("#deleteClick").on("click", function () {
+        let from = document.deleteGoodsLikeForm;
+        $("#result").val(JSON.stringify(GoodsLikeJson));
+
+        form.action = "/mypage/deleteGoodsLike"
+        foem
+        from.submit();
+    });
+
+
+    //유저 정보 수정창으로 이동
+    $("#memberInfoUpdate").on("click", function () {
+        let form = document.updateForm;
+        let title = "memberInfoUpdate"
+
+        form.method = "POST";
+        form.target = title;
+
+        form.submit();
+    });
+
+    //구매 취소상품 선택시 alert
+    $(".notGoHistory").on("click", function () {
+        alert("구매 취소된 상품입니다.");
+        return;
+    });
+
+    //유저정보 삭제창으로 이동
+    $("deleteMember").on("click", function () {
+        let form = document.deleteForm;
+        let title = "deleteMember"
+
+        form.target = title;
         form.submit();
     });
 </script>
@@ -1057,14 +1121,14 @@
 
     function sample5_execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function (data) {
                 var addr = data.address; // 최종 주소 변수
 
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("memberAddress").value = addr;
                 document.getElementById('memberZipcode').value = data.zonecode;
                 // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
+                geocoder.addressSearch(data.address, function (results, status) {
                     // 정상적으로 검색이 완료됐으면
                     if (status === daum.maps.services.Status.OK) {
 

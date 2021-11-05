@@ -1,5 +1,6 @@
 package com.team4.joopging.mypage.dao;
 
+import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mappers.MypageMapper;
@@ -37,7 +38,7 @@ public class MypageDAO {
     }
 
     /*찜목록 출력*/
-    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria){
+    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria){
         return mapper.getGoodsLikeList(memberNum, criteria);
     }
 

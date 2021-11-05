@@ -4,16 +4,38 @@
 <mapper namespace="com.team4.joopging.mappers.OrderHistoryMapper">
 
 
+    <sql id="searchCommu">
+        <if test="type != null and keyword !=null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (COMMUTITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (COMMUCONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (COMMUWRITER LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
     <!--구매 상품 목록-->
 
     <select id="getOrderHistoryList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
         <![CDATA[
-SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
+SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
     FROM (
-SELECT /** INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
-    ROWNUM R, orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
+SELECT /*+ INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
+    ROWNUM R, orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
 FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
@@ -25,7 +47,7 @@ FROM TBL_ORDER_HISTORY WHERE memberNum = #{memberNum} AND
 
     <!--주문번호로 내 상품 정보 가져오기-->
     <select id="getOrderHistory" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
-        SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
+        SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
     FROM TBL_ORDER_HISTORY WHERE orderNum=#{orderNum}
@@ -50,17 +72,17 @@ FROM TBL_PARCEL WHERE orderNum = #{orderNum}
 </select>
 
     <!--구매 취소-->
-    <update id="deleteGoodsOrder">
-UPDATE TBL_GOODS_ORDER
+    <update id="deleteOrderHistory">
+UPDATE TBL_ORDER_HISTORY
 SET orderStatus = 1
 WHERE orderNum = #{orderNum}
 </update>
 
     <!--구매취소된 상품 불러오기-->
     <select id="deletOrderList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
-    SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,orderDate,
+    SELECT orderNum,memberNum,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
-FROM TBL_GOODS_ORDER WHERE orderStatus = 1;
+FROM TBL_ORDER_HISTORY WHERE orderStatus = 1;
     </select>
 </mapper>

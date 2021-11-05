@@ -1,5 +1,6 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
@@ -23,7 +24,7 @@ public interface MypageService {
     public int realTotalPloResCnt(int memberNum);
 
     /*찜목록 출력*/
-    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria);
+    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria);
 
     /*찜목록 토탈*/
     public int totalGoodsLikeCnt(int memberNum);

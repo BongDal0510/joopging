@@ -140,16 +140,9 @@ $("#deleteMember").on("click", function () {
     }
 
     if (confirm("회원 탈퇴를 진행하겠습니까?")) {
-        /*에이젝스로 결과 가져오기*/
-        alert("회원 탈퇴가 완료되었습니다.")
         form.submit();
     } else {
         alert("회원 탈퇴가 취소 되었습니다.")
         return;
     }
-});
-
-$(".listbtn").click(function () {
-    alert("해당 페이지는 준비중에 있어요~ 다음시즌을 기대해 주세요^^");
-    return false;
 });

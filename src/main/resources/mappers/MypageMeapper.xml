@@ -4,6 +4,28 @@
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
 
+    <sql id="search">
+        <if test="type != null and keyword !=null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (COMMUTITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (COMMUCONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (COMMUWRITER LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
     <!--예약번호로 찾기-->
     <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
         SELECT  ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
@@ -16,7 +38,7 @@
     <![CDATA[
     SELECT ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
-    SELECT /** INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
+    SELECT /*+ INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
     ROWNUM R, ploResNum, memberNum,ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
     AND
@@ -36,15 +58,14 @@
         SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum} AND NOT ploResStatus = 1
     </select>
 
-<!--찜 목록-->
-<select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
+<!--찜 목록의 상품정보-->
+<select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.beans.vo.ShopVO">
         <![CDATA[
-SELECT goodsLikeListNum, memberNum, goodsNum
+SELECT GoodsNum,GoodsName, GoodsCategory, GoodsPrice, GoodsContent
 FROM(
-SELECT /** INDEX_DESC(TBL_GOODS_LIKE_LIST GOODS_LIKE_LIST_PK)*/
-ROWNUM R,goodsLikeListNum, memberNum, goodsNum
-FROM TBL_GOODS_LIKE_LIST
-WHERE memberNum = #{memberNum} AND
+SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK)*/
+ROWNUM R, GoodsNum,GoodsName, GoodsCategory, GoodsPrice, GoodsContent FROM TBL_GOODSLIST
+WHERE GOODSNUM IN (SELECT GOODSNUM FROM TBL_GOODS_LIKE_LIST WHERE MEMBERNUM = #{memberNum}) AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
@@ -76,14 +97,14 @@ WHERE ploResNum = #{ploResNum}
 <!--멤버 정보 수정-->
 <update id="updateMember">
     UPDATE TBL_MEMBER
-    SET memberPw = #{memberPw}, memberEmail = #{memberEmail}, memberZipcode = #{memberZipcode}, memberAddress = #{memberAddress}
+    SET memberEmail = #{memberEmail}, memberZipcode = #{memberZipcode}, memberAddress = #{memberAddress}
     WHERE memberNum = #{memberNum}
 </update>
 
 <!--멤버 삭제-->
 <update id="deleteMember">
     UPDATE TBL_MEMBER
-    SET status = 1
+    SET memberStatus = 1
     WHERE memberId = #{memberId} AND memberPw = #{memberPw}
 </update>
 

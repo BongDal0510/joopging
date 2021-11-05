@@ -274,10 +274,10 @@
 <body class="homepage is-preload">
 <div id="page-wrapper">
     <!-- Main -->
-    <section id="main">
+    <section id="main" th:object="${order}">
         <div class="container">
             <!-- 플로깅 취소 환불 -->
-            <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingRefund" style="display: block; padding: 50px 15% 50px 15%">
+            <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingRefund" style="display: block; margin: 0 auto; padding-top: 30px;">
                 <article class="box post">
                     <header>
                         <h2>상품 환불 안내</h2>
@@ -288,12 +288,12 @@
                         </p>
                         <ol style="list-style: none;">
                             <li>상품 환불 안내
-                            <ul class = "not_line">
-                            <li>상품 수령 후 7일이내에 환불해야 합니다.</li>
+                                <ul class = "not_line">
+                                    <li>상품 수령 후 7일이내에 환불해야 합니다.</li>
                                     <li>상품하자 및 오발송인 경우 택배비용은 자사에서 부담합니다.</li>
                                     <li>단순 변심에 의한 환불인 경우 택배비용은 소비자가 부담합니다.</li>
                                     <li style="color: red;">소비자의 잘못으로 안한 상품 훼손 시 환불이 불가능합니다.</li>
-                            </ul>
+                                </ul>
                             </li>
                         </ol>
                         <div style="text-align: right;">
@@ -302,18 +302,18 @@
                         </div>
                     </div>
                     <div  style= "padding: 50px 0px">
-                                <h3>상품 환불</h3>
+                        <h3>상품 환불</h3>
                         <table class = 'delete123'>
-                                <th>상품 명</th>
-                                <td></td>
+                            <th>상품 명</th>
+                            <td th:text="*{goodsName}"></td>
                             </tr>
                             <tr>
                                 <th>상품 수량</th>
-                                <td></td>
+                                <td th:text="*{goodsTotalCost}"></td>
                             </tr>
                             <tr>
                                 <th>옵션</th>
-                                <td></td>
+                                <td th:text="*{goodsColor+' '+goodsSize}">(<span th:text="*{goodsCnt}">) 개</span></td>
                             </tr>
                             <tr>
                                 <th>환불 사유</th>
@@ -332,10 +332,16 @@
                             </tr>
                             <tr>
                                 <th>환불액</th>
-                                <td></td>
+                                <td th:text="*{goodsTotalCost}"></td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-align: center;  margin-top: 10px;"><button>환불하기</button></td>
+                                <td colspan="2" style="text-align: center;">
+                                <form action="/orderhistory/goodsRefund" method="post" name="refundForm">
+                                    <input type="hidden" th:value="${order.getOrderNum()}" id="orderNum" name="orderNum">
+                                    <button onclick="refund()">환불하기</button>
+                                    <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
+                                </form>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -356,4 +362,34 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
+<script th:inline="javascript">
+
+    $("#close").on("click",function () {
+        self.close();
+    });
+
+    function refund() {
+        let form = document.refundForm;
+
+        if ($("#selectBox option:selected").val() == "etc") {
+            if ($('input[name=etcReason]').val() == "") {
+                alert("취소 사유를 작성해주세요.");
+                return;
+            }
+        }
+
+        if ($("#selectBox option:selected").val() == "paymentRefundReason") {
+            alert("취소 사유를 선택해 주세요.");
+            return;
+        }
+
+        if($('input:checkbox[id="term1"]').prop('checked',true)){
+
+            form.submit();
+        }else{
+            alert("확인버튼을 눌러주세요.");
+            return;
+        }
+    }
+</script>
 </html>

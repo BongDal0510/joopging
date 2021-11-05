@@ -1,8 +1,10 @@
 package com.team4.joopging.controller;
 
 import com.team4.joopging.community.vo.CommuPageDTO;
+import com.team4.joopging.community.vo.CommuReplyPageDTO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
+import com.team4.joopging.services.CommuService;
 import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -28,6 +31,7 @@ public class MypageController {
     private final MypageService mypageSVC;
     private final PointService pointSVC;
     private final MemberService memberSVC;
+    private final CommuService commuSVC;
 
     /*마이페이지 메인으로 이동*/
     @GetMapping("mypage")
@@ -48,50 +52,21 @@ public class MypageController {
 
             return "mypage/mypage";
         }else{
-            model.addAttribute("msg","로그인 후 이용바랍니다.");
-            return "/mainpage";
+            model.addAttribute("msg","notLogin");
+            return "mypage/resultpage";
         }
     }
-
-    /*마이 페이지 플로깅 예약으로 이동*/
-    @RequestMapping(value = "mypagePloRes", method = RequestMethod.POST)
-    public RedirectView mypagePloRes(Criteria criteria, HttpServletRequest req, RedirectAttributes rttr) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        if(mypageSVC.getPloResList(memberNum,criteria).size()!=0) {
-            rttr.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
-//            rttr.addAttribute("bno", boardVO.getBno());
-        }
-        return new RedirectView("mypage");
-    }
-
-//    @GetMapping("mypagePloRes")
-//    public void mypagePloRes(Model model, Criteria criteria, HttpServletRequest req) {
+//
+//    /*마이 페이지 플로깅 예약으로 이동*/
+//    @RequestMapping(value = "mypagePloRes", method = RequestMethod.GET)
+//    public CommuPageDTO mypagePloRes(Criteria criteria, HttpServletRequest req) {
 //        HttpSession session = req.getSession();
 //        String memberId = (String)session.getAttribute("memberId");
 //        int memberNum = mypageSVC.selectMemberNum(memberId);
 //
-//        model.addAttribute("ploResAll", mypageSVC.getPloResList(memberNum, criteria));
-//        model.addAttribute("ploResPageMaker", new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria));
-//
-//        return;
+//        return new CommuPageDTO(mypageSVC.totalPloResCnt(memberNum), 10, criteria);
 //    }
 
-    /*마이 페이지 포인트로 이동*/
-    @GetMapping("mypagePoint")
-    public String mypagePoint(Model model, Criteria criteria, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        model.addAttribute("pointPageMaker", new CommuPageDTO(pointSVC.totalPointCnt(memberNum), 10, criteria));
-        model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
-
-        return "mypage/mypage";
-    }
 
     /*비밀번호 수정하는 곳으로 이동*/
     @PostMapping("resultRePw")
@@ -102,73 +77,44 @@ public class MypageController {
         return "member/resultRePw";
     }
 
-    /*마이 페이지 구매상품으로 이동*/
-    @GetMapping("mypageOrderHistory")
-    public String mypageOrderHistory(Model model, Criteria criteria, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        model.addAttribute("orderPageMaker", new CommuPageDTO(mypageSVC.totalOrderCnt(memberNum), 10, criteria));
-        model.addAttribute("orderTotalCnt", mypageSVC.realTotalOrderCnt(memberNum));
-        model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberNum, criteria));
-
-        return "mypage/mypage";
-    }
-    /*마이 페이지 찜으로 이동*/
-    @GetMapping("mypageGoodsLike")
-    public String mypageGoodsLike(Model model, Criteria criteria, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        model.addAttribute("goodsLikePageMaker", new CommuPageDTO(mypageSVC.totalGoodsLikeCnt(memberNum), 10, criteria));
-        model.addAttribute("goodslikeTotalCnt", mypageSVC.totalGoodsLikeCnt(memberNum));
-        model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberNum, criteria));
-
-        return "mypage/mypage";
-    }
-    /*마이 페이지 내 게시글로 이동*/
-    @GetMapping("mypageCommu")
-    public String mypageCommu(Model model, Criteria criteria, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
-
-        return "mypage/mypage";
-    }
-    /*마이 페이지 1:1문의사항으로 이동*/
-    @GetMapping("mypageQue")
-    public String mypageQue(Model model, Criteria criteria, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String memberId = (String)session.getAttribute("memberId");
-        int memberNum = mypageSVC.selectMemberNum(memberId);
-
-        return "mypage/mypage";
-    }
-
     /*회원 탈퇴*/
     @PostMapping("removeMember")
-    public RedirectView removeMember(String memberId, String memberPw, RedirectAttributes rttr){
+    public String removeMember(@RequestParam("deleteMemberPw") String memberPw, HttpServletRequest req,Model model){
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
         if(mypageSVC.deleteMember(memberId,memberPw)){
-            rttr.addFlashAttribute("msg", "회원 탈퇴가 성공적으로 이루어졌습니다.");
-            return new RedirectView("mainpage/mainpage");
+            model.addAttribute("msg", "deleteMember");
         }else{
-            rttr.addFlashAttribute("msg", "회원탈퇴에 실패하였습니다.");
-            return new RedirectView("mypage/mypage");
+            model.addAttribute("msg", "notDeleteMember");
         }
+        return "mypage/resultpage";
     }
 
     /*회원 수정*/
     @PostMapping("updateMember")
-    public String updateMember(MemberVO vo, String memberEmailSite, String memberAddressDetail) {
+    public String updateMember(MemberVO vo,Model model, @RequestParam("memberEmailSite") String memberEmailSite, @RequestParam("memberAddressDetail") String memberAddressDetail, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+
+        MemberVO membervo = memberSVC.memberAllSelect(memberId);
+
+        membervo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
+        membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
+        membervo.setMemberZipcode(vo.getMemberZipcode());
+
+        log.info("=========================================");
+        log.info(membervo.getMemberId());
+        log.info(membervo.getMemberName());
+        log.info(membervo.getMemberEmail());
+        log.info(membervo.getMemberAddress());
+        log.info("=========================================");
         /*디비에 회원정보 저장*/
-        vo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
-        vo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
-        mypageSVC.updateMember(vo);
-        return "/mainpage";
+        if(mypageSVC.updateMember(membervo)){
+            model.addAttribute("msg","updateMember");
+        }else{
+            model.addAttribute("msg","notUpdateMember");
+        };
+        return "mypage/resultpage";
     }
 
     /*플로깅 취소(파업창)- 천천히 해결합세*/
@@ -184,24 +130,39 @@ public class MypageController {
     @PostMapping("ploggingRefund")
     public String ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
         if(mypageSVC.deletePloRes(ploResNum)){
-            model.addAttribute("msg", "플로깅 취소가 완료되었습니다.");
+            model.addAttribute("msg", "refundPlogging");
         }else{
-            model.addAttribute("msg", "플로깅 취소에 실패하였습니다.");
+            model.addAttribute("msg", "notRefundPlogging");
         }
-        return "mypage/close";
+        return "mypage/resultpage";
     }
+
 
     /*찜 삭제*/
     @PostMapping("deleteGoodsLike")
-    public void deleteGoodsLike(Model model, @RequestParam("goodsLikeNum") int goodsLikeNum){
-        if(mypageSVC.deleteGoodsLike(goodsLikeNum)){
-            model.addAttribute("msg","해당 상품에 찜을 삭제하였습니다.");
-        }else{
-            model.addAttribute("msg","찜 삭제에 실패하였습니다.");
+    public String deleteGoodsLike(Model model, @RequestParam("goodsLikeNums") List goodsLikeNums){
+        boolean check = false;
+        for (int i = 0; i < goodsLikeNums.size(); i++) {
+            int goodsLikeNum = goodsLikeNums.indexOf(i);
+            if(mypageSVC.deleteGoodsLike(goodsLikeNum)){
+                log.info("====================================");
+                log.info(i+"번째 삭제 된 찜번호 : "+String.valueOf(goodsLikeNum));
+                log.info("====================================");
+                check = true;
+            }else {
+                log.info("====================================");
+                log.info(i+"번째 삭제 실패한 찜번호 : "+String.valueOf(goodsLikeNum));
+                log.info("====================================");
+                check = false;
+            };
         }
-        return;
+        if(check){
+            model.addAttribute("msg","daleteGoodsLike");
+        }else{
+            model.addAttribute("msg","notDeleteGoodsLike");
+        }
+        return "mypage/resultpage";
     }
-
 
     /*해더*/
     @GetMapping("/pageframe/header")

@@ -1,5 +1,6 @@
 package com.team4.joopging.mappers;
 
+import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
@@ -22,7 +23,7 @@ public interface MypageMapper {
     /*플로깅 내역 개수*/
     public int realTotalPloResCnt(int memberNum);
     /*찜 목록*/
-    public List<TempGoodsLikeListVO> getGoodsLikeList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
+    public List<ShopVO> getGoodsLikeList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
     /*찜목록 토탈*/
     public int totalGoodsLikeCnt(int memberNum);
     /*내가 작성한 게시판 목록*/

@@ -1,5 +1,6 @@
 package com.team4.joopging.services;
 
+import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
@@ -40,7 +41,7 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria) {
+    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria) {
         return mDAO.getGoodsLikeList(memberNum,criteria);
     }
 

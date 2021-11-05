@@ -1,6 +1,7 @@
 package com.team4.joopging.controller;
 
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.io.IOException;
+import java.time.LocalDate;
 
 @Controller
 @Slf4j
@@ -41,9 +44,30 @@ public class OrderHistoryController {
     @PostMapping("deliveryTracking")
     public String deliveryTracking(){ return "mypage/deliveryTracking"; }
 
-    /*상품 환불(파업창)*/
-    @GetMapping("goodsRefund")
-    public String goodsRefund(){ return "mypage/goodsRefund"; }
+
+    /*구매 취소(파업창)*/
+    @RequestMapping(value = "/refundOrderPage", method = RequestMethod.GET)
+    public String refundOrderPage(Model model, @RequestParam("orderNum") int orderNum) throws IOException {
+        model.addAttribute("order", mypageSVC.getOrderHistory(orderNum));
+        return "/mypage/goodsRefund";
+    }
+
+    /*구매 취소하기*/
+    @PostMapping("goodsRefund")
+    public String goodsRefund(Model model, @RequestParam("orderNum") int orderNum){
+        if(mypageSVC.deleteGoodsOrder(orderNum)){
+            PointVO vo = new PointVO();
+            vo.setHistory(mypageSVC.getOrderHistory(orderNum).getGoodsName()+" 구매 취소");
+            vo.setPoint(mypageSVC.getOrderHistory(orderNum).getUsePoint());
+            vo.setMemberNum(mypageSVC.getOrderHistory(orderNum).getMemberNum());
+            vo.setPointStatus("취소");
+            pointSVC.addPoint(vo);
+            model.addAttribute("msg", "refundOrder");
+        }else{
+            model.addAttribute("msg", "notRefundOrder");
+        }
+        return "mypage/resultpage";
+    }
 
     /*해더*/
     @GetMapping("/pageframe/header")

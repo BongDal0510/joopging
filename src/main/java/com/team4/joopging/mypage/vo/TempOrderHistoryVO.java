@@ -37,7 +37,7 @@ public class TempOrderHistoryVO {
     /*택배 메세지*/
     private String parcelMessage;
     /*사용된 포인트*/
-    private int usePoint;
+    private Long usePoint;
     /*상품 상태-취소시 사용할 예정임*/
     private int orderStatus;
 }

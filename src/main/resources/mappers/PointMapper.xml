@@ -7,7 +7,7 @@
                 <![CDATA[
         SELECT pointNum, memberNum, history, point, pointDate, pointStatus
         FROM (
-        SELECT /** INDEX_DESC(TBL_POINT POINTNUM_PK)*/
+        SELECT /*+ INDEX_DESC(TBL_POINT POINTNUM_PK)*/
         ROWNUM R, pointNum, memberNum, history, point, pointDate, pointStatus
         FROM TBL_POINT WHERE memberNum = #{memberNum} AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
@@ -24,6 +24,6 @@
     <!--포인트 추가-->
     <insert id="addPoint">
         INSERT INTO TBL_POINT(pointNum, memberNum, history, point, pointDate, pointStatus)
-        VALUE (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
+        VALUES (SEQ_POINT.NEXTVAL, #{memberNum}, #{history}, #{point}, SYSDATE, #{pointStatus})
     </insert>
 </mapper>
