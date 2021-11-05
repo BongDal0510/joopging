@@ -108,6 +108,13 @@
         WHERE MEMBERID = #{memberId}
     </update>
 
+    <!-- 포인트 추가 -->
+    <update id="pointUpdate">
+        UPDATE TBL_MEMBER
+        SET MEMBERPOINT = MEMBERPOINT + #{memberpoint}, MEMBERSAVEDPOINT = MEMBERSAVEDPOINT + #{memberpoint}
+        WHERE MEMBERID = #{memberId}
+    </update>
+
     <!--네이버 카카오 일반 회원의 이름 조회-->
     <select id="userName" resultType="MemberVO">
         SELECT MEMBERID, MEMBERNAME, MEMBERPLOGGINGCNT, MEMBERPOINT, MEMBERATTEND, MEMBERLEVEL FROM TBL_MEMBER WHERE MEMBERID=#{id}

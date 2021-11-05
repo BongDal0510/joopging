@@ -3,8 +3,10 @@ package com.team4.joopging.controller;
 import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventPageDTO;
 import com.team4.joopging.member.memberVO.MemberVO;
+import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.EventService;
 import com.team4.joopging.services.MemberService;
+import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,7 @@ public class EventController {
 
     private final EventService eventService;
     private final MemberService memberService;
+    private final PointService pointService;
 
     @GetMapping("eventlist")
     public String event(HttpServletRequest req, EventCriteria eventCriteria, Model model) {
@@ -56,7 +59,21 @@ public class EventController {
         HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
 
+        /* 멤버 출석체크 */
         memberService.memberAttendUpdate(memberId);
+
+        /* 멤버 테이블 포인트 추가 */
+        MemberVO memberVO = new MemberVO();
+
+        memberVO.setMemberId(memberId);
+        memberService.memberPointUpdate(memberVO);
+
+        /* 포인트 테이블 포인트내역 추가 */
+        PointVO pointVo = new PointVO();
+
+        pointVo.setHistory("출석");
+        pointVo.setPointStatus("적립");
+
 
         return memberService.memberAllSelect(memberId);
     }
