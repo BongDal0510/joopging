@@ -4,5 +4,6 @@
     <typeAliases>
         <typeAlias type="com.team4.joopging.event.vo.EventVO" alias="eventVO"/>
         <typeAlias type="com.team4.joopging.member.memberVO.MemberVO" alias="MemberVO"/>
+        <typeAlias type="com.team4.joopging.point.vo.PointVO" alias="pointVO"/>
     </typeAliases>
 </configuration>
