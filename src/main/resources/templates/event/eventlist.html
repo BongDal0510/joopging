@@ -442,10 +442,6 @@
         showAttend(attendCnt);
     }
 
-    // $("#attendButton").on("click", function(){
-    //     attendUpdate();
-    // });
-
     $("a#goRead").on("click", function(e){
         e.preventDefault();
         location.href = "/event/eventInfo?eventNum=" + $(this).attr("href");

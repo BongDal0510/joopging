@@ -11,9 +11,8 @@ $(document).ready(function(){
     $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
 });
 
-/* 출석관련 이미지 팝업창 */
+/* 출석안내 이미지 팝업창 */
 function attendInfo() {
-    /* var url = "http://www.daum.net"; */
     var url = "attendPopup";
     var name = "GET";
     var option = "width=716, height=755, top=150, left=600, location=no";
@@ -59,14 +58,13 @@ function attendUpdate(){
         url:'/event/attendUpdate',
         type:'post',
         success:function(memberVO){
-            console.log(memberVO);
-            console.log(memberVO.memberAttendCnt);
-            $("#attendCntLeft").val(memberVO.memberAttendCnt + "/10");
+            alert("출석체크 완료!");
 
+            $("#attendCntLeft").text(memberVO.memberAttend + "/10");
             $("#attendButton").hide();
             $("#attendNotButtonCheck").show();
 
-            showAttend(memberVO.memberAttendCnt);
+            showAttend(memberVO.memberAttend);
             console.log("성공");
         },
         error:function(){
