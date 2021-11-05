@@ -27,6 +27,8 @@ public interface MemberMapper {
     public void updatePw(MemberVO memberVO);
     /*회원정보 전체 조회*/
     public MemberVO allSelect(String id);
+    /* 출석체크 */
+    public int attendUpdate(String id);
     /*네이버 카카오 일반 회원의 이름 조회*/
     public MemberVO userName(String id);
     public MemberVO userNameKAKAO(String id);

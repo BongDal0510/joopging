@@ -65,6 +65,9 @@ public class MemberServiceImple implements MemberService{
         return memberDAO.memberAllSelect(id);
     }
 
+    @Override
+    public int memberAttendUpdate(String id) { return memberDAO.memberAttendUpdate(id); }
+
     /*아이디로 이름 조회하기 : 카카오, 네이버, 일반 회원 모두 사용 가능*/
     @Override
     public MemberVO memberInfo(String id) {

@@ -51,6 +51,9 @@ public class MemberDAO {
     /*회원정보 전체 조회*/
     public MemberVO memberAllSelect(String id){ return mapper.allSelect(id); }
 
+    /* 출석체크 */
+    public int memberAttendUpdate(String id) { return mapper.attendUpdate(id); }
+
     /*네이버 카카오 일반 회원의 이름 조회*/
     public MemberVO userName(String id){return mapper.userName(id); }
     public MemberVO userNameKAKAO(String id){return mapper.userNameKAKAO(id); }

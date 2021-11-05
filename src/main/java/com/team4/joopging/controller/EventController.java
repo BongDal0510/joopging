@@ -2,6 +2,7 @@ package com.team4.joopging.controller;
 
 import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventPageDTO;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.services.EventService;
 import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,19 @@ public class EventController {
 
         return "event/eventlist";
     }
+
+
+    @PostMapping("attendUpdate")
+    @ResponseBody
+    public MemberVO attendUpdate(HttpServletRequest req, Model model){
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+
+        memberService.memberAttendUpdate(memberId);
+
+        return memberService.memberAllSelect(memberId);
+    }
+
 
     @GetMapping("joinInfo")
     public String joinInfo(HttpServletRequest req, Model model) {

@@ -26,6 +26,8 @@ function showAttend(attendCnt){
     tbl1 = "";
     tbl2 = "";
 
+    console.log("showAttend...............");
+
     if(attendCnt <= 5) {
         for(let i=0; i < attendCnt; i++){
             tbl1 += "<td style='padding: 0; text-align: center;'><img src='/images/eventImage/check.png\' style='height: 20px'></td>";
@@ -49,4 +51,26 @@ function showAttend(attendCnt){
     }
     attendTable_1.html(tbl1);
     attendTable_2.html(tbl2);
+}
+
+/* 출석하기 버튼 클릭후 뷰단 설정 */
+function attendUpdate(){
+    $.ajax({
+        url:'/event/attendUpdate',
+        type:'post',
+        success:function(memberVO){
+            console.log(memberVO);
+            console.log(memberVO.memberAttendCnt);
+            $("#attendCntLeft").val(memberVO.memberAttendCnt + "/10");
+
+            $("#attendButton").hide();
+            $("#attendNotButtonCheck").show();
+
+            showAttend(memberVO.memberAttendCnt);
+            console.log("성공");
+        },
+        error:function(){
+            console.log("오류");
+        }
+    });
 }

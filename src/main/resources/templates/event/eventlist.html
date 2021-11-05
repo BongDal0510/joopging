@@ -124,12 +124,20 @@
 
         .attendTr > td{
             border: 2px solid #ffffff;
+            vertical-align: middle;
         }
 
         #attendButton {
             font-size: 17px !important;
             padding: 0.5em 1em !important;
             font-family: 'S-CoreDream-4Regular';
+        }
+
+        #attendNotButton, #attendNotButtonCheck{
+            font-size: 17px !important;
+            padding: 0.5em 1em !important;
+            font-family: 'S-CoreDream-4Regular';
+            background-color: #d3d3d3;
         }
 
 
@@ -215,7 +223,7 @@
                 <img class="grade" src="/images/level/level_leaf.png">
             </div>
             <div>
-                <strong id="memberName" th:text="|*{memberId} 님|"></strong>
+                <strong id="memberName" th:text="|*{memberName} 님|"></strong>
             </div>
         </div>
         <hr id="memberLine">
@@ -236,7 +244,7 @@
                 <strong>출석체크</strong>
                 <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
                 <div class="sideBarInfo" >
-                    <span th:text="|*{memberAttend}/10|"></span>
+                    <span id="attendCntLeft" th:text="|*{memberAttend}/10|"></span>
                 </div>
                 <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
             </div>
@@ -245,8 +253,9 @@
                 <tr class="attendTr" id="attendTr_2"></tr>
             </table>
             <div style="text-align: center">
-                <input id="attendButton" type="button" value="출석 체크하기">
-<!--                <input id="attendNotButton" style="" type="button" value="출석 체크하기">-->
+                <input th:if="*{memberAttendStatus == 0}" id="attendButton" type="button" value="출석 체크하기" onclick="attendUpdate()">
+                <input th:if="*{memberAttendStatus == 1}" id="attendNotButton" type="button" value="출석 체크하기">
+                <input id="attendNotButtonCheck" style="display: none;" type="button" value="출석 체크하기">
             </div>
         </div>
     </div>
@@ -429,10 +438,13 @@
     let attendTable_2 = $("#attendTr_2");
 
     if(member != null && member != 'null'){
-        let attendCnt = $("#attendOk").val();
-
+        let attendCnt = $("#attendOk").text();
         showAttend(attendCnt);
     }
+
+    // $("#attendButton").on("click", function(){
+    //     attendUpdate();
+    // });
 
     $("a#goRead").on("click", function(e){
         e.preventDefault();

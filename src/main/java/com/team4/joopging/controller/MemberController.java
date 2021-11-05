@@ -101,7 +101,7 @@ public class MemberController {
             /*로그인 성공*/
             String id = vo.getMemberId();
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패*/
             model.addAttribute("status", 2);
