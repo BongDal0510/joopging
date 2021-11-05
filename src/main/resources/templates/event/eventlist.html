@@ -238,6 +238,7 @@
                 <div class="sideBarInfo" >
                     <span th:text="|*{memberAttend}/10|"></span>
                 </div>
+                <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
             </div>
             <table id="attendTable">
                 <tr class="attendTr" id="attendTr_1"></tr>
@@ -245,6 +246,7 @@
             </table>
             <div style="text-align: center">
                 <input id="attendButton" type="button" value="출석 체크하기">
+<!--                <input id="attendNotButton" style="" type="button" value="출석 체크하기">-->
             </div>
         </div>
     </div>
@@ -267,7 +269,7 @@
 
                     <div class="col-4 col-6-medium col-12-small">
                         <section class="eventImage">
-                            <a href="#" class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
+                            <a class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
                         </section>
                         <section class="box boxinner">
                             <div style="display: flex">
@@ -291,7 +293,7 @@
                     <th:block th:each="event : ${list}">
                         <div class="col-4 col-6-medium col-12-small">
                             <section class="eventImage">
-                                <a href="#" class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
+                                <a class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
                             </section>
                             <section class="box boxinner" th:object="${event}">
                                 <div style="display: flex">
@@ -427,7 +429,9 @@
     let attendTable_2 = $("#attendTr_2");
 
     if(member != null && member != 'null'){
-        showAttend();
+        let attendCnt = $("#attendOk").val();
+
+        showAttend(attendCnt);
     }
 
     $("a#goRead").on("click", function(e){
@@ -439,17 +443,6 @@
         e.preventDefault();
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
         pageForm.submit();
-    });
-
-    $(document).ready(function(){
-        let today = new Date();
-        let year = today.getFullYear();
-        let month = today.getMonth() + 1;
-
-        let lastDate = new Date(year, month - 2, 0);
-
-        $("#joinEventTitle").html(month + "월 신규가입");
-        $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
     });
 
 </script>

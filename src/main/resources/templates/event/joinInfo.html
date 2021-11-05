@@ -159,6 +159,7 @@
                 <div class="sideBarInfo" >
                     <span th:text="|*{memberAttend}/10|"></span>
                 </div>
+                <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
             </div>
             <table id="attendTable">
                 <tr class="attendTr" id="attendTr_1"></tr>
@@ -185,13 +186,14 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 <script src="/js/event.js"></script>
-<script type="text/javascript">
+<script th:inline="javascript">
     let member = [[${member}]];
     let attendTable_1 = $("#attendTr_1");
     let attendTable_2 = $("#attendTr_2");
 
     if(member != null && member != 'null'){
-        showAttend();
+        let attendCnt = $("#attendOk").val();
+        showAttend(attendCnt);
     }
 
 </script>

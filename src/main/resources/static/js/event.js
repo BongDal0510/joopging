@@ -1,4 +1,16 @@
 
+/* 신규가입 이벤트 날짜 연산 */
+$(document).ready(function(){
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+
+    let lastDate = new Date(year, month - 2, 0);
+
+    $("#joinEventTitle").html(month + "월 신규가입");
+    $("#joinEventDate").html(month + "월 1일-" + month + "월 " + lastDate.getDate() + "일");
+});
+
 /* 출석관련 이미지 팝업창 */
 function attendInfo() {
     /* var url = "http://www.daum.net"; */
@@ -10,9 +22,7 @@ function attendInfo() {
 }
 
 /* 출석체크 테이블 연산 */
-function showAttend(){
-    let attendCnt = [[${member.memberAttend}]];
-
+function showAttend(attendCnt){
     tbl1 = "";
     tbl2 = "";
 
