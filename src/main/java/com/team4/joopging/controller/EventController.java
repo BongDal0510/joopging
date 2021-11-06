@@ -2,6 +2,7 @@ package com.team4.joopging.controller;
 
 import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventPageDTO;
+import com.team4.joopging.event.vo.EventVO;
 import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.EventService;
@@ -52,6 +53,13 @@ public class EventController {
         return "event/eventlist";
     }
 
+    @PostMapping("eventWrite")
+    public String eventWrite(EventVO eventVO){
+
+
+
+        return "/writeSuccess";
+    }
 
     @PostMapping("attendUpdate")
     @ResponseBody
