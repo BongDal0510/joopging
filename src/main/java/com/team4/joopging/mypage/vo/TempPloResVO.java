@@ -9,7 +9,7 @@ public class TempPloResVO {
     /*예약번호*/
     private Long ploResNum;
     /*멤버번호(FK)*/
-    private int memberNum;
+    private String memberId;
     /*플로깅번호(FK)*/
     private int ploggingNum;
     /*플로깅명*/

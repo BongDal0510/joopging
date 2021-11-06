@@ -690,10 +690,10 @@
                             <th:block th:each="goodsLike:${goodsLikeList}">
                                 <tr th:if="${goodsLikeList.size()!=0}" th:object="${goodsLike}">
                                     <td class="deleteCheck">
-                                        <input type="checkbox" th:value="*{goodsNum}" class='chkselect' onclick='Chk();'>
+                                        <input type="checkbox" th:value="*{goodsLikeNum}" class='chkselect' onclick='Chk();'>
                                     </td>
                                     <td calss="goodsName">
-                                        <a id="goGoods" th:text="${goodsName}" th:href="*{goodsNum}"/>
+                                        <a id="goGoods" th:text="*{goodsName}" th:href="*{goodsNum}"/>
                                     </td>
                                     <td calss="goodsPrice" th:text="*{goodsPrice}"/>
                                 </tr>

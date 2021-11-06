@@ -5,6 +5,7 @@ import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
+import com.team4.joopging.services.ShopService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,14 @@ public class OrderHistoryController {
     private final MypageService mypageSVC;
     private final PointService pointSVC;
     private final MemberService memberSVC;
+    private  final ShopService shopSVC;
 
     /*구매 상품 상세보기 이동*/
     @GetMapping("orderInfo")
     public String orderInfo(@RequestParam("orderNum") int orderNum, Model model, HttpServletRequest req){
         HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
-
+        model.addAttribute("goods", shopSVC.goodsGet( Long.parseLong(mypageSVC.getOrderHistory(orderNum).getGoodsNum())));
         model.addAttribute("order", mypageSVC.getOrderHistory(orderNum));
         model.addAttribute("member",memberSVC.memberAllSelect(memberId));
 //        model.addAttribute("parcel",mypageSVC.getParcel(orderNum));
@@ -59,7 +61,7 @@ public class OrderHistoryController {
             PointVO vo = new PointVO();
             vo.setHistory(mypageSVC.getOrderHistory(orderNum).getGoodsName()+" 구매 취소");
             vo.setPoint(mypageSVC.getOrderHistory(orderNum).getUsePoint());
-            vo.setMemberNum(mypageSVC.getOrderHistory(orderNum).getMemberNum());
+            vo.setMemberId(mypageSVC.getOrderHistory(orderNum).getMemberId());
             vo.setPointStatus("취소");
             pointSVC.addPoint(vo);
             model.addAttribute("msg", "refundOrder");

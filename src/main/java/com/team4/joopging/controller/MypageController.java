@@ -1,7 +1,5 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.community.vo.CommuPageDTO;
-import com.team4.joopging.community.vo.CommuReplyPageDTO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.services.CommuService;
@@ -10,25 +8,19 @@ import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-////import org.json.simple.JSONArray;
-//import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+
+////import org.json.simple.JSONArray;
+//import org.springframework.boot.configurationprocessor.json.JSONArray;
 
 @Controller
 @Slf4j
@@ -52,7 +44,7 @@ public class MypageController {
 
             model.addAttribute("member", memberSVC.memberAllSelect(memberId));
             model.addAttribute("ploRes", mypageSVC.getPloResList(memberId, criteria));
-            model.addAttribute("getPointList", pointSVC.getPointList(15, criteria));
+            model.addAttribute("getPointList", pointSVC.getPointList(memberId, criteria));
             model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberId, criteria));
             model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
             model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberId, criteria));
@@ -98,12 +90,6 @@ public class MypageController {
         membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
         membervo.setMemberZipcode(vo.getMemberZipcode());
 
-        log.info("=========================================");
-        log.info(membervo.getMemberId());
-        log.info(membervo.getMemberName());
-        log.info(membervo.getMemberEmail());
-        log.info(membervo.getMemberAddress());
-        log.info("=========================================");
         /*디비에 회원정보 저장*/
         if(mypageSVC.updateMember(membervo)){
             model.addAttribute("msg","updateMember");
@@ -137,29 +123,15 @@ public class MypageController {
     /*찜 삭제*/
     @PostMapping("deleteGoodsLike")
     public String deleteGoodsLike(@RequestParam("result") String result, Model model) throws Exception {
-        log.info("==============================================");
-        log.info(result);
-        log.info("==============================================");
         JSONParser jsonPar = new JSONParser();
             JSONObject jsonOj = (JSONObject) jsonPar.parse(result);
-        log.info("==============================================");
-        log.info(jsonOj.toString());
             List<String> goodsLikeNums = (List<String>) jsonOj.get("deleteGoodsLike");
-        log.info("==============================================");
-        log.info(goodsLikeNums.toString());
-        log.info("==============================================");
         boolean check = false;
             for (int i = 0; i < goodsLikeNums.size(); i++) {
-                String goodsLikeNum = goodsLikeNums.indexOf(i);
+                int goodsLikeNum = Integer.parseInt(goodsLikeNums.get(i));
                 if (mypageSVC.deleteGoodsLike(goodsLikeNum)) {
-                    log.info("====================================");
-                    log.info(i + "번째 삭제 된 찜번호 : " + String.valueOf(goodsLikeNum));
-                    log.info("====================================");
                     check = true;
                 } else {
-                    log.info("====================================");
-                    log.info(i + "번째 삭제 실패한 찜번호 : " + String.valueOf(goodsLikeNum));
-                    log.info("====================================");
                     check = false;
                 };
             }

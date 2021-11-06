@@ -16,7 +16,7 @@
     SELECT ploResNum, memberId, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
     SELECT /*+ INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
-    ROWNUM R, ploResNum, memberNum,ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+    ROWNUM R, ploResNum, memberId,ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM TBL_PLO_RES WHERE memberId = #{memberId}
     AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
