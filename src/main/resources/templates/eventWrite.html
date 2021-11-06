@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>이벤트 등록</title>
@@ -191,21 +191,21 @@
     </div>
 
     <!--폼 태그-->
-    <form action="/event/eventWrite" name="ploggingForm" id="write" method="post">
+    <form action="/event/eventWrite" name="eventForm" id="write" method="post">
         <div class="inputline">
             <span>이벤트명</span>
-            <input class="line" type="text" placeholder="이벤트 행사이름"/>
+            <input class="line" name="eventTitle" type="text" placeholder="이벤트 행사이름"/>
         </div>
         <div class="inputline">
             <span>참가대상</span>
-            <input class="line" type="text" placeholder="이벤트 대상"/>
+            <input class="line" name="eventSubtitle" type="text" placeholder="이벤트 대상"/>
         </div>
         <div class="inputline">
             <span>신청일자</span>
-            <input class="line" type="text" placeholder="신청가능한 일자"/>
+            <input class="line" name="eventDate" type="text" placeholder="신청가능한 일자"/>
         </div>
         <span>내용</span>
-        <textarea id="content" class="line" type="text">
+        <textarea id="content" class="line" name="eventContent" type="text">
 ▷ 장 소 :
 ▷ 기 간 :
 ▷ 참여비용 :
@@ -224,9 +224,9 @@
 
         <!--버튼-->
         <div style="text-align: center;">
-            <button type="button" class="primary">등록</button>
+            <button type="button" class="primary" onclick="goEventWrite()">등록</button>
             <span style="padding:1px"></span>
-            <button type="button" class="primary">취소</button>
+            <button type="button" class="primary" onclick="close()">취소</button>
         </div>
 
     </form>
@@ -236,5 +236,17 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
+<script th:inline="javascript">
+    let eventForm = $(document.eventForm);
 
+    function goEventWrite(){
+        eventForm.submit();
+    }
+
+    function close(){
+        window.close();
+    }
+
+
+</script>
 </html>
