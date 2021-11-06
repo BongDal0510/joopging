@@ -15,17 +15,14 @@ public class PointServiceImple implements PointService {
     private final PointDAO dao;
 
     @Override
-    public List<PointVO> getPointList(int memberNum, Criteria criteria) {
-        return dao.getPointList(memberNum,criteria);
+    public List<PointVO> getPointList(String memberId, Criteria criteria) {
+        return dao.getPointList(memberId,criteria);
     }
 
     @Override
-    public int totalPointCnt(int memberNum) {
-        return dao.totalPointCnt(memberNum);
-    }
+    public int totalPointCnt(String memberId) { return dao.totalPointCnt(memberId); }
 
     @Override
-    public boolean addPoint(PointVO vo) {
-        return dao.addPoint(vo);
-    }
+    public boolean addPoint(PointVO vo) { return dao.addPoint(vo); }
+
 }

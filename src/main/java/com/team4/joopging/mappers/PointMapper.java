@@ -10,10 +10,10 @@ import java.util.List;
 @Mapper
 public interface PointMapper {
     /*포인트 목록*/
-    public List<PointVO> getPointList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
+    public List<PointVO> getPointList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
 
     /*회원의 포인트 전체 내역 개수 */
-    public int totalPointCnt(int memberNum);
+    public int totalPointCnt(String memberId);
 
     /*포인트 추가*/
     public int addPoint(PointVO vo);

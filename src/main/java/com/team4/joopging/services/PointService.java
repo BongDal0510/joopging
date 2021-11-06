@@ -10,13 +10,12 @@ import java.util.List;
 public interface PointService {
 
     /*포인트 내역 출력(넘버로)*/
-    public List<PointVO> getPointList(int memberNum, Criteria criteria);
+    public List<PointVO> getPointList(String memberId, Criteria criteria);
 
     /*포인트 전체 개수(내역 페이지 이동에 사용)*/
-    public int totalPointCnt(int memberNum);
+    public int totalPointCnt(String memberId);
 
     /*포인트 추가*/
     public boolean addPoint(PointVO vo);
-
 
 }
