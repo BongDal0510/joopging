@@ -24,4 +24,7 @@ public interface ReportMapper {
 
     //게시글 상세보기
     public ReportVO readReport(Long reportNum);
+
+    //게시글 삭제
+    public int deleteReport(Long reportNum);
 }

@@ -20,4 +20,6 @@ public interface AdminService {
     public List<ReportVO> getReportList(ReportCriteria reportCriteria);
     //report 전체 글 개수
     public int getReportTotal(ReportCriteria reportCriteria);
+    //report 삭제
+    public boolean removeReport(Long reportNum);
 }

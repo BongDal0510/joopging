@@ -38,4 +38,11 @@ public class AdminServiceImple implements AdminService {
     public int getReportTotal(ReportCriteria reportCriteria) {
         return reportDAO.getReportTotal(reportCriteria);
     }
+
+    //게시글 삭제
+    @Override
+    public boolean removeReport(Long reportNum) {
+        return reportDAO.removeReport(reportNum);
+    }
+
 }

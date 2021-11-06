@@ -19,7 +19,6 @@ public class ReportMapperTest {
 
     @Test
     public void testInsertReport() {
-
         ReportVO report = new ReportVO();
         report.setSessionId("신고한사람임");
         report.setReportContent("청소년 유해 매체");

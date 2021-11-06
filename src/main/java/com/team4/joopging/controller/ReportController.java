@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -40,35 +42,35 @@ public class ReportController {
         log.info("신고할 게시글 번호 :" + commuService.getCommu(commuBno));
         log.info("--------------------------------");
 
+        //2. sessionId 받아오고 싶어여
+        //3. 신고일 연산 -- 메소드 따로 만들기
+        //4. reportPurpose
+
+        // commuboard에 있는 commuTitle
         model.addAttribute("commu", commuService.getCommu(commuBno));
        /* model.addAttribute("reporter", reportService.commuToReported());*/
 
         return "/report/report";
     }
 
-   /* //report 등록
+
+    //report 등록
     @PostMapping("report")                                  //앞에서 받아오는 값
     public void insertReport(ReportVO report, Model model) {
         log.info("--------------------------------");
         log.info("register : " + report.toString());
         log.info("--------------------------------");
 
-        //1. commuboard에 있는 commuTitle을 가져오고 싶어요
-        //2. sessionId 받아오고 싶어여
-        //3. 신고일 연산 -- 메소드 따로 만들기
-        //4. reportPurpose
+
 
         adminService.insertReport(report);
         //세션의 flash 영역을 이용하여 전달
 
-
-
-*//*        model.addAttribute("commu", commu.getCommuTitle());
-        rttr.addFlashAttribute("commuBno", report.getCommuBno());*//*
+ /*       model.addAttribute("commu", commu.getCommuTitle());
+        rttr.addFlashAttribute("commuBno", report.getCommuBno());*/
 
         //  RedirectView를 사용하면 redirect 방식으로 전송이 가능하다. flash에 잠시 값을 담아두고 redirect 초기화 후에 flash에서 값을 받아온다.
-
-    }*/
+    }
 
     //커뮤니티 전체목록 + 페이징
     @GetMapping("reportList")
@@ -82,19 +84,42 @@ public class ReportController {
         return "report/reportList";
     }
 
+/*
+    private String getFolderYesterday() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        //현재 날짜에서 -1은 하루 전날을 의미한다.
+        cal.add(Calendar.DATE, -1);
+        String str = sdf.format(cal.getTime());
+
+        return str.replace("-", "/");
+    }
+*/
+
+
     //신고하기 글 읽기 + 경로 이동 전 페이지 기억하기
     @GetMapping({"reportRead"})
     public void readReport(@RequestParam("reportNum") Long reportNum, ReportCriteria reportCriteria, Model model, ReportVO reportVO, HttpServletRequest request) {
-
-        //현재 시점의 uri를 request로 받아와서 reqURI에 담아줌
-        String reqURI = request.getRequestURI();
-        String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
-
         log.info("--------------------------------");
-        log.info(reqType + " : " + reportNum);
+        log.info(" read : " + reportNum);
         log.info("--------------------------------");
         model.addAttribute("admin", adminService.readReport(reportNum));
         model.addAttribute("criteria", reportCriteria);
+    }
+
+    //  삭제
+    @PostMapping("removeReport")
+    public RedirectView removeReport(@RequestParam("reportNum") Long reportNum, RedirectAttributes rttr) {
+        log.info("-------------------");
+        log.info("remove : " + reportNum);
+        log.info("------------------");
+
+        if (adminService.removeReport(reportNum)) {
+            rttr.addFlashAttribute("result", "success");
+        } else {
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("reportList");
     }
 
     //헤더

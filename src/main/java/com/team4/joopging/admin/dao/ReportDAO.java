@@ -39,4 +39,9 @@ public class ReportDAO {
     /*전체 게시글 수*/
     public int getReportTotal(ReportCriteria reportCriteria){ return reportMapper.getReportTotal(reportCriteria);}
 
+    /*게시글 삭제*/
+    public boolean removeReport(Long reportNum){
+        return reportMapper.deleteReport(reportNum) == 1;
+    }
+
 }

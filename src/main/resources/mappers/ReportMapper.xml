@@ -63,6 +63,7 @@
         WHERE R > (#{pageNum} - 1) * #{amount}
                         ]]>
     </select>
+
     <!--전체 게시글 수-->
     <select id="getReportTotal" resultType="_int">
         SELECT COUNT(REPORTNUM) FROM TBL_REPORT
@@ -72,4 +73,10 @@
             </trim>
         </where>
     </select>
+
+    <!--삭제-->
+    <delete id="deleteReport">
+		DELETE FROM TBL_REPORT
+		WHERE REPORTNUM = #{reportNum}
+	</delete>
 </mapper>
