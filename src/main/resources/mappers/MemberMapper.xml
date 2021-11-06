@@ -125,6 +125,23 @@
         UPDATE TBL_MEMBER SET MEMBERATTEND = 0 WHERE MEMBERATTEND = 10
     </update>
 
+    <!-- 매월 1일 마다 멤버레벨 승급 -->
+    <update id="updateLevelAmateur">
+        UPDATE TBL_MEMBER
+        SET MEMBERLEVEL = 2
+        WHERE MEMBERSAVEDPOINT BETWEEN 10000 AND 29999
+    </update>
+    <update id="updateLevelVeteran">
+        UPDATE TBL_MEMBER
+        SET MEMBERLEVEL = 3
+        WHERE MEMBERSAVEDPOINT BETWEEN 30000 AND 69999
+    </update>
+    <update id="updateLevelMaster">
+        UPDATE TBL_MEMBER
+        SET MEMBERLEVEL = 4
+        WHERE MEMBERSAVEDPOINT >= 70000
+    </update>
+
     <!-- 포인트 추가 -->
     <update id="pointUpdate">
         UPDATE TBL_MEMBER

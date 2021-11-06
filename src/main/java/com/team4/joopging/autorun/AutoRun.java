@@ -42,14 +42,24 @@ public class AutoRun {
     private MemberDAO memberDAO;
 
     /* 매일 0시 마다 출석상태 초기화 + 출석회수 10일 경우 0으로 초기화 */
-//    @Scheduled(cron = "0 0/1 * * * ?") //현재 시범용 1분간격
-//    public void resetAttendStatus(){
-//        log.info("========================================");
-//        log.info("출석상태 초기화");
-//        log.info("========================================");
-//        memberDAO.memberResetAttendStatus();
-//        memberDAO.memberResetAttendCnt();
-//    }
+    @Scheduled(cron = "0 0/1 * * * ?") //현재 시범용 1분간격
+    public void resetAttendStatus(){
+        log.info("========================================");
+        log.info("출석상태 초기화");
+        log.info("========================================");
+        memberDAO.memberResetAttendStatus();
+        memberDAO.memberResetAttendCnt();
+    }
 
+    /* 매월 1일 마다 멤버레벨 승급 */
+    @Scheduled(cron = "0 0/1 * * * ?") //현재 시범용 1분간격
+    public void updateLevel(){
+        log.info("========================================");
+        log.info("멤버레벨 승급");
+        log.info("========================================");
+        memberDAO.memberUpdateLevelAmateur();
+        memberDAO.memberUpdateLevelVeteran();
+        memberDAO.memberUpdateLevelMaster();
+    }
 
 }

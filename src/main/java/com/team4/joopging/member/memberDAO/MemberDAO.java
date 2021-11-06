@@ -58,10 +58,15 @@ public class MemberDAO {
     public int memberGetAttendCnt(String id) { return mapper.getAttendCnt(id); }
 
     /* 매일 0시 마다 출석상태 초기화 */
-    public int memberResetAttendStatus() { return mapper.resetAttendStatus(); }
+    public void memberResetAttendStatus() { mapper.resetAttendStatus(); }
 
     /* 출석회수 10회일 경우 0으로 초기화 */
-    public int memberResetAttendCnt() { return mapper.resetAttendCnt(); }
+    public void memberResetAttendCnt() { mapper.resetAttendCnt(); }
+
+    /* 매월 1일 마다 멤버레벨 승급 */
+    public void memberUpdateLevelAmateur() { mapper.updateLevelAmateur(); }
+    public void memberUpdateLevelVeteran() { mapper.updateLevelVeteran(); }
+    public void memberUpdateLevelMaster() { mapper.updateLevelMaster(); }
 
     /* 포인트 추가 */
     public int memberPointUpdate(MemberVO memberVO) { return mapper.pointUpdate(memberVO); }
