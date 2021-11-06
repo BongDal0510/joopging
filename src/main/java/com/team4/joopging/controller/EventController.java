@@ -53,10 +53,15 @@ public class EventController {
         return "event/eventlist";
     }
 
+    @GetMapping("eventWrite")
+    public String eventWrite(){
+        return "event/eventWrite";
+    }
+
     @PostMapping("eventWrite")
     public String eventWrite(EventVO eventVO){
 
-
+        eventService.register(eventVO);
 
         return "/writeSuccess";
     }
