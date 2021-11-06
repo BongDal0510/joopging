@@ -7,6 +7,24 @@
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         /* Button */
 
         input[type="button"],
@@ -118,50 +136,92 @@
         p{
             color:#5d5d5d;
         }
+
+        .headTitle {
+            text-align:center;
+            margin-bottom: 40px;
+        }
+
+        .writePopUp {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #write span {
+            width: 18%;
+            line-height: 50px;
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        #write input {
+            height:50px;
+            width: 82%;
+        }
+
+        .number {
+            width: 30% !important;
+            text-align: right;
+        }
+
+        .inputline {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .primary {
+            width:100px;
+            height:50px;
+            background:#94c477;
+        }
+
+        #content {
+            width:100%;
+            height:250px;
+            resize: none;
+        }
+
     </style>
 </head>
 
 <body>
-<div style="width: 75%; margin-left:45px;">
+<div class="writePopUp" style="margin: 30px 50px;">
     <!--제목-->
     <div>
-        <h3 style="text-align:center">이벤트 등록하기</h3>
+        <h3 class="headTitle">이벤트 등록하기</h3>
     </div>
 
     <!--폼 태그-->
-    <form name="findId" id="findId" method="post" action="/member/searchId">
-
-        <div style="display: flex;">
+    <form name="ploggingForm" id="write" method="post">
+        <div class="inputline">
             <span>제목</span>
-            <input class="line" type="text" name=""  placeholder="성명입력" style="width:100%; height:50px;"/>
+            <input class="line" type="text" placeholder="이벤트 행사이름"/>
         </div>
-        <div style="display: flex;">
-            <span>제목</span>
-            <input class="line" type="text" name=""  placeholder="성명입력" style="width:100%; height:50px;"/>
+        <div class="inputline">
+            <span>참가대상</span>
+            <input class="line" type="text" placeholder="이벤트 대상"/>
         </div>
-        <div style="display: flex;">
-            <span>제목</span>
-            <input class="line" type="text" name=""  placeholder="성명입력" style="width:100%; height:50px;"/>
-            <span>제목</span>
-            <input class="line" type="text" name=""  placeholder="성명입력" style="width:100%; height:50px;"/>
+        <div class="inputline">
+            <span>신청일자</span>
+            <input class="line" type="text" placeholder="신청가능한 일자"/>
         </div>
+        <span>내용</span>
+        <textarea id="content" class="line" type="text">
+▷ 장 소 :
+▷ 기 간 :
+▷ 참여비용 :
+▷ 참가인원 :
+▷ 참여방법
+①
 
-
-
-        <p style="margin:0;">내용</p>
-        <textarea class="line" type="text" name="" id="" value="" placeholder="숫자만 입력" style="width:100%; height:50px;" maxlength="11"></textarea>
+▷ 문의 : 줍깅 대표전화 1588-1004
+        </textarea>
         <br>
 
-        <!--완료버튼-->
+        <!--버튼-->
         <div style="text-align: center;">
-            <button type="button" value="완료" class="primary" onclick="certifyId()" style="width:150px; height:50px; background:#94c477;">
-                완료
-            </button>
-
-            <!--그냥 띄어쓰기-->
+            <button type="button" class="primary">등록</button>
             <span style="padding:1px"></span>
-
-            <button type="button" value="취소" class="primary" onclick="window.close()" style="width:150px; height:50px; background:#94c477;">취소</button>
+            <button type="button" class="primary">취소</button>
         </div>
 
     </form>
