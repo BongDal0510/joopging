@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 등록하러 가는 창</title>
+</head>
+<body style="text-align: center; margin-top: 200px;">
+    <input style="width: 500px; height: 250px; font-size: 50px;" type="button" onclick="goEventWrite()" value="이벤트 등록하기">
+    <input style="width: 500px; height: 250px; font-size: 50px;" type="button" onclick="goPloggingWrite()" value="플로깅 등록하기">
+</body>
+<script th:inline="javascript">
+    /*이벤트 등록하기*/
+    function goEventWrite() {
+        var url = "/test/eventWrite";
+        var name = "event";
+        var option = "width=600, height=700, top=150, left=600, location=no";
+
+        window.open(url, name, option);
+    }
+
+    /*플로깅 등록하기*/
+    function goPloggingWrite() {
+        var url = "/test/ploggingWrite";
+        var name = "plogging";
+        var option = "width=600, height=700, top=150, left=600, location=no";
+
+        window.open(url, name, option);
+    }
+</script>
+</html>
