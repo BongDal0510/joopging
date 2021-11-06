@@ -457,5 +457,11 @@
         pageForm.submit();
     });
 
+    $(window).bind("pageshow", function(event) {
+        if ( event.originalEvent && event.originalEvent.persisted) {    // BFCahe
+            window.location.reload();
+        }else{} //새로운페이지
+    });
+
 </script>
 </html>

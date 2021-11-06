@@ -57,6 +57,12 @@ public class MemberDAO {
     /* 출석회수 조회 */
     public int memberGetAttendCnt(String id) { return mapper.getAttendCnt(id); }
 
+    /* 매일 0시 마다 출석상태 초기화 */
+    public int memberResetAttendStatus() { return mapper.resetAttendStatus(); }
+
+    /* 출석회수 10회일 경우 0으로 초기화 */
+    public int memberResetAttendCnt() { return mapper.resetAttendCnt(); }
+
     /* 포인트 추가 */
     public int memberPointUpdate(MemberVO memberVO) { return mapper.pointUpdate(memberVO); }
 

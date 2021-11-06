@@ -115,6 +115,16 @@
         WHERE MEMBERID = #{memberId}
     </select>
 
+    <!-- 매일 0시 마다 출석상태 초기화 -->
+    <update id="resetAttendStatus">
+        UPDATE TBL_MEMBER SET MEMBERATTENDSTATUS = 0 WHERE MEMBERID IS NOT NULL
+    </update>
+
+    <!-- 출석회수 10회일 경우 0으로 초기화 -->
+    <update id="resetAttendCnt">
+        UPDATE TBL_MEMBER SET MEMBERATTEND = 0 WHERE MEMBERATTEND = 10
+    </update>
+
     <!-- 포인트 추가 -->
     <update id="pointUpdate">
         UPDATE TBL_MEMBER
