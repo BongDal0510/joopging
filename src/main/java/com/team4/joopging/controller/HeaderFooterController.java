@@ -22,4 +22,14 @@ public class HeaderFooterController {
         return "/pageframe/footer";
     }
 
+    @GetMapping("terms")
+    public String terms() {
+        return "pageframe/terms";
+    }
+
+    @GetMapping("privacy")
+    public String privacy() {
+        return "pageframe/privacy";
+    }
+
 }
