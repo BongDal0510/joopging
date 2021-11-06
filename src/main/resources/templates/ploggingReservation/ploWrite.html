@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>이벤트 상세페이지</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 80%;
+            margin: auto;
+        }
+
+        /* 사이드바 회원정보 관련 CSS*/
+        .grade {
+            float: right;
+            width: 40px;
+            height: 40px;
+        }
+
+        #supersideBar {
+            position: fixed;
+            width: 20%;
+            margin-top: 7.5%;
+        }
+
+        #sideBarInner {
+            width: 260px;
+            float: right;
+            height: auto;
+            border: 2px solid #35A14A;
+            border-radius: 20px;
+            padding: 20px 20px;
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        #sideBarDelivery {
+            padding: 10px 0 0 0;
+        }
+
+        .sideBarInfo {
+            display: inline;
+            float: right;
+        }
+
+        #memberName {
+            font-weight: 700;
+            color: #35A14A;
+            line-height: 40px;
+            font-size: 22px;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #memberLine {
+            margin: 1em 0 1em 0;
+            border-top: solid 2px #35A14A;
+        }
+
+        #attendInfo {
+            font-size: 17px;
+            padding: 0 0.5em 0 0.5em;
+            height: 1.5em;
+            line-height: 1.5em;
+            background: #94C477;
+        }
+
+        #attendInfo:hover {
+            background: #5d5d5d;
+        }
+
+        #attendTable {
+            border-color: #ffffff;
+            background-color: #e2f0d9;
+            margin: 20px 0;
+        }
+
+        .attendTr {
+            height: 40px;
+        }
+
+        .attendTr > td {
+            border: 2px solid #ffffff;
+        }
+
+        #attendButton {
+            font-size: 17px !important;
+            padding: 0.5em 1em !important;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        /* 이벤트 상세설명 관련 CSS */
+        .box {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+    </style>
+</head>
+<body class="homepage is-preload" style="font-family: 'yg-jalnan';">
+<div id="page-wrapper" style="display: flex; justify-content: space-around;">
+    <section id="main" style="width:960px; padding-top: 0px; ">
+        <div class="container">
+
+            <div class="col-8 col-12-medium imp-medium" id=""
+                 style="display: block; padding: 5px 15% 50px 15%; width:960px;">
+                <article class="box post" style="border:0px;">
+                    <header>
+                        <h2 style="margin:0px;">플로깅 글쓰기</h2>
+                    </header>
+
+                    <!-- 폼태그 시작점 -->
+                    <!-- 해당 폼에서 jsp 연산이 일어난다. -->
+                    <!-- 스프링 이후 연산 수정 -->
+                    <form action="/plo/writeAction" id="ploggingform" name="ploggingform" enctype="multipart/form-data"
+                          method="post">
+
+                        <!-- 상품명 입력 -->
+                        <p>
+                        <p style="margin: 0; text-align: left;">플로깅 제목</p>
+                        <input id="plogging_name" name="plogging_name" type="text" placeholder="플로깅 이름">
+                        </p>
+
+                        <!-- 설명작성란 -->
+                        <div style="margin-top: 3%;">
+                            <p style="margin: 0; text-align: left">플로깅 설명</p>
+                            <textarea id="plogging_content" name="plogging_content" placeholder="플로깅 설명 작성"
+                                      style="resize: none;" rows="30"></textarea>
+                        </div>
+
+                        <!-- 시간작성란 -->
+                        <div style="margin-top: 3%;">
+                            <p style="margin: 0; text-align: left">플로깅 날짜 및 시간</p>
+                            <textarea id="plogging_time" name="plogging_time" placeholder="날짜 시간 작성"
+                                      style="resize: none; height:60px; overflow:hidden;" rows="30"></textarea>
+                        </div>
+
+                        <!-- 장소작성란 -->
+                        <div style="margin-top: 3%;">
+                            <p style="margin: 0; text-align: left">플로깅 장소</p>
+                            <textarea id="plogging_place" name="plogging_place" placeholder="플로깅 장소 작성"
+                                      style="resize: none; height:60px; overflow:hidden;" rows="30"></textarea>
+                        </div>
+                        <br>
+
+                        <!-- 플로깅 이미지 첨부 -->
+                        <div style="display: flex; width:100%;">
+                            <div class="files">
+                                <div>
+                                    <div>플로깅 사진</div>
+                                    <label for="board_file1" style="display: inline;"> <img
+                                            id="board_file1Img"
+                                            src="/images/첨부파일_이미지.png"
+                                            width="110px" height="110px" style="display: inline;">
+                                    </label>
+                                </div>
+                                <input id="board_file1" name="board_file1" type="file"
+                                       style="display: none;"> <input type="button"
+                                                                      onclick="cancelFile('board_file1')" value="첨부 삭제"
+                                                                      class="deleteButton">
+                            </div>
+                        </div>
+
+                        <!-- 등록 및 취소 버튼 -->
+                        <ul class="actions"
+                            style="display: flex; justify-content: center; margin-top: 3%;">
+                            <li><input type="button" value="등록" class="primary"
+                                       onclick="ploggingSubmit()" style="width:100px;"/></li>
+                            <li><input type="button" value="취소"
+                                       onclick="history.back()" style="width:100px;"/></li>
+                        </ul>
+                    </form>
+
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+
+<script src="/js/plogging_res/ploggingWrite.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+
+</html>

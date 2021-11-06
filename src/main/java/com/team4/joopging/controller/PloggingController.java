@@ -19,13 +19,19 @@ public class PloggingController {
         return "ploggingReservation/ploInfo";
     }
 
-    /*플로깅 결제 팝업 창*/
-    @GetMapping("payment")
-    public String payMent(){ return "ploggingReservation/payMent"; }
-
     /*플로깅 상세페이지*/
     @GetMapping("ploresinfo")
     public String ploResInfo(){
         return "ploggingReservation/ploResInfo";
     }
+
+    /*플로깅 목록 페이지*/
+    @GetMapping("ploreslist")
+    public String ploreslist() { return "ploggingReservation/ploResList"; }
+
+    /*플로깅 결제 팝업 창*/
+    @GetMapping("payment")
+    public String payMent(){ return "ploggingReservation/payMent"; }
+
+
 }
