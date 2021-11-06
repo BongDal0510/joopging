@@ -12,13 +12,13 @@ import java.util.List;
 public interface OrderHistoryMapper {
 
     /*구매 상품 목록*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(@Param("memberNum") int memberNum,@Param("criteria") Criteria criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(@Param("memberId") String memberId,@Param("criteria") Criteria criteria);
     /*구매 상품 목록*/
     public TempOrderHistoryVO getOrderHistory(int orderNum);
     /*구매한 상품 내역 개수*/
-    public int totalOrderCnt(int memberNum);
+    public int totalOrderCnt(String memberId);
     /*구매한 상품 전체 개수*/
-    public int realTotalOrderCnt(int memberNum);
+    public int realTotalOrderCnt(String memberId);
     /*상품의 택배*/
     public TempParcelVO getParcel(int orderNum);
     /*상품 구매 취소*/

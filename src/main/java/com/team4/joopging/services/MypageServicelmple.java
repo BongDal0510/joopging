@@ -26,28 +26,28 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria) {
-        return mDAO.getPloResList(memberNum, criteria);
+    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria) {
+        return mDAO.getPloResList(memberId, criteria);
     }
 
     @Override
-    public int totalPloResCnt(int memberNum) {
-        return mDAO.totalPloResCnt(memberNum);
+    public int totalPloResCnt(String memberId) {
+        return mDAO.totalPloResCnt(memberId);
     }
 
     @Override
-    public int realTotalPloResCnt(int memberNum) {
-        return mDAO.realTotalPloResCnt(memberNum);
+    public int realTotalPloResCnt(String memberId) {
+        return mDAO.realTotalPloResCnt(memberId);
     }
 
     @Override
-    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria) {
-        return mDAO.getGoodsLikeList(memberNum,criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria) {
+        return mDAO.getGoodsLikeList(memberId,criteria);
     }
 
     @Override
-    public int totalGoodsLikeCnt(int memberNum) {
-        return mDAO.totalGoodsLikeCnt(memberNum);
+    public int totalGoodsLikeCnt(String memberId) {
+        return mDAO.totalGoodsLikeCnt(memberId);
     }
 
     @Override
@@ -86,8 +86,8 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria) {
-        return oDAO.getOrderHistoryList(memberNum,criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId, Criteria criteria) {
+        return oDAO.getOrderHistoryList(memberId,criteria);
     }
 
     @Override
@@ -96,13 +96,13 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public int totalOrderCnt(int memberNum) {
-        return oDAO.totalOrderCnt(memberNum);
+    public int totalOrderCnt(String memberId) {
+        return oDAO.totalOrderCnt(memberId);
     }
 
     @Override
-    public int realTotalOrderCnt(int memberNum) {
-        return oDAO.realTotalOrderCnt(memberNum);
+    public int realTotalOrderCnt(String memberId) {
+        return oDAO.realTotalOrderCnt(memberId);
     }
 
     @Override

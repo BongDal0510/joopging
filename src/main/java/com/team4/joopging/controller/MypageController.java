@@ -10,6 +10,12 @@ import com.team4.joopging.services.MypageService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+////import org.json.simple.JSONArray;
+//import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +25,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,14 +49,13 @@ public class MypageController {
 
         if(session.getAttribute("memberId")!=null) {
             String memberId = (String)session.getAttribute("memberId");
-            int memberNum = mypageSVC.selectMemberNum(memberId);
 
             model.addAttribute("member", memberSVC.memberAllSelect(memberId));
-            model.addAttribute("ploRes", mypageSVC.getPloResList(memberNum, criteria));
-            model.addAttribute("getPointList", pointSVC.getPointList(memberNum, criteria));
-            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberNum, criteria));
+            model.addAttribute("ploRes", mypageSVC.getPloResList(memberId, criteria));
+            model.addAttribute("getPointList", pointSVC.getPointList(15, criteria));
+            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberId, criteria));
             model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
-            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberNum, criteria));
+            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberId, criteria));
 
             return "mypage/mypage";
         }else{
@@ -128,29 +135,40 @@ public class MypageController {
 
 
     /*찜 삭제*/
-    @RequestMapping("deleteGoodsLike")
-    public String deleteGoodsLike(Model model, @RequestParam("goodsLikeNums") List goodsLikeNums){
+    @PostMapping("deleteGoodsLike")
+    public String deleteGoodsLike(@RequestParam("result") String result, Model model) throws Exception {
+        log.info("==============================================");
+        log.info(result);
+        log.info("==============================================");
+        JSONParser jsonPar = new JSONParser();
+            JSONObject jsonOj = (JSONObject) jsonPar.parse(result);
+        log.info("==============================================");
+        log.info(jsonOj.toString());
+            List<String> goodsLikeNums = (List<String>) jsonOj.get("deleteGoodsLike");
+        log.info("==============================================");
+        log.info(goodsLikeNums.toString());
+        log.info("==============================================");
         boolean check = false;
-        for (int i = 0; i < goodsLikeNums.size(); i++) {
-            int goodsLikeNum = goodsLikeNums.indexOf(i);
-            if(mypageSVC.deleteGoodsLike(goodsLikeNum)){
-                log.info("====================================");
-                log.info(i+"번째 삭제 된 찜번호 : "+String.valueOf(goodsLikeNum));
-                log.info("====================================");
-                check = true;
-            }else {
-                log.info("====================================");
-                log.info(i+"번째 삭제 실패한 찜번호 : "+String.valueOf(goodsLikeNum));
-                log.info("====================================");
-                check = false;
-            };
-        }
-        if(check){
-            model.addAttribute("msg","daleteGoodsLike");
-        }else{
-            model.addAttribute("msg","notDeleteGoodsLike");
-        }
-        return "mypage/resultpage";
+            for (int i = 0; i < goodsLikeNums.size(); i++) {
+                String goodsLikeNum = goodsLikeNums.indexOf(i);
+                if (mypageSVC.deleteGoodsLike(goodsLikeNum)) {
+                    log.info("====================================");
+                    log.info(i + "번째 삭제 된 찜번호 : " + String.valueOf(goodsLikeNum));
+                    log.info("====================================");
+                    check = true;
+                } else {
+                    log.info("====================================");
+                    log.info(i + "번째 삭제 실패한 찜번호 : " + String.valueOf(goodsLikeNum));
+                    log.info("====================================");
+                    check = false;
+                };
+            }
+            if (check) {
+                model.addAttribute("msg", "daleteGoodsLike");
+            } else {
+                model.addAttribute("msg", "notDeleteGoodsLike");
+            }
+            return "mypage/resultpage";
     }
 
     /*해더*/

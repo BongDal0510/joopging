@@ -3,32 +3,9 @@
 
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
-
-    <sql id="search">
-        <if test="type != null and keyword !=null">
-            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                <foreach item="type" collection="typeArr">
-                    <trim prefix="OR">
-                        <choose>
-                            <when test="type == 'T'.toString()">
-                                (COMMUTITLE LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="type == 'C'.toString()">
-                                (COMMUCONTENT LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="type == 'W'.toString()">
-                                (COMMUWRITER LIKE '%'||#{keyword}||'%')
-                            </when>
-                        </choose>
-                    </trim>
-                </foreach>
-            </trim>
-        </if>
-    </sql>
-
     <!--예약번호로 찾기-->
     <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
-        SELECT  ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+        SELECT  ploResNum, memberId, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
         FROM TBL_PLO_RES WHERE ploResNum = #{ploResNum}
     </select>
 
@@ -36,11 +13,11 @@
 <select id="getPloResList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
 
     <![CDATA[
-    SELECT ploResNum, memberNum, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
+    SELECT ploResNum, memberId, ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
     FROM(
     SELECT /*+ INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
     ROWNUM R, ploResNum, memberNum,ploResTitle, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
-    FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
+    FROM TBL_PLO_RES WHERE memberId = #{memberId}
     AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
@@ -50,22 +27,22 @@
 
     <!--내 플로깅 내역의 전체 개수-->
     <select id="totalPloResCnt" resultType="_int">
-        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberId = #{memberId}
     </select>
 
     <!--내가 플로깅 개수-->
     <select id="realTotalPloResCnt" resultType="_int">
-        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum} AND NOT ploResStatus = 1
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberId = #{memberId} AND NOT ploResStatus = 1
     </select>
 
 <!--찜 목록의 상품정보-->
-<select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.beans.vo.ShopVO">
+<select id="getGoodsLikeList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
         <![CDATA[
-SELECT GoodsNum,GoodsName, GoodsCategory, GoodsPrice, GoodsContent
+SELECT goodsLikeNum, goodsNum, GoodsName, GoodsPrice, memberId
 FROM(
 SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK)*/
-ROWNUM R, GoodsNum,GoodsName, GoodsCategory, GoodsPrice, GoodsContent FROM TBL_GOODSLIST
-WHERE GOODSNUM IN (SELECT GOODSNUM FROM TBL_GOODS_LIKE_LIST WHERE MEMBERNUM = #{memberNum}) AND
+ROWNUM R, goodsLikeNum,goodsNum, GoodsName, GoodsPrice, memberId FROM TBL_GOODS_LIKE_LIST
+WHERE memberId = #{memberId} AND
                 ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
@@ -74,13 +51,14 @@ WHERE GOODSNUM IN (SELECT GOODSNUM FROM TBL_GOODS_LIKE_LIST WHERE MEMBERNUM = #{
 
     <!--내가 찜한 목록 전체 개수-->
     <select id="totalGoodsLikeCnt" resultType="_int">
-        SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberNum = #{memberNum}
+        SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberId = #{memberId}
     </select>
 
     <!--찜 삭제-->
     <delete id="deleteGoodsLike">
-        DELETE FROM TBL_GOODS_LIKE_LIST WHERE goodsLikeListNum = #{goodsLikeListNum}
+        DELETE FROM TBL_GOODS_LIKE_LIST WHERE goodsLikeNum = #{goodsLikeNum}
     </delete>
+
 
 <!--플로깅 예약 취소-->
 <update id="deletePloRes">
@@ -98,7 +76,7 @@ WHERE ploResNum = #{ploResNum}
 <update id="updateMember">
     UPDATE TBL_MEMBER
     SET memberEmail = #{memberEmail}, memberZipcode = #{memberZipcode}, memberAddress = #{memberAddress}
-    WHERE memberNum = #{memberNum}
+    WHERE memberId = #{memberId}
 </update>
 
 <!--멤버 삭제-->
@@ -127,7 +105,7 @@ WHERE ploResNum = #{ploResNum}
 
     <!--내 게시글-->
     <select id="totalMemberCommuCnt" resultType="_int">
-        SELECT COUNT(COMMUBNO) FROM TBL_COMMUBOARD WHERE COMMUWRITER = #{memberNum}
+        SELECT COUNT(COMMUBNO) FROM TBL_COMMUBOARD WHERE COMMUWRITER = #{memberId}
     </select>
 
 </mapper>

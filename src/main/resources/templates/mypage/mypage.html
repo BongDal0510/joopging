@@ -616,7 +616,7 @@
                         <div>
                             <table class=boardList>
                                 <caption>
-                                    내가 구매한 상품 : <span th:text="${orderTotalCnt}"/> 개
+                                    내가 구매한 상품 : 개
                                 </caption>
                                 <thead>
                                 <tr>
@@ -688,7 +688,7 @@
                             </thead>
                             <tbody>
                             <th:block th:each="goodsLike:${goodsLikeList}">
-                                <tr th:if="${goodsLikeList.size()!=0}" th:object="goodsLike">
+                                <tr th:if="${goodsLikeList.size()!=0}" th:object="${goodsLike}">
                                     <td class="deleteCheck">
                                         <input type="checkbox" th:value="*{goodsNum}" class='chkselect' onclick='Chk();'>
                                     </td>
@@ -704,8 +704,8 @@
                             </tbody>
                         </table>
                         <p style="text-align: right;">
-                        <form name="deleteGoodsLikeForm" id="deleteGoodsLikeForm">
-                        <input type='hidden' id='result' name='result'>
+                        <form action="/mypage/deleteGoodsLike" method="post" name="deleteGoodsLikeForm" id="deleteGoodsLikeForm">
+                        <input type='hidden' id='result' name='result' value="">
                         <button id="deleteClick">선택 삭제</button>
                         </form>
                         </p>
@@ -1090,7 +1090,12 @@
                 cnt++;
             }
         }
+        console.log(cnt);
+        console.log(result);
         $("#result").val(JSON.stringify({"deleteGoodsLike": result}));
+        console.log($("#result").val());
+        console.log(typeof $("#result").val());
+        console.log($("#result").val()==JSON.stringify({"deleteGoodsLike": result}));
     }
     /*저당된 value를 보냄*/
     $("#deleteClick").on("click", function () {

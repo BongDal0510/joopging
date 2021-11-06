@@ -23,28 +23,28 @@ public class MypageDAO {
     };
 
     /*플로깅 내역 출력*/
-    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria){
-        return mapper.getPloResList(memberNum, criteria);
+    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria){
+        return mapper.getPloResList(memberId, criteria);
     }
 
     /*플로깅 내역 토탈*/
-    public int totalPloResCnt(int memberNum){
-        return mapper.totalPloResCnt(memberNum);
+    public int totalPloResCnt(String memberId){
+        return mapper.totalPloResCnt(memberId);
     }
 
     /*플로깅 현재 예약 건수*/
-    public int realTotalPloResCnt(int memberNum){
-        return mapper.realTotalPloResCnt(memberNum);
+    public int realTotalPloResCnt(String memberId){
+        return mapper.realTotalPloResCnt(memberId);
     }
 
     /*찜목록 출력*/
-    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria){
-        return mapper.getGoodsLikeList(memberNum, criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria){
+        return mapper.getGoodsLikeList(memberId, criteria);
     }
 
     /*찜목록 토탈*/
-    public int totalGoodsLikeCnt(int memberNum){
-        return mapper.totalGoodsLikeCnt(memberNum);
+    public int totalGoodsLikeCnt(String memberId){
+        return mapper.totalGoodsLikeCnt(memberId);
     }
 
     /*플로깅 취소(예약 번호로)*/

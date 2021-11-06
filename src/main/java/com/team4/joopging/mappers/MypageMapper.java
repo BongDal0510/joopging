@@ -17,21 +17,21 @@ public interface MypageMapper {
     /*예약번호로 플로깅 찾기*/
     public TempPloResVO getPloRes(Long ploResNum);
     /*플로깅 예약 목록*/
-    public List<TempPloResVO> getPloResList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
+    public List<TempPloResVO> getPloResList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
     /*플로깅 내역 토탈*/
-    public int totalPloResCnt(int memberNum);
+    public int totalPloResCnt(String memberId);
     /*플로깅 내역 개수*/
-    public int realTotalPloResCnt(int memberNum);
+    public int realTotalPloResCnt(String memberId);
     /*찜 목록*/
-    public List<ShopVO> getGoodsLikeList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
+    public List<ShopVO> getGoodsLikeList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
     /*찜목록 토탈*/
-    public int totalGoodsLikeCnt(int memberNum);
+    public int totalGoodsLikeCnt(String memberId);
     /*내가 작성한 게시판 목록*/
     public List<CommuVO> getMemberCommuList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
     /*내 게시글 전체 개수*/
     public int totalMemberCommuCnt(String memberId);
     /*내가 작성한 1:1문의 목록*/
-    public List<CommuVO> getMyQueList(@Param("memberNum")int memberNum, @Param("criteria")Criteria criteria);
+    public List<CommuVO> getMyQueList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
     /*플로깅 예약 취소*/
     public int deletePloRes(Long ploResNum);
     /*찜목록 삭제*/

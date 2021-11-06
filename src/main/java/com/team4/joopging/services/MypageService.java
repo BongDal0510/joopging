@@ -15,19 +15,19 @@ public interface MypageService {
     public TempPloResVO getPloRes(Long ploResNum);
 
     /*내 플로깅 내역 출력*/
-    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria);
+    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria);
 
     /*내 플로깅 내역 토탈 개수*/
-    public int totalPloResCnt(int memberNum);
+    public int totalPloResCnt(String memberId);
 
     /*내 플로깅 현재 예약 건수*/
-    public int realTotalPloResCnt(int memberNum);
+    public int realTotalPloResCnt(String memberId);
 
     /*찜목록 출력*/
-    public List<ShopVO> getGoodsLikeList(int memberNum, Criteria criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria);
 
     /*찜목록 토탈*/
-    public int totalGoodsLikeCnt(int memberNum);
+    public int totalGoodsLikeCnt(String memberId);
 
     /*플로깅 취소(예약 번호로)*/
     public boolean deletePloRes(Long ploResNum);
@@ -51,16 +51,16 @@ public interface MypageService {
     public int selectMemberNum(String memberId);
 
     /*구매 상품 내역 출력(아이디로)*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId, Criteria criteria);
 
     /*구매 상품 정보*/
     public TempOrderHistoryVO getOrderHistory(int orderNum);
 
     /*구매한 상품 토탈*/
-    public int totalOrderCnt(int memberNum);
+    public int totalOrderCnt(String memberId);
 
     /*구매한 상품 토탈*/
-    public int realTotalOrderCnt(int memberNum);
+    public int realTotalOrderCnt(String memberId);
 
     /*택배 정보 출력(구매상품번호로)*/
     public TempParcelVO getParcel(int orderNum);
