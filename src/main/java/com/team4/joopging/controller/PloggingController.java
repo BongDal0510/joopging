@@ -33,5 +33,9 @@ public class PloggingController {
     @GetMapping("payment")
     public String payMent(){ return "ploggingReservation/payMent"; }
 
+    /*플로깅 결제 팝업 창*/
+    @GetMapping("plowrite")
+    public String plowrite(){ return "ploggingReservation/ploWrite"; }
+
 
 }
