@@ -5,8 +5,8 @@
 
     <!--신고 등록 from 유저 to 관리자-->
     <insert id="insertReport">
-        INSERT INTO TBL_REPORT (REPORTNUM, SESSIONID, COMMUWRITER, PURPOSE, COMMUBNO, COMMUTITLE)
-        VALUES(SEQ_REPORT.NEXTVAL, #{sessionId}, #{commuWriter}, #{purpose}, #{commuBno}, #{commuTitle})
+        INSERT INTO TBL_REPORT (REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS
+        VALUES(SEQ_REPORT.NEXTVAL, #{sessionId}, #{reportContent}, #{reportDetail}, #{commuBno}, #{commuTitle}, #{reportDate}, #{reportStatus})
     </insert>
 
     <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
@@ -16,5 +16,60 @@
 		WHERE COMMUBNO = #{commuBno}
 	</update>
 
+    <!--특정 게시글 가져오기-->
+    <select id="readReport" resultType="reportVO">
+		SELECT REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS
+		FROM TBL_REPORT WHERE REPORTNUM = #{reportNum}
+	</select>
 
+    <!--검색기능-->
+    <sql id="searchReport">
+        <if test="type != null and keyword !=null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (COMMUTITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (COMMUCONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (COMMUWRITER LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <!--검색기능을 합치기 위해 MyBatis 동적 태그 사용-->
+    <select id="getReportList" resultType="reportVO">
+        <![CDATA[
+        SELECT REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, EXTRADETAILS, REPORTSTATUS
+        FROM
+            (
+                SELECT /*+ INDEX_DESC(TBL_REPORT PK_REPORT)*/
+                ROWNUM R, REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, EXTRADETAILS, REPORTSTATUS
+                FROM TBL_REPORT
+                WHERE
+                        ]]>
+        <include refid="searchReport"></include>
+        <![CDATA[
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+    </select>
+    <!--전체 게시글 수-->
+    <select id="getReportTotal" resultType="_int">
+        SELECT COUNT(REPORTNUM) FROM TBL_REPORT
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="searchReport"></include>
+            </trim>
+        </where>
+    </select>
 </mapper>

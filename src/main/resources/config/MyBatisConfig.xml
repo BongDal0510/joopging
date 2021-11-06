@@ -5,6 +5,6 @@
         <typeAlias type="com.team4.joopging.community.vo.CommuVO" alias="commuVO"/>
         <typeAlias type="com.team4.joopging.community.vo.CommuReplyVO" alias="commuReplyVO"/>
         <typeAlias type="com.team4.joopging.community.vo.CommuAttachFileVO" alias="commuAttachFileVO"/>
-        <typeAlias type="com.team4.joopging.report.vo.ReportVO" alias="reportVO"/>
+        <typeAlias type="com.team4.joopging.admin.vo.ReportVO" alias="reportVO"/>
     </typeAliases>
 </configuration>

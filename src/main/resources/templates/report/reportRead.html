@@ -26,40 +26,24 @@
 
             <div class="reportWrapper content">
                 <form method="post" action="report" id="reportForm">
-                    <div id="joopgingLogoLeaf"><img src="/images/commu/leaf_icon.png"/></div>
-
-                    <div class="reportBackground">
-                        <div class="reportAnnounce">
-                            <div class="reportInfo">
-                                <h3> 게시물 신고하기 </h3>
-                            </div>
-                            <div class="reportAnnounceDetail">
-                                해당 게시판은 모든 연령이 이용 가능한 공간입니다.<br>
-                                비방글, 도배, 불법광고, 청소년 유해글 등<br>
-                                누군가에게 불편을 줄 수 있는 글은 삼가주세요.<br>
-                                <br>
-                                신고된 글은 줍깅 커뮤니티의 이용 수칙에 따라<br>
-                                꼼꼼히 검토 후, 알맞은 조치가 취해질 예정입니다.<br>
-                                <br>
-                                늘 깨끗하고 건전한 커뮤니티를 만들기 위해 최선을 다하겠습니다.<br>
-                                감사합니다.
-                            </div>
-                            <div class="reportWarning">
-                                **허위 신고시 향후 활동에 불이익이 있을 수 있습니다.
-                            </div>
-                        </div>
-                    </div>
-                    <!--신고자 정보-->
                     <div>
+                        <!--신고당한 글 제목-->
                         <h4 class="reportPage">해당 글을 신고합니다.</h4>
                         <div id="boardTitleArea">
-                            <div class="field" th:object="${commu}">
+                            <div class="field" th:object="${admin}">
                                 <input class="reportedTitle" name="commuTitle" type="text"
                                        th:value="*{commuTitle}" readonly/>
-                                <!--신고당한 글 제목-->
                             </div>
+                            <!--신고자 정보-->
                             <div class="field" id="boardWriterArea">
                                 <h4 id="sessionId">신고자 :</h4>
+                                <input name="sessionId" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
+                                <h4 id="reportDate">신고일 :</h4><!--th: ${reportDate}-->
+                                <input name="reportDate" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
+                            </div>
+                            <!--신고 내용-->
+                            <div class="field" id="reportContent">
+                                <h4 id="purpose">신고사유 :</h4>
                                 <input name="sessionId" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
                                 <h4 id="reportDate">신고일 :</h4><!--th: ${reportDate}-->
                                 <input name="reportDate" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
@@ -111,7 +95,7 @@
 
     //신고하기 submit
     $("a#insertReport").on("click", function(){
-     /*   this.submit();*/
+        /*   this.submit();*/
         self.close();
     });
 </script>

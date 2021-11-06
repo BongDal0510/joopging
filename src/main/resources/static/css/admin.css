@@ -1,0 +1,12 @@
+div.adminMainCategory{
+    display: flex;
+}
+
+div.adminCategoryBtn{
+    width: 20%;
+}
+
+div.adminCategoryBtn img{
+    object-fit: fill;
+    width: 50%;
+}

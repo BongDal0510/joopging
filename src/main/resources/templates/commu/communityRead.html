@@ -118,8 +118,7 @@
                             </div>
                             </div>
                             <!--글 내용-->
-                            <div class="field">
-                                <textarea name="content" rows="6" style="resize:none" th:text="*{commuContent}" readonly></textarea>
+                            <div class="field" id="content">
                             </div>
                             <div class="field">
                                 <h4>첨부파일</h4>
@@ -250,7 +249,8 @@
         })();
     });
 
-
+    var content = document.querySelector("#content");
+    content.innerHTML += [[${commu.getCommuContent}]];
 /*###################################################댓글###########################################################*/
     /*댓글 영역의 첫 페이지를 항상 보여준다*/
     showList(pageNum);

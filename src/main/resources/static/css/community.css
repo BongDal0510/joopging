@@ -37,7 +37,7 @@ a.button{
     margin: 3.4% 0;
 }
 
-#commuBoardWrapper{
+#commuBoardWrapper, #reportListWrapper{
     display: flex;
 }
 #commuBoardLeft{
@@ -71,6 +71,9 @@ a.button{
 #commuSearchWrap{
     padding: 0 25% 0 23%;
 }
+#reportSearchWrap{
+    padding: 0 25% 0 23%;
+}
 #communityBanner{
     padding: 0 10%;
     text-align: center;
@@ -82,7 +85,7 @@ a.button{
 #searchWrap a{
     margin-left: 2%;
 }
-#commuBoardMiddle{
+#commuBoardMiddle, #reportListMiddle{
     font-family: 'S-CoreDream-3Light';
     font-size: 13px;
 }
@@ -94,7 +97,9 @@ a.button{
     text-align: center;
 }
 
-
+div#reportListMiddle{
+    width: 100%;
+}
 #commuSearchWrap{
     font-family: 'S-CoreDream-3Light';
 }
@@ -225,7 +230,7 @@ a#reportBtn.button.small{
     box-shadow: -3px 0px 3px 3px #3c763d;
     top: 8%;
 }
-#commuBoardTh th, #commuAnnounceTh th{
+#commuBoardTh th, #commuAnnounceTh th, #reportListHeader th{
     text-align: center;
 }
 #commuBoardThList td.bno, td.writer, td.regDate, td.viewCnt{
@@ -233,6 +238,35 @@ a#reportBtn.button.small{
 }
 #commuAnnounceThList td.bno, td.writer, td.regDate, td.viewCnt{
     text-align: center;
+}
+#reportListValues td.reportedDate, td.reporter, td.purpose,
+td.reportStatus, td.changeReasons, td.changeStatus{
+    text-align: center;
+}
+
+#reportListHeader td.reportedDate{
+    text-align: center;
+    width: 13%;
+    padding: 0 1%;
+}
+
+#reportListHeader td.reporter{
+    text-align: center;
+    width: 20%;
+}
+
+#reportListHeader td.oneReport{
+    text-align: center;
+    width: 35%;
+}
+
+#reportListHeader td.changeReasons{
+    width: 15%;
+}
+
+#reportListHeader td.changeStatus{
+    text-align: center;
+    width: 15%;
 }
 
 td.boardStatus > img{
