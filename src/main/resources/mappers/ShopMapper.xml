@@ -32,15 +32,15 @@
     </insert>
 
 
-   <!-- 상품번호도 가져오기
-    <insert id="goodsInsertSelectKey_goodsNum">
-        <selectKey keyProperty="goodsNum" order="BEFORE" resultType="long">
-            SELECT GoodsNum.NEXTVAL FROM DUAL
-        </selectKey>
-        /*위에서 전달받은 goodsNum 사용한다.*/
-        INSERT INTO TBL_GOODSLIST (goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent)
-        VALUES(#{goodsNum}, #{goodsName}, #{goodsCategory}, #{goodsPrice}, #{goodsContent})
-    </insert>-->
+    <!-- 상품번호도 가져오기
+     <insert id="goodsInsertSelectKey_goodsNum">
+         <selectKey keyProperty="goodsNum" order="BEFORE" resultType="long">
+             SELECT GoodsNum.NEXTVAL FROM DUAL
+         </selectKey>
+         /*위에서 전달받은 goodsNum 사용한다.*/
+         INSERT INTO TBL_GOODSLIST (goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent)
+         VALUES(#{goodsNum}, #{goodsName}, #{goodsCategory}, #{goodsPrice}, #{goodsContent})
+     </insert>-->
 
     <!--상품번호도 가져오기-->
     <insert id="goodsInsertSelectKey_goodsNum">
