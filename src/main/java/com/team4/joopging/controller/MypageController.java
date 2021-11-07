@@ -99,15 +99,15 @@ public class MypageController {
             membervo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
         }
 
-        if(vo.getMemberAddress()!=null){
+        if(vo.getMemberAddress()!=null && vo.getMemberAddress()!=""){
             membervo.setMemberAddress(vo.getMemberAddress());
         }
 
-        if(vo.getMemberAddress()!=null && memberAddressDetail!=null){
+        if((vo.getMemberAddress()!=null && vo.getMemberAddress()!="") && (memberAddressDetail!=null && memberAddressDetail!="")){
             membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
         }
 
-        if(vo.getMemberZipcode()!=null){
+        if(vo.getMemberZipcode()!=null && vo.getMemberZipcode()!=""){
             membervo.setMemberZipcode(vo.getMemberZipcode());
         }
 
