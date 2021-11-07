@@ -84,7 +84,7 @@ public class ReportController {
         //로그인 되어있는 상태 알림 + 현재 아이디 담기
         if(session.getAttribute("memberId")!= null){
             String memberId = (String)session.getAttribute("memberId");
-            model.addAttribute("member", memberService.memberAllSelect(memberId));
+//            model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
         log.info("------------------");
         log.info("reportList");
@@ -100,17 +100,16 @@ public class ReportController {
     public String readReport(@RequestParam("reportNum") Long reportNum, ReportCriteria reportCriteria, Model model, ReportVO reportVO, HttpServletRequest req) {
         HttpSession session = req.getSession();
         //로그인 되어있는 상태 알림 + 현재 아이디 담기
-            String memberId = (String)session.getAttribute("memberId");
-            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        String memberId = (String)session.getAttribute("memberId");
+//        model.addAttribute("member", memberService.memberAllSelect(memberId));
 
 
         log.info("--------------------------------");
         log.info(" read : " + reportNum);
         log.info("--------------------------------");
         log.info("read" +adminService.readReport(reportNum));
-
         model.addAttribute("admin", adminService.readReport(reportNum));
-        model.addAttribute("criteria", reportCriteria);
+//        model.addAttribute("criteria", reportCriteria);
 
         return "report/reportRead";
     }

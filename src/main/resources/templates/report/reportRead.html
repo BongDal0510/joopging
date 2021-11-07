@@ -90,11 +90,11 @@
                                         </div>
                                         <div class="field" id="boardWriterArea">
                                             <h4 id="commuWriterTitle">신고자 :</h4>
-                                            <input name="writer" type="text" readonly/>
+                                            <input name="writer" type="text" th:field="*{sessionId}" readonly/>
                                         </div>
                                     </div>
                                     <!--글 내용-->
-                                    <div class="field" id="content">
+                                    <div class="field" id="content" th:value="*{reportContent}">
                                     </div>
                                 </div>
                                 <ul class="actions special">
