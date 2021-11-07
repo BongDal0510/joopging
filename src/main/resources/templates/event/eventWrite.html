@@ -158,20 +158,19 @@
             width: 82%;
         }
 
-        .number {
-            width: 30% !important;
-            text-align: right;
-        }
-
         .inputline {
             display: flex;
             margin-bottom: 20px;
         }
 
-        .primary {
-            width:100px;
-            height:50px;
-            background:#94c477;
+        .clickButton {
+            width: auto !important;
+            line-height: 1.5em;
+            background: #94C477 !important;
+        }
+
+        .clickButton:hover {
+            background: #5d5d5d !important;
         }
 
         #content {
@@ -197,23 +196,15 @@
             <input class="line" name="eventTitle" type="text" placeholder="이벤트 행사이름"/>
         </div>
         <div class="inputline">
-            <span>참가대상</span>
-            <input class="line" name="eventSubtitle" type="text" placeholder="이벤트 대상"/>
+            <span>한줄요약</span>
+            <input class="line" name="eventSubtitle" type="text" placeholder="이벤트 설명"/>
         </div>
         <div class="inputline">
             <span>신청일자</span>
-            <input class="line" name="eventDate" type="text" placeholder="신청가능한 일자"/>
+            <input class="line" name="eventDate" type="text" placeholder="신청 가능한 일자"/>
         </div>
         <span>내용</span>
-        <textarea id="content" class="line" name="eventContent" type="text">
-▷ 장 소 :
-▷ 기 간 :
-▷ 참여비용 :
-▷ 참가인원 :
-▷ 참여방법
-①
-
-▷ 문의 : 줍깅 대표전화 1588-1004</textarea>
+        <textarea id="content" name="eventContent" class="line" type="text"></textarea>
 
         <!--첨부파일-->
         <div class="field">
@@ -224,9 +215,9 @@
 
         <!--버튼-->
         <div style="text-align: center;">
-            <button type="button" class="primary" onclick="goEventWrite()">등록</button>
+            <input type="button" class="clickButton" value="등록" onclick="goEventWrite()">
             <span style="padding:1px"></span>
-            <button type="button" class="primary" onclick="close()">취소</button>
+            <input type="button" class="clickButton" value="취소" onclick="close()">
         </div>
 
     </form>
