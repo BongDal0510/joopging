@@ -390,7 +390,12 @@
             return;
         }
 
+        if (confirm("구매 취소를 진행하겠습니까?")) {
             form.submit();
-    })
+        } else {
+            alert("구매 취소가 취소 되었습니다.")
+            return;
+        }
+    });
 </script>
 </html>

@@ -457,7 +457,7 @@
             <div class="col-8 col-12-medium imp-medium" id="myHome" style="display: block;">
                 <article class="box post" style="">
                     <header>
-                        <h2><strong th:text="*{memberName}"/>님 환영합니다.</h2>
+                        <h2><strong th:text="*{memberName}" style="color: #35A14A"/>님 환영합니다.</h2>
                     </header>
                     <div id="ploggingAdv">
                         <button onclick="goEvent()">
@@ -469,9 +469,9 @@
                             <h4>나의 현황</h4>
                             <table>
                                 <th:block th:each="plores:${ploRes}">
-                                    <tr th:if="${ploRes.size()!=0}&&${ploresStat.index<5}" th:each="plo:${plogging}">
+                                    <tr th:if="${ploRes.size()!=0 && ploresStat.index<3}" th:each="plo:${plogging}">
                                             <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
-                                            <td class="ploResTitle" th:text="${plo.getPloggingTitle()}"></td>
+                                                <td class="ploResTitle"> <strong th:text="${plo.getPloggingTitle().length() > 7 ? plo.getPloggingTitle().substring(0, 6) : plo.getPloggingTitle()}"/>...</td>
                                             <td class="ploResDate" th:text="${plores.getPloResDate()}"></td>
                                         </th:block>
                                     </tr>
@@ -515,16 +515,16 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="plores : ${ploRes}">
-                                    <tr class="ploRes" th:if="${ploRes.size()!=0} && ${ploresStat.index<10}" th:each="plo : ${plogging}">
+                                    <tr class="ploRes" th:if="${ploRes.size()!=0 && ploresStat.index<10}" th:each="plo : ${plogging}">
                                         <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
-                                        <td calss="ploResNum" th:text="${plores}"></td>
+                                        <td calss="ploResNum" th:text="${plores.ploResNum}"></td>
                                         <td calss="ploResTitle"><a id="goPloggingDetail" th:href="${plores.getPloggingNum()}"
                                                                    th:text="${plo.getPloggingTitle()}"/></td>
                                         <td class="ploResTime" th:text="${plores.getPloResDate()}"/>
                                         <td class="deletePloRes">
                                                 <span id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
                                                       th:class="${plores.getPloResNum()}">x</span>
-                                                <span id="ploResRefundSuccess" th:if="*{plores.getPloResStatus()==1}">취소 됨</span>
+                                                <span id="ploResRefundSuccess" th:if="${plores.getPloResStatus()==1}">취소 됨</span>
                                         </td>
                                         </th:block>
                                     </tr>
@@ -1054,9 +1054,9 @@
         let title = "newPassword"
         let option = "width=470, height=600, top=100, left=200, location=no";
         window.open("", title, option);
+        form.target = title;
 
         form.action = "/mypage/resultRePw";
-        form.target = title;
 
         form.submit();
     });

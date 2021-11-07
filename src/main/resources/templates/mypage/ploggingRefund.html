@@ -311,9 +311,11 @@
                     <div  style= "padding: 50px 0px">
                         <h3>플로깅 취소</h3>
                         <table class = 'delete123' th:object="${ploRes}">
-                        <tr th:each="plo:${plogging}">
+                        <tr>
                                 <th>플로깅명</th>
+                            <th:block th:each="plo:${plogging}">
                                 <td th:if="${ploRes.getPloggingNum()==plo.getPloggingNum()}" th:text="${plo.getPloggingTitle()}"></td>
+                            </th:block>
                             </tr>
                             <tr>
                                 <th>날짜</th>

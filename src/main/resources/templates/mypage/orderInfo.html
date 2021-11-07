@@ -651,6 +651,12 @@
         let goodsNum = [[${order.getGoodsNum()}]];
         location.href = "/shop/shopDetail?goodsNum=" + goodsNum;
     })
+    /*재구매시 해당 상품의 상세페이지로 이동*/
+    $(".goGoodsDetail").on("click", function (e) {
+        e.preventDefault();
+        let goodsNum = [[${order.getGoodsNum()}]];
+        location.href = "/shop/shopDetail?goodsNum=" + goodsNum;
+    })
 
     /*구매 취소 페이지 이동*/
     $("#refundOrder").on("click", function () {
@@ -681,6 +687,10 @@
 
     $("#parcelSubmit").on("click", function () {
     let form = document.parcelForm;
+        let title = "parcel"
+        let option = "width=470, height=600, top=100, left=200, location=no";
+        window.open("", title, option);
+        form.target = title;
     form.submit();
     })
 </script>
