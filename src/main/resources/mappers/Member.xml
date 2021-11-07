@@ -96,11 +96,17 @@
         MEMBERNUM, MEMBERID, MEMBERPW, MEMBERNAME, MEMBERPHONE,
         MEMBERBIRTH, MEMBERGENDER, MEMBEREMAIL, MEMBERREGIDATE,
         MEMBERZIPCODE, MEMBERADDRESS, MEMBERPLOGGINGCNT, MEMBERPOINT,
-        MEMBERSAVEDPOINT, MEMBERATTEND, MEMBERLEVEL, MEMBERSTATUS
+        MEMBERSAVEDPOINT, MEMBERATTEND, MEMBERATTENDSTATUS, MEMBERLEVEL, MEMBERSTATUS
         FROM TBL_MEMBER
         WHERE MEMBERID=#{memberId}
     </select>
 
+    <!-- 출석체크 -->
+    <update id="attendUpdate">
+        UPDATE TBL_MEMBER
+        SET MEMBERATTEND = MEMBERATTEND + 1, MEMBERATTENDSTATUS = 1
+        WHERE MEMBERID = #{memberId}
+    </update>
 
     <!--네이버 카카오 일반 회원의 이름 조회-->
     <select id="userName" resultType="MemberVO">
@@ -117,4 +123,5 @@
     <select id="loginStatus" resultType="_int">
         SELECT MEMBERSTATUS FROM TBL_MEMBER WHERE MEMBERID=#{memberId}
     </select>
+
 </mapper>

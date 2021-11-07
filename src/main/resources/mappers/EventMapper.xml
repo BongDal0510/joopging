@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.EventMapper">
+    <insert id="insertEvent">
+        INSERT INTO TBL_EVENT_INFO
+        (EVENTNUM, EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE)
+        VALUES (SEQ_EVENT.NEXTVAL, #{eventTitle}, #{eventSubtitle}, #{eventContent}, #{eventDate})
+    </insert>
+    
+    <select id="readEvent" resultType="eventVO">
+        SELECT EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE
+        FROM TBL_EVENT_INFO
+        WHERE EVENTNUM = #{eventNum}
+    </select>
+
+    <update id="updateEvent">
+        UPDATE TBL_EVENT_INFO
+        SET EVENTTITLE = #{eventTitle}, EVENTSUBTITLE = #{eventSubtitle}, EVENTCONTENT = #{eventContent}, EVENTDATE = #{eventDate}
+        WHERE EVENTNUM = #{eventNum}
+    </update>
+
+    <delete id="deleteEvent">
+        DELETE FROM TBL_EVENT_INFO
+        WHERE EVENTNUM = #{eventNum}
+    </delete>
+
+    <select id="getEventList" resultType="eventVO">
+        <![CDATA[
+        SELECT EVENTNUM, EVENTTITLE, EVENTDATE
+        FROM
+        (
+        SELECT /*+ INDEX_DESC(TBL_EVENT_INFO EVENT_INFO_PK) */
+        ROWNUM R, EVENTNUM, EVENTTITLE, EVENTDATE
+        FROM TBL_EVENT_INFO
+        WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(EVENTNUM)
+        FROM TBL_EVENT_INFO
+    </select>
+</mapper>
