@@ -6,11 +6,17 @@
     <!--상품목록-->
     <select id="getGoodsList" resultType="shopVO">
         <![CDATA[
-        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+        SELECT goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent, fileName, uploadPath
         FROM
         (
             SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK) */
             ROWNUM R, goodsNum, goodsName, goodsCategory, goodsPrice, goodsContent
+            ,(SELECT uploadPath FROM (SELECT uploadPath
+            FROM TBL_GOODSATTACH
+            WHERE GOODSNUM = goodsNum) WHERE ROWNUM=1) AS uploadPath
+            ,(SELECT fileName FROM (SELECT fileName
+            FROM TBL_GOODSATTACH
+            WHERE GOODSNUM = goodsNum) WHERE ROWNUM=1) AS fileName
             FROM TBL_GOODSLIST
             WHERE ROWNUM <= #{pageNum} * #{amount}
         )

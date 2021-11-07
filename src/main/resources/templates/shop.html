@@ -141,20 +141,23 @@
 
                     <!--상품목록 -->
                     <table style="border-collapse:collapse">
-                        <tr>
+
                             <th:block th:each="shop, status : ${shop}">
-                                <td th:object="${shop}">
-                                    <th:block th:if="${status.odd}">
+                                <th:block th:if="${(status.index+1)%2==1}">
+                                    <tr>
+
+                                </th:block>
+                                    <td th:object="${shop}">
+
                                         <div style= width:380px;height:700px;float:left;>
-                                            <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                            <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img th:src ="@{/upload/display?fileName=}+*{uploadPath}+@{/}+*{fileName}" style= width:380px;height:500px >
                                                 <h3 th:text="*{goodsName}"></h3>
                                                 <span th:text="*{goodsPrice}"></span></a><br>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                             <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                         </div>
-                                    </th:block>
-                                    <!-- <th:block th:unless="${status.odd}">
+                                             <!-- <th:block th:unless="${status.odd}">
                                          <div style= width:380px;height:700px;float:left;>
                                              <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
                                                  <h3 th:text="*{goodsName}"></h3>
@@ -163,9 +166,14 @@
                                              <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                              <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                          </div>-->
-                                </td>
+                                    </td>
+
+                                    <th:block th:if="${(status.index+1)%2==0}">
+                                        </tr>
+
+                                    </th:block>
                             </th:block>
-                        </tr>
+
                         <!--                            <td>-->
                         <!--                                <div style= width:380px;height:700px;float:right;>-->
                         <!--                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">-->
@@ -177,7 +185,7 @@
                         <!--                                </div>-->
                         <!--                            </td>-->
                         <!--                        </tr>-->
-                        <tr>
+                       <!-- <tr>
                             <th:block th:each="shop, status : ${shop}">
                                 <td th:object="${shop}">
                                     <th:block th:if="${status.even}">
@@ -190,7 +198,7 @@
                                             <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                         </div>
                                     </th:block>
-                                </td>
+                                </td>-->
                                 <!--<th:block th:each="shop, status : ${shop}">
                                     <td th:object="${shop}">
                                         <th:block th:switch="${status.even}">
@@ -205,7 +213,7 @@
                                         </th:block>
                                     </td>
                                 </th:block>-->
-                        </tr>
+                      <!--  </tr>-->
                         <!--     <tr>
                                  <td>
                                      <div style= width:380px;height:700px;float:left;>
