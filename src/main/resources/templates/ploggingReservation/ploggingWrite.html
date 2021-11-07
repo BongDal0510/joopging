@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>플로깅 등록</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        /* Button */
+
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        button,
+        .button {
+            -webkit-appearance: none;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+            background: #14a876;
+            color: #fff !important;
+            font-weight: 700;
+            outline: 0;
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+            text-align: center;
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+        }
+
+        input[type="button"]:hover,
+        input[type="submit"]:hover,
+        input[type="reset"]:hover,
+        button:hover,
+        .button:hover {
+            background: #24b886;
+        }
+
+        input[type="button"]:active,
+        input[type="submit"]:active,
+        input[type="reset"]:active,
+        button:active,
+        .button:active {
+            background: #049866;
+        }
+
+        input[type="button"].alt,
+        input[type="submit"].alt,
+        input[type="reset"].alt,
+        button.alt,
+        .button.alt {
+            background: #0b871e;
+        }
+
+        input[type="button"].alt:hover,
+        input[type="submit"].alt:hover,
+        input[type="reset"].alt:hover,
+        button.alt:hover,
+        .button.alt:hover {
+            background: #066514;
+        }
+
+        input[type="button"].alt:active,
+        input[type="submit"].alt:active,
+        input[type="reset"].alt:active,
+        button.alt:active,
+        .button.alt:active {
+            background: #151112;
+        }
+
+        input[type="button"].icon:before,
+        input[type="submit"].icon:before,
+        input[type="reset"].icon:before,
+        button.icon:before,
+        .button.icon:before {
+            opacity: 0.35;
+            position: relative;
+            top: 0.05em;
+            margin-right: 0.75em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.5em;
+            padding: 0.75em 1.5em 0.75em 1.5em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+        }
+
+        .out {
+            width: 400px;
+            height: 550px;
+            margin: 10px;
+            padding: 10px;
+            border: none;
+        }
+
+        .line {
+            border: solid 1px #dddddd;
+            border-radius: 5px;
+        }
+
+        p{
+            color:#5d5d5d;
+        }
+
+        .headTitle {
+            text-align:center;
+            margin-bottom: 40px;
+        }
+
+        .writePopUp {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #write span {
+            width: 18%;
+            line-height: 50px;
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        #write input {
+            height:50px;
+            width: 82%;
+        }
+
+        .number {
+            width: 30% !important;
+            text-align: right;
+        }
+
+        .inputline {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .primary {
+            width:100px;
+            height:50px;
+            background:#94c477;
+        }
+
+        #content {
+            width:100%;
+            height:250px;
+            resize: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="writePopUp" style="margin: 30px 50px;">
+    <!--제목-->
+    <div>
+        <h3 class="headTitle">플로깅 등록하기</h3>
+    </div>
+
+    <!--폼 태그-->
+    <form action="/plo/ploWrite" name="ploggingForm" id="write" method="post">
+        <div class="inputline">
+            <span>플로깅명</span>
+            <input class="line" type="text" id="ploggingTitle" name="ploggingTitle" placeholder="플로깅 행사이름" maxlength="8"/>
+        </div>
+        <div class="inputline">
+            <span>신청일자</span>
+            <input class="line" type="text" id="ploResDate" name="ploResDate" placeholder="신청가능한 일자"/>
+        </div>
+        <div class="inputline">
+            <span>제한인원</span>
+            <input class="line number" id="ploggingPplLimit" name="ploggingPplLimit" type="text" placeholder="30"/>
+            <span style="width: 22%;">&nbsp 지급 포인트</span>
+            <input class="line number" id="ploggingPoint" name="ploggingPoint" type="text" placeholder="100"/>
+        </div>
+
+        <span>내용</span>
+        <pre><textarea id="ploggingContent" name="ploggingContent" class="line" type="text">
+        ▷ 장 소 :
+        ▷ 기 간 :
+        ▷ 참여방법
+        ①
+
+        ▷ 문의 : 줍깅 대표전화 1588-1004</textarea></pre>
+
+        <!--첨부파일-->
+        <div class="field">
+            <span>첨부파일</span>
+            <input type="file" name="uploadFiles" multiple>
+        </div>
+        <br>
+
+        <!--버튼-->
+        <div style="text-align: center;">
+            <button type="button" class="primary" onclick="submit()">등록</button>
+            <span style="padding:1px"></span>
+            <button type="button" class="primary" onclick="close()">취소</button>
+        </div>
+
+    </form>
+</div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script>
+    function close(){
+        window.close();
+    }
+</script>
+</html>
