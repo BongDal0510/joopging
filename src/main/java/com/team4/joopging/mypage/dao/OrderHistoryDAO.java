@@ -16,17 +16,20 @@ public class OrderHistoryDAO {
     private final OrderHistoryMapper mapper;
 
     /*구매 상품 내역 출력(아이디로)*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(int memberNum, Criteria criteria){
-        return mapper.getOrderHistoryList(memberNum, criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId){
+        return mapper.getOrderHistoryList(memberId);
     }
-
+    /*구매 상품 정보*/
+    public TempOrderHistoryVO getOrderHistory(int orderNum){
+        return mapper.getOrderHistory(orderNum);
+    };
     /*구매한 상품 토탈*/
-    public int totalOrderCnt(int memberNum){
-        return mapper.totalOrderCnt(memberNum);
+    public int totalOrderCnt(String memberId){
+        return mapper.totalOrderCnt(memberId);
     }
     /*구매한 상품 토탈*/
-    public int realTotalOrderCnt(int memberNum){
-        return mapper.realTotalOrderCnt(memberNum);
+    public int realTotalOrderCnt(String memberId){
+        return mapper.realTotalOrderCnt(memberId);
     }
 
     /*택배 정보 출력(구매상품번호로)*/

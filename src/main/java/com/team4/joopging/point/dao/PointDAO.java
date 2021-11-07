@@ -15,13 +15,13 @@ public class PointDAO {
     private final PointMapper mapper;
 
     /*포인트 내역 출력(넘버로)*/
-    public List<PointVO> getPointList(int memberNum, Criteria criteria){
-        return mapper.getPointList(memberNum, criteria);
+    public List<PointVO> getPointList(String memberId, Criteria criteria){
+        return mapper.getPointList(memberId, criteria);
     }
 
     /*포인트 전체 개수*/
-    public int totalPointCnt(int memberNum){
-        return totalPointCnt(memberNum);
+    public int totalPointCnt(String memberId){
+        return totalPointCnt(memberId);
     };
 
     /*포인트 추가*/
@@ -29,12 +29,10 @@ public class PointDAO {
         return mapper.addPoint(vo) == 1;
     }
 
-    /*구매 상품 취소()*/
+    /*구매 상품 취소*/
     public boolean removeOrder(PointVO vo){
-        return mapper.removeOrder(vo)==1;
+        return mapper.removeOrder(vo) == 1;
     }
 
-    /*구매 취소된 상품 인지 확인 여부*/
-    public boolean checkDeletOrder(int orderNum){return mapper.checkDeletOrder(orderNum)==1;}
 
 }

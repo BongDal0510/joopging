@@ -3,86 +3,85 @@
 
 <mapper namespace="com.team4.joopging.mappers.MypageMapper">
 
-
-    <!--플로깅 번호로 찾기-->
+    <!--예약번호로 찾기-->
     <select id="getPloRes" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
-        SELECT  ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
-        FROM TBL_PLO_RES WHERE ploggingNum = #{ploggingNum}
+        SELECT  ploResNum, memberId, ploggingNum, ploResDate, ploResStatus
+        FROM TBL_PLO_RES WHERE ploResNum = #{ploResNum}
+    </select>
+
+    <!--플로깅리스트 가져오기-->
+    <select id="getPloggingList" resultType="com.team4.joopging.mypage.vo.TempPloggingVO">
+        SELECT ploggingNum, ploggingTitle, ploggingContent, ploResDate, ploggingPpl, ploggingPplLimit, ploggingPoint, ploggingRegDate
+        FROM TBL_PLOGGING_INFO
     </select>
 
     <!--플로깅 예약 목록-->
 <select id="getPloResList" resultType="com.team4.joopging.mypage.vo.TempPloResVO">
 
-    SELECT ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
-    FROM(
     <![CDATA[
-    SELECT /** INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
-    ROWNUM R, ploResNum, memberNum, ploResLocation, ploggingNum, ploResDate,ploResTime,ploResStatus
-    FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
-                ROWNUM <= #{pageNum} * #{amount}
-            )
-        WHERE R > (#{pageNum} - 1) * #{amount}
-                        ]]>
+    SELECT ploResNum, memberId, ploggingNum, ploResDate,ploResStatus
+    FROM(
+    SELECT /*+ INDEX_DESC(TBL_PLO_RES RESERVATION_PK)*/
+    ROWNUM R, ploResNum, memberId, ploggingNum, ploResDate, ploResStatus
+    FROM TBL_PLO_RES WHERE memberId = #{memberId}
+            )]]>
 </select>
 
     <!--내 플로깅 내역의 전체 개수-->
     <select id="totalPloResCnt" resultType="_int">
-        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum}
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberId = #{memberId}
     </select>
 
     <!--내가 플로깅 개수-->
     <select id="realTotalPloResCnt" resultType="_int">
-        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberNum = #{memberNum} AND NOT ploResStatus = 1
+        SELECT COUNT(ploResNum) FROM TBL_PLO_RES WHERE memberId = #{memberId} AND NOT ploResStatus = 1
     </select>
 
-<!--찜 목록-->
+<!--찜 목록의 상품정보-->
 <select id="getGoodsLikeList" resultType="com.team4.joopging.mypage.vo.TempGoodsLikeListVO">
-SELECT goodsLikeListNum, memberNum, goodsNum
+        <![CDATA[
+SELECT goodsLikeNum, goodsNum, GoodsName, GoodsPrice, memberId
 FROM(
-    <![CDATA[
-SELECT /** INDEX_DESC(TBL_GOODS_LIKE_LIST GOODS_LIKE_LIST_PK)*/
-ROWNUM R,goodsLikeListNum, memberNum, goodsNum
-FROM TBL_GOODS_LIKE_LIST
-WHERE memberNum = #{memberNum}
-                ROWNUM <= #{pageNum} * #{amount}
-            )
-        WHERE R > (#{pageNum} - 1) * #{amount}
-                        ]]>
+SELECT /*+ INDEX_DESC(TBL_GOODSLIST GoodsPK)*/
+ROWNUM R, goodsLikeNum,goodsNum, GoodsName, GoodsPrice, memberId FROM TBL_GOODS_LIKE_LIST
+WHERE memberId = #{memberId}
+            )]]>
 </select>
 
     <!--내가 찜한 목록 전체 개수-->
     <select id="totalGoodsLikeCnt" resultType="_int">
-        SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberNum = #{memberNum}
+        SELECT COUNT(goodsLikeListNum) FROM TBL_GOODS_LIKE_LIST WHERE memberId = #{memberId}
     </select>
 
     <!--찜 삭제-->
     <delete id="deleteGoodsLike">
-        DELETE FROM TBL_GOODS_LIKE_LIST WHERE goodsLikeListNum = #{goodsLikeListNum}
+        DELETE FROM TBL_GOODS_LIKE_LIST WHERE goodsLikeNum = #{goodsLikeNum}
     </delete>
 
+
 <!--플로깅 예약 취소-->
-<update id="deleteReservation">
-UPDATE TBL_RESERVATION
-SET reservationStatus = 1
+<update id="deletePloRes">
+UPDATE TBL_PLO_RES
+SET ploResStatus = 1
 WHERE ploResNum = #{ploResNum}
 </update>
 
 <!--아이디로 멤버 번호 찾기-->
-<select id="seletMemberNum" resultType="_int">
+<select id="selectMemberNum" resultType="_int">
     SELECT memberNum FROM TBL_MEMBER WHERE memberId = #{memberId}
 </select>
 
 <!--멤버 정보 수정-->
 <update id="updateMember">
     UPDATE TBL_MEMBER
-    SET memberPw = #{memberPw}, memberEmail = #{memberEmail}, memberZipcode = #{memberZipcode}, memberAddress = #{memberAddress}
-    WHERE memberNum = #{memberNum}
+    SET memberEmail = #{memberEmail}, memberZipcode = #{memberZipcode}, memberAddress = #{memberAddress}, memberPoint = #{memberPoint}
+    WHERE memberId = #{memberId}
 </update>
 
 <!--멤버 삭제-->
 <update id="deleteMember">
     UPDATE TBL_MEMBER
-    SET status = 1
+    SET memberStatus = 1
     WHERE memberId = #{memberId} AND memberPw = #{memberPw}
 </update>
 
@@ -95,12 +94,13 @@ WHERE ploResNum = #{ploResNum}
                 SELECT /*+ INDEX_DESC(TBL_COMMUBOARD PK_COMMUBOARD)*/
                 ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
                 FROM TBL_COMMUBOARD
-                WHERE COMMUBOARDSTATUS = 0 AND
-                ROWNUM <= #{pageNum} * #{amount}
-                AND COMMUWRITER = #{memberId}
-            )
-        WHERE R > (#{pageNum} - 1) * #{amount}
-                        ]]>
+                WHERE COMMUBOARDSTATUS = 0 AND COMMUWRITER = #{memberId}
+            )]]>
+    </select>
+
+    <!--내 게시글-->
+    <select id="totalMemberCommuCnt" resultType="_int">
+        SELECT COUNT(COMMUBNO) FROM TBL_COMMUBOARD WHERE COMMUWRITER = #{memberId}
     </select>
 
 </mapper>

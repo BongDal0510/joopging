@@ -1,8 +1,10 @@
 package com.team4.joopging.mypage.dao;
 
+import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.mappers.MypageMapper;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.mypage.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,28 +23,28 @@ public class MypageDAO {
     };
 
     /*플로깅 내역 출력*/
-    public List<TempPloResVO> getPloResList(int memberNum, Criteria criteria){
-        return mapper.getPloResList(memberNum, criteria);
+    public List<TempPloResVO> getPloResList(String memberId){
+        return mapper.getPloResList(memberId);
     }
 
     /*플로깅 내역 토탈*/
-    public int totalPloResCnt(int memberNum){
-        return mapper.totalPloResCnt(memberNum);
+    public int totalPloResCnt(String memberId){
+        return mapper.totalPloResCnt(memberId);
     }
 
     /*플로깅 현재 예약 건수*/
-    public int realTotalPloResCnt(int memberNum){
-        return mapper.realTotalPloResCnt(memberNum);
+    public int realTotalPloResCnt(String memberId){
+        return mapper.realTotalPloResCnt(memberId);
     }
 
     /*찜목록 출력*/
-    public List<TempGoodsLikeListVO> getGoodsLikeList(int memberNum, Criteria criteria){
-        return mapper.getGoodsLikeList(memberNum, criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId){
+        return mapper.getGoodsLikeList(memberId);
     }
 
     /*찜목록 토탈*/
-    public int totalGoodsLikeCnt(int memberNum){
-        return mapper.totalGoodsLikeCnt(memberNum);
+    public int totalGoodsLikeCnt(String memberId){
+        return mapper.totalGoodsLikeCnt(memberId);
     }
 
     /*플로깅 취소(예약 번호로)*/
@@ -56,21 +58,29 @@ public class MypageDAO {
     };
 
     /*회원정보 수정*/
-    public boolean updateMember(TempMemberVO vo){
+    public boolean updateMember(MemberVO vo){
         return mapper.updateMember(vo) == 1;
     }
 
     /*회원정보 탈퇴*/
     public boolean deleteMember(String memberId, String memberPw){
-        return mapper.deleteMember(memberId, memberPw) == 1;
+        return mapper.deleteMember(memberId,memberPw) == 1;
     }
 
     /*내 게시글*/
-    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria){
-        return mapper.getMemberCommuList(memberId, criteria);
+    public List<CommuVO> getMemberCommuList(String memberId){
+        return mapper.getMemberCommuList(memberId);
+    };
+    /*내 게시글 전체 개수*/
+    public int totalMemberCommuCnt(String memberId){
+        return mapper.totalMemberCommuCnt(memberId);
     };
 
     /*아이디로 회원 번호 가져오기*/
     public int selectMemberNum(String memberId){ return mapper.selectMemberNum(memberId);
+    }
+    /*플로깅 리스트 가져오기-플로깅 생기면 지워!*/
+    public List<TempPloggingVO> getPloggingList(){
+        return mapper.getPloggingList();
     }
 }

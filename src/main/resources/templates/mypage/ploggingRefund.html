@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>PLOGGING REFUND</title>
     <meta charset="utf-8" />
@@ -40,7 +40,8 @@
         div.imp-medium{
             font-family: S-CoreDream-3Light;
             display: none;
-            padding-top: 4.8px;
+            padding-top: 2em;
+            margin: 0 auto;
             width: 70% !important;
         }
 
@@ -277,7 +278,7 @@
     <section id="main">
         <div class="container">
             <!-- 플로깅 취소 환불 -->
-            <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingRefund" style="display: block; padding: 50px 15% 50px 15%">
+            <div class="col-8 col-12-medium imp-medium"  id = "checkPloggingRefund" style="display: block;">
                 <article class="box post">
                     <header>
                         <h2>플로깅 예약 취소 및 환불 안내</h2>
@@ -309,22 +310,20 @@
                     </div>
                     <div  style= "padding: 50px 0px">
                         <h3>플로깅 취소</h3>
-                        <table class = 'delete123'>
+                        <table class = 'delete123' th:object="${ploRes}">
                         <tr>
                                 <th>플로깅명</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>장소</th>
-                                <td></td>
+                            <th:block th:each="plo:${plogging}">
+                                <td th:if="${ploRes.getPloggingNum()==plo.getPloggingNum()}" th:text="${plo.getPloggingTitle()}"></td>
+                            </th:block>
                             </tr>
                             <tr>
                                 <th>날짜</th>
-                                <td></td>
+                                <td th:text="*{ploResDate}"></td>
                             </tr>
                             <tr>
                                 <th>예약번호</th>
-                                <td></td>
+                                <td th:text="*{ploResNum}"></td>
                             </tr>
                             <tr>
                                 <th>예약 취소 사유</th>
@@ -344,8 +343,11 @@
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: center;">
-                                    <form action=""><button>환불하기</button></form>
-                                    <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
+                                    <form action="/mypage/ploggingRefund" method="post" name="refundForm">
+                                        <input type="hidden" th:value="${ploRes.getPloResNum()}" id="ploResNum" name="ploResNum">
+                                        <button id="refund">환불하기</button>
+                                        <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
+                                    </form>
                                 </td>
                             </tr>
                         </table>
@@ -367,11 +369,36 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
-<script>
-    window.opener.location.reload();
+<script th:inline="javascript">
+
 $("#close").on("click",function () {
     self.close();
-})
+});
+</script>
+<script>
+$("#refund").on("click",function() {
+    let form = document.refundForm;
 
+    form.method = "POST";
+    form.action = "/mypage/ploggingRefund";
+
+    if ($("#ploggingSelectBox option:selected").val() == "etc") {
+        if ($('input[name=etcReason]').val() == "") {
+            alert("취소 사유를 작성해주세요.");
+            return;
+        }
+    }
+
+    if ($("#ploggingSelectBox option:selected").val() == "ploggingRefundReason") {
+        alert("취소 사유를 선택해 주세요.");
+        return;
+    }
+
+    if($('#term1').is(':checked')==false){
+        alert("확인버튼을 눌러주세요.");
+        return;
+    }
+    form.submit();
+})
 </script>
 </html>
