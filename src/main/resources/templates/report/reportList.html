@@ -125,6 +125,7 @@
                 <p></p>
             </header>
             <div id="reportListWrapper">
+             <!--   <form method="get" action="report/reportRead">-->
                 <!--게시판 목록-->
                 <div id="reportListMiddle">
                     <div id="registerBtn">
@@ -146,7 +147,7 @@
                             <th:block th:each="report : ${reportList}">
                                 <tr class="tBody" id="reportListValues" th:object="${report}">
                                     <td class="reportedDate">2021-11-05</td>
-                                    <td class="reporter">신고한사람아이디1234</td>
+                                    <td class="reporter" th:text="*{sessionId}"></td>
                                     <td class="oneReport"><a th:href="@{/report/reportRead(reportNum=${report.reportNum})}" th:text="*{commuTitle}"></a></td>
                                     <td class="changeReasons" th:text="*{extraDetails}"></td>
                                     <td class="changeStatus" th:text="*{reportStatus}"></td>
@@ -159,8 +160,9 @@
                         </table>
                     </div>
                 </div>
-
+            <!--    </form>-->
             </div>
+
             <!--검색 기능-->
             <form action="/report/reportList" name="searchForm">
                 <div class="fields" id="reportSearchWrap">

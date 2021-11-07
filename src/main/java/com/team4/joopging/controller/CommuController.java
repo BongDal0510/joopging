@@ -69,7 +69,10 @@ public class CommuController {
         log.info("--------------------------------");
         log.info(reqType + " : " + commuBno);
         log.info("viewCnt : " + commuVO.getCommuViewCnt());
+        log.info("viewCnt : " + commuVO.getCommuRegDate());
+        log.info("viewCnt : " + commuVO.getCommuUpdateDate());
         log.info("--------------------------------");
+
         model.addAttribute("commu", commuService.getCommu(commuBno));
         model.addAttribute("commuVO", commuService.updateCommuViewCnt(commuBno));
         model.addAttribute("criteria", criteria);
