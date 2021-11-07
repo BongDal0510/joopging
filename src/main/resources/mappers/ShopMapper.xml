@@ -17,6 +17,9 @@
             ,(SELECT fileName FROM (SELECT fileName
             FROM TBL_GOODSATTACH
             WHERE GOODSNUM = goodsNum) WHERE ROWNUM=1) AS fileName
+            ,(SELECT uuid FROM (SELECT uuid
+            FROM TBL_GOODSATTACH
+            WHERE GOODSNUM = goodsNum) WHERE ROWNUM=1) AS uuid
             FROM TBL_GOODSLIST
             WHERE ROWNUM <= #{pageNum} * #{amount}
         )

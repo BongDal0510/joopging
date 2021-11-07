@@ -22,6 +22,7 @@ public class ShopVO {
     private List<AttachFileVO> attachList;
     private String fileName;
     private String uploadPath;
+    private String uuid;
 
 
 }
