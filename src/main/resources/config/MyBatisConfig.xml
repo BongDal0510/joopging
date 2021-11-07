@@ -8,5 +8,6 @@
         <typeAlias type="com.team4.joopging.event.vo.EventVO" alias="eventVO"/>
         <typeAlias type="com.team4.joopging.beans.vo.ShopVO" alias="shopVO"/>
         <typeAlias type="com.team4.joopging.beans.vo.AttachFileVO" alias="attachFileVO"/>
+        <typeAlias type="com.team4.joopging.member.memberVO.MemberVO" alias="MemberVO"/>
     </typeAliases>
 </configuration>
