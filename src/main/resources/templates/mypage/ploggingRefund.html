@@ -311,13 +311,9 @@
                     <div  style= "padding: 50px 0px">
                         <h3>플로깅 취소</h3>
                         <table class = 'delete123' th:object="${ploRes}">
-                        <tr>
+                        <tr th:each="plo:${plogging}">
                                 <th>플로깅명</th>
-                                <td th:text="*{ploResTitle}"></td>
-                            </tr>
-                            <tr>
-                                <th>장소</th>
-                                <td th:text="*{ploResLocation}"></td>
+                                <td th:if="${ploRes.getPloggingNum()==plo.getPloggingNum()}" th:text="${plo.getPloggingTitle()}"></td>
                             </tr>
                             <tr>
                                 <th>날짜</th>
@@ -347,7 +343,7 @@
                                 <td colspan="2" style="text-align: center;">
                                     <form action="/mypage/ploggingRefund" method="post" name="refundForm">
                                         <input type="hidden" th:value="${ploRes.getPloResNum()}" id="ploResNum" name="ploResNum">
-                                        <button onclick="refund()">환불하기</button>
+                                        <button id="refund">환불하기</button>
                                         <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
                                     </form>
                                 </td>
@@ -376,32 +372,31 @@
 $("#close").on("click",function () {
     self.close();
 });
-
-function refund() {
+</script>
+<script>
+$("#refund").on("click",function() {
     let form = document.refundForm;
 
     form.method = "POST";
     form.action = "/mypage/ploggingRefund";
 
-    if ($("#selectBox option:selected").val() == "etc") {
+    if ($("#ploggingSelectBox option:selected").val() == "etc") {
         if ($('input[name=etcReason]').val() == "") {
             alert("취소 사유를 작성해주세요.");
             return;
         }
     }
 
-    if ($("#selectBox option:selected").val() == "ploggingRefundReason") {
+    if ($("#ploggingSelectBox option:selected").val() == "ploggingRefundReason") {
         alert("취소 사유를 선택해 주세요.");
         return;
     }
 
-    if($('input:checkbox[id="term1"]').prop('checked',true)){
-
-        form.submit();
-    }else{
-        alert("확인 버튼을 눌러주세요.");
+    if($('#term1').is(':checked')==false){
+        alert("확인버튼을 눌러주세요.");
         return;
     }
-}
+    form.submit();
+})
 </script>
 </html>

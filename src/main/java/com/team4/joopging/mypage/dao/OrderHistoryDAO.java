@@ -16,8 +16,8 @@ public class OrderHistoryDAO {
     private final OrderHistoryMapper mapper;
 
     /*구매 상품 내역 출력(아이디로)*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId, Criteria criteria){
-        return mapper.getOrderHistoryList(memberId, criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId){
+        return mapper.getOrderHistoryList(memberId);
     }
     /*구매 상품 정보*/
     public TempOrderHistoryVO getOrderHistory(int orderNum){

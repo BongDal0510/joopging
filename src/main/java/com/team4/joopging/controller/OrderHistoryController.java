@@ -1,6 +1,7 @@
 package com.team4.joopging.controller;
 
 import com.team4.joopging.community.vo.Criteria;
+import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.MypageService;
@@ -37,7 +38,7 @@ public class OrderHistoryController {
         model.addAttribute("goods", shopSVC.goodsGet( Long.parseLong(mypageSVC.getOrderHistory(orderNum).getGoodsNum())));
         model.addAttribute("order", mypageSVC.getOrderHistory(orderNum));
         model.addAttribute("member",memberSVC.memberAllSelect(memberId));
-//        model.addAttribute("parcel",mypageSVC.getParcel(orderNum));
+        model.addAttribute("parcel",mypageSVC.getParcel(orderNum));
 
         return "mypage/orderInfo";
     }
@@ -56,14 +57,20 @@ public class OrderHistoryController {
 
     /*구매 취소하기*/
     @PostMapping("goodsRefund")
-    public String goodsRefund(Model model, @RequestParam("orderNum") int orderNum){
+    public String goodsRefund(Model model, @RequestParam("orderNum") int orderNum, HttpServletRequest req){
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+        MemberVO membervo = memberSVC.memberAllSelect(memberId);
+        Long addPoint = mypageSVC.getOrderHistory(orderNum).getUsePoint();
         if(mypageSVC.deleteGoodsOrder(orderNum)){
             PointVO vo = new PointVO();
+            membervo.setMemberPoint(membervo.getMemberPoint()+addPoint);
             vo.setHistory(mypageSVC.getOrderHistory(orderNum).getGoodsName()+" 구매 취소");
             vo.setPoint(mypageSVC.getOrderHistory(orderNum).getUsePoint());
             vo.setMemberId(mypageSVC.getOrderHistory(orderNum).getMemberId());
             vo.setPointStatus("취소");
             pointSVC.addPoint(vo);
+            mypageSVC.updateMember(membervo);
             model.addAttribute("msg", "refundOrder");
         }else{
             model.addAttribute("msg", "notRefundOrder");

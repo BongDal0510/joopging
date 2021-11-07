@@ -5,21 +5,18 @@
 
     <!--구매 상품 목록-->
 
-    <select id="getOrderHistoryList" parameterType="map" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
+    <select id="getOrderHistoryList" resultType="com.team4.joopging.mypage.vo.TempOrderHistoryVO">
         <![CDATA[
 SELECT orderNum,memberId,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
     FROM (
-SELECT /*+ INDEX_DESC(TBL_HISTORY_ORDER ORDERNUM_PK)*/
+SELECT /*+ INDEX_DESC(TBL_ORDER_HISTORY ORDERNUM_PK)*/
     ROWNUM R, orderNum,memberId,goodsNum,goodsName,goodsCnt,goodsColor,goodsSize,goodsTotalCost,orderDate,
     recipient,recipientPhone,recipientZipCode,recipientAddress,recipientAddressEtc,
     parcelMessage,usePoint,orderStatus
-FROM TBL_ORDER_HISTORY WHERE memberId = #{memberId} AND
-                ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
-            )
-        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
-                        ]]>
+FROM TBL_ORDER_HISTORY WHERE memberId = #{memberId}
+            )]]>
 </select>
 
     <!--주문번호로 내 상품 정보 가져오기-->

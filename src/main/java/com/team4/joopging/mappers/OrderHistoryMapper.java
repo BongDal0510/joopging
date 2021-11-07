@@ -12,7 +12,7 @@ import java.util.List;
 public interface OrderHistoryMapper {
 
     /*구매 상품 목록*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(@Param("memberId") String memberId,@Param("criteria") Criteria criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId);
     /*구매 상품 목록*/
     public TempOrderHistoryVO getOrderHistory(int orderNum);
     /*구매한 상품 내역 개수*/

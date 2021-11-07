@@ -457,7 +457,7 @@
             <div class="col-8 col-12-medium imp-medium" id="myHome" style="display: block;">
                 <article class="box post" style="">
                     <header>
-                        <h2 th:text="*{memberName}">님 환영합니다.</h2>
+                        <h2><strong th:text="*{memberName}"/>님 환영합니다.</h2>
                     </header>
                     <div id="ploggingAdv">
                         <button onclick="goEvent()">
@@ -469,9 +469,11 @@
                             <h4>나의 현황</h4>
                             <table>
                                 <th:block th:each="plores:${ploRes}">
-                                    <tr th:if="${ploRes.size()!=0}" th:object="${plores}">
-                                        <td class="ploResTitle" th:text="${plores?.getPloResTitle()}"></td>
-                                        <td class="ploResDate" th:text="${plores?.getPloResDate()}"></td>
+                                    <tr th:if="${ploRes.size()!=0}&&${ploresStat.index<5}" th:each="plo:${plogging}">
+                                            <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
+                                            <td class="ploResTitle" th:text="${plo.getPloggingTitle()}"></td>
+                                            <td class="ploResDate" th:text="${plores.getPloResDate()}"></td>
+                                        </th:block>
                                     </tr>
                                 </th:block>
                                 <tr th:unless="${ploRes.size()!=0}">
@@ -501,36 +503,34 @@
                         <div>
                             <table class=boardList>
                                 <caption>
-                                    내 플로깅 예약 횟수 : <span th:text="${ploResTotalCnt}"/> 번
+                                    플로깅 예약 내역 : <span th:text="${ploRes.size()}"/> 개
                                 </caption>
                                 <thead>
                                 <tr>
                                     <th>예약 번호</th>
                                     <th>플로깅명</th>
-                                    <th>장소</th>
                                     <th>날짜</th>
                                     <th>예약 취소</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <th:block th:each="plores : ${ploRes}">
-                                    <tr class="ploRes" th:if="${ploRes.size()!=0}" th:object="${plores}">
-                                        <td calss="ploResNum" th:text="*{ploResNum}"></td>
-                                        <td calss="ploResTitle"><a id="goPloggingDetail" th:href="*{ploggingNum}"
-                                                                   th:text="*{ploResTitle}"/></td>
-                                        <td class="ploResDate" th:text="*{ploResLocation}"/>
-                                        <td class="ploResTime" th:text="*{ploResDate}"/>
+                                    <tr class="ploRes" th:if="${ploRes.size()!=0} && ${ploresStat.index<10}" th:each="plo : ${plogging}">
+                                        <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
+                                        <td calss="ploResNum" th:text="${plores}"></td>
+                                        <td calss="ploResTitle"><a id="goPloggingDetail" th:href="${plores.getPloggingNum()}"
+                                                                   th:text="${plo.getPloggingTitle()}"/></td>
+                                        <td class="ploResTime" th:text="${plores.getPloResDate()}"/>
                                         <td class="deletePloRes">
-                                            <th:block>
-                                                <span id="ploResRefund" th:if="*{ploResStatus==0}"
-                                                      th:class="*{ploResNum}">x</span>
-                                                <span id="ploResRefundSuccess" th:if="*{ploResStatus==1}">취소 됨</span>
-                                            </th:block>
+                                                <span id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
+                                                      th:class="${plores.getPloResNum()}">x</span>
+                                                <span id="ploResRefundSuccess" th:if="*{plores.getPloResStatus()==1}">취소 됨</span>
                                         </td>
+                                        </th:block>
                                     </tr>
                                 </th:block>
                                 <tr th:if="${ploRes.size()==0}">
-                                    <td colspan="5" align="center">예약한 플로깅이 없습니다.</td>
+                                    <td colspan="4" align="center">예약한 플로깅이 없습니다.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -568,9 +568,10 @@
                                 </caption>
                                 <thead>
                                 <tr>
-                                    <th>날짜</th>
-                                    <th colspan="2">내역</th>
-                                    <th>금액</th>
+                                    <th width="35%">날짜</th>
+                                    <th width="30%">내역</th>
+                                    <th width="15%">상태</th>
+                                    <th width="20%">포인트</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -616,7 +617,7 @@
                         <div>
                             <table class=boardList>
                                 <caption>
-                                    내가 구매한 상품 : 개
+                                    상품 주문 내역 : <span th:text="${orderHistory.size()}"></span>개
                                 </caption>
                                 <thead>
                                 <tr>
@@ -629,7 +630,7 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="orderhistory:${orderHistory}">
-                                    <tr th:if="${orderHistory.size()!=0}" th:object="${orderhistory}">
+                                    <tr th:if="${orderHistory.size()!=0 && orderhistoryStat.index<10}" th:object="${orderhistory}">
                                         <td calss="orderNum" th:text="*{orderNum}"/>
                                         <td th:if="*{orderStatus!=1}" class="goodsName">
                                             <a id="goOrderHistory" th:text="${orderhistory.getGoodsName()}"
@@ -677,21 +678,23 @@
                     <div>
                         <table class=boardList>
                             <caption>
-                                내 찜 목록 : <span th:text="${goodslikeTotalCnt}"/> 개
+                                내 찜 목록 : <span th:text="${goodsLikeList.size()}"/> 개
                             </caption>
                             <thead>
                             <tr>
                                 <th width="10%">선택</th>
-                                <th width="60%">상품명</th>
-                                <th width="30%">가격</th>
+                                <th width="20%">상품번호</th>
+                                <th width="45%">상품명</th>
+                                <th width="25%">가격</th>
                             </tr>
                             </thead>
                             <tbody>
                             <th:block th:each="goodsLike:${goodsLikeList}">
-                                <tr th:if="${goodsLikeList.size()!=0}" th:object="${goodsLike}">
+                                <tr th:if="${goodsLikeList.size()!=0 && goodsLikeStat.index<10}" th:object="${goodsLike}">
                                     <td class="deleteCheck">
                                         <input type="checkbox" th:value="*{goodsLikeNum}" class='chkselect' onclick='Chk();'>
                                     </td>
+                                    <td class="goodsNum" th:text="*{goodsNum}"/>
                                     <td calss="goodsName">
                                         <a id="goGoods" th:text="*{goodsName}" th:href="*{goodsNum}"/>
                                     </td>
@@ -914,7 +917,7 @@
                         <div>
                             <table class=boardList>
                                 <caption>
-                                    내가 작성한 게시글 : 개
+                                    내가 작성한 게시글 : <span th:text="${memberCommu.size()}"/> 개
                                 </caption>
                                 <thead>
                                 <tr>
@@ -926,11 +929,11 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="commu:${memberCommu}">
-                                    <tr th:if="${memberCommu.size()!=0}" th:object="${commu}">
-                                        <td th:text="*{commuBno}"/>
-                                        <td th:text="*{commuTitle}"><a th:href=""/></td>
-                                        <td th:text="*{commuRegDate}"/>
-                                        <td th:text="*{commuViewCnt}"/>
+                                    <tr th:if="${memberCommu.size()!=0 && commuStat.index<10}" th:object="${commu}">
+                                        <td calss = "commuBno" th:text="*{commuBno}"/>
+                                        <td class="commuTitle"><a id="goCommu" th:text="*{commuTitle}" th:href="*{commuBno}"/></td>
+                                        <td class="commuRegDate" th:text="*{commuRegDate}"/>
+                                        <td class="commuViewCnt" th:text="*{commuViewCnt}"/>
                                     </tr>
                                 </th:block>
                                 <tr th:if="${memberCommu.size()==0}">
@@ -1019,8 +1022,9 @@
         e.preventDefault();
         location.href = "/plogging/ploggingDetail?ploggingNum=" + $(this).attr("href");
     });
+
     /*굿즈 페이지로 이동 이동*/
-    $("a#goPloggingDetail").on("click", function (e) {
+    $("a#goGoods").on("click", function (e) {
         e.preventDefault();
         location.href = "/shop/shopDetail?goodsNum=" + $(this).attr("href");
     });
@@ -1036,6 +1040,12 @@
     $("a#goOrderHistory").on("click", function (e) {
         e.preventDefault();
         location.href = "/orderhistory/orderInfo?orderNum=" + $(this).attr("href");
+    });
+
+    /*커뮤 상세보기 페이지로 이동*/
+    $("a#goCommu").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/commu/communityRead?commuBno=" + $(this).attr("href");
     });
 
     //비밀번호 변경창으로 이동

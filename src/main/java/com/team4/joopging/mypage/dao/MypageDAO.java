@@ -23,8 +23,8 @@ public class MypageDAO {
     };
 
     /*플로깅 내역 출력*/
-    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria){
-        return mapper.getPloResList(memberId, criteria);
+    public List<TempPloResVO> getPloResList(String memberId){
+        return mapper.getPloResList(memberId);
     }
 
     /*플로깅 내역 토탈*/
@@ -38,8 +38,8 @@ public class MypageDAO {
     }
 
     /*찜목록 출력*/
-    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria){
-        return mapper.getGoodsLikeList(memberId, criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId){
+        return mapper.getGoodsLikeList(memberId);
     }
 
     /*찜목록 토탈*/
@@ -68,8 +68,8 @@ public class MypageDAO {
     }
 
     /*내 게시글*/
-    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria){
-        return mapper.getMemberCommuList(memberId, criteria);
+    public List<CommuVO> getMemberCommuList(String memberId){
+        return mapper.getMemberCommuList(memberId);
     };
     /*내 게시글 전체 개수*/
     public int totalMemberCommuCnt(String memberId){
@@ -78,5 +78,9 @@ public class MypageDAO {
 
     /*아이디로 회원 번호 가져오기*/
     public int selectMemberNum(String memberId){ return mapper.selectMemberNum(memberId);
+    }
+    /*플로깅 리스트 가져오기-플로깅 생기면 지워!*/
+    public List<TempPloggingVO> getPloggingList(){
+        return mapper.getPloggingList();
     }
 }

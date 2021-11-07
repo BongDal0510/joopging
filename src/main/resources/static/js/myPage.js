@@ -122,7 +122,7 @@ $('li').on("click", function () {
 $("#deleteMember").on("click", function () {
     let form = $("form[name=deleteForm]");
 
-    if ($('input[name=deleteMember_pw]').val() == "") {
+    if ($('input[name=deleteMemberPw]').val() == "") {
         alert("비밀번호를 입력해주세요.");
         return;
     }

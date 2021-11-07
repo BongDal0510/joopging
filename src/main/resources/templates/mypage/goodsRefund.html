@@ -338,7 +338,7 @@
                                 <td colspan="2" style="text-align: center;">
                                 <form action="/orderhistory/goodsRefund" method="post" name="refundForm">
                                     <input type="hidden" th:value="${order.getOrderNum()}" id="orderNum" name="orderNum">
-                                    <button onclick="refund()">환불하기</button>
+                                    <button id="refund">환불하기</button>
                                     <button id="close" style="border-color: #d3d3d3; margin-left: 1%">취소</button>
                                 </form>
                                 </td>
@@ -367,29 +367,30 @@
     $("#close").on("click",function () {
         self.close();
     });
-
-    function refund() {
+</script>
+    <script>
+    $("#refund").on("click",function() {
         let form = document.refundForm;
 
-        if ($("#selectBox option:selected").val() == "etc") {
+
+        if($('#term1').is(':checked')==false){
+            alert("확인버튼을 눌러주세요.");
+            return;
+        }
+
+        if ($("#paymentSelectBox option:selected").val() == "etc") {
             if ($('input[name=etcReason]').val() == "") {
                 alert("취소 사유를 작성해주세요.");
                 return;
             }
         }
 
-        if ($("#selectBox option:selected").val() == "paymentRefundReason") {
+        if ($("#paymentSelectBox option:selected").val() == "paymentRefundReason") {
             alert("취소 사유를 선택해 주세요.");
             return;
         }
 
-        if($('input:checkbox[id="term1"]').prop('checked',true)){
-
             form.submit();
-        }else{
-            alert("확인버튼을 눌러주세요.");
-            return;
-        }
-    }
+    })
 </script>
 </html>

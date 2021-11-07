@@ -8,9 +8,9 @@
         SELECT pointNum, memberId, history, point, pointDate, pointStatus
         FROM
         (
-        SELECT /*+ INDEX_DESC(TBL_POINT POINTNUM_PK)*/
+        SELECT /*+ INDEX_DESC(TBL_POINT_HISTORY POINTNUM_PK)*/
         ROWNUM R, pointNum, memberId, history, point, pointDate, pointStatus
-        FROM TBL_POINT WHERE memberId = #{memberId} AND
+        FROM TBL_POINT_HISTORY WHERE memberId = #{memberId} AND
         ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
         )
         WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
@@ -19,12 +19,12 @@
 
     <!--내 포인트 내역 개수-->
     <select id="totalPointCnt" resultType="_int">
-        SELECT COUNT(pointNum) FROM TBL_POINT WHERE memberId = #{memberId}
+        SELECT COUNT(pointNum) FROM TBL_POINT_HISTORY WHERE memberId = #{memberId}
     </select>
 
     <!--포인트 추가-->
     <insert id="addPoint">
-        INSERT INTO TBL_POINT
+        INSERT INTO TBL_POINT_HISTORY
         (pointNum, memberId, history, point, pointStatus)
         VALUES (SEQ_POINT.NEXTVAL, #{memberId}, #{history}, #{point}, #{pointStatus})
     </insert>

@@ -42,12 +42,13 @@ public class MypageController {
         if(session.getAttribute("memberId")!=null) {
             String memberId = (String)session.getAttribute("memberId");
 
+            model.addAttribute("plogging", mypageSVC.getPloggingList());
             model.addAttribute("member", memberSVC.memberAllSelect(memberId));
-            model.addAttribute("ploRes", mypageSVC.getPloResList(memberId, criteria));
+            model.addAttribute("ploRes", mypageSVC.getPloResList(memberId));
             model.addAttribute("getPointList", pointSVC.getPointList(memberId, criteria));
-            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberId, criteria));
-            model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId, criteria));
-            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberId, criteria));
+            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberId));
+            model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId));
+            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberId));
 
             return "mypage/mypage";
         }else{
@@ -82,13 +83,33 @@ public class MypageController {
     @PostMapping("updateMember")
     public String updateMember(MemberVO vo,Model model, @RequestParam("memberEmailSite") String memberEmailSite, @RequestParam("memberAddressDetail") String memberAddressDetail, HttpServletRequest req) {
         HttpSession session = req.getSession();
+
         String memberId = (String)session.getAttribute("memberId");
 
         MemberVO membervo = memberSVC.memberAllSelect(memberId);
+        log.info(membervo.getMemberAddress());
+        log.info(membervo.getMemberEmail());
+        log.info(membervo.getMemberName());
+        log.info(membervo.getMemberId());
+        log.info(membervo.getMemberZipcode());
+        log.info(membervo.getMemberBirth());
+        log.info(membervo.getMemberPw());
 
-        membervo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
-        membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
-        membervo.setMemberZipcode(vo.getMemberZipcode());
+        if(vo.getMemberEmail()!=null && memberEmailSite!=null){
+            membervo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
+        }
+
+        if(vo.getMemberAddress()!=null){
+            membervo.setMemberAddress(vo.getMemberAddress());
+        }
+
+        if(vo.getMemberAddress()!=null && memberAddressDetail!=null){
+            membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
+        }
+
+        if(vo.getMemberZipcode()!=null){
+            membervo.setMemberZipcode(vo.getMemberZipcode());
+        }
 
         /*디비에 회원정보 저장*/
         if(mypageSVC.updateMember(membervo)){
@@ -104,6 +125,7 @@ public class MypageController {
     public String ploggingRefundPage(Model model, @RequestParam("ploResNum") Long ploResNum) throws IOException {
         Long num = ploResNum;
         log.info(String.valueOf(ploResNum));
+        model.addAttribute("plogging", mypageSVC.getPloggingList());
         model.addAttribute("ploRes", mypageSVC.getPloRes(num));
         return "/mypage/ploggingRefund";
     }
@@ -118,7 +140,6 @@ public class MypageController {
         }
         return "mypage/resultpage";
     }
-
 
     /*찜 삭제*/
     @PostMapping("deleteGoodsLike")

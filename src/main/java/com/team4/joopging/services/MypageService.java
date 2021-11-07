@@ -15,7 +15,7 @@ public interface MypageService {
     public TempPloResVO getPloRes(Long ploResNum);
 
     /*내 플로깅 내역 출력*/
-    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria);
+    public List<TempPloResVO> getPloResList(String memberId);
 
     /*내 플로깅 내역 토탈 개수*/
     public int totalPloResCnt(String memberId);
@@ -24,7 +24,7 @@ public interface MypageService {
     public int realTotalPloResCnt(String memberId);
 
     /*찜목록 출력*/
-    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId);
 
     /*찜목록 토탈*/
     public int totalGoodsLikeCnt(String memberId);
@@ -42,7 +42,7 @@ public interface MypageService {
     public boolean deleteMember(String memberId, String memberPw);
 
     /*내 게시글*/
-    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria);
+    public List<CommuVO> getMemberCommuList(String memberId);
 
     /*내 게시글 개수*/
     public int totalMemberCommuCnt(String memberId);
@@ -51,7 +51,7 @@ public interface MypageService {
     public int selectMemberNum(String memberId);
 
     /*구매 상품 내역 출력(아이디로)*/
-    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId, Criteria criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId);
 
     /*구매 상품 정보*/
     public TempOrderHistoryVO getOrderHistory(int orderNum);
@@ -70,4 +70,7 @@ public interface MypageService {
 
     /*구매취소된 상품 불러오기*/
     public List<TempOrderHistoryVO> deletOrderList();
+
+    /*플로깅 리스트 가져오기-플로깅 들어오면 없애버렷*/
+    public List<TempPloggingVO> getPloggingList();
 }

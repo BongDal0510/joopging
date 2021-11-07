@@ -26,8 +26,8 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<TempPloResVO> getPloResList(String memberId, Criteria criteria) {
-        return mDAO.getPloResList(memberId, criteria);
+    public List<TempPloResVO> getPloResList(String memberId){
+        return mDAO.getPloResList(memberId);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<ShopVO> getGoodsLikeList(String memberId, Criteria criteria) {
-        return mDAO.getGoodsLikeList(memberId,criteria);
+    public List<ShopVO> getGoodsLikeList(String memberId) {
+        return mDAO.getGoodsLikeList(memberId);
     }
 
     @Override
@@ -71,8 +71,8 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<CommuVO> getMemberCommuList(String memberId, Criteria criteria) {
-        return mDAO.getMemberCommuList(memberId,criteria);
+    public List<CommuVO> getMemberCommuList(String memberId) {
+        return mDAO.getMemberCommuList(memberId);
     }
 
     @Override
@@ -86,8 +86,8 @@ public class MypageServicelmple implements MypageService{
     }
 
     @Override
-    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId, Criteria criteria) {
-        return oDAO.getOrderHistoryList(memberId,criteria);
+    public List<TempOrderHistoryVO> getOrderHistoryList(String memberId) {
+        return oDAO.getOrderHistoryList(memberId);
     }
 
     @Override
@@ -118,5 +118,10 @@ public class MypageServicelmple implements MypageService{
     @Override
     public List<TempOrderHistoryVO> deletOrderList() {
         return oDAO.deletOrderList();
+    }
+
+    @Override
+    public List<TempPloggingVO> getPloggingList() {
+       return mDAO.getPloggingList();
     }
 }
