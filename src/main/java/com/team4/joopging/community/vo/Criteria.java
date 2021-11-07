@@ -29,9 +29,7 @@ public class Criteria {
                 .queryParam("keyword", keyword);
         return builder.toUriString();
     }
-
     public String[] getTypeArr(){
         return type == null ? new String[] {} : type.split("");
     }
-
 }

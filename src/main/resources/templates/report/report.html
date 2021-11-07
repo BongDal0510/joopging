@@ -25,7 +25,7 @@
         <div class="inner head">
 
             <div class="reportWrapper content">
-                <form method="post" action="report" id="reportForm">
+                <form method="post" action="/report" id="reportForm">
                     <div id="joopgingLogoLeaf"><img src="/images/commu/leaf_icon.png"/></div>
 
                     <div class="reportBackground">
@@ -60,16 +60,16 @@
                             </div>
                             <div class="field" id="boardWriterArea">
                                 <h4 id="sessionId">신고자 :</h4>
-                                <input name="sessionId" type="text" value="asdf1234" readonly/> <!-- th:value="${member.memberId}" readonly-->
+                                <input name="sessionId" type="text" th:value="${memberId}" readonly/>
                                 <h4 id="reportDate">신고일 :</h4><!--th: ${reportDate}-->
-                                <input name="reportDate" type="text" readonly/> <!--th:field="*{세션 아이디}" readonly-->
+                                <input name="reportDate" type="text" th:value="${admin.reportDate}" readonly/>
                             </div>
                         </div>
 
                         <div>
                             <h4 class="reportPage">신고 사유를 선택해주세요</h4>
                         </div>
-                        <div class="reportSelections">
+                        <div class="reportSelections" id="reportContent" name="reportContent">
                             <select>
                                 <option>불법광고</option>
                                 <option>욕설/비방글</option>
@@ -79,7 +79,7 @@
                             </select>
                         </div>
                         <div>
-                            <pre><textarea name="reportPurpose" id="reportPurpose" cols="30" rows="4" style="resize: none"
+                            <pre><textarea name="reportDetail" id="reportDetail" cols="30" rows="4" style="resize: none"
                                            placeholder="명확한 사유는 신속한 대응에 도움이 될 수 있습니다."></textarea></pre>
                         </div>
                     </div>

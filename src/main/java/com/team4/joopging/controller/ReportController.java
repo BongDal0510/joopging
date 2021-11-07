@@ -50,18 +50,21 @@ public class ReportController {
 
         //2. sessionId 받아오고 싶어여
         HttpSession session = req.getSession();
-        if(session.getAttribute("memberId")!= null){
+     /*   if(session.getAttribute("memberId")!= null){
             String memberId = (String)session.getAttribute("memberId");
             model.addAttribute("member", memberService.memberAllSelect(memberId));
-        }
-        //3. 신고일 연산 -- 메소드 따로 만들기
+        }*/
+        //3. 신고일 연산
+
         //4. reportPurpose
 
         // commuboard에 있는 commuTitle
         model.addAttribute("commu", commuService.getCommu(commuBno));
-       /* model.addAttribute("reporter", reportService.commuToReported());*/
+   /*    model.addAttribute("reporter", adminService.readReport(commuBno));*/
+        String memberId = (String)session.getAttribute("memberId");
+        model.addAttribute("member", memberService.memberAllSelect(memberId));
 
-        return "/report/report";
+        return "report/report";
     }
 
 

@@ -5,9 +5,26 @@
 
     <!--신고 등록 from 유저 to 관리자-->
     <insert id="insertReport">
-        INSERT INTO TBL_REPORT (REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS
+        INSERT INTO TBL_REPORT (REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS)
         VALUES(SEQ_REPORT.NEXTVAL, #{sessionId}, #{reportContent}, #{reportDetail}, #{commuBno}, #{commuTitle}, #{reportDate}, #{reportStatus})
     </insert>
+
+<!--
+    <insert id="insertSelectKey_commuBno">
+        /*태그 안에서는 이와 같은 주석으로 사용해야 한다.*/
+        /*게시글 등록 전 다음 시퀀스를 가져와서 insertSelectKey_COMMUBNO메소드의 매개변수로 매핑후 전달한다.*/
+        <selectKey keyProperty="commuBno" order="BEFORE" resultType="long">
+            SELECT SEQ_COMMUBOARD.NEXTVAL FROM DUAL
+        </selectKey>
+        /*위에서 전달받은 COMMUBNO를 사용한다.*/
+        INSERT INTO TBL_COMMUBOARD (COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER)
+        VALUES(SEQ_REPORT.NEXTVAL, #{commuTitle}, #{commuContent}, #{commuWriter})
+    </insert>
+
+
+    -->
+
+
 
     <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
     <update id="commuToReported">

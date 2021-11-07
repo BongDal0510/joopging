@@ -71,13 +71,11 @@
                 <div id="commuBoardMiddle">
                     <div id="goCommuListBtn"> <!--href="javascript:void(0)"-->
                         <div><a id="goListBtn" href="javascript:void(0)" class="button small">목록 보기</a></div>
-                        <div id="goReportBtn"><a id="reportBtn" class="button small trigger" onclick="popup()">
-                            <img src="/images/commu/siren.png"></a>
-                        </div>
+                        <div><a href="javascript:history.go(-1)" class="button small">돌아가기</a></div>
                     </div>
                     <div class="content">
                         <div class="form">
-                            <form method="post" action="/commu/removeCommu">
+                            <form method="post" action="/report/removeReport">
                                 <div class="fields" th:object="${admin}">
                                     <!--신고 번호 : 화이트/ 안보임-->
                                     <div class="field">
@@ -158,6 +156,13 @@
     let replyUL = $("ul.replies");
     let pageNum = 1;
 
+    //목록보러 가기
+    $("a#goList").on("click", function(){
+        location.href = "/report/reportList" + paging;
+    });
+
+
+    //가져온 글에 html태그 인식 시키기
     let content = document.querySelector("#content");
     content.innerHTML += [[${admin.getReportContent}]];
     /*###################################################댓글###########################################################*/
@@ -201,7 +206,7 @@
 
     //목록보러 가기
     $("a#goList").on("click", function(){
-        location.href = "/commu/communityList" + paging;
+        location.href = "/report/reportList" + paging;
     });
 
     //===================================================================================================
@@ -339,15 +344,7 @@
             }
         );
     })
-    /*############################################수정시 예외처리############################*/
 
-    function beforeModify(){
-        if (confirm("수정시 등록된 첨부파일이 삭제됩니다'<br>'계속 진행 하시겠습니까?") == true){    //확인
-            document.form.submit();
-        }else{   //취소
-            return;
-        }
-    }
     /*#########################################팝업############################################*/
     /*신고하기 누르면 팝업*/
     let commuToReport = [[${commu.commuBno}]];
