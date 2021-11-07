@@ -10,8 +10,8 @@ public class PloggingVO {
     private String ploggingTitle;
     private String ploggingContent;
     private String ploResDate;
-    private String ploggingPpl;
-    private String ploggingPplLimit;
+    private int ploggingPpl;
+    private int ploggingPplLimit;
     private Long ploggingPoint;
     private String ploggingRegDate;
 }

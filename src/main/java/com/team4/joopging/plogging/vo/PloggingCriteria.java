@@ -11,7 +11,7 @@ public class PloggingCriteria {
     private int amount;
 
     public PloggingCriteria(){
-        this(1, 9);
+        this(1, 6);
     }
 
     public PloggingCriteria(int pageNum, int amount) {

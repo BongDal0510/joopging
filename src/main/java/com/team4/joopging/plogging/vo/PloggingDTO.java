@@ -12,19 +12,19 @@ public class PloggingDTO {
     private int realEnd;
     private boolean prev, next;
     private int total;
-    private PloggingCriteria eventCriteria;
+    private PloggingCriteria ploggingCriteria;
 
     public PloggingDTO() {;}
 
-    public PloggingDTO(int total, int pageCount, PloggingCriteria eventCriteria) {
+    public PloggingDTO(int total, int pageCount, PloggingCriteria ploggingCriteria) {
         this.total = total;
         this.pageCount = pageCount;
-        this.eventCriteria = eventCriteria;
+        this.ploggingCriteria = ploggingCriteria;
 
-        this.endPage = (int)(Math.ceil(eventCriteria.getPageNum() * 1.0 / pageCount)) * pageCount;
+        this.endPage = (int)(Math.ceil(ploggingCriteria.getPageNum() * 1.0 / pageCount)) * pageCount;
         this.startPage = endPage - (pageCount - 1);
 
-        realEnd = (int)(Math.ceil(total * 1.0 / eventCriteria.getAmount()));
+        realEnd = (int)(Math.ceil(total * 1.0 / ploggingCriteria.getAmount()));
 
         if(endPage > realEnd){
             endPage = realEnd == 0 ? 1 : realEnd;

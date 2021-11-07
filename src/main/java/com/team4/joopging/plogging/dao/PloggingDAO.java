@@ -28,4 +28,10 @@ public class PloggingDAO {
     public List<PloggingVO> getList(PloggingCriteria ploggingCriteria) { return ploggingMapper.getPloggingList(ploggingCriteria); }
 
     public int getTotal() { return ploggingMapper.getTotal(); }
+
+    /*플로깅 예약*/
+    public void reservation(String memberId, String ploggingNum) { ploggingMapper.reservation(memberId, ploggingNum); }
+
+    /*플로깅 신청 인원*/
+    public void addPloggingPpl(int peo, String ploggingNum){ ploggingMapper.addPloggingPpl(peo, ploggingNum); }
 }

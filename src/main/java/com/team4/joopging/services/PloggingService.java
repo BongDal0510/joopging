@@ -29,15 +29,19 @@ public class PloggingService {
 //        return ploggingDAO.modify(plogging);
 //    }
 
-    public boolean remove(Long eventNum){
-        return ploggingDAO.remove(eventNum);
+    public boolean remove(Long ploggingNum){
+        return ploggingDAO.remove(ploggingNum);
     }
 
-    public List<PloggingVO> getList(PloggingCriteria eventCriteria){
-        return ploggingDAO.getList(eventCriteria);
+    public List<PloggingVO> getList(PloggingCriteria ploggingCriteria){
+        return ploggingDAO.getList(ploggingCriteria);
     }
 
     public int getTotal(){
         return ploggingDAO.getTotal();
     }
+
+    public void reservation(String memberId, String ploggingNum) { ploggingDAO.reservation(memberId, ploggingNum); }
+
+    public void addPloggingPpl(int peo, String ploggingNum) { ploggingDAO.addPloggingPpl(peo, ploggingNum);}
 }

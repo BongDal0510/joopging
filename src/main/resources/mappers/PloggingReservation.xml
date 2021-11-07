@@ -9,7 +9,7 @@
     </insert>
 
     <select id="readPlogging" resultType="ploggingVO">
-        SELECT PLOGGINGTITLE, PLOGGINGCONTENT, PLOGGINGPPL, PLOGGINGPPLLIMIT
+        SELECT PLOGGINGNUM, PLOGGINGTITLE, PLOGGINGCONTENT, PLOGGINGPPL, PLOGGINGPPLLIMIT
         FROM TBL_PLOGGING_INFO
         WHERE PLOGGINGNUM = #{ploggingNum}
     </select>
@@ -24,7 +24,7 @@
         SELECT PLOGGINGNUM, PLOGGINGTITLE, PLORESDATE
         FROM
         (
-        SELECT /*+ INDEX_DESC(TBL_EVENT_INFO EVENT_INFO_PK) */
+        SELECT
         ROWNUM R, PLOGGINGNUM, PLOGGINGTITLE, PLORESDATE
         FROM TBL_PLOGGING_INFO
         WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -32,4 +32,23 @@
         WHERE R > (#{pageNum} - 1) * #{amount}
         ]]>
     </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(PLOGGINGNUM)
+        FROM TBL_PLOGGING_INFO
+    </select>
+
+    <!--플로깅 예약-->
+    <insert id="reservation">
+        INSERT INTO TBL_PLO_RES
+        (PLORESNUM, MEMBERID, PLOGGINGNUM, PLORESDATE, PLORESSTATUS)
+        VALUES(SEQ_PLO_RES.NEXTVAL, #{memberId}, #{ploggingNum}, SYSDATE, 0)
+    </insert>
+
+    <!--플로깅 참여 인원 증가-->
+    <update id="addPloggingPpl">
+        UPDATE TBL_PLOGGING_INFO
+        SET PLOGGINGPPL = PLOGGINGPPL + #{peo}
+        WHERE PLOGGINGNUM = #{ploggingNum}
+    </update>
 </mapper>
