@@ -1,20 +1,22 @@
 package com.team4.joopging.controller;
 
 
-import com.team4.joopging.beans.vo.AttachFileVO;
-import com.team4.joopging.beans.vo.ShopCriteria;
-import com.team4.joopging.beans.vo.ShopPageDTO;
-import com.team4.joopging.beans.vo.ShopVO;
+import com.team4.joopging.beans.vo.*;
 import com.team4.joopging.services.ShopService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.http11.Http11AprProtocol;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.List;
 
 @Controller
@@ -74,8 +76,27 @@ public class shopController {
         model.addAttribute("shopCriteria", shopCriteria);
 
     }
+    /*찜목록 저장*/
+    @GetMapping("insertGoodsLike")
+    @ResponseBody
+    public String insertGoodsLike(HttpServletRequest req, @RequestBody String goodsNum){
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+        String result="0";
+        if(memberId!=null&&memberId!=""){
+            ShopVO shopvo = shopService.goodsGet(Long.parseLong(goodsNum));
+            GoodsLikeVO vo = new GoodsLikeVO();
 
-
+            vo.setGoodsName(shopvo.getGoodsName());
+            vo.setGoodsNum(shopvo.getGoodsNum());
+            vo.setGoodsPrice(shopvo.getGoodsPrice());
+            vo.setMemberId(memberId);
+            if(shopService.insertGoodsLike(vo)){
+                result = "1";
+            }
+        }
+        return result;
+    }
 
 
     @GetMapping("successPayment")

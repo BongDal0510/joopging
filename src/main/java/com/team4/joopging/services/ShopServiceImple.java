@@ -3,6 +3,7 @@ package com.team4.joopging.services;
 import com.team4.joopging.beans.dao.AttachFileDAO;
 import com.team4.joopging.beans.dao.ShopDAO;
 import com.team4.joopging.beans.vo.AttachFileVO;
+import com.team4.joopging.beans.vo.GoodsLikeVO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import lombok.RequiredArgsConstructor;
@@ -58,5 +59,10 @@ public class ShopServiceImple implements ShopService{
     @Override
     public List<AttachFileVO> getAttachList(Long goodsNum){
         return attachFileDAO.findByGoodsNum(goodsNum);
+    }
+
+    @Override
+    public boolean insertGoodsLike(GoodsLikeVO vo) {
+        return shopDAO.insertGoodsLike(vo);
     }
 }

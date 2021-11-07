@@ -149,7 +149,7 @@
                                 </th:block>
                                     <td th:object="${shop}">
 
-                                        <div style= width:380px;height:700px;float:left;>
+                                        <div class="test" style= width:380px;height:700px;float:left;>
                                             <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img th:src ="@{/upload/display?fileName=}+*{uploadPath}+@{/}+*{fileName}" style= width:380px;height:500px >
                                                 <h3 th:text="*{goodsName}"></h3>
                                                 <span th:text="*{goodsPrice}"></span></a><br>
@@ -277,7 +277,7 @@
     let paging = [[${pageMaker.shopCriteria.listLink}]];
 
     $(document).ready(function(){
-        let goodsNum = [[${goodsNum}]];
+        let goodsNum = [[${GoodsNum}]];
         if(goodsNum == null || history.state){
             return;
         }
@@ -295,7 +295,33 @@
         e.preventDefault();
         location.href = "/shop/shopDetail" + paging + "&goodsNum=" + $(this).attr("href");
     })
+let testResult = $(".test");
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
+                function(arr){
+                    let str = "";
+                    let mainstr ="";
 
+                    $(arr).each(function(i, attach){
+                        console.log(goodsNum);
+                        if(!attach.image){
+                            return;
+                        }else{
+                            if(i==0){
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                mainstr += "<div class=\"test\">";
+                                mainstr += "<a href=\""+goodsNum+"\" class=\"goDetail\">";
+                                mainstr += "<img style=\"text-algin: center; width: 500px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                                mainstr += "</a></div>"
+                                return;
+                            }
+                        }
+                    });
+                    testResult.html(mainstr);
+                });//getJSON
+        })();
+    })
 </script>
 
 

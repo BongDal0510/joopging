@@ -1,6 +1,7 @@
 package com.team4.joopging.mappers;
 
 
+import com.team4.joopging.beans.vo.GoodsLikeVO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +24,6 @@ public interface ShopMapper {
     public int goodsDelete(Long goodsNum);
     /* 상품 전체 갯수*/
     public int goodsGetTotal();
+    /*찜 넣기*/
+    public int insertGoodsLike(GoodsLikeVO vo);
 }

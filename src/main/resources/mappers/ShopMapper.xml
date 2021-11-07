@@ -79,5 +79,8 @@
         SELECT COUNT(goodsNum) FROM TBL_GOODSLIST
     </select>
 
-
+<insert id="insertGoodsLike">
+    INSERT INTO TBL_GOODS_LIKE_LIST
+(SEQ_GOODSLIKENUM.NEXTVAL, #{memberId}, #{goodsNum}, #{goodsName}, #{GoodsPrice});
+</insert>
 </mapper>
