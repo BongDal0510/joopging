@@ -60,9 +60,9 @@
                             </div>
                             <div class="field" id="boardWriterArea">
                                 <h4 id="sessionId">신고자 :</h4>
-                                <input name="sessionId" type="text" th:value="${memberId}" readonly/>
-                                <h4 id="reportDate">신고일 :</h4><!--th: ${reportDate}-->
-                                <input name="reportDate" type="text" th:value="${admin.reportDate}" readonly/>
+                                <input name="sessionId" type="text" th:value="${reporter}" readonly/><!--th:value="${member.getMemberId()}"-->
+                                <!--                                <h4 id="reportDate">신고일 :</h4>&lt;!&ndash;th: ${reportDate}&ndash;&gt;
+                                                                <input name="reportDate" type="text" readonly/> &lt;!&ndash;th:value="${admin.reportDate}"&ndash;&gt;-->
                             </div>
                         </div>
 

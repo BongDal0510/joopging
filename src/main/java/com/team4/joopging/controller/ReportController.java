@@ -43,26 +43,31 @@ public class ReportController {
     //report 팝업으로 페이지 이동
     @GetMapping("report")
     public String reportPop(@RequestParam("commuBno") Long commuBno, Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+
         //1. read에서 commuBno 가져옴.
         log.info("--------------------------------");
         log.info("신고할 게시글 번호 :" + commuService.getCommu(commuBno));
+        log.info("세션 아이디 :" + session.getAttribute("memberId"));
+
         log.info("--------------------------------");
 
         //2. sessionId 받아오고 싶어여
-        HttpSession session = req.getSession();
+
+        model.addAttribute("reporter", session.getAttribute("memberId"));
      /*   if(session.getAttribute("memberId")!= null){
             String memberId = (String)session.getAttribute("memberId");
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }*/
         //3. 신고일 연산
-
         //4. reportPurpose
 
         // commuboard에 있는 commuTitle
         model.addAttribute("commu", commuService.getCommu(commuBno));
    /*    model.addAttribute("reporter", adminService.readReport(commuBno));*/
-        String memberId = (String)session.getAttribute("memberId");
-        model.addAttribute("member", memberService.memberAllSelect(memberId));
+/*        String memberId = (String)session.getAttribute("memberId");
+
+        model.addAttribute("member", memberService.memberAllSelect(memberId));*/
 
         return "report/report";
     }
