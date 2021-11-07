@@ -9,6 +9,7 @@ import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.services.CommuService;
 import com.team4.joopging.services.AdminService;
+import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,15 +36,24 @@ public class ReportController {
 
     private final AdminService adminService;
     private final CommuService commuService;
+    private final MemberService memberService;
+
+
+    //###############################################사용자가 신고 등록하는 페이지#####################################################
     //report 팝업으로 페이지 이동
     @GetMapping("report")
-    public String reportPop(@RequestParam("commuBno") Long commuBno, Model model) {
+    public String reportPop(@RequestParam("commuBno") Long commuBno, Model model, HttpServletRequest req) {
         //1. read에서 commuBno 가져옴.
         log.info("--------------------------------");
         log.info("신고할 게시글 번호 :" + commuService.getCommu(commuBno));
         log.info("--------------------------------");
 
         //2. sessionId 받아오고 싶어여
+        HttpSession session = req.getSession();
+        if(session.getAttribute("memberId")!= null){
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        }
         //3. 신고일 연산 -- 메소드 따로 만들기
         //4. reportPurpose
 
@@ -60,21 +71,21 @@ public class ReportController {
         log.info("--------------------------------");
         log.info("register : " + report.toString());
         log.info("--------------------------------");
-
-
-
         adminService.insertReport(report);
         //세션의 flash 영역을 이용하여 전달
-
- /*       model.addAttribute("commu", commu.getCommuTitle());
-        rttr.addFlashAttribute("commuBno", report.getCommuBno());*/
-
         //  RedirectView를 사용하면 redirect 방식으로 전송이 가능하다. flash에 잠시 값을 담아두고 redirect 초기화 후에 flash에서 값을 받아온다.
     }
 
+    //###############################################관리자 창에서 띄워주는 페이지#####################################################
     //커뮤니티 전체목록 + 페이징
     @GetMapping("reportList")
-    public String reportList(ReportCriteria reportCriteria, Model model) {
+    public String reportList(ReportCriteria reportCriteria, Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        //로그인 되어있는 상태 알림 + 현재 아이디 담기
+        if(session.getAttribute("memberId")!= null){
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+        }
         log.info("------------------");
         log.info("reportList");
         log.info("------------------");
@@ -84,27 +95,24 @@ public class ReportController {
         return "report/reportList";
     }
 
-/*
-    private String getFolderYesterday() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        //현재 날짜에서 -1은 하루 전날을 의미한다.
-        cal.add(Calendar.DATE, -1);
-        String str = sdf.format(cal.getTime());
-
-        return str.replace("-", "/");
-    }
-*/
-
-
     //신고하기 글 읽기 + 경로 이동 전 페이지 기억하기
-    @GetMapping({"reportRead"})
-    public void readReport(@RequestParam("reportNum") Long reportNum, ReportCriteria reportCriteria, Model model, ReportVO reportVO, HttpServletRequest request) {
+    @GetMapping("reportRead")
+    public String readReport(@RequestParam("reportNum") Long reportNum, ReportCriteria reportCriteria, Model model, ReportVO reportVO, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        //로그인 되어있는 상태 알림 + 현재 아이디 담기
+            String memberId = (String)session.getAttribute("memberId");
+            model.addAttribute("member", memberService.memberAllSelect(memberId));
+
+
         log.info("--------------------------------");
         log.info(" read : " + reportNum);
         log.info("--------------------------------");
+        log.info("read" +adminService.readReport(reportNum));
+
         model.addAttribute("admin", adminService.readReport(reportNum));
         model.addAttribute("criteria", reportCriteria);
+
+        return "report/reportRead";
     }
 
     //  삭제
