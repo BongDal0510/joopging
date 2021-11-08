@@ -129,16 +129,15 @@
                 <div id="commuBoardLeft">
                     <table id="commuLeftCategory">
                         <tr>
-                            <td><a href="javascript:void(0)" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
+                            <td><a href="/commu/communityList" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
                         </tr>
                         <tr>
-                            <td><a href="javascript:void(0)" id="interview" class="commu">인터뷰</a></td>
+                            <td><a href="javascript:void(0)" id="interview" class="commu" onclick="serviceNotReady()">플로깅
+                                소식지</a></td>
                         </tr>
-                        <!--                        <tr>
-                                                    <th class="commu">이벤트</th>
-                                                </tr>-->
                         <tr>
-                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu">문의하기</a></td>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu"
+                                   onclick="serviceNotReady()">인터뷰</a></td>
                         </tr>
                         <!--admin 계정만 보이게-->
                         <tr>
@@ -155,7 +154,7 @@
                         <div id="registerBtnArea"><a href="/commu/communityRegister" class="button small">글 등록</a></div>
                     </div>
                     <div class="table-wrapper">
-                        <table>
+                        <table id="commuListTable">
                             <thead>
                             <tr class="tHead" id="commuAnnounceTh">
                                 <th class="bno" style="color:white;">번호</th>
@@ -168,7 +167,7 @@
                             <tbody>
                             <th:block th:each="announce : ${announceList}">
                                 <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
-                                    <td class="boardStatus"><img src="/images/commu/siren.png"></td>
+                                    <td class="boardStatus"><span style="color: red">[공지글]</span></td>
                                     <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>
@@ -382,5 +381,11 @@
             e.preventDefault();
         }
     })
+
+    /*#####################################기능 막기####################################*/
+    function serviceNotReady() {
+        console.log(confirm("준비중인 서비스입니다.\n단장된 모습으로 찾아 뵙겠습니다.") == true);
+    }
+
 </script>
 </html>

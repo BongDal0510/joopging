@@ -55,11 +55,11 @@ public class ReportController {
         //2. sessionId 받아오고 싶어여
 
         model.addAttribute("reporter", session.getAttribute("memberId"));
-     /*   if(session.getAttribute("memberId")!= null){
-            String memberId = (String)session.getAttribute("memberId");
-            model.addAttribute("member", memberService.memberAllSelect(memberId));
-        }*/
+     /*
         //3. 신고일 연산
+
+      */
+
         //4. reportPurpose
 
         // commuboard에 있는 commuTitle
@@ -75,13 +75,14 @@ public class ReportController {
 
     //report 등록
     @PostMapping("report")                                  //앞에서 받아오는 값
-    public void insertReport(ReportVO report, Model model) {
+    public String insertReport(ReportVO report, Model model) {
         log.info("--------------------------------");
         log.info("register : " + report.toString());
         log.info("--------------------------------");
         adminService.insertReport(report);
         //세션의 flash 영역을 이용하여 전달
         //  RedirectView를 사용하면 redirect 방식으로 전송이 가능하다. flash에 잠시 값을 담아두고 redirect 초기화 후에 flash에서 값을 받아온다.
+        return "success";
     }
 
     //###############################################관리자 창에서 띄워주는 페이지#####################################################

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <title>1:1 문의 글 쓰기</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/inquiryWrite.css">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload">
+<header id="commuHeaderWrapper">
+    <div id="main_header"></div>
+</header>
+<div id="page-wrapper">
+    <!--Main-->
+    <section class="main">
+        <div id="all">
+            <div class="group">
+                <h3 style="text-align: center; margin-bottom: 25px">1:1 문의 작성</h3>
+                <hr style="width: 89%">
+                <table id="table">
+                    <form id="writeForm" action="/inquiry/inquiryWrite" method="post">
+                        <tbody>
+                        <tr>
+                            <th>문의 구분</th>
+                            <td>
+                                <select>
+                                    <option>플로깅 예약</option>
+                                    <option>이벤트 신청</option>
+                                    <option>게시판 문의</option>
+                                    <option>상품/결제 문의</option>
+                                    <option>등업 관련 문의</option>
+                                    <option>기타</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" class="input" name="title" id="title" placeholder="제목을 입력해주세요.">
+                                <input type="hidden" id="id" name="id" th:value="${session.sessionId}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: middle;">문의 내용</th>
+                            <td style="line-height: 3">
+                                <textarea rows="10" style="resize: none;" name="content" class="input" id="content"
+                                          placeholder="내용을 입력해주세요."></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </form>
+                </table>
+                <div style="text-align: center; margin-left: 20px">
+                    <input type="button" id="inquiryButton" value="작성">
+                    <input type="button" id="cancelButton" value="취소" style="margin-left: 8px; background: #888787;">
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script>
+
+    $("#inquiryButton").on("click", function () {
+        if (!$("#title").val()) {
+            alert("제목을 입력해주세요.")
+            return;
+        }
+        if (!$("#content").val()) {
+            alert("내용을 입력해주세요.")
+            return;
+        }
+
+        $("#writeForm").submit();
+    });
+
+    $("#cancelButton").on("click", function(){
+        location.href="/user/inquiry";
+    })
+</script>
+</body>
+</html>

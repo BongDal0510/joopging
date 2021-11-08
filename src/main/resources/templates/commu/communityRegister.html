@@ -8,8 +8,7 @@
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/community.css" />
-    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
-    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">    <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
 
@@ -33,16 +32,15 @@
                 <div id="commuBoardLeft">
                     <table id="commuLeftCategory">
                         <tr>
-                            <td><a href="javascript:void(0)" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
+                            <td><a href="/commu/communityList" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
                         </tr>
                         <tr>
-                            <td><a href="javascript:void(0)" id="interview" class="commu">인터뷰</a></td>
+                            <td><a href="javascript:void(0)" id="interview" class="commu" onclick="serviceNotReady()">플로깅
+                                소식지</a></td>
                         </tr>
-                        <!--                        <tr>
-                                                    <th class="commu">이벤트</th>
-                                                </tr>-->
                         <tr>
-                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu">문의하기</a></td>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu"
+                                   onclick="serviceNotReady()">인터뷰</a></td>
                         </tr>
                         <!--admin 계정만 보이게-->
                         <tr>
@@ -116,13 +114,16 @@
 <!--summernote script-->
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+
 </body>
 <script>
+/*
     let session = $("#id").val();
-    if (session != "yougnAdmin" || session == "") {
-        alert("관리자 이외에는 접근하실 수 없습니다.");
+    if (session != "memberId" || session == "") {
+        alert("로그인 후 이용해주세요");
         history.back();
     }
+*/
 
     $(document).ready(function () {
         var fontList = ['맑은 고딕', '돋움', '궁서', '굴림', '굴림체', '궁서체', '나눔 고딕', '바탕', '바탕체', '새굴림', 'HY견고딕', 'HY견명조', 'HY궁서B', 'HY그래픽M', 'HY목각파임B', 'HY신명조', 'HY얕은샘물M', 'HY엽서L', 'HY엽서M', 'HY중고딕', 'HY헤드라인M', '휴먼매직체', '휴먼모음T', '휴먼아미체', '휴먼둥근헤드라인', '휴먼편지체', '휴먼옛체'];
@@ -149,21 +150,34 @@
                 ['Misc', ['fullscreen']]
             ],
             //콜백 함수
-            callbacks: {}
-        };
+            callbacks: {	//이미지 첨부하는 부분
+                onImageUpload: function (files) {
+                    uploadSummernoteImageFile(files[0], this);
+                }
+            }
+        }
         $('#summernote').summernote(setting);
+        });
+
+        function uploadSummernoteImageFile(file, editor) {
+            data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                data : data,
+                type : "POST",
+                url : "/uploadSummernoteImageFile",
+                contentType : false,
+                processData : false,
+                success : function(data) {
+                    //항상 업로드된 파일의 url이 있어야 한다.
+                    $(editor).summernote('insertImage', data.url);
+                }
+            });
+        }
+
 
         $("#commuRegist").click(function (e) {
             e.preventDefault();
-            if (!$("input[name=title]").val()) {
-                alert("제목을 입력해주세요.");
-                $("input[name=title]").focus();
-                return;
-            }
-            if (!$("#summernote").val()) {
-                alert("내용을 입력해주세요.");
-                return;
-            }
             let str = "";
             $(".uploadResult ul li").each(function (i, obj) {
                 str += "<input type='text' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
@@ -172,6 +186,48 @@
                 str += "<input type='text' name='fileList[" + i + "].image' value='" + $(obj).data('type') + "'>"
             });
             $(document.postForm).append(str).submit();
+        })
+
+
+        let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)$");
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+        function showUploadFile(uploadFile) {
+            let str = "";
+            $(uploadFile).each(function (i, obj) {
+                console.log(obj.uploadPath);
+                let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image + "'>";
+                str += "<div>";
+                str += "<img src='/upload/display?fileName=" + originPath + "' style='width: 480px; max-width: 480px; max-height:350px; height: 350px;'>";
+                str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
+                str += "</div>";
+                str += "</li>";
+            });
+            uploadResult.append(str);
+        }
+
+        $(".uploadResult").on("click", "span", function () {
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/upload/deleteFile",
+                type: "POST",
+                data: {fileName: targetFile, type: type},
+                dataType: "text",
+                success: function (result) {
+                    alert(result);
+                    li.remove();
+                    $("#file").show();
+                }
+            });
+
         });
 
 </script>
@@ -318,6 +374,12 @@
             });
         });
     })
+
+    /*#####################################기능 막기####################################*/
+    function serviceNotReady() {
+        console.log(confirm("준비중인 서비스입니다.\n단장된 모습으로 찾아 뵙겠습니다.") == true);
+    }
+
 </script>
 
 </html>
