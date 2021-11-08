@@ -9,6 +9,18 @@
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
     <style>
+        .total_price{
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+        .math{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .total_span{
+            font-weight: bolder;
+            font-size: 14px;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -392,6 +404,21 @@
                         </tr>-->
                             </tbody>
                     </table>
+                    </div>
+                    <div class="total_price">
+                        <hr align="center" style="border: solid 1px #5d5d5d59; width: 100%;">
+                        <div>
+                            <span class="total_span">주문상품금액&nbsp; 55,000원 </span>
+                            &nbsp;&nbsp;<span class="math">+</span>&nbsp;&nbsp;
+                            <span class="total_span">총 배송비&nbsp; 0 원</span>
+                            &nbsp;&nbsp;<span class="math">-</span>&nbsp;&nbsp;
+                            <span class="total_span">총 할인금액&nbsp; 0 원</span>
+                            &nbsp; &nbsp;<span class="math">=</span>&nbsp;&nbsp;
+                            <span class="total_span">총 주문금액&nbsp;<span style="color:red; font-size: 14px;">&nbsp;55,000원</span></span>
+                        </div>
+                        <div>
+                            <hr align="center" style="border: solid 1px #5d5d5d59; width: 100%;">
+                        </div>
                     </div>
                     <div style="margin-top: 2em; text-align: center">
                         <input class="Payment_btn" type="button" value="결제하기">
