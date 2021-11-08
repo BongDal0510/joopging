@@ -285,6 +285,8 @@
         history.replaceState({}, null, null);
     });
 
+
+
     $("a.changePage").click(function(e){
         e.preventDefault();
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));

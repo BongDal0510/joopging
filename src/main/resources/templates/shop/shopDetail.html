@@ -255,7 +255,7 @@
                                                                                                   onclick="del();">
                         </form>
                         <div style="margin-top: 30px;">
-                            <input type="button" class="listbtn" value="BUY NOW " onclick=""> <input
+                            <input type="button" class="Payment_btn" value="BUY NOW " onclick=""> <input
                                 type="button" class="listbtn" value="ADD CART" onclick=""> <label><img
                                 id="heart"
                                 style="vertical-align: middle; width: 40px; height: 40px; margin-left: 30px;"
@@ -517,11 +517,13 @@
                 "border-color": "#d3d3d3"
             });
         });
-        $(".listbtn").click(function () {
+        /*$(".listbtn").click(function () {
            alert("준비중입니다");
            return false;
+        });*/
+        $(".Payment_btn").on("click", function(){
+            location.href="/shop/shopPayment"
         });
-
     });
 
     // 수량 조종하는 함수
