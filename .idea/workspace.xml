@@ -214,14 +214,7 @@
       <workItem from="1636220439413" duration="51197000" />
       <workItem from="1636336041463" duration="50741000" />
       <workItem from="1636396518802" duration="216000" />
-      <workItem from="1636396881317" duration="1290000" />
-    </task>
-    <task id="LOCAL-00025" summary="2021-11-02 성윤&#10;&#10;네이버 로그인 프론트 구현 성공&#10;이후 사용자 데이터 요청 및&#10;회원가입 기능 구현 예정">
-      <created>1635843318806</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1635843318806</updated>
+      <workItem from="1636396881317" duration="1647000" />
     </task>
     <task id="LOCAL-00026" summary="2021-11-02 성윤&#10;&#10;임시 커밋">
       <created>1635862216377</created>
@@ -559,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636398153207</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료">
+      <created>1636398255595</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1636398255595</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -719,16 +719,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1635787707690" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1636398165949">
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1636398261987">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1636380295721" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398165949" />
-    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636398181392">
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398261987" />
+    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636398306434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1636380546564" />
-    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398181392" />
+    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398306434" />
     <state x="475" y="10" width="585" height="804" key="find.popup" timestamp="1635954173095">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
