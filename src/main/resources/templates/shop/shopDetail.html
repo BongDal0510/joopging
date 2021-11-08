@@ -208,7 +208,7 @@
             <div class="shop_text">
                 <div th:object="${shop}">
                     <h2 name="goodsName" th:text="*{goodsName}"></h2>
-                    <span style="font-size: 20px;">\</span><span th:text="*{goodsPrice}"style="font-size: 20px;"></span><span style="font-size: 20px;">원</span>
+                    <span style="font-size: 20px;">\</span><span name ="goodsPrice" th:text="*{goodsPrice}"style="font-size: 20px;"></span><span style="font-size: 20px;">원</span>
                     <p>
 
                     <div th:text="*{goodsContent}">
@@ -248,7 +248,6 @@
                             <option value="1">GREEN</option>
                             <option value="2">WHITE</option>
                         </select>
-                        <form>
                             QUANTITY <input type="text" name="amount" value="1" size="3"
                                             onchange="change();"> <input type="button" value=" + "
                                                                          onclick="add();"> <input type="button"
