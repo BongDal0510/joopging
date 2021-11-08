@@ -293,7 +293,7 @@
             <ul></ul>
         </div>
 
-        <div class="detail">
+        <!--<div class="detail">
             <img
                     style="text-algin: center; width: 550px; height: 500px; margin-top: 200px;"
                     src="/images/프라이탁.jpg">
@@ -306,7 +306,7 @@
         <div class="detail">
             <img style="text-algin: center; width: 550px; height: 500px;"
                  src="/images/프라이탁정보2.jpg">
-        </div>
+        </div>-->
 
         <div id="review_div">
             <h3 id="review_h3">상품후기</h3>
@@ -317,7 +317,7 @@
                     <p id="review_notice">고객님의 소중한 상품후기에 <span class="point">포인트</span>를 드립니다.<br>
                         다만 관련법에 위반이 되는표현이 포함된 경우,<br>
                         부득이 삭제될 수 있으니 양해 바랍니다.</p>
-                    <input id="review_btn" type="button" value="후기작성" onclick="">
+                    <input id="review_btn" class="listbtn" type="button" value="후기작성" onclick="">
                 </div>
                 <div>
                     <img src="/images/일반리뷰.png">
@@ -515,7 +515,10 @@
                 "border-color": "#d3d3d3"
             });
         });
-
+        $(".listbtn").click(function () {
+           alert("준비중입니다");
+           return false;
+        });
 
     });
 
