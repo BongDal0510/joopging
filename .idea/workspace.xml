@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9652526d-1a3e-43d1-a752-744ab00bbdc3" name="Default Changelist" comment="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="JavaScript File" />
+        <option value="Kotlin File" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ploggingReservation" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1zNkouoZgULGoG6RRBFdF3umEv8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mappers" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\mappers" />
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\static\images\ploggingReservation" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.team4.joopging.task" />
+      <recent name="com.team4.joopging.controller" />
+      <recent name="com.team4.joopging.plogging.dao" />
+      <recent name="com.team4.joopging.plogging.vo" />
+      <recent name="com.team4.joopging.mappers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\static\images\admin" />
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\templates" />
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\static\images\member" />
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\java\com\team4\joopging\mappers" />
+      <recent name="C:\gb_0900_ksy\spring\workspace\joopging\src\main\resources\static\images\ploggingReservation" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.JoopgingApplication">
+    <configuration name="MemberTest.testAllSelect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="joopging" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.team4.joopging.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.team4.joopging.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.team4.joopging.controller.MemberTest" />
+      <option name="METHOD_NAME" value="testAllSelect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="joinInfo.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/joopging/templates/event/joinInfo.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="payMent.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/joopging/templates/ploggingReservation/payMent.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="ploResInfo.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/joopging/templates/ploggingReservation/ploResInfo.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="ploWrite.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/joopging/templates/ploggingReservation/ploWrite.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="JoopgingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="joopging" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.team4.joopging.JoopgingApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.payMent.html" />
+      <item itemvalue="JavaScript Debug.ploWrite.html" />
+      <item itemvalue="JavaScript Debug.ploResInfo.html" />
+      <item itemvalue="JavaScript Debug.joinInfo.html" />
+      <item itemvalue="JUnit.MemberTest.testAllSelect" />
+      <item itemvalue="Spring Boot.JoopgingApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.joinInfo.html" />
+        <item itemvalue="JUnit.MemberTest.testAllSelect" />
+        <item itemvalue="JavaScript Debug.ploResInfo.html" />
+        <item itemvalue="JavaScript Debug.ploWrite.html" />
+        <item itemvalue="JavaScript Debug.payMent.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9652526d-1a3e-43d1-a752-744ab00bbdc3" name="Default Changelist" comment="" />
+      <created>1633996110631</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633996110631</updated>
+      <workItem from="1633996115847" duration="44000" />
+      <workItem from="1633997516293" duration="38000" />
+      <workItem from="1634028159958" duration="3873000" />
+      <workItem from="1634112174899" duration="2888000" />
+      <workItem from="1634173630429" duration="1249000" />
+      <workItem from="1634185340677" duration="695000" />
+      <workItem from="1634195900974" duration="15146000" />
+      <workItem from="1634287088524" duration="268000" />
+      <workItem from="1634287645475" duration="15008000" />
+      <workItem from="1634436293358" duration="9232000" />
+      <workItem from="1634464848751" duration="1321000" />
+      <workItem from="1634476051919" duration="9844000" />
+      <workItem from="1634562132883" duration="244000" />
+      <workItem from="1634562544059" duration="12357000" />
+      <workItem from="1634621214561" duration="8159000" />
+      <workItem from="1634632518901" duration="3239000" />
+      <workItem from="1634655176221" duration="16125000" />
+      <workItem from="1634689343106" duration="35935000" />
+      <workItem from="1634774421171" duration="10334000" />
+      <workItem from="1634862050376" duration="6000" />
+      <workItem from="1634862154007" duration="384000" />
+      <workItem from="1634863644222" duration="16001000" />
+      <workItem from="1634888686680" duration="3062000" />
+      <workItem from="1635148927812" duration="16361000" />
+      <workItem from="1635252026824" duration="13829000" />
+      <workItem from="1635294398179" duration="4375000" />
+      <workItem from="1635346906827" duration="11738000" />
+      <workItem from="1635380986359" duration="24091000" />
+      <workItem from="1635410318722" duration="8924000" />
+      <workItem from="1635466732388" duration="11117000" />
+      <workItem from="1635517690341" duration="19466000" />
+      <workItem from="1635671169423" duration="4024000" />
+      <workItem from="1635688565195" duration="12512000" />
+      <workItem from="1635732843942" duration="2917000" />
+      <workItem from="1635744837486" duration="512000" />
+      <workItem from="1635756415266" duration="148000" />
+      <workItem from="1635756636073" duration="31000" />
+      <workItem from="1635756679237" duration="87000" />
+      <workItem from="1635756841225" duration="7000" />
+      <workItem from="1635756870989" duration="4385000" />
+      <workItem from="1635784835646" duration="2844000" />
+      <workItem from="1635787722724" duration="8676000" />
+      <workItem from="1635825128881" duration="25103000" />
+      <workItem from="1635861362310" duration="13353000" />
+      <workItem from="1635897803889" duration="9694000" />
+      <workItem from="1635913744886" duration="16702000" />
+      <workItem from="1635935699502" duration="1128000" />
+      <workItem from="1635936849059" duration="22143000" />
+      <workItem from="1635985823371" duration="9080000" />
+      <workItem from="1636072442522" duration="24441000" />
+      <workItem from="1636173545820" duration="9004000" />
+      <workItem from="1636220439413" duration="51197000" />
+      <workItem from="1636336041463" duration="50741000" />
+      <workItem from="1636396518802" duration="216000" />
+      <workItem from="1636396881317" duration="1290000" />
+    </task>
+    <task id="LOCAL-00025" summary="2021-11-02 성윤&#10;&#10;네이버 로그인 프론트 구현 성공&#10;이후 사용자 데이터 요청 및&#10;회원가입 기능 구현 예정">
+      <created>1635843318806</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1635843318806</updated>
+    </task>
+    <task id="LOCAL-00026" summary="2021-11-02 성윤&#10;&#10;임시 커밋">
+      <created>1635862216377</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1635862216377</updated>
+    </task>
+    <task id="LOCAL-00027" summary="2021-11-02 성윤&#10;&#10;네이버 로그인 api 테스트 진행">
+      <created>1635866964092</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1635866964092</updated>
+    </task>
+    <task id="LOCAL-00028" summary="2021-11-03 성윤&#10;&#10;네이버 로그인 api 완성 및&#10;회원 관련 기능 구현 끗">
+      <created>1635904273953</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1635904273953</updated>
+    </task>
+    <task id="LOCAL-00029" summary="2021-11-03 성윤&#10;&#10;플로깅 예약 브렌치 생성">
+      <created>1635904853350</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1635904853350</updated>
+    </task>
+    <task id="LOCAL-00030" summary="2021-11-03 성윤&#10;&#10;플로깅 예약 관련 브런치 분리">
+      <created>1635905277268</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1635905277268</updated>
+    </task>
+    <task id="LOCAL-00031" summary="2021-11-03 성윤&#10;&#10;member 오류 수정">
+      <created>1635920981335</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1635920981335</updated>
+    </task>
+    <task id="LOCAL-00032" summary="2021-11-03 성윤&#10;&#10;member 파일 분리 및 오류 수정">
+      <created>1635922399009</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1635922399009</updated>
+    </task>
+    <task id="LOCAL-00033" summary="2021-11-03 성윤&#10;&#10;member 파일 분리 및 오류 수정">
+      <created>1635922486156</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1635922486156</updated>
+    </task>
+    <task id="LOCAL-00034" summary="2021-11-03 성윤&#10;&#10;members 브랜치 생성 및 member 로컬 브랜치 제거">
+      <created>1635924197547</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1635924197547</updated>
+    </task>
+    <task id="LOCAL-00035" summary="2021-11-03 성윤&#10;&#10;plogging Reservation 브랜치 세팅 중">
+      <created>1635927627242</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1635927627242</updated>
+    </task>
+    <task id="LOCAL-00036" summary="2021-11-03 성윤&#10;&#10;plogging Reservation 브랜치 세팅 중">
+      <created>1635928396458</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1635928396458</updated>
+    </task>
+    <task id="LOCAL-00037" summary="2021-11-03 성윤&#10;&#10;temp 업데이트 제발요">
+      <created>1635932775827</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1635932775827</updated>
+    </task>
+    <task id="LOCAL-00038" summary="2021-11-03 성윤&#10;&#10;temp 업데이트 제발요">
+      <created>1635932985447</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1635932985447</updated>
+    </task>
+    <task id="LOCAL-00039" summary="2021-11-03 성윤&#10;&#10;user 브랜치 업데이트">
+      <created>1635935912089</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1635935912089</updated>
+    </task>
+    <task id="LOCAL-00040" summary="2021-11-03 성윤&#10;&#10;탬프 업데이트 백업 브랜치 업데이트">
+      <created>1635937665747</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1635937665747</updated>
+    </task>
+    <task id="LOCAL-00041" summary="2021-11-03 성윤&#10;&#10;탬프 업데이트 백업 브랜치 업데이트">
+      <created>1635938113792</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1635938113792</updated>
+    </task>
+    <task id="LOCAL-00042" summary="2021-11-03 성윤&#10;&#10;탬프 업데이트 백업 브랜치 업데이트">
+      <created>1635938372662</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1635938372662</updated>
+    </task>
+    <task id="LOCAL-00043" summary="2021-11-03 성윤&#10;&#10;member 컨트롤러 이름 수정">
+      <created>1635948679559</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1635948679559</updated>
+    </task>
+    <task id="LOCAL-00044" summary="2021-11-04 성윤&#10;&#10;member 브랜치 생성">
+      <created>1635953594295</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1635953594295</updated>
+    </task>
+    <task id="LOCAL-00045" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635953949678</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1635953949678</updated>
+    </task>
+    <task id="LOCAL-00046" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635954189789</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1635954189789</updated>
+    </task>
+    <task id="LOCAL-00047" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635954483274</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1635954483274</updated>
+    </task>
+    <task id="LOCAL-00048" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635955241310</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1635955241310</updated>
+    </task>
+    <task id="LOCAL-00049" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635955373201</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1635955373201</updated>
+    </task>
+    <task id="LOCAL-00050" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635955497151</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1635955497152</updated>
+    </task>
+    <task id="LOCAL-00051" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635955581548</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1635955581549</updated>
+    </task>
+    <task id="LOCAL-00052" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635956039615</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1635956039615</updated>
+    </task>
+    <task id="LOCAL-00053" summary="2021-11-04 성윤&#10;&#10;member 브랜치 정리">
+      <created>1635956689640</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1635956689640</updated>
+    </task>
+    <task id="LOCAL-00054" summary="2021-11-04 성윤&#10;&#10;member 회원 별 &#10;정보 조회 알고리즘 설계&#10;&#10;비밀번호 찾기 오류 수정">
+      <created>1635970105060</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1635970105060</updated>
+    </task>
+    <task id="LOCAL-00055" summary="2021-11-04 성윤&#10;&#10;member controller 코드 정리">
+      <created>1635990539863</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1635990539863</updated>
+    </task>
+    <task id="LOCAL-00056" summary="2021-11-05 성윤&#10;&#10;member 로그인 회원탈퇴 검사 기능&#10;업데이트">
+      <created>1636073915988</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1636073915988</updated>
+    </task>
+    <task id="LOCAL-00057" summary="2021-11-05 성윤&#10;&#10;plogging 세팅 중 중간 커밋">
+      <created>1636077897129</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1636077897129</updated>
+    </task>
+    <task id="LOCAL-00058" summary="2021-11-05 성윤&#10;&#10;plogging 소개 페이지 완료">
+      <created>1636080618465</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1636080618465</updated>
+    </task>
+    <task id="LOCAL-00059" summary="2021-11-05 성윤&#10;&#10;plogging html 정리">
+      <created>1636093661954</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1636093661954</updated>
+    </task>
+    <task id="LOCAL-00060" summary="2021-11-05 성윤&#10;&#10;plogging, event 브랜치 merge">
+      <created>1636095201638</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1636095201638</updated>
+    </task>
+    <task id="LOCAL-00061" summary="2021-11-05 성윤&#10;&#10;plogging 작업중">
+      <created>1636124212114</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1636124212115</updated>
+    </task>
+    <task id="LOCAL-00062" summary="2021-11-05 성윤&#10;&#10;plogging 작업중">
+      <created>1636124267426</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1636124267426</updated>
+    </task>
+    <task id="LOCAL-00063" summary="2021-11-05 성윤&#10;&#10;썸머노트 api 태그 오류 수정">
+      <created>1636129822649</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1636129822649</updated>
+    </task>
+    <task id="LOCAL-00064" summary="2021-11-07 성윤&#10;&#10;plogging 작업 중 커밋">
+      <created>1636219342156</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1636219342157</updated>
+    </task>
+    <task id="LOCAL-00065" summary="2021-11-07 성윤&#10;&#10;plogging 글쓰기 틀 제작">
+      <created>1636220055115</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1636220055115</updated>
+    </task>
+    <task id="LOCAL-00066" summary="2021-11-07 성윤&#10;&#10;plogging 글쓰기 틀 제작 중">
+      <created>1636221007245</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1636221007245</updated>
+    </task>
+    <task id="LOCAL-00067" summary="2021-11-07 성윤&#10;&#10;plogging 기능 제작 중">
+      <created>1636258808302</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1636258808302</updated>
+    </task>
+    <task id="LOCAL-00068" summary="2021-11-07 성윤&#10;&#10;관리자 신고하기 페이지 오류 수정">
+      <created>1636267831070</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1636267831070</updated>
+    </task>
+    <task id="LOCAL-00069" summary="2021-11-08 성윤&#10;&#10;플로깅 예약 기능, 글쓰기 기능 완성">
+      <created>1636309145056</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1636309145056</updated>
+    </task>
+    <task id="LOCAL-00070" summary="2021-11-08 성윤&#10;&#10;플로깅 예약 목록 상세보기 첨부파일 완성">
+      <created>1636380278814</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1636380278815</updated>
+    </task>
+    <task id="LOCAL-00071" summary="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 페이지 오류 수정 중">
+      <created>1636386352698</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1636386352698</updated>
+    </task>
+    <task id="LOCAL-00072" summary="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료">
+      <created>1636394882664</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1636394882664</updated>
+    </task>
+    <task id="LOCAL-00073" summary="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료">
+      <created>1636398153206</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1636398153207</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="2021-11-03 성윤&#10;&#10;user 브랜치 업데이트" />
+    <MESSAGE value="2021-11-03 성윤&#10;&#10;탬프 업데이트 백업 브랜치 업데이트" />
+    <MESSAGE value="2021-11-03 성윤&#10;&#10;member 컨트롤러 이름 수정" />
+    <MESSAGE value="2021-11-04 성윤&#10;&#10;member 브랜치 생성" />
+    <MESSAGE value="2021-11-04 성윤&#10;&#10;member 브랜치 정리" />
+    <MESSAGE value="2021-11-04 성윤&#10;&#10;member 회원 별 &#10;정보 조회 알고리즘 설계&#10;&#10;비밀번호 찾기 오류 수정" />
+    <MESSAGE value="2021-11-04 성윤&#10;&#10;member controller 코드 정리" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;member 로그인 회원탈퇴 검사 기능&#10;업데이트" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging 세팅 중 중간 커밋" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging 소개 페이지 완료" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging html 정리" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging event 브랜치 설정" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging event 브랜치 merge" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging, event 브랜치 merge" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;plogging 작업중" />
+    <MESSAGE value="2021-11-05 성윤&#10;&#10;썸머노트 api 태그 오류 수정" />
+    <MESSAGE value="2021-11-07 성윤&#10;&#10;plogging 작업 중 커밋" />
+    <MESSAGE value="2021-11-07 성윤&#10;&#10;plogging 글쓰기 틀 제작" />
+    <MESSAGE value="2021-11-07 성윤&#10;&#10;plogging 글쓰기 틀 제작 중" />
+    <MESSAGE value="2021-11-07 성윤&#10;&#10;plogging 기능 제작 중" />
+    <MESSAGE value="2021-11-07 성윤&#10;&#10;관리자 신고하기 페이지 오류 수정" />
+    <MESSAGE value="2021-11-08 성윤&#10;&#10;플로깅 예약 기능, 글쓰기 기능 완성" />
+    <MESSAGE value="2021-11-08 성윤&#10;&#10;플로깅 예약 목록 상세보기 첨부파일 완성" />
+    <MESSAGE value="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 페이지 오류 수정 중" />
+    <MESSAGE value="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021-11-09 성윤&#10;&#10;관리자 - 신고하기 기능 완료" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="654" y="274" key="#Notifications" timestamp="1636094668147">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="654" y="274" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1636094668147" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636219491906">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1636219491906" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1635964335153">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1635964335153" />
+    <state x="585" y="335" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1634208532445">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="585" y="335" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1634208532445" />
+    <state x="402" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1636337060282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="402" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1636337060282" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636222295259">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636222295259" />
+    <state x="326" y="47" width="1000" height="730" key="CommitChangelistDialog2" timestamp="1635543257309">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="326" y="47" width="1000" height="730" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1635543257309" />
+    <state x="147" y="65" key="DiffContextDialog" timestamp="1635948696559">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1635948696559" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1636222717100">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1636222717100" />
+    <state width="1877" height="277" key="GridCell.Tab.0.bottom" timestamp="1636396736285">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636396736285" />
+    <state width="1877" height="277" key="GridCell.Tab.0.center" timestamp="1636396736285">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636396736285" />
+    <state width="1877" height="277" key="GridCell.Tab.0.left" timestamp="1636396736285">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636396736285" />
+    <state width="1877" height="277" key="GridCell.Tab.0.right" timestamp="1636396736285">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636396736285" />
+    <state width="1877" height="277" key="GridCell.Tab.1.bottom" timestamp="1636396460194">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1636394058793" />
+    <state width="1877" height="277" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636396460194" />
+    <state width="1877" height="277" key="GridCell.Tab.1.center" timestamp="1636396460194">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636396460194" />
+    <state width="1877" height="277" key="GridCell.Tab.1.left" timestamp="1636396460194">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636396460194" />
+    <state width="1877" height="277" key="GridCell.Tab.1.right" timestamp="1636396460194">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="194" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1636394058792" />
+    <state width="1877" height="277" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636396460194" />
+    <state width="1478" height="257" key="GridCell.Tab.2.bottom" timestamp="1636309264590">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1478" height="257" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1636309264590" />
+    <state width="1478" height="257" key="GridCell.Tab.2.center" timestamp="1636309264590">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1478" height="257" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1636309264590" />
+    <state width="1478" height="257" key="GridCell.Tab.2.left" timestamp="1636309264590">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1478" height="257" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1636309264590" />
+    <state width="1478" height="257" key="GridCell.Tab.2.right" timestamp="1636309264590">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1478" height="257" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1636309264590" />
+    <state x="349" y="155" key="IDE.errors.dialog" timestamp="1636219487043">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="155" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1636219487043" />
+    <state x="147" y="64" key="MergeDialog" timestamp="1636095118999">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="64" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1636095118999" />
+    <state x="387" y="86" width="1027" height="471" key="MultipleFileMergeDialog" timestamp="1636095119008">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="387" y="86" width="1027" height="471" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1636095119008" />
+    <state x="524" y="132" key="RollbackChangesDialog" timestamp="1635932054718">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="524" y="132" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1635932054718" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1635787707690">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1635787707690" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1636398165949">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1636380295721" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398165949" />
+    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636398181392">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1636380546564" />
+    <state x="714" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1636398181392" />
+    <state x="475" y="10" width="585" height="804" key="find.popup" timestamp="1635954173095">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="475" y="10" width="585" height="804" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1635954173095" />
+    <state x="0" y="124" width="854" height="576" key="git4idea.branch.GitSmartOperationDialog" timestamp="1636220994694">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="124" width="854" height="576" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1636220994694" />
+    <state x="597" y="324" key="git4idea.rebase.GitUnstructuredEditor" timestamp="1634634070366">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="597" y="324" key="git4idea.rebase.GitUnstructuredEditor/0.0.1536.824@0.0.1536.824" timestamp="1634634070366" />
+    <state x="180" y="72" key="new project wizard" timestamp="1634862306549">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="180" y="72" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1634862306549" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1636308715757">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1636308715757" />
+    <state x="700" y="139" width="672" height="678" key="search.everywhere.popup" timestamp="1636344439355">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="700" y="139" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1636344439355" />
+  </component>
+</project>
