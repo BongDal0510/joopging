@@ -379,7 +379,7 @@
                             <td class="product">
                                 <div id="goodsMoreInfo">
                                     <div id="img_center">
-                                        <img src="" style="width: 100px;background-size: 100%;margin-right: 10px;">
+                                        <img src="/images/dummy.jpg" style="width: 100px;background-size: 100%;margin-right: 10px;">
                                     </div>
                                     <dl><!-- NV_MID:83250896260 -->
                                         <dt>
@@ -664,26 +664,6 @@
         let option = "width=470, height=600, top=100, left=200, location=no";
         window.open("/orderhistory/refundOrderPage?orderNum=" + orderNum, "", option).focus();
     });
-
-    let goodsNum = [[${order.getGoodsNum()}]];
-    let mainImgUploadResult = $("#img_center");
-    $(document).ready(function(){
-        (function(){
-            $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
-                function(arr){
-                    let str = "";
-                    $(arr).each(function(i, attach){
-                            if(i=0){
-                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                            str += "<div class=\"img_center\">";
-                            str += "<img style=\"width: 100px;background-size: 100%;margin-right: 10px;\" src='/upload/display?fileName=" + originPath + "'>" ;
-                            str += "</div>";
-                            }
-                    });
-                    mainImgUploadResult.html(str);
-                });//getJSON
-        })();
-    })
 
     $("#parcelSubmit").on("click", function () {
     let form = document.parcelForm;

@@ -385,18 +385,18 @@ $("#refund").on("click",function() {
     if ($("#ploggingSelectBox option:selected").val() == "etc") {
         if ($('input[name=etcReason]').val() == "") {
             alert("취소 사유를 작성해주세요.");
-            return;
+            return false;
         }
     }
 
     if ($("#ploggingSelectBox option:selected").val() == "ploggingRefundReason") {
         alert("취소 사유를 선택해 주세요.");
-        return;
+        return false;
     }
 
     if($('#term1').is(':checked')==false){
         alert("확인버튼을 눌러주세요.");
-        return;
+        return false;
     }
     form.submit();
 })

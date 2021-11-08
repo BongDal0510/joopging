@@ -375,26 +375,26 @@
 
         if($('#term1').is(':checked')==false){
             alert("확인버튼을 눌러주세요.");
-            return;
+            return false;
         }
 
         if ($("#paymentSelectBox option:selected").val() == "etc") {
             if ($('input[name=etcReason]').val() == "") {
                 alert("취소 사유를 작성해주세요.");
-                return;
+                return false;
             }
         }
 
         if ($("#paymentSelectBox option:selected").val() == "paymentRefundReason") {
             alert("취소 사유를 선택해 주세요.");
-            return;
+            return false;
         }
 
         if (confirm("구매 취소를 진행하겠습니까?")) {
             form.submit();
         } else {
             alert("구매 취소가 취소 되었습니다.")
-            return;
+            return false;
         }
     });
 </script>
