@@ -52,92 +52,6 @@
             width: auto !important;
         }
 
-        /* 사이드바 회원정보 관련 CSS*/
-        .grade{
-            float:right;
-            width: 40px;
-            height: 40px;
-        }
-
-        #supersideBar {
-            position: fixed;
-            width: 20%;
-            margin-top: 7.5%;
-        }
-
-        #sideBarInner{
-            width: 260px;
-            float: right;
-            height: auto;
-            border: 2px solid #35A14A;
-            border-radius: 20px;
-            padding: 20px 20px;
-            font-family: 'S-CoreDream-3Light';
-        }
-
-        #sideBarDelivery{
-            padding: 10px 0 0 0;
-        }
-
-        .sideBarInfo{
-            display: inline;
-            float: right;
-        }
-
-        #memberName {
-            font-weight: 700;
-            color: #35A14A;
-            line-height: 40px;
-            font-size: 22px;
-            font-family: 'S-CoreDream-4Regular';
-        }
-
-        #memberLine {
-            margin:1em 0 1em 0;
-            border-top: solid 2px #35A14A;
-        }
-
-        #attendInfo {
-            font-size: 17px;
-            padding: 0 0.5em 0 0.5em;
-            height: 1.5em;
-            line-height: 1.5em;
-            background: #94C477;
-        }
-
-        #attendInfo:hover {
-            background: #5d5d5d;
-        }
-
-        #attendTable {
-            border-color: #ffffff;
-            background-color: #e2f0d9;
-            margin: 20px 0;
-        }
-
-        .attendTr {
-            height: 40px;
-        }
-
-        .attendTr > td{
-            border: 2px solid #ffffff;
-            vertical-align: middle;
-        }
-
-        #attendButton {
-            font-size: 17px !important;
-            padding: 0.5em 1em !important;
-            font-family: 'S-CoreDream-4Regular';
-        }
-
-        #attendNotButton, #attendNotButtonCheck{
-            font-size: 17px !important;
-            padding: 0.5em 1em !important;
-            font-family: 'S-CoreDream-4Regular';
-            background-color: #d3d3d3;
-        }
-
-
         /* 이벤트 박스 관련 CSS */
         .eventImage {
             margin: 0 !important;
@@ -225,31 +139,32 @@
                 </div>
 
                 <div class="row">
-                    <th:block th:each="plo : ${list}">
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section class="eventImage">
-                                <a class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
-                            </section>
-                            <section class="box boxinner" th:object="${plo}">
-                                <div style="display: flex">
-                                    <header id="center">
-                                        <h4 style="font-family: 'S-CoreDream-4Regular';" th:text="*{ploggingTitle}"></h4>
-                                    </header>
-                                    <footer class="eventButton">
-                                        <ul class="actions">
-                                            <li><a id="goRead" th:href="*{ploggingNum}" class="button alt">상세보기</a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                                <div>
-                                    <p class="eventDate">신청일 </p>
-                                    <p class="eventDate" th:text="*{ploResDate}"></p>
-                                </div>
-                            </section>
-                        </div>
-                    </th:block>
+                <th:block th:each="plo : ${list}">
+                    <div class="col-4 col-6-medium col-12-small" th:object="${plo}">
+                        <section class="eventImage">
+                            <a class="image featured"><img style="height: 330px;" th:src="*{fileName}"></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';" th:text="*{ploggingTitle}"></h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a id="goRead" th:href="*{ploggingNum}" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">신청일 </p>
+                                <p class="eventDate" th:text="*{ploResDate}"></p>
+                            </div>
+                        </section>
+                    </div>
+                </th:block>
                 </div>
 
+                <!--페이징-->
                 <div class="paging" th:object="${pageMaker}">
                     <div class="big-width" style="text-align: center">
                         <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>

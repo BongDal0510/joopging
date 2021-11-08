@@ -14,13 +14,13 @@ public interface PloggingMapper {
     public void insertPlogging(PloggingVO plogging);
 
     //플로깅 상세보기
-    public PloggingVO readPlogging(Long ploggingNum);
+    public PloggingVO readPlogging(int ploggingNum);
 
     //플로깅 수정
 //    public int updateEvent(PloggingVO plogging);
 
     //플로깅 삭제
-    public int deleteEvent(Long ploggingNum);
+    public int deleteEvent(int ploggingNum);
 
     //플로깅 목록
     public List<PloggingVO> getPloggingList(PloggingCriteria ploggingCriteria);
@@ -33,4 +33,7 @@ public interface PloggingMapper {
 
     //플로깅 신청인원
     public void addPloggingPpl(int peo, String ploggingNum);
+
+    //파일명 가져오기
+    public String getFileName(int ploggingNum);
 }

@@ -160,8 +160,15 @@
 
 <div class="container">
     <div class="box post" th:object="${plogging}">
-        <div>
-            <img class="eventImage" src="/images/eventImage/event_seoul01.jpg"/>
+        <div style="width: 100%; object-fit: fill;">
+            <img style="width: 90%; object-fit: fill;" th:src="${img}">
+        </div>
+        <div id="ploImage" name="ploImage" class="ploImage">
+            <div class="field">
+                <div class="uploadResult">
+                    <ul></ul>
+                </div>
+            </div>
         </div>
         <br>
         <header>
@@ -203,7 +210,7 @@
     let ploggingPpl = [[${plogging.ploggingPpl}]];
     let ploggingPplLimit = [[${plogging.ploggingPplLimit}]];
 
-    console.log([[${plogging.ploggingNum}]]);
+    // console.log([[${plogging.ploggingNum}]]);
 
     function goRes(){
         let form = document.resForm;
@@ -226,5 +233,43 @@
         alert("결제완료");
         form.submit();
     }
+</script>
+<!--첨부파일-->
+<script th:inline="javascript">
+    let ploImage = $("#ploImage");
+    let ploggingNum = [[${plogging.ploggingNum}]];
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/plo/getAttachList", {ploggingNum: ploggingNum},
+                function(arr){
+                    let str = "";
+                    let mainstr ="";
+
+                    $(arr).each(function(i, attach){
+                        console.log(ploggingNum);
+                        if(!attach.image){
+                            return;
+                        }else {
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<div class=\"detail\">";
+                            str += "<img style=\"text-algin: center; width: 550px; height: 500px;\" src='/upload/plogging/display?fileName=" + originPath + "'>";
+                            str += "</div>";
+                        }
+                        /*첨부파일 여러개 일때 실행되는 조건문*/
+                        // if(i==0){
+                        //     let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                        //     mainstr += "<div class=\"stock_img\">";
+                        //     mainstr += "<a href=\"#\" class=\"stock_detail\">";
+                        //     mainstr += "<img style=\"text-algin: center; width: 500px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                        //     mainstr += "</a></div>"
+                        //     return;
+                        // } else{
+                        //
+                        // }
+                    });
+                    ploImage.html(str);
+                });//getJSON
+        })();
+    })
 </script>
 </html>

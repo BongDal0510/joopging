@@ -4,5 +4,6 @@
     <typeAliases>
         <typeAlias type="com.team4.joopging.event.vo.EventVO" alias="eventVO"/>
         <typeAlias type="com.team4.joopging.plogging.vo.PloggingVO" alias="ploggingVO"/>
+        <typeAlias type="com.team4.joopging.plogging.vo.PloAttachFileVO" alias="ploAttachFileVO"/>
     </typeAliases>
 </configuration>

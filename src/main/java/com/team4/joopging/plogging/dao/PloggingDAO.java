@@ -19,11 +19,11 @@ public class PloggingDAO {
 
     public void register(PloggingVO plogging) { ploggingMapper.insertPlogging(plogging); }
 
-    public PloggingVO get(Long ploggingNum) { return ploggingMapper.readPlogging(ploggingNum); }
+    public PloggingVO get(int ploggingNum) { return ploggingMapper.readPlogging(ploggingNum); }
 
 //    public boolean modify(PloggingVO plogging) { return ploggingMapper.updatePlogging(plogging) == 1; }
 
-    public boolean remove(Long eventNum) { return ploggingMapper.deleteEvent(eventNum) == 1; }
+    public boolean remove(int eventNum) { return ploggingMapper.deleteEvent(eventNum) == 1; }
 
     public List<PloggingVO> getList(PloggingCriteria ploggingCriteria) { return ploggingMapper.getPloggingList(ploggingCriteria); }
 
@@ -34,4 +34,7 @@ public class PloggingDAO {
 
     /*플로깅 신청 인원*/
     public void addPloggingPpl(int peo, String ploggingNum){ ploggingMapper.addPloggingPpl(peo, ploggingNum); }
+
+    //파일명 가져오기
+    public String getFileName(int ploggingNum){ return ploggingMapper.getFileName(ploggingNum); };
 }

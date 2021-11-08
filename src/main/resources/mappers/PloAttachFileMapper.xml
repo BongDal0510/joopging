@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.PloAttachFileMapper">
+    <insert id="insert">
+        INSERT INTO TBL_PLO_ATTACH (UUID, UPLOADPATH, FILENAME, IMAGE, PLOGGINGNUM)
+        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{ploggingNum})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_PLO_ATTACH WHERE UUID = #{uuid}
+    </delete>
+
+    <select id="findByBno" resultType="ploAttachFileVO">
+        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, PLOGGINGNUM
+        FROM TBL_PLO_ATTACH
+        WHERE PLOGGINGNUM = #{ploggingNum}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM TBL_PLO_ATTACH WHERE PLOGGINGNUM = #{ploggingNum}
+    </delete>
+
+    <select id="getOldFiles" resultType="ploAttachFileVO">
+        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, PLOGGINGNUM
+        FROM TBL_PLO_ATTACH
+        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+
+    <!--첨부파일 이름 가져오기-->
+    <select id="getFileName" resultType="String">
+        SELECT FILENAME FROM TBL_PLO_ATTACH WHERE PLOGGINGNUM = #{ploggingNum}
+    </select>
+</mapper>

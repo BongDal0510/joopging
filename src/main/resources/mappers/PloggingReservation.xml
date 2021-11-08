@@ -3,9 +3,12 @@
 
 <mapper namespace="com.team4.joopging.mappers.PloggingMapper">
     <insert id="insertPlogging">
+        <selectKey keyProperty="ploggingNum" order="BEFORE" resultType="_int">
+        SELECT SEQ_PLOGGING.NEXTVAL FROM DUAL
+        </selectKey>
         INSERT INTO TBL_PLOGGING_INFO
         (PLOGGINGNUM, PLOGGINGTITLE, PLOGGINGCONTENT, PLORESDATE, PLOGGINGPPLLIMIT, PLOGGINGPOINT, PLOGGINGREGDATE)
-        VALUES(SEQ_PLOGGING.NEXTVAL, #{ploggingTitle}, #{ploggingContent}, #{ploResDate}, #{ploggingPplLimit}, #{ploggingPoint}, SYSDATE)
+        VALUES(#{ploggingNum}, #{ploggingTitle}, #{ploggingContent}, #{ploResDate}, #{ploggingPplLimit}, #{ploggingPoint}, SYSDATE)
     </insert>
 
     <select id="readPlogging" resultType="ploggingVO">
@@ -51,4 +54,9 @@
         SET PLOGGINGPPL = PLOGGINGPPL + #{peo}
         WHERE PLOGGINGNUM = #{ploggingNum}
     </update>
+
+    <!--파일이름 가져오기-->
+    <select id="getFileName" resultType="String">
+        SELECT FILENAME FROM TBL_PLO_ATTACH WHERE PLOGGINGNUM = #{ploggingNum}
+    </select>
 </mapper>
