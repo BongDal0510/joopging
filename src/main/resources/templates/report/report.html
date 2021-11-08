@@ -25,7 +25,7 @@
         <div class="inner head">
 
             <div class="reportWrapper content">
-                <form method="post" action="/report" id="reportForm">
+                <form method="post" action="/report/reporting" id="reportForm">
                     <div id="joopgingLogoLeaf"><img src="/images/commu/leaf_icon.png"/></div>
 
                     <div class="reportBackground">
@@ -69,8 +69,8 @@
                         <div>
                             <h4 class="reportPage">신고 사유를 선택해주세요</h4>
                         </div>
-                        <div class="reportSelections" id="reportContent" name="reportContent">
-                            <select>
+                        <div class="reportSelections">
+                            <select id="reportContent" name="reportContent">
                                 <option>불법광고</option>
                                 <option>욕설/비방글</option>
                                 <option>도배글</option>
@@ -80,12 +80,13 @@
                         </div>
                         <div>
                             <pre><textarea name="reportDetail" id="reportDetail" cols="30" rows="4" style="resize: none"
-                                           placeholder="명확한 사유는 신속한 대응에 도움이 될 수 있습니다."></textarea></pre>
+                                           placeholder="명확한 사유는 신속한 대응에 도움이 될 수 있습니다." value="예시"></textarea></pre>
                         </div>
                     </div>
                     <div class="reportPageBtns">
                         <a href="javascript:void(0)" id="cancelReport" class="button btn-close trigger">취소</a>
                         <a href="javascript:void(0)" id="insertReport" class="button btn-close trigger" onclick="submit()">신고하기</a>
+                        <input type="submit" value="신고하기">
                     </div>
                 </form>
             </div>

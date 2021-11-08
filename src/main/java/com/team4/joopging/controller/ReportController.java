@@ -74,10 +74,12 @@ public class ReportController {
 
 
     //report 등록
-    @PostMapping("report")                                  //앞에서 받아오는 값
+    @PostMapping("reporting")                                  //앞에서 받아오는 값
     public String insertReport(ReportVO report, Model model) {
         log.info("--------------------------------");
-        log.info("register : " + report.toString());
+        log.info("신고하기 들어옴");
+        System.out.println(report.getReportContent());
+        System.out.println(report.toString());
         log.info("--------------------------------");
         adminService.insertReport(report);
         //세션의 flash 영역을 이용하여 전달
