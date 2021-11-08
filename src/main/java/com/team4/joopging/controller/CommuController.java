@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,10 +43,13 @@ public class CommuController {
 
     //커뮤니티 글쓰기
     @PostMapping("communityRegister")
-    public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr) {
+    public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr, HttpServletRequest req, Model model) {
+        HttpSession session = req.getSession();
         log.info("--------------------------------");
         log.info("register : " + commu.toString());
         log.info("--------------------------------");
+
+        model.addAttribute("commuWriter", session.getAttribute("memberId"));
 
         if(commu.getAttachList() != null){
             commu.getAttachList().forEach(attach -> log.info(attach.toString()));
@@ -61,9 +65,10 @@ public class CommuController {
 
     //커뮤니티 글 읽기/수정하기 경로이동 + 경로 이동 전 페이지 기억하기
     @GetMapping({"communityRead", "communityModify"})
-    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, CommuVO commuVO, HttpServletRequest request) {
+    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, HttpServletRequest req, CommuVO commuVO, HttpServletRequest request) {
         String reqURI = request.getRequestURI();
         String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
+        HttpSession session = req.getSession();
         //read 요청시 read 출력
         //modify 요청시 modify 출력
         log.info("--------------------------------");
@@ -80,7 +85,8 @@ public class CommuController {
 
     //커뮤니티 수정하기
     @PostMapping("communityModify")
-    public RedirectView modifyCommu(CommuVO commu, RedirectAttributes rttr) {
+    public RedirectView modifyCommu(CommuVO commu, RedirectAttributes rttr, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         log.info("--------------------------------");
         log.info("modify : " + commu.toString());
         log.info("--------------------------------");
@@ -94,7 +100,8 @@ public class CommuController {
 
     //  삭제
     @PostMapping("removeCommu")
-    public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr) {
+    public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr, HttpServletRequest req) {
+
         log.info("-------------------------------");
         log.info("remove : " + commuBno);
         log.info("-------------------------------");

@@ -55,13 +55,6 @@ public class ReportController {
         //2. sessionId 받아오고 싶어여
 
         model.addAttribute("reporter", session.getAttribute("memberId"));
-     /*
-        //3. 신고일 연산
-
-      */
-
-        //4. reportPurpose
-
         // commuboard에 있는 commuTitle
         model.addAttribute("commu", commuService.getCommu(commuBno));
         model.addAttribute("bno", commuBno);

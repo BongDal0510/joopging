@@ -50,7 +50,7 @@
             <div class="adminMainCategory" id="adminhead">
                 <!--//회원관리-->
                 <div class="adminCategoryBtn">
-                    <a href="javascript:void(0)" id="memberBtn" class="button small trigger" onclick="memberPop()">
+                    <a href="javascript:void(0)" id="memberBtn" class="button small trigger" onclick="serviceNotReady()">
                         <img src="/images/admin/admin_memberInfo.png"></a>
                 </div>
 
@@ -62,7 +62,7 @@
 
                 <!--   //포인트 관리-->
                 <div class="adminCategoryBtn">
-                    <a href="javascript:void(0)" id="pointBtn" class="button small trigger" onclick="pointPop()">
+                    <a href="javascript:void(0)" id="pointBtn" class="button small trigger" onclick="serviceNotReady()">
                         <img src="/images/admin/admin_point.png"></a>
                 </div>
 
@@ -82,7 +82,7 @@
 
                 <!--   //플로깅 관리-->
                 <div class="adminCategoryBtn">
-                    <a href="javascript:void(0)" id="ploggingBtn" class="button small trigger" onclick="commuPop()">
+                    <a href="javascript:void(0)" id="ploggingBtn" class="button small trigger" onclick="ploggingPop()">
                         <img src="/images/admin/admin_plogging.png"></a>
                 </div>
 
@@ -116,10 +116,42 @@
     function reportsCtrPop(){
         let url = "/report/reportList"
         let name = "신고한 글 관리";
-        let option = "width = 1440, height = 700, top = 50, left = 50, location = no"
+        let option = "width = 1400, height = 700, top = 50, left = 50, location = no"
         window.open(url, name, option);
     }
 
+    function shopPop(){
+        let url = "ship/shipEnroll"
+        let name = "상품 등록 및 관리";
+        let option = "width = 1400, height = 700, top = 50, left = 50, location = no"
+        window.open(url, name, option);
+    }
+
+    function eventPop(){
+        let url = "event/eventWrite"
+        let name = "이벤트 관리";
+        let option = "width = 1400, height = 700, top = 50, left = 50, location = no"
+        window.open(url, name, option);
+    }
+
+    function ploggingPop(){
+        let url = "plo/ploggingWrite"
+        let name = "플로깅 관리";
+        let option = "width = 1400, height = 700, top = 50, left = 50, location = no"
+        window.open(url, name, option);
+    }
+
+    function inquiryPop(){
+        let url = "inquiry/inquiryList"
+        let name = "1:1 문의 관리";
+        let option = "width = 1400, height = 700, top = 50, left = 50, location = no"
+        window.open(url, name, option);
+    }
+
+    /*#####################################기능 막기####################################*/
+    function serviceNotReady() {
+        console.log(confirm("준비중인 서비스입니다.\n단장된 모습으로 찾아 뵙겠습니다.") == true);
+    }
 
 </script>
 </html>

@@ -34,7 +34,7 @@
                 SELECT /*+ INDEX_DESC(TBL_COMMUBOARD PK_COMMUBOARD)*/
                 ROWNUM R, COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
                 FROM TBL_COMMUBOARD
-                WHERE COMMUBOARDSTATUS = 0 AND
+                WHERE
                         ]]>
         <include refid="searchCommu"></include>
         <![CDATA[
