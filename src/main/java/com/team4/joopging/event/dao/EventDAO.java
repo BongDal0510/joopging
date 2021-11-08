@@ -25,4 +25,7 @@ public class EventDAO {
     public List<EventVO> getList(EventCriteria eventCriteria) { return eventMapper.getEventList(eventCriteria); }
 
     public int getTotal() { return eventMapper.getTotal(); }
+
+    //파일명 가져오기
+    public String getFileName(Long eventNum){ return eventMapper.getFileName(eventNum); };
 }

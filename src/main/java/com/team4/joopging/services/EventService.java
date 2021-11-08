@@ -1,11 +1,14 @@
 package com.team4.joopging.services;
 
 import com.team4.joopging.event.dao.EventDAO;
+import com.team4.joopging.event.dao.EventFileDAO;
 import com.team4.joopging.event.vo.EventCriteria;
+import com.team4.joopging.event.vo.EventFileVO;
 import com.team4.joopging.event.vo.EventVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +17,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventService {
     private final EventDAO eventDAO;
+    private final EventFileDAO eventFileDAO;
 
-    public void register(EventVO eventVO){
+    @Transactional(rollbackFor = Exception.class)
+    public void register(EventVO eventVO) {
+
         eventDAO.register(eventVO);
+
+
+        if(eventVO.getAttachList() == null || eventVO.getAttachList().size() == 0){
+            return;
+        }
+
+        eventVO.getAttachList().forEach(attach -> {
+            attach.setEventNum(eventVO.getEventNum());
+            eventFileDAO.insert(attach);
+        });
     }
 
     public EventVO get(Long eventNum){
@@ -39,4 +55,9 @@ public class EventService {
         return eventDAO.getTotal();
     }
 
+    public String getFileNames(Long eventNum){ return eventDAO.getFileName(eventNum);}
+
+    public List<EventFileVO> getAttachList(Long eventNum) {
+        return eventFileDAO.findByBno(eventNum);
+    }
 }

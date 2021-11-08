@@ -43,4 +43,9 @@
         SELECT COUNT(EVENTNUM)
         FROM TBL_EVENT_INFO
     </select>
+
+    <!--파일이름 가져오기-->
+    <select id="getFileName" resultType="String">
+        SELECT FILENAME FROM TBL_EVENTATTACH WHERE EVENTNUM = #{eventNum}
+    </select>
 </mapper>

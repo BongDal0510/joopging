@@ -26,4 +26,7 @@ public interface EventMapper {
     //이벤트 전체 개수
     public int getTotal();
 
+    //파일명 가져오기
+    public String getFileName(Long eventNum);
+
 }

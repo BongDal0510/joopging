@@ -1,6 +1,7 @@
 package com.team4.joopging.controller;
 
 import com.team4.joopging.event.vo.EventCriteria;
+import com.team4.joopging.event.vo.EventFileVO;
 import com.team4.joopging.event.vo.EventPageDTO;
 import com.team4.joopging.event.vo.EventVO;
 import com.team4.joopging.member.memberVO.MemberVO;
@@ -10,12 +11,14 @@ import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 //    프레젠테이션 계층의 구현
 
@@ -46,12 +49,21 @@ public class EventController {
             String memberId = (String)session.getAttribute("memberId");
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
+        List<EventVO> listVO = eventService.getList(eventCriteria);
+        EventVO vo = new EventVO();
 
+        for(int i=0; i<listVO.size(); i++){
+            listVO.get(i).setFileName("/images/eventImage/"+ eventService.getFileNames(listVO.get(i).getEventNum()));
+        }
+
+        System.out.println(listVO.toString());
         model.addAttribute("list", eventService.getList(eventCriteria));
+        model.addAttribute("listVO", listVO);
         model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
-
         return "event/eventlist";
     }
+
+
 
     @GetMapping("eventWrite")
     public String eventWrite(){
@@ -136,8 +148,7 @@ public class EventController {
         return "event/attendPopup";
     }
 
-
-
+/*
 
     @GetMapping("eventInfo3")
     public String eventInfo3() {
@@ -147,7 +158,7 @@ public class EventController {
     @GetMapping("eventInfo4")
     public String eventInfo4() {
         return "event/eventInfo4";
-    }
+    }*/
 
     /* 위의 @RequestMapping 의 경로와 다를경우 '/' 슬래쉬를 붙여준다. */
     /* /event/pageframe/header → /pageframe/header */
@@ -159,5 +170,13 @@ public class EventController {
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
+    }
+
+    //    게시글 첨부파일
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<EventFileVO> getAttachList(Long eventNum){
+        log.info("getAttachList " + eventNum);
+        return eventService.getAttachList(eventNum);
     }
 }
