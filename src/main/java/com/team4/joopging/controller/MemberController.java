@@ -31,7 +31,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Service;
 
 
 /*성윤 : 회원 관련 기능 컨트롤러*/

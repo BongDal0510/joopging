@@ -6,13 +6,8 @@
     <!--신고 등록 from 유저 to 관리자-->
     <insert id="insertReport">
         INSERT INTO TBL_REPORT
-        (
-            REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS
-        )
-        VALUES
-        (
-            SEQ_REPORT.NEXTVAL, #{sessionId}, #{reportContent}, #{reportDetail}, #{commuBno}, #{commuTitle}, #{reportDate}, #{reportStatus}
-        )
+        (REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS)
+        VALUES(SEQ_REPORT.NEXTVAL, #{sessionId}, #{reportContent}, #{reportDetail}, #{commuBno}, #{commuTitle}, SYSDATE, 1)
     </insert>
 
 <!--
@@ -29,8 +24,6 @@
 
 
     -->
-
-
 
     <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
     <update id="commuToReported">

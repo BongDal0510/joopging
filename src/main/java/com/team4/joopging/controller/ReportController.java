@@ -64,6 +64,7 @@ public class ReportController {
 
         // commuboard에 있는 commuTitle
         model.addAttribute("commu", commuService.getCommu(commuBno));
+        model.addAttribute("bno", commuBno);
    /*    model.addAttribute("reporter", adminService.readReport(commuBno));*/
 /*        String memberId = (String)session.getAttribute("memberId");
 
@@ -77,9 +78,6 @@ public class ReportController {
     @PostMapping("reporting")                                  //앞에서 받아오는 값
     public String insertReport(ReportVO report, Model model) {
         log.info("--------------------------------");
-        log.info("신고하기 들어옴");
-        System.out.println(report.getReportContent());
-        System.out.println(report.toString());
         log.info("--------------------------------");
         adminService.insertReport(report);
         //세션의 flash 영역을 이용하여 전달

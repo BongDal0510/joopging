@@ -11,6 +11,33 @@
     <link rel="icon" href="/images/faviconWhite.ico">
 
 </head>
+<style>
+
+    #adminhead {
+        margin-top: 100px;
+    }
+
+    .adminMainCategory {
+        display: flex;
+        justify-content: center;
+    }
+
+    .adminCategoryBtn img {
+        width: 200px;
+    }
+
+    .adminCategoryBtn > a {
+        width: 200px;
+        background: none;
+        padding: 0;
+        margin: 20px
+    }
+
+    .adminCategoryBtn > a:hover {
+        background: none;
+    }
+
+</style>
 <body class="is-preload">
 <!-- 헤더 -->
 <header>
@@ -20,48 +47,49 @@
 <div id="main" class="modal-wrapper">
     <div id="wrapper" class="modal">
         <div class="inner head">
-            <div id="adminPageTitle">
-                <div class="adminPageTitle">관리자 페이지</div>
-            </div>
-
-            <div class="adminMainCategory">
+            <div class="adminMainCategory" id="adminhead">
                 <!--//회원관리-->
                 <div class="adminCategoryBtn">
-                        <img src="/images/commu/paperplaneCircle.png">
+                    <a href="javascript:void(0)" id="memberBtn" class="button small trigger" onclick="memberPop()">
+                        <img src="/images/admin/admin_memberInfo.png"></a>
                 </div>
 
                 <!--//문의 관리-->
                 <div class="adminCategoryBtn">
-                    <img src="/images/commu/paperplaneCircleBlue.png">
+                    <a href="javascript:void(0)" id="inquiryBtn" class="button small trigger" onclick="inquiryPop()">
+                        <img src="/images/admin/admin_inquiry.png"></a>
                 </div>
 
-             <!--   //포인트 관리-->
+                <!--   //포인트 관리-->
                 <div class="adminCategoryBtn">
-                    <img src="/images/commu/paperplaneCircleD.png">
+                    <a href="javascript:void(0)" id="pointBtn" class="button small trigger" onclick="pointPop()">
+                        <img src="/images/admin/admin_point.png"></a>
                 </div>
 
-               <!-- //신고글 관리-->
+                <!-- //신고글 관리-->
                 <div class="adminCategoryBtn">
                     <a href="javascript:void(0)" id="reportBtn" class="button small trigger" onclick="reportsCtrPop()">
-                        <img src="/images/commu/paperplaneCircle.png"></a>
+                        <img src="/images/admin/admin_report.png"></a>
                 </div>
             </div>
 
             <div class="adminMainCategory">
-              <!--  //이벤트 관리-->
+                <!--  //이벤트 관리-->
                 <div class="adminCategoryBtn">
-                    <img src="/images/commu/paperplaneCircleBlue.png">
+                    <a href="javascript:void(0)" id="eventBtn" class="button small trigger" onclick="eventPop()">
+                        <img src="/images/admin/admin_event.png"></a>
                 </div>
 
-             <!--   //플로깅 관리-->
+                <!--   //플로깅 관리-->
                 <div class="adminCategoryBtn">
                     <a href="javascript:void(0)" id="ploggingBtn" class="button small trigger" onclick="commuPop()">
-                        <img src="/images/commu/paperplaneCircleD.png"></a>
+                        <img src="/images/admin/admin_plogging.png"></a>
                 </div>
 
                 <!--//상품 등록 관리-->
                 <div class="adminCategoryBtn">
-                    <img src="/images/commu/paperplaneCircle.png">
+                    <a href="javascript:void(0)" id="shopBtn" class="button small trigger" onclick="shopPop()">
+                        <img src="/images/admin/admin_shopitem.png"></a>
                 </div>
             </div>
         </div>
@@ -82,9 +110,9 @@
 </body>
 <script>
     //##################################################팝업##################################################
-/*
+    /*
 
-    console.log(commuToReport + "1");*/ //변수 받아올 때 쓰기
+        console.log(commuToReport + "1");*/ //변수 받아올 때 쓰기
     function reportsCtrPop(){
         let url = "/report/reportList"
         let name = "신고한 글 관리";

@@ -65,7 +65,7 @@
                                                                 <input name="reportDate" type="text" readonly/> &lt;!&ndash;th:value="${admin.reportDate}"&ndash;&gt;-->
                             </div>
                         </div>
-
+                        <input type="text" th:value="${bno}" id="commuBno" name="commuBno" style="display: none">
                         <div>
                             <h4 class="reportPage">신고 사유를 선택해주세요</h4>
                         </div>
@@ -84,9 +84,10 @@
                         </div>
                     </div>
                     <div class="reportPageBtns">
-                        <a href="javascript:void(0)" id="cancelReport" class="button btn-close trigger">취소</a>
-                        <a href="javascript:void(0)" id="insertReport" class="button btn-close trigger" onclick="submit()">신고하기</a>
-                        <input type="submit" value="신고하기">
+<!--                        <a href="javascript:void(0)" id="cancelReport" class="button btn-close trigger">취소</a>-->
+<!--                        <a href="javascript:void(0)" id="insertReport" class="button btn-close trigger" onclick="submit()">신고하기</a>-->
+                        <input type="button" onclick="window.close()" value="취소하기">
+                        <input type="button" onclick="submit()" value="신고하기">
                     </div>
                 </form>
             </div>
