@@ -31,7 +31,6 @@ public class MypageController {
     private final MypageService mypageSVC;
     private final PointService pointSVC;
     private final MemberService memberSVC;
-    private final CommuService commuSVC;
 
     /*마이페이지 메인으로 이동*/
     @GetMapping("mypage")
