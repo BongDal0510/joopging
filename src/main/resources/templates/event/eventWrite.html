@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 등록</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        /* Button */
+
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        button,
+        .button {
+            -webkit-appearance: none;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+            background: #14a876;
+            color: #fff !important;
+            font-weight: 700;
+            outline: 0;
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+            text-align: center;
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+        }
+
+        input[type="button"]:hover,
+        input[type="submit"]:hover,
+        input[type="reset"]:hover,
+        button:hover,
+        .button:hover {
+            background: #24b886;
+        }
+
+        input[type="button"]:active,
+        input[type="submit"]:active,
+        input[type="reset"]:active,
+        button:active,
+        .button:active {
+            background: #049866;
+        }
+
+        input[type="button"].alt,
+        input[type="submit"].alt,
+        input[type="reset"].alt,
+        button.alt,
+        .button.alt {
+            background: #0b871e;
+        }
+
+        input[type="button"].alt:hover,
+        input[type="submit"].alt:hover,
+        input[type="reset"].alt:hover,
+        button.alt:hover,
+        .button.alt:hover {
+            background: #066514;
+        }
+
+        input[type="button"].alt:active,
+        input[type="submit"].alt:active,
+        input[type="reset"].alt:active,
+        button.alt:active,
+        .button.alt:active {
+            background: #151112;
+        }
+
+        input[type="button"].icon:before,
+        input[type="submit"].icon:before,
+        input[type="reset"].icon:before,
+        button.icon:before,
+        .button.icon:before {
+            opacity: 0.35;
+            position: relative;
+            top: 0.05em;
+            margin-right: 0.75em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.5em;
+            padding: 0.75em 1.5em 0.75em 1.5em;
+        }
+
+        input[type="button"].large,
+        input[type="submit"].large,
+        input[type="reset"].large,
+        button.large,
+        .button.large {
+            font-size: 1.1em;
+            padding: 0.65em 1.5em 0.65em 1.5em;
+        }
+
+        .out {
+            width: 400px;
+            height: 550px;
+            margin: 10px;
+            padding: 10px;
+            border: none;
+        }
+
+        .line {
+            border: solid 1px #dddddd;
+            border-radius: 5px;
+        }
+
+        p{
+            color:#5d5d5d;
+        }
+
+        .headTitle {
+            text-align:center;
+            margin-bottom: 40px;
+        }
+
+        .writePopUp {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #write span {
+            width: 18%;
+            line-height: 50px;
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        #write input {
+            height:50px;
+            width: 82%;
+        }
+
+        .inputline {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .clickButton {
+            width: auto !important;
+            line-height: 1.5em;
+            background: #94C477 !important;
+        }
+
+        .clickButton:hover {
+            background: #5d5d5d !important;
+        }
+
+        #content {
+            width:100%;
+            height:250px;
+            resize: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="writePopUp" style="margin: 30px 50px;">
+    <!--제목-->
+    <div>
+        <h3 class="headTitle">이벤트 등록하기</h3>
+    </div>
+
+    <!--폼 태그-->
+    <form action="/event/eventWrite" name="eventForm" id="write" method="post">
+        <div class="inputline">
+            <span>이벤트명</span>
+            <input class="line" name="eventTitle" type="text" placeholder="이벤트 행사이름"/>
+        </div>
+        <div class="inputline">
+            <span>한줄요약</span>
+            <input class="line" name="eventSubtitle" type="text" placeholder="이벤트 설명"/>
+        </div>
+        <div class="inputline">
+            <span>신청일자</span>
+            <input class="line" name="eventDate" type="text" placeholder="신청 가능한 일자"/>
+        </div>
+        <span>내용</span>
+        <textarea id="content" name="eventContent" class="line" type="text"></textarea>
+
+        <!--첨부파일-->
+        <div class="field">
+            <span>첨부파일</span>
+            <input type="file" name="uploadFiles" multiple>
+        </div>
+        <br>
+
+        <!--버튼-->
+        <div style="text-align: center;">
+            <input type="button" class="clickButton" value="등록" onclick="goEventWrite()">
+            <span style="padding:1px"></span>
+            <input type="button" class="clickButton" value="취소" onclick="close()">
+        </div>
+
+    </form>
+</div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script th:inline="javascript">
+    let eventForm = $(document.eventForm);
+
+    function goEventWrite(){
+        eventForm.submit();
+    }
+
+    function close(){
+        window.close();
+    }
+
+</script>
+</html>

@@ -2,9 +2,12 @@ package com.team4.joopging.controller;
 
 import com.team4.joopging.event.vo.EventCriteria;
 import com.team4.joopging.event.vo.EventPageDTO;
+import com.team4.joopging.event.vo.EventVO;
 import com.team4.joopging.member.memberVO.MemberVO;
+import com.team4.joopging.point.vo.PointVO;
 import com.team4.joopging.services.EventService;
 import com.team4.joopging.services.MemberService;
+import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,7 @@ public class EventController {
 
     private final EventService eventService;
     private final MemberService memberService;
+    private final PointService pointService;
 
     @GetMapping("eventlist")
     public String event(HttpServletRequest req, EventCriteria eventCriteria, Model model) {
@@ -49,13 +53,49 @@ public class EventController {
         return "event/eventlist";
     }
 
+    @GetMapping("eventWrite")
+    public String eventWrite(){
+        return "event/eventWrite";
+    }
+
+    @PostMapping("eventWrite")
+    public String eventWrite(EventVO eventVO){
+
+        eventService.register(eventVO);
+
+        return "/writeSuccess";
+    }
 
     @PostMapping("attendUpdate")
     @ResponseBody
-    public MemberVO attendUpdate(HttpServletRequest req, Model model){
+    public MemberVO attendUpdate(HttpServletRequest req){
         HttpSession session = req.getSession();
         String memberId = (String)session.getAttribute("memberId");
 
+        /* 멤버,포인트 테이블 포인트 추가 */
+        MemberVO memberVO = new MemberVO();
+        PointVO pointVo = new PointVO();
+
+        if(memberService.memberGetAttendCnt(memberId) == 9){
+            memberVO.setMemberPoint(500L);
+            pointVo.setPoint(500L);
+            pointVo.setHistory("출석(10일)");
+        }else{
+            memberVO.setMemberPoint(50L);
+            pointVo.setPoint(50L);
+            pointVo.setHistory("출석");
+        }
+
+        /* 멤버 테이블 */
+        memberVO.setMemberId(memberId);
+        memberService.memberPointUpdate(memberVO);
+
+        /* 포인트 테이블 */
+        pointVo.setMemberId(memberId);
+        pointVo.setPointStatus("적립");
+        pointService.addPoint(pointVo);
+
+        /* 멤버 출석체크 */
         memberService.memberAttendUpdate(memberId);
 
         return memberService.memberAllSelect(memberId);

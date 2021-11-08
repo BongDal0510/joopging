@@ -20,6 +20,28 @@ function attendInfo() {
     window.open(url, name, option);
 }
 
+/* 회원 등급 이미지 */
+function showLevel(memberLevel){
+
+    console.log("함수 들어와따");
+
+    switch (memberLevel) {
+        case "1":
+            $("#grade").attr("src", "/images/level/level_seed.png");
+        break;
+        case "2":
+            $("#grade").attr("src", "/images/level/level_leaf.png");
+        break;
+        case "3":
+            $("#grade").attr("src", "/images/level/level_flower.png");
+        break;
+        case "4":
+            $("#grade").attr("src", "/images/level/level_tree.png");
+        break;
+    }
+
+}
+
 /* 출석체크 테이블 연산 */
 function showAttend(attendCnt){
     tbl1 = "";
@@ -58,8 +80,14 @@ function attendUpdate(){
         url:'/event/attendUpdate',
         type:'post',
         success:function(memberVO){
-            alert("출석체크 완료!");
 
+            if(memberVO.memberAttend == 10){
+                alert("출석체크 완료! (500P 적립)");
+            }else{
+                alert("출석체크 완료! (50P 적립)");
+            }
+
+            $("#memberPoint").text(memberVO.memberPoint + "P");
             $("#attendCntLeft").text(memberVO.memberAttend + "/10");
             $("#attendButton").hide();
             $("#attendNotButtonCheck").show();

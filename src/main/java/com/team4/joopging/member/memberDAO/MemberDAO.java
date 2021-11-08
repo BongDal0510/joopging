@@ -54,6 +54,23 @@ public class MemberDAO {
     /* 출석체크 */
     public int memberAttendUpdate(String id) { return mapper.attendUpdate(id); }
 
+    /* 출석회수 조회 */
+    public int memberGetAttendCnt(String id) { return mapper.getAttendCnt(id); }
+
+    /* 매일 0시 마다 출석상태 초기화 */
+    public void memberResetAttendStatus() { mapper.resetAttendStatus(); }
+
+    /* 출석회수 10회일 경우 0으로 초기화 */
+    public void memberResetAttendCnt() { mapper.resetAttendCnt(); }
+
+    /* 매월 1일 마다 멤버레벨 승급 */
+    public void memberUpdateLevelAmateur() { mapper.updateLevelAmateur(); }
+    public void memberUpdateLevelVeteran() { mapper.updateLevelVeteran(); }
+    public void memberUpdateLevelMaster() { mapper.updateLevelMaster(); }
+
+    /* 포인트 추가 */
+    public int memberPointUpdate(MemberVO memberVO) { return mapper.pointUpdate(memberVO); }
+
     /*네이버 카카오 일반 회원의 이름 조회*/
     public MemberVO userName(String id){return mapper.userName(id); }
     public MemberVO userNameKAKAO(String id){return mapper.userNameKAKAO(id); }

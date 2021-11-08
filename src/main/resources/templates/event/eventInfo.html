@@ -137,49 +137,50 @@
 <body class="homepage is-preload" style="margin: 0;">
 <div id="main_header" style="display: flex"></div>
 <div id="supersideBar" th:if="${member != null}">
-<!-- 회원정보 사이드바 -->
-<div id="sideBarInner" th:object="${member}">
-    <div>
+    <!-- 회원정보 사이드바 -->
+    <div id="sideBarInner" th:object="${member}">
         <div>
-            <img class="grade" src="/images/level/level_leaf.png">
+            <div>
+                <img class="grade" id="grade">
+            </div>
+            <div id="memberLevel" style="display: none;" th:text="*{memberLevel}"></div>
+            <div>
+                <strong id="memberName" th:text="|*{memberName} 님|"></strong>
+            </div>
         </div>
-        <div>
-            <strong id="memberName" th:text="|*{memberName} 님|"></strong>
+        <hr id="memberLine">
+        <div id="sideBarDelivery">
+            <div>
+                <strong>참여횟수</strong>
+                <div class="sideBarInfo">
+                    <span th:text="|*{memberPloggingCnt}회|"></span>
+                </div>
+            </div>
+            <div>
+                <strong>포인트</strong>
+                <div class="sideBarInfo">
+                    <span id="memberPoint" th:text="|*{memberPoint}P|"></span>
+                </div>
+            </div>
+            <div>
+                <strong>출석체크</strong>
+                <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
+                <div class="sideBarInfo" >
+                    <span id="attendCntLeft" th:text="|*{memberAttend}/10|"></span>
+                </div>
+                <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
+            </div>
+            <table id="attendTable">
+                <tr class="attendTr" id="attendTr_1"></tr>
+                <tr class="attendTr" id="attendTr_2"></tr>
+            </table>
+            <div style="text-align: center">
+                <input th:if="*{memberAttendStatus == 0}" id="attendButton" type="button" value="출석 체크하기" onclick="attendUpdate()">
+                <input th:if="*{memberAttendStatus == 1}" id="attendNotButton" type="button" value="출석 체크하기">
+                <input id="attendNotButtonCheck" style="display: none;" type="button" value="출석 체크하기">
+            </div>
         </div>
     </div>
-    <hr id="memberLine">
-    <div id="sideBarDelivery">
-        <div>
-            <strong>참여횟수</strong>
-            <div class="sideBarInfo">
-                <span th:text="|*{memberPloggingCnt}회|"></span>
-            </div>
-        </div>
-        <div>
-            <strong>포인트</strong>
-            <div class="sideBarInfo">
-                <span th:text="|*{memberPoint}P|"></span>
-            </div>
-        </div>
-        <div>
-            <strong>출석체크</strong>
-            <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
-            <div class="sideBarInfo" >
-                <span id="attendCntLeft" th:text="|*{memberAttend}/10|"></span>
-            </div>
-            <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
-        </div>
-        <table id="attendTable">
-            <tr class="attendTr" id="attendTr_1"></tr>
-            <tr class="attendTr" id="attendTr_2"></tr>
-        </table>
-        <div style="text-align: center">
-            <input th:if="*{memberAttendStatus == 0}" id="attendButton" type="button" value="출석 체크하기" onclick="attendUpdate()">
-            <input th:if="*{memberAttendStatus == 1}" id="attendNotButton" type="button" value="출석 체크하기">
-            <input id="attendNotButtonCheck" style="display: none;" type="button" value="출석 체크하기">
-        </div>
-    </div>
-</div>
 </div>
 
 <div class="container">
@@ -191,9 +192,10 @@
             <h2 th:text="*{eventTitle}"></h2>
         </header>
         <h4 th:text="*{eventSubtitle}"></h4>
+        <br>
         <p style="display: inline">▷신청기간 :</p>
         <p style="display: inline" th:text="*{eventDate}"></p>
-        <p th:text="*{eventContent}"></p>
+        <pre th:text="*{eventContent}"></pre>
         <section>
             <header>
                 <h3>주의 사항</h3>
@@ -221,7 +223,10 @@
 
     if(member != null && member != 'null'){
         let attendCnt = $("#attendOk").text();
+        let memberLevel = $("#memberLevel").text();
+
         showAttend(attendCnt);
+        showLevel(memberLevel);
     }
 
 </script>
