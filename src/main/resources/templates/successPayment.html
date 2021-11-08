@@ -32,7 +32,7 @@
              주문번호
          </td>
          <td>
-             20211017556479
+             202111097556479
          </td>
         </tr>
         <td>
@@ -63,10 +63,15 @@
     </div>
 
     <button class="button">주문내역보기</button>
-    <button class="button">확인</button>
+    <button id="confirm_btn" class="button">확인</button>
 </div>
 
-
-
 </body>
+<script>
+
+    $("#confirm_btn").on("click", function(){
+        location.href="/shop/shop"
+    });
+
+</script>
 </html>

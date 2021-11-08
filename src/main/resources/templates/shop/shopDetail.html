@@ -256,7 +256,7 @@
                         </form>
                         <div style="margin-top: 30px;">
                             <input type="button" class="Payment_btn" value="BUY NOW " onclick=""> <input
-                                type="button" class="listbtn" value="ADD CART" onclick=""> <label><img
+                                type="button" class="Cart_btn" value="ADD CART" onclick=""> <label><img
                                 id="heart"
                                 style="vertical-align: middle; width: 40px; height: 40px; margin-left: 30px;"
                                 src="/images/하트.png"></label> <label><img
@@ -524,6 +524,12 @@
         $(".Payment_btn").on("click", function(){
             location.href="/shop/shopPayment"
         });
+
+        $(".Cart_btn").on("click", function(){
+            location.href="/basket/basket"
+        });
+
+
     });
 
     // 수량 조종하는 함수
