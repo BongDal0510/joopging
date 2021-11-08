@@ -8,7 +8,7 @@ import java.util.List;
 @Component
 @Data
 public class EventVO {
-    private Long eventNum;
+    private int eventNum;
     private String eventTitle;
     private String eventSubtitle;
     private String eventContent;

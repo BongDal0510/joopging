@@ -12,13 +12,13 @@ public interface EventMapper {
     public void insertEvent(EventVO event);
 
     //이벤트 상세보기
-    public EventVO readEvent(Long eventNum);
+    public EventVO readEvent(int eventNum);
 
     //이벤트 수정
     public int updateEvent(EventVO event);
 
     //이벤트 삭제
-    public int deleteEvent(Long eventNum);
+    public int deleteEvent(int eventNum);
 
     //이벤트 목록
     public List<EventVO> getEventList(EventCriteria eventCriteria);
@@ -27,6 +27,6 @@ public interface EventMapper {
     public int getTotal();
 
     //파일명 가져오기
-    public String getFileName(Long eventNum);
+    public String getFileName(int eventNum);
 
 }

@@ -3,9 +3,12 @@
 
 <mapper namespace="com.team4.joopging.mappers.EventMapper">
     <insert id="insertEvent">
+        <!--<selectKey resultType="_int" order="BEFORE" keyProperty="eventNum">
+            SELECT SEQ_EVENT.NEXTVAL FROM DUAL
+        </selectKey>-->
         INSERT INTO TBL_EVENT_INFO
-        (EVENTNUM, EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE)
-        VALUES (SEQ_EVENT.NEXTVAL, #{eventTitle}, #{eventSubtitle}, #{eventContent}, #{eventDate})
+        (EVENTNUM, EVENTTITLE, EVENTSUBTITLE, EVENTCONTENT, EVENTDATE, FILENAME)
+        VALUES (SEQ_EVENT.NEXTVAL, #{eventTitle}, #{eventSubtitle}, #{eventContent}, #{eventDate}, #{fileName})
     </insert>
     
     <select id="readEvent" resultType="eventVO">
@@ -27,11 +30,11 @@
 
     <select id="getEventList" resultType="eventVO">
         <![CDATA[
-        SELECT EVENTNUM, EVENTTITLE, EVENTDATE
+        SELECT EVENTNUM, EVENTTITLE, EVENTDATE, FILENAME
         FROM
         (
         SELECT /*+ INDEX_DESC(TBL_EVENT_INFO EVENT_INFO_PK) */
-        ROWNUM R, EVENTNUM, EVENTTITLE, EVENTDATE
+        ROWNUM R, EVENTNUM, EVENTTITLE, EVENTDATE, FILENAME
         FROM TBL_EVENT_INFO
         WHERE ROWNUM <= #{pageNum} * #{amount}
         )
@@ -46,6 +49,7 @@
 
     <!--파일이름 가져오기-->
     <select id="getFileName" resultType="String">
-        SELECT FILENAME FROM TBL_EVENTATTACH WHERE EVENTNUM = #{eventNum}
+        SELECT FILENAME FROM TBL_EVENT_INFO WHERE EVENTNUM = #{eventNum}
     </select>
+
 </mapper>

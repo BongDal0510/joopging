@@ -3,8 +3,14 @@
 
 <mapper namespace="com.team4.joopging.mappers.EventFileMapper">
     <insert id="insert">
-        INSERT INTO TBL_EVENTATTACH (UUID, UPLOADPATH, FILENAME, IMAGE, EVENTNUM)
-        VALUES ('테스트', '테스트', #{fileName}, '1', #{eventNum})
+            INSERT INTO TBL_EVENTATTACH
+        (
+            UUID, UPLOADPATH, FILENAME, IMAGE, EVENTNUM
+        )
+        VALUES
+        (
+            'uuuuasdf', 'asdgzxcvwe', #{fileName}, '1', #{eventNum}
+        )
     </insert>
 
     <delete id="delete">

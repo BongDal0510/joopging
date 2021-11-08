@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,6 +51,7 @@ public class EventController {
             String memberId = (String)session.getAttribute("memberId");
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
+
         List<EventVO> listVO = eventService.getList(eventCriteria);
         EventVO vo = new EventVO();
 
@@ -57,8 +60,8 @@ public class EventController {
         }
 
         System.out.println(listVO.toString());
-        model.addAttribute("list", eventService.getList(eventCriteria));
-        model.addAttribute("listVO", listVO);
+
+        model.addAttribute("list", listVO);
         model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
         return "event/eventlist";
     }
@@ -71,16 +74,16 @@ public class EventController {
     }
 
     @PostMapping("eventWrite")
-    public String eventWrite(EventVO eventVO){
+    public String ploWrite(EventVO vo, RedirectAttributes rttr, String uploadFiles){
+        if(vo.getAttachList() != null){
+            vo.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
+        System.out.println("첨부파일 명 : " + uploadFiles);
+        vo.setFileName(uploadFiles);
+        eventService.register(vo);
+//        rttr.addFlashAttribute("plogging", vo.getEventNum());
 
-        log.info("--------------------------------");
-        log.info(eventVO.toString());
-        log.info("--------------------------------");
-
-
-        eventService.register(eventVO);
-
-        return "/writeSuccess";
+        return "writeSuccess";
     }
 
     @PostMapping("attendUpdate")
@@ -135,7 +138,7 @@ public class EventController {
 
     /*이벤트 상세보기*/
     @GetMapping("eventInfo")
-    public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") Long eventNum, Model model) {
+    public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") int eventNum, Model model, String uploadFiles) {
 
         HttpSession session = req.getSession();
 
@@ -145,7 +148,15 @@ public class EventController {
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
 
-        model.addAttribute("img", "/image/eventImage" + eventService.getFileNames(eventNum));
+//        if(vo.getAttachList() != null){
+//            vo.getAttachList().forEach(attach -> log.info(attach.toString()));
+//        }
+//        ploggingService.register(vo);
+//        rttr.addFlashAttribute("plogging", vo.getPloggingNum());
+//
+//        return new RedirectView("writeSuccess");
+        System.out.println(eventNum);
+        model.addAttribute("img", "/images/eventImage/" + eventService.getFileNames(eventNum));
         model.addAttribute("event", eventService.get(eventNum));
         return "event/eventInfo";
     }
@@ -182,7 +193,7 @@ public class EventController {
     //    게시글 첨부파일
     @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<EventFileVO> getAttachList(Long eventNum){
+    public List<EventFileVO> getAttachList(int eventNum){
         log.info("getAttachList " + eventNum);
         return eventService.getAttachList(eventNum);
     }

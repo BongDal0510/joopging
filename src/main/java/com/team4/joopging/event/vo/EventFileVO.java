@@ -10,5 +10,5 @@ public class EventFileVO {
     private String uploadPath;
     private String uuid;
     private boolean image;
-    private Long eventNum;
+    private int eventNum;
 }

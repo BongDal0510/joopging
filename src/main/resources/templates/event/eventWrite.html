@@ -209,7 +209,7 @@
         <!--첨부파일-->
         <div class="field">
             <span>첨부파일</span>
-            <input type="file" name="uploadFiles" multiple>
+            <input type="file" name="uploadFiles" id="uploadFiles" multiple>
         </div>
         <br>
 
@@ -220,7 +220,7 @@
             <input type="button" class="clickButton" value="취소" onclick="close()">
         </div>
 
-        <input type="text" id="img" name="img" style="display: none;">
+<!--        <input type="text" id="img" name="img" style="display: none;">-->
     </form>
 </div>
 </body>
@@ -296,6 +296,9 @@
                     str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
                     str += "</div>";
                     str += "</li>";
+                    document.getElementById("uploadFiles").value =  obj.image;
+                    document.getElementById("uploadFiles").innerText =  obj.image;
+                    document.getElementById("uploadFiles").innerHTML =  obj.image;
                 } else {
                     let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
                     let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
@@ -308,6 +311,7 @@
                     str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
                     str += "</div>";
                     str += "</li>";
+                    document.getElementById("uploadFiles").value =  obj.image;
                 }
             });
             uploadResult.append(str);
