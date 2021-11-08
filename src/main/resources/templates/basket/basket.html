@@ -316,7 +316,7 @@
                 <div class="payment_div">
                     <h3 style="font-size: 1.8em; margin-bottom: 1em">장바구니</h3>
                     <div style="margin: 0 auto">
-                        <div style="display: flex"><span style="width: 100px; padding-top: 0.5em">장바구니 : 개</span>
+                        <div style="display: flex"><span style="font-size: 8px; width: 100px; padding-top: 0.5em">장바구니 1개</span>
                             <div style="flex-direction: column; width : 90%; text-align: right; margin-bottom: 1em;"><input type="button" value="삭제하기"></div>
                         </div>
                         <table class="order_table">
@@ -365,7 +365,7 @@
                                 <span>무료 배송</span>
                             </td>
                         </tr>
-                            <!--두번째 상품정보-->
+                            <!--&lt;!&ndash;두번째 상품정보&ndash;&gt;
                             <tr>
                                 <td>
                                     <input type="checkbox">
@@ -389,12 +389,12 @@
                                 <td>
                                     <span>무료 배송</span>
                                 </td>
-                        </tr>
+                        </tr>-->
                             </tbody>
                     </table>
                     </div>
                     <div style="margin-top: 2em; text-align: center">
-                        <input type="button" value="결제하기">
+                        <input class="Payment_btn" type="button" value="결제하기">
                     </div>
                 </div>
         </div>
@@ -411,5 +411,11 @@
 <script type="text/javascript"></script>
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
+<script>
+    $(".Payment_btn").on("click", function(){
+        location.href="/shop/shopPayment"
+    });
+
+</script>
 </body>
 </html>

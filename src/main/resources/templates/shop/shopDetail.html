@@ -232,6 +232,7 @@
                         </div>
                         <select>
                             <option selected>Select</option>
+                            <option value="0">FREE</option>
                             <option value="1">S</option>
                             <option value="2">M</option>
                             <option value="3">L</option>
@@ -526,6 +527,7 @@
         });
 
         $(".Cart_btn").on("click", function(){
+            alert("해당 상품을 장바구니에 담고 장바구니로 이동합니다.");
             location.href="/basket/basket"
         });
 
