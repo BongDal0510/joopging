@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.PloggingMapper">
+    <insert id="insertPlogging">
+        <selectKey keyProperty="ploggingNum" order="BEFORE" resultType="_int">
+        SELECT SEQ_PLOGGING.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_PLOGGING_INFO
+        (PLOGGINGNUM, PLOGGINGTITLE, PLOGGINGCONTENT, PLORESDATE, PLOGGINGPPLLIMIT, PLOGGINGPOINT, PLOGGINGREGDATE)
+        VALUES(#{ploggingNum}, #{ploggingTitle}, #{ploggingContent}, #{ploResDate}, #{ploggingPplLimit}, #{ploggingPoint}, SYSDATE)
+    </insert>
+
+    <select id="readPlogging" resultType="ploggingVO">
+        SELECT PLOGGINGNUM, PLOGGINGTITLE, PLOGGINGCONTENT, PLOGGINGPPL, PLOGGINGPPLLIMIT
+        FROM TBL_PLOGGING_INFO
+        WHERE PLOGGINGNUM = #{ploggingNum}
+    </select>
+
+    <delete id="deletePlogging">
+        DELETE FROM TBL_PLOGGING_INFO
+        WHERE PLOGGINGNUM = #{ploggingNum}
+    </delete>
+
+    <select id="getPloggingList" resultType="ploggingVO">
+        <![CDATA[
+        SELECT PLOGGINGNUM, PLOGGINGTITLE, PLORESDATE
+        FROM
+        (
+        SELECT
+        ROWNUM R, PLOGGINGNUM, PLOGGINGTITLE, PLORESDATE
+        FROM TBL_PLOGGING_INFO
+        WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(PLOGGINGNUM)
+        FROM TBL_PLOGGING_INFO
+    </select>
+
+    <!--플로깅 예약-->
+    <insert id="reservation">
+        INSERT INTO TBL_PLO_RES
+        (PLORESNUM, MEMBERID, PLOGGINGNUM, PLORESDATE, PLORESSTATUS)
+        VALUES(SEQ_PLO_RES.NEXTVAL, #{memberId}, #{ploggingNum}, SYSDATE, 0)
+    </insert>
+
+    <!--플로깅 참여 인원 증가-->
+    <update id="addPloggingPpl">
+        UPDATE TBL_PLOGGING_INFO
+        SET PLOGGINGPPL = PLOGGINGPPL + #{peo}
+        WHERE PLOGGINGNUM = #{ploggingNum}
+    </update>
+
+    <!--파일이름 가져오기-->
+    <select id="getFileName" resultType="String">
+        SELECT FILENAME FROM TBL_PLO_ATTACH WHERE PLOGGINGNUM = #{ploggingNum}
+    </select>
+</mapper>
