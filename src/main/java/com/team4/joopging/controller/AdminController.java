@@ -15,4 +15,18 @@ public class AdminController {
     @GetMapping("admin")
     public String adminMain() { return "/admin/admin"; }
 
+    //헤더
+    @GetMapping("/pageframe/header")
+    public String header() {
+        return "/pageframe/header";
+    }
+
+    //푸터
+    @GetMapping("/pageframe/footer")
+    public String footer() {
+        return "/pageframe/footer";
+    }
+
+
 }
+
