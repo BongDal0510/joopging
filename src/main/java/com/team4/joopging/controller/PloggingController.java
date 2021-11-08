@@ -85,7 +85,7 @@ public class PloggingController {
     public String payMent(){ return "ploggingReservation/payMent"; }
 
     /*플로깅 글쓰기 창*/
-    @GetMapping("ploWritePop")
+    @GetMapping("ploggingWrite")
     public String plowritePop(PloggingVO vo){ return "ploggingReservation/ploggingWrite"; }
 
     /*플로깅 글쓰기 완료 후 디비 저장*/
