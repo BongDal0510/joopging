@@ -74,8 +74,8 @@
 
     <!-- Main -->
     <section id="main"  style = margin-top:-40px;>
-        <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>
-
+     <!--   <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>-->
+        <button style="margin-left: 76%" id="shopEnrollBtn">상품 등록</button>
         <!--
                 <a><input type="button" value="상품 등록" style="margin-left: 76%;"></a>
         -->
@@ -326,6 +326,10 @@ let testResult = $(".test");
                 });//getJSON
         })();
     })
+
+    $("#shopEnrollBtn").on("click", function(){
+       location.href="/shop/shopEnroll"
+    });
 </script>
 
 
