@@ -73,6 +73,11 @@ public class EventController {
     @PostMapping("eventWrite")
     public String eventWrite(EventVO eventVO){
 
+        log.info("--------------------------------");
+        log.info(eventVO.toString());
+        log.info("--------------------------------");
+
+
         eventService.register(eventVO);
 
         return "/writeSuccess";
@@ -128,6 +133,7 @@ public class EventController {
         return "event/joinInfo";
     }
 
+    /*이벤트 상세보기*/
     @GetMapping("eventInfo")
     public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") Long eventNum, Model model) {
 
@@ -139,6 +145,7 @@ public class EventController {
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
 
+        model.addAttribute("img", "/image/eventImage" + eventService.getFileNames(eventNum));
         model.addAttribute("event", eventService.get(eventNum));
         return "event/eventInfo";
     }

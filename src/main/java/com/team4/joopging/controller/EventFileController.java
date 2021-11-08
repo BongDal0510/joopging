@@ -49,6 +49,10 @@ public class EventFileController {
         for(MultipartFile multipartFile : uploadFiles){
             log.info("-------------------------");
             log.info("Upload File Name : " + multipartFile.getOriginalFilename());
+
+
+
+
             log.info("Upload File Size : " + multipartFile.getSize());
 
             EventFileVO attachFileVO = new EventFileVO();

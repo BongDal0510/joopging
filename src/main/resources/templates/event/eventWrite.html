@@ -220,6 +220,7 @@
             <input type="button" class="clickButton" value="취소" onclick="close()">
         </div>
 
+        <input type="text" id="img" name="img" style="display: none;">
     </form>
 </div>
 </body>
@@ -244,6 +245,7 @@
         $(".bigPicture").html("<img src='/eventupload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
             .animate({width:"100%", height:"100%"}, 1000);
         check = true;
+        console.log(encodeURIComponent(fileCallPath));
     }
 
     $(".bigPictureWrapper").on("click", function(){
@@ -286,7 +288,6 @@
             $(uploadFiles).each(function (i, obj) {
                 if (!obj.image) {
                     let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
-
                     str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image + "'>";
                     str += "<div>";
                     str += "<a href='/eventupload/download?fileName=" + fileCallPath + "'>";
