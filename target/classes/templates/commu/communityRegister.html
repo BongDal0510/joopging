@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/community.css" />
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body class="is-preload">
+<!--header 위치-->
+<div id="main_header"></div>
+<!--<section id="communityBanner">
+    <img src="/images/shopBannerAd.png">
+</section>-->
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+            <!-- 글 등록 헤더 -->
+            <header class="major">
+                <p></p>
+            </header>
+            <div id="commuBoardWrapper">
+                <!--게시판 목록 왼쪽 사이드-->
+                <div id="commuBoardLeft">
+                    <table id="commuLeftCategory">
+                        <tr>
+                            <td><a href="/commu/communityList" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="javascript:void(0)" id="interview" class="commu" onclick="serviceNotReady()">플로깅
+                                소식지</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu"
+                                   onclick="serviceNotReady()">인터뷰</a></td>
+                        </tr>
+                        <!--admin 계정만 보이게-->
+                        <tr>
+                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div id="commuBoardMiddle">
+                    <div id="goCommuListBtn">
+                        <a href="/commu/communityList" class="button small">목록 보기</a>
+                    </div>
+                    <div class="content">
+                        <div class="form">
+                            <form method="post" action="/commu/communityRegister" id="registForm">
+                                <div class="fields">
+                                    <!--제목 공간-->
+                                    <div id="boardTitleArea">
+                                        <div class="field">
+                                            <input name="commuTitle" type="text" placeholder="제목을 입력해주세요."/>
+                                        </div>
+                                        <div class="field" id="boardWriterArea">
+                                            <h4 id="commuWriterTitle">작성자 :</h4>
+                                            <input name="commuWriter" type="text"/> <!--th:field="*{세션 아이디}" readonly-->
+                                        </div>
+                                    </div>
+                                    <div class="field" id="summernoteUpper">
+                                        <textarea id="summernote" name="commuContent" rows="6" placeholder="Content"
+                                                  style="resize:none"></textarea>
+                                    </div>
+                                    <div class="field">
+                                        <h4>첨부파일</h4>
+                                        <input type="file" name="uploadFiles" multiple>
+                                    </div>
+                                    <div class="field">
+                                        <div class="uploadResult">
+                                            <ul></ul>
+                                        </div>
+                                    </div>
+                                    <div class="bigPictureWrapper">
+                                        <div class="bigPicture"></div>
+                                    </div>
+                                </div>
+                                <ul class="actions special">
+                                    <li><input type="submit" id="commuRegist" class="button" value="등록"/></li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--게시판 목록 오른쪽 사이드-->
+                <div id="commuBoardRight">
+                    <img src="/images/nogreenAd.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="main_footer"></div>
+</footer>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<!--summernote script-->
+<script src="/js/summernote/summernote-lite.js"></script>
+<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+
+</body>
+<script>
+/*
+    let session = $("#id").val();
+    if (session != "memberId" || session == "") {
+        alert("로그인 후 이용해주세요");
+        history.back();
+    }
+*/
+
+    $(document).ready(function () {
+        var fontList = ['맑은 고딕', '돋움', '궁서', '굴림', '굴림체', '궁서체', '나눔 고딕', '바탕', '바탕체', '새굴림', 'HY견고딕', 'HY견명조', 'HY궁서B', 'HY그래픽M', 'HY목각파임B', 'HY신명조', 'HY얕은샘물M', 'HY엽서L', 'HY엽서M', 'HY중고딕', 'HY헤드라인M', '휴먼매직체', '휴먼모음T', '휴먼아미체', '휴먼둥근헤드라인', '휴먼편지체', '휴먼옛체'];
+        var setting = {
+            placeholder: "",
+            height: 500,
+            tabsize: 2,
+            maxHeight: null,
+            minHeight: null,
+            lang: 'ko-KR', // 언어 세팅
+            fontNames: fontList,
+            fontNamesIgnoreCheck: fontList,
+            toolbar: [
+                // [groupName, [list of button]]
+                ['Font Style', ['fontname']],
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['paragraph']],
+                ['height', ['height']],
+                ['Insert', ['picture']],
+                ['Insert', ['link']],
+                ['Misc', ['fullscreen']]
+            ],
+            //콜백 함수
+            callbacks: {	//이미지 첨부하는 부분
+                onImageUpload: function (files) {
+                    uploadSummernoteImageFile(files[0], this);
+                }
+            }
+        }
+        $('#summernote').summernote(setting);
+        });
+
+        function uploadSummernoteImageFile(file, editor) {
+            data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                data : data,
+                type : "POST",
+                url : "/uploadSummernoteImageFile",
+                contentType : false,
+                processData : false,
+                success : function(data) {
+                    //항상 업로드된 파일의 url이 있어야 한다.
+                    $(editor).summernote('insertImage', data.url);
+                }
+            });
+        }
+
+
+        $("#commuRegist").click(function (e) {
+            e.preventDefault();
+            let str = "";
+            $(".uploadResult ul li").each(function (i, obj) {
+                str += "<input type='text' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            $(document.postForm).append(str).submit();
+        })
+
+
+        let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)$");
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+        function showUploadFile(uploadFile) {
+            let str = "";
+            $(uploadFile).each(function (i, obj) {
+                console.log(obj.uploadPath);
+                let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image + "'>";
+                str += "<div>";
+                str += "<img src='/upload/display?fileName=" + originPath + "' style='width: 480px; max-width: 480px; max-height:350px; height: 350px;'>";
+                str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
+                str += "</div>";
+                str += "</li>";
+            });
+            uploadResult.append(str);
+        }
+
+        $(".uploadResult").on("click", "span", function () {
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/upload/deleteFile",
+                type: "POST",
+                data: {fileName: targetFile, type: type},
+                dataType: "text",
+                success: function (result) {
+                    alert(result);
+                    li.remove();
+                    $("#file").show();
+                }
+            });
+
+        });
+
+</script>
+<script>
+    //파일이 있는지 없는지 확인
+    let check = false;
+    //이미지 보여주는 곳
+    function showImage(fileCallPath){
+        //만약 check이 false면 = 이미지 없음.
+        if(check) {return;}
+        //아닐경우 .bigPictureWrapper을 표시해준다.
+        $(".bigPictureWrapper").css("display", "flex").show();
+        //이미지 클릭시 원본 사이즈 이미지를 보여준다. 애니메이션 1초간.
+        $(".bigPicture").html("<img src='/upload/commu/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+            .animate({width:"100%", height:"100%"}, 1000);
+        //이미지 있음 = check true
+        check = true;
+    }
+    //이미지 사라지게 하는 곳
+    $(".bigPictureWrapper").on("click", function(){
+        //만약 이미지가 있다면?
+        if(!check){return;}
+        //이미지 클릭시 원본 이미지 없애기, 애니메이션 1초간
+        $(".bigPicture").animate({width: "0%", height: "0%"}, 1000);
+        setTimeout(function(){
+            //이미지 상태 = 없음으로 바꿈
+            check = false;
+            //이미지 숨기기
+            $(".bigPictureWrapper").hide();
+        }, 1000)
+    })
+    /*확장자 제한*/
+    $(document).ready(function(){
+        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        //사이즈 제한
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+
+        //등록 폼 submit시
+        $("input[type='submit']").on("click", function(e){
+            e.preventDefault();
+            let form = $("form#registForm");
+            let str = "";
+            /*첨부 파일마다 반복*/
+            $(".uploadResult ul li").each(function(i, obj){
+                str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            form.append(str).submit();
+        })
+        /*파일 업로드*/
+        function showUploadFile(uploadFiles){
+            let str = "";
+            $(uploadFiles).each(function(i, obj){
+                //업로드한 파일이 이미지가 아닐경우
+                if(!obj.image){
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href='/commuupload/download?fileName=" + fileCallPath + "'>";
+                    str += "<img src='/images/attach.png' width='100px'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>"
+                    str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                    //업로드한 파일이 이미지라면
+                }else{
+                    //썸네일 추가생성
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                    let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                    str += "<img src='/commuupload/display?fileName=" + fileCallPath + "'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>";
+                    str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                }
+            });
+            uploadResult.append(str);
+        }
+        /*생성된 파일/이미지 html에 넣어줌*/
+        $(".uploadResult").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            //attachController 경로로 보내기
+            $.ajax({
+                url: "/commuupload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                }
+            });
+
+        });
+
+        //파일 등록시 예외처리
+        function checkExtension(fileName, fileSize){
+            //1. 확장자 별 업로드 제한
+            if(regex.test(fileName)){
+                alert("업로드 할 수 없는 파일의 형식입니다.");
+                return false;
+            }
+            //2. 특정 크기 이상의 파일은 업로드 제한
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+        /*upload 폴더 경로에 파일 업로드*/
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='uploadFiles']");
+            let files = inputFile[0].files;
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+
+            $.ajax({
+                url: "/commuupload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
+    })
+
+    /*#####################################기능 막기####################################*/
+    function serviceNotReady() {
+        console.log(confirm("준비중인 서비스입니다.\n단장된 모습으로 찾아 뵙겠습니다.") == true);
+    }
+
+</script>
+
+</html>

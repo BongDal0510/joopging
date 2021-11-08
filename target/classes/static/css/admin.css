@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'S-CoreDream-5Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream-4Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+div.adminMainCategory {
+    display: flex;
+}
+
+div.adminCategoryBtn{
+    justify-content: center;
+    width: 20%;
+}
+
+div.adminCategoryBtn img{
+    object-fit: fill;
+    width: 50%;
+}
+
+div#main{
+    margin-top: 5%;
+    padding: 0 17%;
+}
+
+.adminPageTitle{
+    font-family: 'yg-jalnan';
+    color: #35A14A;
+    padding: 2% 0%;
+    margin: 5% 0 0 0;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+}
+
+#adminPageTitle{
+    border-bottom: solid 3px #35A14A;
+    display: flex;
+    margin-bottom: 5%;
+}
+
+div.adminCategoryBtn a.button{
+    background-color: #ffffff;
+    padding: 0;
+}

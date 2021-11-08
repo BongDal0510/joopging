@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>이벤트 상세페이지</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 80%;
+            margin: auto;
+        }
+
+        /* 사이드바 회원정보 관련 CSS*/
+        .grade{
+            float:right;
+            width: 40px;
+            height: 40px;
+        }
+
+        #supersideBar {
+            position: fixed;
+            width: 20%;
+            margin-top: 7.5%;
+        }
+
+        #sideBarInner{
+            width: 260px;
+            float: right;
+            height: auto;
+            border: 2px solid #35A14A;
+            border-radius: 20px;
+            padding: 20px 20px;
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        #sideBarDelivery{
+            padding: 10px 0 0 0;
+        }
+
+        .sideBarInfo{
+            display: inline;
+            float: right;
+        }
+
+        #memberName {
+            font-weight: 700;
+            color: #35A14A;
+            line-height: 40px;
+            font-size: 22px;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #memberLine {
+            margin:1em 0 1em 0;
+            border-top: solid 2px #35A14A;
+        }
+
+        #attendInfo {
+            font-size: 17px;
+            padding: 0 0.5em 0 0.5em;
+            height: 1.5em;
+            line-height: 1.5em;
+            background: #94C477;
+        }
+
+        #attendInfo:hover {
+            background: #5d5d5d;
+        }
+
+        #attendTable {
+            border-color: #ffffff;
+            background-color: #e2f0d9;
+            margin: 20px 0;
+        }
+
+        .attendTr {
+            height: 40px;
+        }
+
+        .attendTr > td{
+            border: 2px solid #ffffff;
+            vertical-align: middle;
+        }
+
+        #attendButton {
+            font-size: 17px !important;
+            padding: 0.5em 1em !important;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #attendNotButton, #attendNotButtonCheck{
+            font-size: 17px !important;
+            padding: 0.5em 1em !important;
+            font-family: 'S-CoreDream-4Regular';
+            background-color: #d3d3d3;
+        }
+
+        /* 이벤트 상세설명 관련 CSS */
+        .box {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+    </style>
+</head>
+
+<body class="homepage is-preload" style="margin: 0;">
+<div id="main_header" style="display: flex"></div>
+<div id="supersideBar" th:if="${member != null}">
+    <!-- 회원정보 사이드바 -->
+    <div id="sideBarInner" th:object="${member}">
+        <div>
+            <div>
+                <img class="grade" id="grade">
+            </div>
+            <div id="memberLevel" style="display: none;" th:text="*{memberLevel}"></div>
+            <div>
+                <strong id="memberName" th:text="|*{memberName} 님|"></strong>
+            </div>
+        </div>
+        <hr id="memberLine">
+        <div id="sideBarDelivery">
+            <div>
+                <strong>참여횟수</strong>
+                <div class="sideBarInfo">
+                    <span th:text="|*{memberPloggingCnt}회|"></span>
+                </div>
+            </div>
+            <div>
+                <strong>포인트</strong>
+                <div class="sideBarInfo">
+                    <span id="memberPoint" th:text="|*{memberPoint}P|"></span>
+                </div>
+            </div>
+            <div>
+                <strong>출석체크</strong>
+                <a class="button" id="attendInfo" onclick="attendInfo()">?</a>
+                <div class="sideBarInfo" >
+                    <span id="attendCntLeft" th:text="|*{memberAttend}/10|"></span>
+                </div>
+                <div id="attendOk" style="display: none;" th:text="*{memberAttend}"></div>
+            </div>
+            <table id="attendTable">
+                <tr class="attendTr" id="attendTr_1"></tr>
+                <tr class="attendTr" id="attendTr_2"></tr>
+            </table>
+            <div style="text-align: center">
+                <input th:if="*{memberAttendStatus == 0}" id="attendButton" type="button" value="출석 체크하기" onclick="attendUpdate()">
+                <input th:if="*{memberAttendStatus == 1}" id="attendNotButton" type="button" value="출석 체크하기">
+                <input id="attendNotButtonCheck" style="display: none;" type="button" value="출석 체크하기">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="box post" th:object="${event}">
+        <div>
+            <img class="eventImage" src="/images/eventImage/event_seoul01.jpg"/>
+        </div>
+        <header>
+            <h2 th:text="*{eventTitle}"></h2>
+        </header>
+        <h4 th:text="*{eventSubtitle}"></h4>
+        <br>
+        <p style="display: inline">▷신청기간 :</p>
+        <p style="display: inline" th:text="*{eventDate}"></p>
+        <pre th:text="*{eventContent}"></pre>
+        <section>
+            <header>
+                <h3>주의 사항</h3>
+            </header>
+            <p style="color: red;">
+                1. 일부 신청은 선착순 예약이며, 가용 인원 초과 시 조기 예약 마감할 수 있습니다.<br>
+                2. 신청시 소액의 신청 금액이 부과 될 수 있습니다.<br>
+                3. 개인 사유로 인해 예약을 취소할 경우 규정에 따라 환불이 불가능 할 수 있습니다.<br>
+                4. 우천 등의 사유로 플로깅 일정이 취소될 수 있으며, 이에 따른 모든 예약은 환불됩니다.<br>
+            </p>
+        </section>
+    </div>
+</div>
+
+<div id="main_footer"></div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<script src="/js/event.js"></script>
+<script th:inline="javascript">
+    let member = [[${member}]];
+    let attendTable_1 = $("#attendTr_1");
+    let attendTable_2 = $("#attendTr_2");
+
+    if(member != null && member != 'null'){
+        let attendCnt = $("#attendOk").text();
+        let memberLevel = $("#memberLevel").text();
+
+        showAttend(attendCnt);
+        showLevel(memberLevel);
+    }
+
+</script>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <title>1:1문의</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>d
+</head>
+<body class="homepage is-preload">
+<header id="commuHeaderWrapper">
+    <div id="main_header"></div>
+</header>
+<div id="page-wrapper">
+
+
+    <!-- Main -->
+    <div id="main" style="padding: 0 17%">
+        <div class="wrapper">
+            <div class="inner">
+
+                <!--신고된 글 목록-->
+                <header class="major">
+                    <p></p>
+                </header>
+                <div id="reportListWrapper">
+                    <!--   <form method="get" action="report/reportRead">-->
+                    <!--게시판 목록-->
+                    <div id="reportListMiddle">
+                        <div id="registerBtn">
+                            <div>1:1 문의</div>
+                            <a href="javascript:void(0)" id="cancelReport" class="button btn-close trigger">문의하기</a>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                <tr class="tHead" id="reportListHeader">
+                                    <th class="reportedDate">접수일</th>
+                                    <th class="reporter">제목</th>
+                                    <th class="oneReport">아이디</th>
+                                    <th class="changeReasons">비고</th>
+                                    <th class="changeStatus">처리상태</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="report : ${reportList}">
+                                    <tr class="tBody" id="reportListValues" th:object="${report}">
+                                        <td class="reportedDate">2021-11-05</td>
+                                        <td class="reporter" th:text="*{sessionId}"></td>
+                                        <td class="oneReport"><a th:href="@{/report/reportRead(reportNum=${report.reportNum})}" th:text="*{commuTitle}"></a></td>
+                                        <td class="changeReasons" th:text="*{extraDetails}"></td>
+                                        <td class="changeStatus" th:text="*{reportStatus}"></td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                                <tfoot>
+                                <!--th:text="*{commuBoardStatus}"-->
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!--    </form>-->
+                </div>
+
+                <!--검색 기능-->
+                <form action="/inquiry/inquiryList" name="searchForm">
+                    <div class="fields" id="reportSearchWrap">
+                        <div class="field">
+                            <div id="searchWrap"th:object="${pageMaker}">
+                                <select name="type" th:object="${reportCriteria}">
+                                    <option value="">검색 기준</option>
+                                    <option value="T" th:selected="*{type} == 'T'">제목</option>
+                                    <option value="C" th:selected="*{type} == 'C'">내용</option>
+                                    <option value="W" th:selected="*{type} == 'W'">작성자</option>
+                                    <option value="TC" th:selected="*{type} == 'TC'">제목 또는 내용</option>
+                                    <option value="TW" th:selected="*{type} == 'TW'">제목 또는 작성자</option>
+                                    <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
+                                </select>
+                                <input id="keyword" type="text" name="keyword" th:value="*{reportCriteria.keyword}">
+                                <a href="javascript:void(0)" id="commuSearchBtn" class="search button primary icon solid fa-search"></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!--페이징 처리-->
+                <div th:object="${pageMaker}">
+                    <div class="big-width" id="pagingStyle">
+                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block
+                                th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.reportCriteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="changePage" th:unless="${pageMaker.reportCriteria.getPageNum() == num}"
+                               th:href="${num}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                    </div>
+                    <!--반응형 paging 처리-->
+                    <div class="small-width" style="text-align: center">
+                        <a class="changePage" th:if="*{reportCriteria.pageNum > 1}" th:href="*{reportCriteria.pageNum - 1}"><code>&lt;</code></a>
+                        <code th:text="*{reportCriteria.pageNum}"></code>
+                        <a class="changePage" th:if="*{reportCriteria.pageNum < realEnd}"
+                           th:href="*{reportCriteria.pageNum + 1}"><code>&gt;</code></a>
+                    </div>
+                    <form action="/report/reportList" th:object="${reportCriteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                        <input type="hidden" name="type" th:field="*{type}">
+                        <input type="hidden" name="keyword" th:field="*{keyword}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer 위치-->
+    <footer>
+        <div id="main_footer"></div>
+    </footer>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/inquiryReply.js"></script>
+<script th:inline="javascript">
+    // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
+    let pageForm = $(document.pageForm);
+    let paging = [[${pageMaker.criteria.listLink}]];
+    let searchForm = $(document.searchForm);
+    let list = [[${list}]];
+    let str="";
+
+    $(document).ready(function() {
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].status == 0) {
+                str = "답변 대기 중"
+            }
+            if (list[i].status == 1)  {
+                str = "답변 완료"
+            }
+            $("#" + i).text(str);
+        }
+    });
+
+    $("a.changePage").click(function (e) {
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    $("a#goRead2").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/inquiry/inquiryRead" + paging + "&inquiryNum=" + $(this).attr("href");
+    });
+
+
+</script>
+<script src="/js/main.js"></script>
+</body>
+</html>

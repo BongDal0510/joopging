@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>줍깅</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        /* 브라우저 마진과 패딩 리셋 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* INPUT 가리기 */
+        .section {
+            margin-right: 17%;
+            margin-left: 17%;
+            padding: 0 5%;
+            background-color: #ffffff;
+        }
+
+        .section input[id*="slide"] {
+            display: none;
+        }
+
+        /* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
+        .section .slidewrap {
+            max-width: 1300px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .section .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+        }
+
+        .section .slidelist>li {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+        }
+
+        .section .slidelist>li>a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        } /* 화살표 화면 밖으로 나가면 안보이도록 OVERFLOW로 가림처리 */
+        .section .slidelist>li>a img {
+            width: 100%;
+        }
+
+        /* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+        .section .slidelist label {
+            position: absolute;
+            z-index: 1;
+            transform: translateY(-60%);
+            padding: 50px;
+            cursor: pointer;
+        }
+
+        .section .slidelist .left {
+            left: -300px;
+            background: url('/images/mainpage/left.png') center center/50% no-repeat;
+        } /* LEFT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+        .section .slidelist .right {
+            right: -300px;
+            background: url('/images/mainpage/right.png') center center/50% no-repeat;
+        } /* RIGHT -300px로 화살표가 안보이게 되어있도록 준 스타일 */
+
+        /* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(0%);
+        }
+
+        .section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-100%);
+        }
+
+        .section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
+            transform: translateX(-200%);
+        }
+
+        /* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 1번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 2번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left
+        {
+            left: 1px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 왼쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+        .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right
+        {
+            right: 1px;
+            transition: all .35s ease .5s;
+        } /* 3번 INPUT이 체크되면 1번 슬라이드의 오른쪽 화살표의 LEFT값이 변하면서 나타나도록 준 스타일 */
+
+        .actions input {
+            line-height: 1.5em !important;
+        }
+
+        .col-12 {
+            clear: both;
+        }
+
+        .box {
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        .actions > li > input {
+            font-family: 'S-CoreDream-3Light' !important;
+        }
+
+        /*플로깅 안내*/
+        .event_subtitle {
+            text-align: center;
+            margin-bottom: 2em;
+            margin-top: 5%;
+        }
+
+        .container {
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            padding: 0 5% !important;
+            width: auto !important;
+        }
+
+        #center {
+            margin: 0;
+        }
+
+        .image.featured {
+            margin: 0 !important;
+        }
+
+        .eventImage {
+            margin: 0 !important;
+        }
+
+        .eventDate {
+            margin: 0;
+            font-size: 13pt;
+        }
+
+        .boxinner {
+            padding: 1em 1em 1em 1em !important;
+            font-family: 'S-CoreDream-3Light';
+            text-align: left !important;
+        }
+
+        .alt {
+            font-size: 17px !important;
+            padding: 0.2em 1em !important;
+        }
+
+        .eventButton {
+            float: right;
+            margin-left: auto;
+            margin-top: 0;
+        }
+
+
+    </style>
+</head>
+
+<body class="homepage is-preload">
+<div id="main_header" style="display: flex"></div>
+<div id="page-wrapper" style="margin-top: 5.1em;">
+    <div class="section">
+        <input type="radio" name="slide" id="slide01" checked>
+        <input type="radio" name="slide" id="slide02">
+        <input type="radio" name="slide" id="slide03">
+
+        <div class="slidewrap">
+            <ul class="slidelist" style=height:400px;margin-bottom:85px;margin-top:-140px;>
+                <li><a>
+                    <label for="slide03" class="left" style="top: 37%;"></label>
+                    <img src="/images/mainpage/banner_01.png">
+                    <label for="slide02" class="right" style="top: 37%;"></label>
+                </a></li>
+                <li><a>
+                    <label for="slide01" class="left" style="top: 37%;"></label>
+                    <img src="/images/mainpage/banner_02.png">
+                    <label for="slide03" class="right" style="top: 37%;"></label>
+                </a></li>
+                <li><a> <label for="slide02" class="left" style="top: 37%;"></label>
+                    <img src="/images/mainpage/banner_03.png">
+                    <label for="slide01" class="right" style="top: 37%;"></label>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Main -->
+<!--<section id="main">-->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- Portfolio -->
+            <section>
+                <div class="event_subtitle">
+                    <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 플로깅</h2>
+                </div>
+                <div class="row">
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/mainpage/양화대교.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        양화대교 플로깅<br>
+                                        (23/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 1일-11월 30일</p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/mainpage/성내천.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        성내천 플로깅<br>
+                                        (20/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 3일-11월 19일</p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a href="#" class="image featured"><img src="/images/mainpage/마포대교.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 style="font-family: 'S-CoreDream-4Regular';">
+                                        마포대교 플로깅<br>
+                                        (14/30)
+                                    </h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/main/eventInfo" class="button alt">예약하기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">11월 4일-11월 10일</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+            <div class="col-12">
+                <!-- Blog -->
+                <section>
+                    <div class="event_subtitle">
+                        <h2 style="text-align: left; font-family: 'yg-jalnan';">플로깅이 처음이신가요?</h2>
+                    </div>
+                    <p align="middle">
+                        <iframe width="834px" height="410px" src="https://www.youtube.com/embed/mc4oufE-9yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main_footer"></div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

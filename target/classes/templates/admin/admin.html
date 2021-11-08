@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MY PAGE</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/font.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/admin.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+
+</head>
+<style>
+
+    #adminhead {
+        margin-top: 100px;
+    }
+
+    .adminMainCategory {
+        display: flex;
+        justify-content: center;
+    }
+
+    .adminCategoryBtn img {
+        width: 200px;
+    }
+
+    .adminCategoryBtn > a {
+        width: 200px;
+        background: none;
+        padding: 0;
+        margin: 20px
+    }
+
+    .adminCategoryBtn > a:hover {
+        background: none;
+    }
+
+</style>
+<body class="is-preload">
+<!-- 헤더 -->
+<header>
+    <div id="main_header" style="display: flex"></div>
+</header>
+
+<div id="main" class="modal-wrapper">
+    <div id="wrapper" class="modal">
+        <div class="inner head">
+            <div class="adminMainCategory" id="adminhead">
+                <!--//회원관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="memberBtn" class="button small trigger" onclick="memberPop()">
+                        <img src="/images/admin/admin_memberInfo.png"></a>
+                </div>
+
+                <!--//문의 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="inquiryBtn" class="button small trigger" onclick="inquiryPop()">
+                        <img src="/images/admin/admin_inquiry.png"></a>
+                </div>
+
+                <!--   //포인트 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="pointBtn" class="button small trigger" onclick="pointPop()">
+                        <img src="/images/admin/admin_point.png"></a>
+                </div>
+
+                <!-- //신고글 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="reportBtn" class="button small trigger" onclick="reportsCtrPop()">
+                        <img src="/images/admin/admin_report.png"></a>
+                </div>
+            </div>
+
+            <div class="adminMainCategory">
+                <!--  //이벤트 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="eventBtn" class="button small trigger" onclick="eventPop()">
+                        <img src="/images/admin/admin_event.png"></a>
+                </div>
+
+                <!--   //플로깅 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="ploggingBtn" class="button small trigger" onclick="commuPop()">
+                        <img src="/images/admin/admin_plogging.png"></a>
+                </div>
+
+                <!--//상품 등록 관리-->
+                <div class="adminCategoryBtn">
+                    <a href="javascript:void(0)" id="shopBtn" class="button small trigger" onclick="shopPop()">
+                        <img src="/images/admin/admin_shopitem.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div id="main_footer"></div>
+</footer>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script type="text/javascript"></script>
+<script src="/js/headerfooter.js"></script>
+</body>
+<script>
+    //##################################################팝업##################################################
+    /*
+
+        console.log(commuToReport + "1");*/ //변수 받아올 때 쓰기
+    function reportsCtrPop(){
+        let url = "/report/reportList"
+        let name = "신고한 글 관리";
+        let option = "width = 1440, height = 700, top = 50, left = 50, location = no"
+        window.open(url, name, option);
+    }
+
+
+</script>
+</html>
