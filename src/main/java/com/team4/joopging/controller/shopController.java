@@ -105,20 +105,39 @@ public class shopController {
     @GetMapping("failPayment")
     public String failPayment() {return "failPayment";}
 
-    @GetMapping("header")
+  /*  @GetMapping("header")
     public String header() {
         return "header";
     }
 
     @GetMapping("shop_header")
-    public String shop_header() { return "shop_header";}
+    public String shop_header() { return "shop_header";}*/
 
     @GetMapping("shopPayment")
     public String shopPayment() { return "shopPayment";}
-
+/*
     @GetMapping("footer")
     public String footer() {
         return "footer";
+    }*/
+    @GetMapping("/pageframe/header")
+    public String header() {
+    return "/pageframe/header";
+}
+
+    @GetMapping("/pageframe/footer")
+    public String footer() {
+        return "/pageframe/footer";
+    }
+
+    @GetMapping("/terms")
+    public String terms() {
+        return "/pageframe/terms";
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "/pageframe/privacy";
     }
 
 
