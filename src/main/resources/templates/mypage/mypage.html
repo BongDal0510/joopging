@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>MY PAGE</title>
+    <title>마이페이징</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
@@ -212,6 +212,9 @@
             padding: 0.5em 0.7em !important;
         }
 
+        .pointer{
+            cursor:pointer;
+        }
 
         #ploggingAdv button {
             margin: 0px;
@@ -439,17 +442,17 @@
                         <h3 id="myList">내 정보</h3>
                     </header>
                     <ul id=listAll>
-                        <li class="list" id='myPageMainList'>My Home</li>
-                        <li class="list">플로깅 예약 확인</li>
-                        <li class="list">포인트 내역</li>
-                        <li class="list">내 상품</li>
-                        <li class="hiddenList payment" id='paymentMainList'>- 내 상품 내역</li>
-                        <li class="hiddenList payment">- 찜 목록</li>
-                        <li class="list">회원 정보</li>
-                        <li class="hiddenList member" id='memberMainList'>- 회원 정보 수정</li>
-                        <li class="hiddenList member">- 회원 탈퇴</li>
-                        <li class="list">내 게시글 관리</li>
-                        <li class="list">문의하기</li>
+                        <li class="list pointer" id='myPageMainList'>My Home</li>
+                        <li class="list pointer">플로깅 예약 확인</li>
+                        <li class="list pointer">포인트 내역</li>
+                        <li class="list pointer">내 상품</li>
+                        <li class="hiddenList payment pointer" id='paymentMainList'>- 내 상품 내역</li>
+                        <li class="hiddenList payment pointer">- 찜 목록</li>
+                        <li class="list pointer">회원 정보</li>
+                        <li class="hiddenList member pointer" id='memberMainList'>- 회원 정보 수정</li>
+                        <li class="hiddenList member pointer">- 회원 탈퇴</li>
+                        <li class="list pointer">내 게시글 관리</li>
+                        <li class="list pointer">문의하기</li>
                     </ul>
                 </section>
             </div>
@@ -522,7 +525,7 @@
                                                                    th:text="${plo.getPloggingTitle()}"/></td>
                                         <td class="ploResTime" th:text="${plores.getPloResDate()}"/>
                                         <td class="deletePloRes">
-                                                <span id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
+                                                <span class = "pointer" id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
                                                       th:class="${plores.getPloResNum()}">x</span>
                                                 <span id="ploResRefundSuccess" th:if="${plores.getPloResStatus()==1}">취소 됨</span>
                                         </td>
@@ -702,7 +705,7 @@
                                 </tr>
                             </th:block>
                             <tr th:if="${goodsLikeList.size()==0}">
-                                <td colspan="3" align="center">찜 내역이 없습니다.</td>
+                                <td colspan="4" align="center">찜 내역이 없습니다.</td>
                             </tr>
                             </tbody>
                         </table>

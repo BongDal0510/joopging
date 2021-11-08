@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ORDER INFORMATION</title>
+    <title>상품 주문내역확인하깅</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
@@ -378,12 +378,12 @@
                             </td>
                             <td class="product">
                                 <div id="goodsMoreInfo">
-                                    <div class="img_center">
-                                        <img src="">
+                                    <div id="img_center">
+                                        <img src="" style="width: 100px;background-size: 100%;margin-right: 10px;">
                                     </div>
                                     <dl><!-- NV_MID:83250896260 -->
                                         <dt>
-                                            <a th:href="${order.getGoodsNum()}" th:text="${order.getGoodsName()}">
+                                            <a class="goGoodsDetail" th:href="${order.getGoodsNum()}" th:text="${order.getGoodsName()}">
                                             </a><!--N=a:odd.product-->
                                         </dt>
                                         <dd><span>옵션: <strong th:text="${order.getGoodsColor()}"/> <strong th:text="${order.getGoodsSize()}"/>
@@ -651,7 +651,7 @@
         let goodsNum = [[${order.getGoodsNum()}]];
         location.href = "/shop/shopDetail?goodsNum=" + goodsNum;
     })
-    /*재구매시 해당 상품의 상세페이지로 이동*/
+    /*상품 이름 클릭시 상세페이지로 이동*/
     $(".goGoodsDetail").on("click", function (e) {
         e.preventDefault();
         let goodsNum = [[${order.getGoodsNum()}]];
@@ -665,22 +665,22 @@
         window.open("/orderhistory/refundOrderPage?orderNum=" + orderNum, "", option).focus();
     });
 
+    let goodsNum = [[${order.getGoodsNum()}]];
+    let mainImgUploadResult = $("#img_center");
     $(document).ready(function(){
         (function(){
             $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
                 function(arr){
                     let str = "";
                     $(arr).each(function(i, attach){
-                        if(!attach.image){
-
-                        }else{
+                            if(i=0){
                             let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
                             str += "<div class=\"img_center\">";
                             str += "<img style=\"width: 100px;background-size: 100%;margin-right: 10px;\" src='/upload/display?fileName=" + originPath + "'>" ;
                             str += "</div>";
-                        }
+                            }
                     });
-                    uploadResult.html(str);
+                    mainImgUploadResult.html(str);
                 });//getJSON
         })();
     })
