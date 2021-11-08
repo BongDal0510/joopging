@@ -432,6 +432,9 @@
         /*빈하트를 클릭했을 때 빨간하트를 보여줌(해당상품찜)*/
         $("#heart").click(function () {
             let goodsNum = [[${shop.getGoodsNum}]];
+            $("#heart").hide();
+            $("#redheart").show();
+            alert("찜 목록에 추가");
             $.ajax(
                 {
                     type:"GET",
@@ -440,9 +443,7 @@
                     dateType:"text",
                     success: function (result) {
                         if(result.eq("1")) {
-                            $("#heart").hide();
-                            $("#redheart").show();
-                            alert("찜 목록에 추가");
+
                             return false;
                         }else{
                             alert("찜 추가 실패");

@@ -151,12 +151,12 @@
 
                                         <div class="test" style= width:380px;height:700px;float:left;>
                                             <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img th:src ="|/upload/display?fileName=*{uploadPath}/*{fileName}|" style= width:380px;height:500px >
-                                                <h3 th:text="*{uploadPath}"></h3>
+                                             <!--   <h3 th:text="*{uploadPath}"></h3>
                                                 <h3 th:text="*{fileName}"></h3>
-                                                <h3 th:text="*{uuid}"></h3>
+                                                <h3 th:text="*{uuid}"></h3>-->
 
                                                 <h3 th:text="*{goodsName}"></h3>
-                                                <span th:text="*{goodsPrice}"></span></a><br>
+                                                <span th:text="*{goodsPrice}">원</span></a><br>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                             <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
