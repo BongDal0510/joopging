@@ -87,7 +87,7 @@
                     <!-- Sidebar -->
                     <section class="box" style=text-align:left;>
                         <a href="#" class="image featured"><img
-                                src="/images/여자둘.png" alt="" /></a>
+                                src="/images/twogirl.png" alt="" /></a>
                         <header th:object="${pageMaker}">
                             <h3>All products ( <span th:text="*{total}"></span> ) </h3>
                         </header>
@@ -276,6 +276,10 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/header.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+
+
 <script th:inline="javascript">
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.shopCriteria.listLink}]];
@@ -299,6 +303,7 @@
         e.preventDefault();
         location.href = "/shop/shopDetail" + paging + "&goodsNum=" + $(this).attr("href");
     })
+
 let testResult = $(".test");
     $(document).ready(function(){
         (function(){
