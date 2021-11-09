@@ -147,14 +147,14 @@
             font-family: 'S-CoreDream-4Regular';
         }
 
-        #write span {
+        .write span {
             width: 18%;
             line-height: 50px;
             font-size: 12pt;
             font-weight: 700;
         }
 
-        #write input {
+        .write input {
             height:50px;
             width: 82%;
         }
@@ -201,6 +201,7 @@
 </head>
 
 <body>
+<div id="main_header" style="display: flex"></div>
 <div class="writePopUp" style="margin: 30px 50px;">
     <!--제목-->
     <div>
@@ -208,7 +209,7 @@
     </div>
 
     <!--폼 태그-->
-    <form action="/plo/ploWrite" name="ploForm" id="write" method="post">
+    <form action="/plo/ploWrite" name="ploggingForm" id="registForm" class="write" method="post">
         <div class="inputline">
             <span>플로깅명</span>
             <input class="line" type="text" id="ploggingTitle" name="ploggingTitle" placeholder="플로깅 행사이름" maxlength="8"/>

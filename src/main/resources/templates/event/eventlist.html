@@ -277,21 +277,27 @@
                 <div class="row">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section class="eventImage">
+                            <a class="image featured"><img style = height:330px; src="/images/eventImage/신규가입.png"/></a>
+                        </section>
+                        <section class="box boxinner">
+                            <div style="display: flex">
+                                <header id="center">
+                                    <h4 id="joinEventTitle" style="font-family: 'S-CoreDream-4Regular';"></h4>
+                                </header>
+                                <footer class="eventButton">
+                                    <ul class="actions">
+                                        <li><a href="/event/joinInfo" class="button alt">상세보기</a></li>
+                                    </ul>
+                                </footer>
+                            </div>
+                            <div>
+                                <p class="eventDate">신청일 </p>
+                                <p class="eventDate" id="joinEventDate"></p>
+                            </div>
+                        </section>
+                    </div>
 
 
                     <th:block th:each="event : ${list}">

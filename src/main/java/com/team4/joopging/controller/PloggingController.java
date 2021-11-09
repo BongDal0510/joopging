@@ -177,4 +177,26 @@ public class PloggingController {
     public String writeSuccess(){
         return "ploggingReservation/button";
     }
+
+    @GetMapping("/pageframe/header")
+    public String header() {
+        return "/pageframe/header";
+    }
+
+    @GetMapping("/pageframe/footer")
+    public String footer() {
+        return "/pageframe/footer";
+    }
+
+    @GetMapping("/terms")
+    public String terms() {
+        return "/pageframe/terms";
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "/pageframe/privacy";
+    }
+
+
 }
