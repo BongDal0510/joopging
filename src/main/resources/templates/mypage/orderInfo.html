@@ -396,8 +396,9 @@
                                 <em class="thm" th:text="${order.getGoodsTotalCost()}"></em>원<br>
                                 <span>( <span th:text="${order.getGoodsCnt()}"/> 개)</span>
                             </td>
-                            <td class="bg_point state">
-                                주문 접수<br>
+                            <td class="bg_point">
+                            <strong th:if="${order.getOrderStatus()==0}">주문 접수</strong>
+                            <strong th:if="${order.getOrderStatus()==2}">배송 완료</strong>
                             </td>
                             <td class="bg_point btn">
                                 <a th:href="${order.getGoodsNum()}" class="goGoodsDetail">
@@ -417,10 +418,13 @@
                                         <label for="t_invoice">운송장 번호</label>
                                         <input type="text" class="form-control" name="t_invoice" id="t_invoice" value="556566805873">
                                     </div>
-                                <a id="parcelSubmit">
+                                <a th:if="${order.getOrderStatus()==2}" id="parcelSubmit">
                                     <span>배송 조회</span>
                                 </a>
                                 </form>
+                                    <a th:if="${order.getOrderStatus()==0}" id="notParcelSubmit">
+                                        <span>배송 조회</span>
+                                    </a>
                             </td>
                         </tr>
                         </tbody>
@@ -519,7 +523,7 @@
                                             </li>
                                             <li>
                                                 <strong>최종 결제액</strong>
-                                                <p><em class="thm"><span th:text="${goods.getGoodsPrice()}"/> - <span th:text="${order.getUsePoint()}"/></em> 원</p>
+                                                <p><em class="thm"><span th:text="${goods.getGoodsPrice()*order.getGoodsCnt()}"/> - <span th:text="${order.getUsePoint()}"/></em> 원</p>
                                                 <p><em class="thm"><span th:text="${order.getGoodsTotalCost()}"/></em> 원</p>
                                             </li>
                                         </ul>
@@ -672,6 +676,9 @@
         window.open("", title, option);
         form.target = title;
     form.submit();
+    })
+    $("#notParcelSubmit").on("click", function () {
+        alert("배송 전 상품입니다.")
     })
 </script>
 </html>

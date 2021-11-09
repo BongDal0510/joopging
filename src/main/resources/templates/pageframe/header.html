@@ -123,26 +123,26 @@
                         <li style="padding-right:0.5em"><img id="weather_icon"></li>
                         <li id="weather" style="padding-right:0.5em"></li>
 
-                        <li><a href="/member/login">로그인</a></li>
-                        <li><a href="/member/logout">로그아웃</a></li>
-                        <li><a href="no-sidebar.html">장바구니</a></li>
-                        <li><a href="/mypage/mypage">마이페이지</a></li>
-                        <li><a href="no-sidebar.html">관리자페이지</a></li>
+<!--                        <li><a href="/member/login">로그인</a></li>-->
+<!--                        <li><a href="/member/logout">로그아웃</a></li>-->
+<!--                        <li><a href="no-sidebar.html">장바구니</a></li>-->
+<!--                        <li><a href="/mypage/mypage">마이페이지</a></li>-->
+<!--                        <li><a href="no-sidebar.html">관리자페이지</a></li>-->
 
-<!--                        &lt;!&ndash;비회원&ndash;&gt;-->
-<!--                        <li><a th:if="${session.memberId} == null" href="/member/login">로그인</a></li>-->
-<!--                        <li><a th:if="${session.memberId} == null" href="/member/join">회원가입</a></li>-->
-<!--                        <li><a th:if="${session.memberId} == null" href="no-sidebar.html">장바구니</a></li>-->
+                        <!--비회원-->
+                        <li><a th:if="${session.memberId} == null" href="/member/login">로그인</a></li>
+                        <li><a th:if="${session.memberId} == null" href="/member/join">회원가입</a></li>
+                        <li><a th:if="${session.memberId} == null" href="no-sidebar.html">장바구니</a></li>
 
-<!--                        &lt;!&ndash;로그인 상태&ndash;&gt;-->
-<!--                        <li><a th:if="${session.memberId} != null" href="/member/logout">로그아웃</a></li>-->
+                        <!--로그인 상태-->
+                        <li><a th:if="${session.memberId} != null" href="/member/logout">로그아웃</a></li>
 
-<!--                        &lt;!&ndash;일반회원&ndash;&gt;-->
-<!--                        <li><a th:if="${session.memberId} != 'admin' and ${session.memberId} != null" href="no-sidebar.html">장바구니</a></li>-->
-<!--                        <li><a th:if="${session.memberId} != 'admin' and ${session.memberId} != null" href="/mypage/mypage">마이페이지</a></li>-->
+                        <!--일반회원-->
+                        <li><a th:if="${session.memberId} != 'admin' and ${session.memberId} != null" href="no-sidebar.html">장바구니</a></li>
+                        <li><a th:if="${session.memberId} != 'admin' and ${session.memberId} != null" href="/mypage/mypage">마이페이지</a></li>
 
-<!--                        &lt;!&ndash;관리자&ndash;&gt;-->
-<!--                        <li><a th:if="${session.memberId} == 'admin'" href="no-sidebar.html">관리자페이지</a></li>-->
+                        <!--관리자-->
+                        <li><a th:if="${session.memberId} == 'admin'" href="no-sidebar.html">관리자페이지</a></li>
 
 
                     </ul>

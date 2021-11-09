@@ -72,7 +72,7 @@
             background-size: 100%;
             margin-top: 16px;
             text-align: right;
-            height: 240px;
+            height: 170px;
             width: 100%;
             border-bottom: 1px solid;
             border-top: 1px solid;
@@ -463,18 +463,18 @@
                         <h2><strong th:text="*{memberName}" style="color: #35A14A"/>님 환영합니다.</h2>
                     </header>
                     <div id="ploggingAdv">
-                        <button onclick="goEvent()">
-                            이벤트 확인하러 가기
-                        </button>
+<!--                        <button onclick="goEvent()">-->
+<!--                            이벤트 확인하러 가기-->
+<!--                        </button>-->
                     </div>
                     <div style="display: flex; justify-content: space-around;">
                         <div class="smallBox1">
                             <h4>나의 현황</h4>
                             <table>
                                 <th:block th:each="plores:${ploRes}">
-                                    <tr th:if="${ploRes.size()!=0 && ploresStat.index<3}" th:each="plo:${plogging}">
+                                    <tr th:if="${ploRes.size()!=0 && ploresStat.index<3}" th:each="plo:${plogging}" style="border-top:none;">
                                             <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
-                                                <td class="ploResTitle"> <strong th:text="${plo.getPloggingTitle().length() > 7 ? plo.getPloggingTitle().substring(0, 6) : plo.getPloggingTitle()}"/>...</td>
+                                                <td class="ploResTitle"> <strong th:text="${plo.getPloggingTitle().length() > 9 ? plo.getPloggingTitle().substring(0, 6) : plo.getPloggingTitle()}"/>...</td>
                                             <td class="ploResDate" th:text="${plores.getPloResDate()}"></td>
                                         </th:block>
                                     </tr>
@@ -521,12 +521,11 @@
                                     <tr class="ploRes" th:if="${ploRes.size()!=0 && ploresStat.index<10}" th:each="plo : ${plogging}">
                                         <th:block th:if="${plores.ploggingNum}==${plo.ploggingNum}">
                                         <td calss="ploResNum" th:text="${plores.ploResNum}"></td>
-                                        <td calss="ploResTitle"><a id="goPloggingDetail" th:href="${plores.getPloggingNum()}"
-                                                                   th:text="${plo.getPloggingTitle()}"/></td>
+                                        <td calss="ploResTitle"><a id="goPloggingDetail" th:text="${plo.getPloggingTitle()}"/></td>
                                         <td class="ploResTime" th:text="${plores.getPloResDate()}"/>
                                         <td class="deletePloRes">
-                                                <span class = "pointer" id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
-                                                      th:class="${plores.getPloResNum()}">x</span>
+                                                <span id="ploResRefund" th:if="${plores.getPloResStatus()==0}"
+                                                      th:class="${plores.getPloResNum()}"><strong class = "pointer">x</strong></span>
                                                 <span id="ploResRefundSuccess" th:if="${plores.getPloResStatus()==1}">취소 됨</span>
                                         </td>
                                         </th:block>
@@ -644,8 +643,9 @@
                                         </td>
                                         <td calss="goodsTotalCost" th:text="${orderhistory.getGoodsTotalCost()}"/>
                                         <td class="goodsCnt" th:text="*{goodsCnt}"/>
-                                        <td th:if="*{orderStatus!=1}">주문 접수</td>
-                                        <td th:unless="*{orderStatus!=1}">구매 취소</td>
+                                        <td th:if="*{orderStatus==0}">주문 접수</td>
+                                        <td th:if="*{orderStatus==2}">배송 완료</td>
+                                        <td th:if="*{orderStatus==1}">구매 취소</td>
                                     </tr>
                                 </th:block>
                                 <tr th:if="${orderHistory.size()==0}">
@@ -761,7 +761,10 @@
                         </tr>
                         <tr>
                             <th>성별</th>
-                            <td th:text="*{memberGender}" colspan="3"></td>
+                            <td colspan="3">
+                                <strong th:if="*{memberGender%2==1}">남</strong>
+                                <strong th:if="*{memberGender%2==0}">여</strong>
+                            </td>
                         </tr>
                         <tr>
                             <th>생일</th>
@@ -984,7 +987,7 @@
                             </table>
 
                             <p style="text-align: right;">
-                                <button style="font-size: 18px;"> <!--onclick="location.href=''"-->글쓰기</button>
+                                <button id="not" style="font-size: 18px;">글쓰기</button>
 
                             </p>
                             <table style="font-size:1.3rem">
@@ -1016,10 +1019,14 @@
         location.href = "/event/eventlist"
     };
 
+    /**/
+    $("#not").on("click", function () {
+       alert("준비 중인 서비스입니다.")
+    });
+
     /*플로깅 상세보기로 이동*/
-    $("a#goPloggingDetail").on("click", function (e) {
-        e.preventDefault();
-        location.href = "/plogging/ploggingDetail?ploggingNum=" + $(this).attr("href");
+    $("a#goPloggingDetail").on("click", function () {
+        alert("준비 중인 서비스입니다.");
     });
 
     /*굿즈 페이지로 이동 이동*/
