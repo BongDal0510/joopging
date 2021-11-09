@@ -47,7 +47,7 @@
                                    onclick="serviceNotReady()">인터뷰</a></td>
                         </tr>
                         <!--admin 계정만 보이게-->
-                        <tr>
+                        <tr th:if="${member=='admin'}">
                             <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
                         </tr>
 

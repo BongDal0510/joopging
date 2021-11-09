@@ -83,16 +83,15 @@
                                    onclick="serviceNotReady()">인터뷰</a></td>
                         </tr>
                         <!--admin 계정만 보이게-->
-                        <tr>
-                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
+                        <tr th:if="${member=='admin'}">
+                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu" onclick="reportListPop()">신고글</a></td>
                         </tr>
-
                     </table>
                 </div>
 
                 <div id="commuBoardMiddle">
                     <div id="goCommuListBtn"> <!--href="javascript:void(0)"-->
-                        <div><a id="goListBtn" href="javascript:void(0)" class="button small">목록 보기</a></div>
+                        <div><a id="goListBtn" href="/commu/communityList" class="button small">목록 보기</a></div>
                         <div id="goReportBtn"><a id="reportBtn" class="button small trigger" onclick="popup()">
                             <img src="/images/commu/siren.png"></a>
                         </div>
@@ -195,6 +194,14 @@
     let replyUL = $("ul.replies");
     let pageNum = 1;
     let uploadResult = $(".uploadResult ul");
+
+
+        let msg = [[${msg}]];
+
+        if(msg == "notLogin"){
+            alert("로그인이 필요한 페이지입니다.")
+            location.href = "/member/login"
+        }
 
     let showCheck = false;
 
@@ -474,6 +481,14 @@
         let option = "width = 500, height = 500, top = 100, left = 200, location = no"
         window.open(url, name, option);
     }
+    function reportListPop() {
+        let url = "/report/reportList/";
+        console.log(commuToReport + "2");
+        let name = "신고하기";
+        let option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
+
 
     /*#####################################기능 막기####################################*/
     function serviceNotReady() {
