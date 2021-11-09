@@ -4,7 +4,7 @@
 <mapper namespace="com.team4.joopging.mappers.PloggingMapper">
     <insert id="insertPlogging">
         <selectKey keyProperty="ploggingNum" order="BEFORE" resultType="_int">
-        SELECT SEQ_PLOGGING.NEXTVAL FROM DUAL
+            SELECT SEQ_PLOGGING.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_PLOGGING_INFO
         (PLOGGINGNUM, PLOGGINGTITLE, PLOGGINGCONTENT, PLORESDATE, PLOGGINGPPLLIMIT, PLOGGINGPOINT, PLOGGINGREGDATE)

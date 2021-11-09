@@ -141,7 +141,7 @@
     <div id="sideBarInner" th:object="${member}">
         <div>
             <div>
-                <img class="grade" id="grade">
+                <img class="grade" id="grade" th:src="${img}">
             </div>
             <div id="memberLevel" style="display: none;" th:text="*{memberLevel}"></div>
             <div>
@@ -186,9 +186,8 @@
 <div class="container">
     <div class="box post" th:object="${event}">
         <div>
-            <img class="eventImage" src="/images/eventImage/event_seoul01.jpg"/>
+            <img class="eventImage" th:src="${img}"/>
         </div>
-        <br>
         <header>
             <h2 th:text="*{eventTitle}"></h2>
         </header>
@@ -197,8 +196,6 @@
         <p style="display: inline">▷신청기간 :</p>
         <p style="display: inline" th:text="*{eventDate}"></p>
         <pre th:text="*{eventContent}"></pre>
-        <br>
-        <br>
         <section>
             <header>
                 <h3>주의 사항</h3>
@@ -223,6 +220,8 @@
     let member = [[${member}]];
     let attendTable_1 = $("#attendTr_1");
     let attendTable_2 = $("#attendTr_2");
+
+    console.log([[${img}]]);
 
     if(member != null && member != 'null'){
         let attendCnt = $("#attendOk").text();

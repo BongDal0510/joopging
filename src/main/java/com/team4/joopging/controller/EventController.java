@@ -1,6 +1,7 @@
 package com.team4.joopging.controller;
 
 import com.team4.joopging.event.vo.EventCriteria;
+import com.team4.joopging.event.vo.EventFileVO;
 import com.team4.joopging.event.vo.EventPageDTO;
 import com.team4.joopging.event.vo.EventVO;
 import com.team4.joopging.member.memberVO.MemberVO;
@@ -10,12 +11,16 @@ import com.team4.joopging.services.MemberService;
 import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 //    프레젠테이션 계층의 구현
 
@@ -47,11 +52,21 @@ public class EventController {
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
 
-        model.addAttribute("list", eventService.getList(eventCriteria));
-        model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
+        List<EventVO> listVO = eventService.getList(eventCriteria);
+        EventVO vo = new EventVO();
 
+        for(int i=0; i<listVO.size(); i++){
+            listVO.get(i).setFileName("/images/eventImage/"+ eventService.getFileNames(listVO.get(i).getEventNum()));
+        }
+
+        System.out.println(listVO.toString());
+
+        model.addAttribute("list", listVO);
+        model.addAttribute("pageMaker", new EventPageDTO(eventService.getTotal(), 10, eventCriteria));
         return "event/eventlist";
     }
+
+
 
     @GetMapping("eventWrite")
     public String eventWrite(){
@@ -59,11 +74,16 @@ public class EventController {
     }
 
     @PostMapping("eventWrite")
-    public String eventWrite(EventVO eventVO){
+    public String ploWrite(EventVO vo, RedirectAttributes rttr, String uploadFiles){
+        if(vo.getAttachList() != null){
+            vo.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
+        System.out.println("첨부파일 명 : " + uploadFiles);
+        vo.setFileName(uploadFiles);
+        eventService.register(vo);
+//        rttr.addFlashAttribute("plogging", vo.getEventNum());
 
-        eventService.register(eventVO);
-
-        return "/writeSuccess";
+        return "writeSuccess";
     }
 
     @PostMapping("attendUpdate")
@@ -116,8 +136,9 @@ public class EventController {
         return "event/joinInfo";
     }
 
+    /*이벤트 상세보기*/
     @GetMapping("eventInfo")
-    public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") Long eventNum, Model model) {
+    public String eventInfo(HttpServletRequest req, @RequestParam("eventNum") int eventNum, Model model, String uploadFiles) {
 
         HttpSession session = req.getSession();
 
@@ -127,6 +148,15 @@ public class EventController {
             model.addAttribute("member", memberService.memberAllSelect(memberId));
         }
 
+//        if(vo.getAttachList() != null){
+//            vo.getAttachList().forEach(attach -> log.info(attach.toString()));
+//        }
+//        ploggingService.register(vo);
+//        rttr.addFlashAttribute("plogging", vo.getPloggingNum());
+//
+//        return new RedirectView("writeSuccess");
+        System.out.println(eventNum);
+        model.addAttribute("img", "/images/eventImage/" + eventService.getFileNames(eventNum));
         model.addAttribute("event", eventService.get(eventNum));
         return "event/eventInfo";
     }
@@ -136,8 +166,7 @@ public class EventController {
         return "event/attendPopup";
     }
 
-
-
+/*
 
     @GetMapping("eventInfo3")
     public String eventInfo3() {
@@ -147,7 +176,7 @@ public class EventController {
     @GetMapping("eventInfo4")
     public String eventInfo4() {
         return "event/eventInfo4";
-    }
+    }*/
 
     /* 위의 @RequestMapping 의 경로와 다를경우 '/' 슬래쉬를 붙여준다. */
     /* /event/pageframe/header → /pageframe/header */
@@ -159,5 +188,13 @@ public class EventController {
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
+    }
+
+    //    게시글 첨부파일
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<EventFileVO> getAttachList(int eventNum){
+        log.info("getAttachList " + eventNum);
+        return eventService.getAttachList(eventNum);
     }
 }

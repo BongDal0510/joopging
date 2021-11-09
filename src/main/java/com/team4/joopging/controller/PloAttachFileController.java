@@ -111,7 +111,7 @@ public class PloAttachFileController {
         return now.replace("-", "/");
     }
 
-//    서버에 업로드된 파일은 시간이 걸리더라도 파일 자체가 이미지인지를 정확하게 체크한 뒤 저장해야 한다.
+    //    서버에 업로드된 파일은 시간이 걸리더라도 파일 자체가 이미지인지를 정확하게 체크한 뒤 저장해야 한다.
     private boolean checkImageType(File file){
         try {
             String contentType = Files.probeContentType(file.toPath());
@@ -181,7 +181,6 @@ public class PloAttachFileController {
     }
 
 }
-
 
 
 

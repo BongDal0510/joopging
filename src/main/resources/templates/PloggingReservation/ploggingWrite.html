@@ -175,13 +175,14 @@
             background:#94c477;
         }
 
-        .clickButton {
+        #commuRegist {
+            margin: 0 !important;
             width: auto !important;
             line-height: 1.5em;
             background: #94C477 !important;
         }
 
-        .clickButton:hover {
+        #commuRegist:hover {
             background: #5d5d5d !important;
         }
 
@@ -189,6 +190,11 @@
             width:100%;
             height:250px;
             resize: none;
+        }
+
+        .actions > li {
+            margin: 0 !important;
+            width: 20%;
         }
 
     </style>
@@ -241,12 +247,17 @@
             </div>
         </div>
 
+        <ul class="actions special" style="text-align: center; display: flex; justify-content: center;">
+            <li><input type="submit" id="commuRegist" class="button" value="등록"/></li>
+            <li><input type="submit" id="commuRegist" class="button" onclick="close()" value="취소"/></li>
+        </ul>
+
         <!--버튼-->
-        <div style="text-align: center;">
-            <input type="button" class="clickButton" value="등록" onclick="goPloWrite()">
-            <span style="padding:1px"></span>
-            <input type="button" class="clickButton" value="취소" onclick="close()">
-        </div>
+<!--        <div style="text-align: center;">-->
+<!--            <input type="button" class="clickButton" value="등록" onclick="goPloWrite()">-->
+<!--            <span style="padding:1px"></span>-->
+<!--            <input type="button" class="clickButton" value="취소" onclick="close()">-->
+<!--        </div>-->
 
     </form>
 </div>
@@ -258,12 +269,6 @@
     }
 </script>
 <script>
-    let ploForm = $(document.ploForm);
-
-    function goPloWrite(){
-        ploForm.submit();
-    }
-
     //파일이 있는지 없는지 확인
     let check = false;
     //이미지 보여주는 곳

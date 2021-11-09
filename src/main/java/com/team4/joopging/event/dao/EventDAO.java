@@ -16,13 +16,16 @@ public class EventDAO {
 
     public void register(EventVO event) { eventMapper.insertEvent(event); }
 
-    public EventVO get(Long eventNum) { return eventMapper.readEvent(eventNum); }
+    public EventVO get(int eventNum) { return eventMapper.readEvent(eventNum); }
 
     public boolean modify(EventVO event) { return eventMapper.updateEvent(event) == 1; }
 
-    public boolean remove(Long eventNum) { return eventMapper.deleteEvent(eventNum) == 1; }
+    public boolean remove(int eventNum) { return eventMapper.deleteEvent(eventNum) == 1; }
 
     public List<EventVO> getList(EventCriteria eventCriteria) { return eventMapper.getEventList(eventCriteria); }
 
     public int getTotal() { return eventMapper.getTotal(); }
+
+    //파일명 가져오기
+    public String getFileName(int eventNum){ return eventMapper.getFileName(eventNum); };
 }
