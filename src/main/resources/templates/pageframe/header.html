@@ -123,11 +123,11 @@
                         <li style="padding-right:0.5em"><img id="weather_icon"></li>
                         <li id="weather" style="padding-right:0.5em"></li>
 
-                        <!--                        <li><a href="/member/login">로그인</a></li>-->
-                        <!--                        <li><a href="/member/logout">로그아웃</a></li>-->
-                        <!--                        <li><a href="no-sidebar.html">장바구니</a></li>-->
-                        <!--                        <li><a href="/mypage/mypage">마이페이지</a></li>-->
-                        <!--                        <li><a href="/admin/admin">관리자페이지</a></li>-->
+<!--                        <li><a href="/member/login">로그인</a></li>-->
+<!--                        <li><a href="/member/logout">로그아웃</a></li>-->
+<!--                        <li><a href="no-sidebar.html">장바구니</a></li>-->
+<!--                        <li><a href="/mypage/mypage">마이페이지</a></li>-->
+<!--                        <li><a href="/admin/admin">관리자페이지</a></li>-->
 
                         <!--비회원-->
                         <li><a th:if="${session.memberId} == null" href="/member/login">로그인</a></li>
@@ -156,7 +156,7 @@
 
             <!-- Logo -->
             <div id="logo">
-                <a href="/main/mainpage">
+                <a href="/main/index">
                     <img src="/images/headerfooter/joopging_logo.png" style="width: 130px;">
                 </a>
             </div>
@@ -179,11 +179,4 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/weather.js"></script>
 </div>
-<script>
-
-    function goAlert(){
-        alert("아직 준비중인 서비스입니다.");
-    }
-
-</script>
 </html>
