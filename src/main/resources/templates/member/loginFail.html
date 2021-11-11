@@ -7,6 +7,7 @@
 <body>
 </body>
 <script th:inline="javascript">
+    /*status 변수로 로그인 or 회원탈퇴 판단*/
     let result = [[${status}]];
     if(result == 1){
         alert("회원 탈퇴된 회원입니다.");
@@ -15,6 +16,5 @@
         alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
     }
     document.location.href="login";
-
 </script>
 </html>

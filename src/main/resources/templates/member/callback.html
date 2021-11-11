@@ -2,11 +2,12 @@
 <html lang="ko">
 <head>
 <body>
-<!--현재 callback.html을 한번 더 거쳐서 mainpage.html로 이동한다.-->
+<!--login.html -> member controller -> callback.html -> member controller -> 메인페이지 이동 -->
 <form id="naverLogin" name="naverLogin" action="/member/naverlogin" method="post" style="display: none">
     <!--토큰을 담아줄 input 태그-->
     <input id="token" name="token" type="text">
 
+    <!--폼태그 전송 태그-->
     <input id="memberId" name="memberId" type="text">
     <input id="memberName" name="memberName" type="text">
     <input id="memberEmail" name="memberEmail" type="text">
@@ -26,18 +27,9 @@
     naver_id_login.get_naver_userprofile("naverSignInCallback()");
     // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
     function naverSignInCallback() {
-        /*토큰값으로 데이터 조회하기기*/
-       // console.log("네이버 로그인 토큰 : " + naver_id_login.oauthParams.access_token);
-        // console.log("아이디 : " + naver_id_login.getProfileData('id'));
-        // console.log("이름 : " + naver_id_login.getProfileData('name'));
-        // console.log("이메일 : " + naver_id_login.getProfileData('email'));
-        // console.log("출생년도 : " + naver_id_login.getProfileData('birthyear'));
-        // console.log("출생월일 : " + naver_id_login.getProfileData('birthday'));
-        // console.log("휴대폰번호 : " + naver_id_login.getProfileData('mobile'));
-
         let form = document.naverLogin;
 
-        /*발생한 토큰값 input 태그에 넣어주기*/
+        /*회원 정보 input 태그에 담아 보내기*/
         form.token.value=naver_id_login.oauthParams.access_token;
         form.memberId.value=naver_id_login.getProfileData('id');
         form.memberName.value=naver_id_login.getProfileData('name');
@@ -45,7 +37,6 @@
         form.memberBirth.value=naver_id_login.getProfileData('birthyear');
         form.memberDay.value=naver_id_login.getProfileData('birthday');
         form.memberPhone.value=naver_id_login.getProfileData('mobile');
-        /*서브밋*/
         form.submit();
     }
 </script>
