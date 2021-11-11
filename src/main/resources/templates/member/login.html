@@ -1,13 +1,11 @@
 <!DOCTYPE HTML>
-<!--
-	성윤 : 로그인 페이지
--->
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>줍깅 로깅</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <!--페비콘 설정-->
     <link rel="shortcut icon" href="/images/faviconWhite.ico">
     <link rel="icon" href="/images/faviconWhite.ico">
 </head>
@@ -90,94 +88,85 @@
 </style>
 <body>
 <section id="main" style="padding-bottom:0px; margin-bottom:0px;">
-        <div style="width:1200px;">
-            <!--로그인 창 로고-->
-            <div style="text-align: center;">
-                <img src="/images/member/leaf_logo.png" style="width: 80px;">
-                <h1 style="margin-block-start: 0; margin-top: 10px;">로그인</h1>
-            </div>
-
-            <!--form 태그-->
-            <form method="post" action="/member/login" id="loginForm" name="loginForm">
-                <div style="width:850px; margin: auto;">
-
-                    <div style="width: 38%; margin:auto;">
-                        <!--아이디 비밀번호 입력-->
-                        <div>
-                            <input type="text" id="memberId" name="memberId" placeholder="아이디"/> <br>
-                            <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호"/>
-                        </div>
-
-                        <!--아이디 비밀번호 찾기-->
-                        <div style="display: flex; margin:4% 4.5%; font-size: 13px; text-align: center; width: 100%;">
-                            <div style="width: 45%;">
-                                <a href="#" onclick="findId()">아이디 찾깅</a>
-                            </div>
-                            <div>
-                                <span> | </span>
-                            </div>
-                            <div style="width: 45%;">
-                                <a href="#" onclick="findPw()">비밀번호 찾깅</a>
-                            </div>
-                         </div>
-
-                        <!--로그인 회원가입 버튼-->
-                        <div id="loginbutton" style="text-align: center;">
-                            <input type="button" value=" 로그인 " onclick="check()" style="width: 48%; height: 58px; font-size: 18px;"/>
-                            <input type="button" value="회원가입" onclick="join()" style="width: 48%; height: 58px; font-size: 18px;"/>
-                        </div>
-                        <div>
-                            <div class="hr-sect" style="font-color:#000000;">소셜 로그인하깅</div>
-                            <!--카카오 로그인-->
-                            <a onclick="kakaoLogin()"><img src="/images/member/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
-                            <!--네이버 로그인-->
-                            <div id="naver_id_login"></div>
-
-                        </div>
-
-                        <!--소셜 로그인-->
-                        <br>
-
-                    </div>
-                </div>
-                <div style="display: none">
-                    <input type="text" id="memberName" name="memberName">
-                    <input type="text" id="memberBirth" name="memberBirth">
-                    <input type="text" id="memberEmail" name="memberEmail">
-                </div>
-           </form>
+    <div style="width:1200px;">
+        <!--로그인 창 로고-->
+        <div style="text-align: center;">
+            <img src="/images/member/leaf_logo.png" style="width: 80px;">
+            <h1 style="margin-block-start: 0; margin-top: 10px;">로그인</h1>
         </div>
+
+        <!--form 태그-->
+        <form method="post" action="/member/login" id="loginForm" name="loginForm">
+            <div style="width:850px; margin: auto;">
+
+                <div style="width: 38%; margin:auto;">
+                    <!--아이디 비밀번호 입력-->
+                    <div>
+                        <input type="text" id="memberId" name="memberId" placeholder="아이디"/> <br>
+                        <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호"/>
+                    </div>
+
+                    <!--아이디 비밀번호 찾기-->
+                    <div style="display: flex; margin:4% 4.5%; font-size: 13px; text-align: center; width: 100%;">
+                        <div style="width: 45%;">
+                            <a href="#" onclick="findId()">아이디 찾깅</a>
+                        </div>
+                        <div>
+                            <span> | </span>
+                        </div>
+                        <div style="width: 45%;">
+                            <a href="#" onclick="findPw()">비밀번호 찾깅</a>
+                        </div>
+                     </div>
+
+                    <!--로그인 회원가입 버튼-->
+                    <div id="loginbutton" style="text-align: center;">
+                        <input type="button" value=" 로그인 " onclick="check()" style="width: 48%; height: 58px; font-size: 18px;"/>
+                        <input type="button" value="회원가입" onclick="join()" style="width: 48%; height: 58px; font-size: 18px;"/>
+                    </div>
+                    <!--소셜 로그인 버튼-->
+                    <div>
+                        <div class="hr-sect" style="font-color:#000000;">소셜 로그인하깅</div>
+                        <!--카카오 로그인-->
+                        <a onclick="kakaoLogin()"><img src="/images/member/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
+                        <!--네이버 로그인-->
+                        <div id="naver_id_login"></div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div style="display: none">
+                <input type="text" id="memberName" name="memberName">
+                <input type="text" id="memberBirth" name="memberBirth">
+                <input type="text" id="memberEmail" name="memberEmail">
+            </div>
+       </form>
+    </div>
 </section>
 <div id="main_footer"></div>
 <script th:inline="javascript">
-    /*현재 로그인 세션이 존재한다면*/
-    /*메인페이지로 바로 이동한다.*/
+    /*세션이 존재 할 때, 메인페이지로 바로 이동*/
     let session = [[${session.memberId}]];
     if(!(session == null)){
         document.location.href="/main/mainpage";
     }
-    // console.log(session);
-
     /*아이디 찾기*/
     function findId() {
-        /* var url = "http://www.daum.net"; */
         var url = "findId";
         var name = "terms";
         var option = "width=470, height=600, top=100, left=200, location=no";
 
         window.open(url, name, option);
     }
-
     /*비밀번호 찾기*/
     function findPw() {
-        /* var url = "http://www.daum.net"; */
         var url = "findPw";
         var name = "terms";
         var option = "width=450, height=680, top=100, left=200, location=no";
 
         window.open(url, name, option);
     }
-
+    /*회원가입 창 이동*/
     function join() {
         let form = document.loginForm;
 
@@ -191,30 +180,25 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
 <script src="/js/headerfooter.js"></script>
-<!-- 카카오 스크립트-->
+<!-- 카카오 로그인-->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-    /*카카오 로그인*/
+    /*카카오 로그인 버튼*/
     let form = document.getElementById("loginForm");
 
-    Kakao.init('5fa1d4826fe6e8d11410cb571085e69d'); //발급받은 키 중 javascript키를 사용해준다.
-    //console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    /*개발자 키 세팅*/
+    Kakao.init('5fa1d4826fe6e8d11410cb571085e69d');
+    /*sdk의 초기화 상태를 판단 : 정상 작동시 true값 리턴*/
+    //console.log(Kakao.isInitialized());
 
-    //카카오로그인
+    //카카오 로그인
     function kakaoLogin() {
         Kakao.Auth.login({
             success: function (response) {
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (response) {
-                        /*console.log(response)
-                        console.log(response.id);
-                        console.log(response.properties.nickname);
-                        console.log(response.kakao_account.birthday);
-                        console.log(response.kakao_account.gender);
-                        console.log(response.kakao_account.email);*/
-
-                        /*response의 정보를 가져와서 input 태그에 넣기*/
+                        /*response의 정보 input 태그에 넣기*/
                         document.getElementById("memberId").value=response.id;
                         document.getElementById("memberName").value=response.properties.nickname;
                         document.getElementById("memberBirth").value=response.kakao_account.birthday;
@@ -234,38 +218,14 @@
             },
         })
     }
-    //카카오로그아웃
-    // function kakaoLogout() {
-    //     if (Kakao.Auth.getAccessToken()) {
-    //         Kakao.API.request({
-    //             url: '/v1/user/unlink',
-    //             success: function (response) {
-    //                 console.log(response)
-    //             },
-    //             fail: function (error) {
-    //                 console.log(error)
-    //             },
-    //         })
-    //         Kakao.Auth.setAccessToken(undefined)
-    //     }
-    // }
 </script>
-
-
 <!-- 네이버 스크립트 -->
-<!--기존 script 연동 코드-->
-<!--<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>-->
-
 <!--script코드 수정을 위해서 링크 따서 만들어놓은 스크립트-->
+<!--<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>-->
 <script type="text/javascript" src="/js/member/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<!--제이쿼리-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
 <script type="text/javascript">
-    /*네이버에서 제공되는 개발자 어플리케이션 키 값 , 콜백 URL 입력*/
-    /*콜백 URL : http://localhost:10004/member/callback 가 실행되고 memberController를 통해 callback.html로 이동한다.*/
-    /*1. 버튼을 클릭하면 네이버 로그인 창이 뜬다.*/
-    /*2. 네이버 로그인 성공 시 연동이 안되있으면 연동 창으로 이동 / 연동이 되어있으면 callback.html로 이동*/
+    /*네이버 로그인 창 활성화를 위한 개발자 키 값, 콜백함수*/
     var naver_id_login = new naver_id_login("OAU8mmDRIAGPllfANyWA", "http://localhost:10004/member/callback");
 
     /*해당 코드로 네이버 로그인 창이 나타남*/

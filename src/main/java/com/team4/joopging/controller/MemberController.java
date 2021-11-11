@@ -40,7 +40,6 @@ import javax.xml.ws.Service;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class MemberController {
-
     private final MemberService memberService;
 
     /*헤더, 푸터*/
@@ -167,9 +166,8 @@ public class MemberController {
     /*아이디 찾기 SMS 인증 페이지*/
     @PostMapping("searchId")
     public String searchId(MemberVO vo, Model model) {
-        /*난수 메소드 사용*/
+        /*난수 발생*/
         String str = random();
-        /*모델에 난수 담아주기*/
         model.addAttribute("random", str);
 
         /*데이터베이스 조회*/
@@ -179,9 +177,8 @@ public class MemberController {
             model.addAttribute("result", memberService.memberSearchId(vo));
         }
 
-//      내돈 20원.......
-//      SMS보내기 메소드 주석풀면 돈나감
-//      SendSMS(str, phone);
+        /*SMS 문자 보내기 메소드*/
+        //SendSMS(str, phone);
 
         return "/member/searchId";
     }
@@ -282,26 +279,20 @@ public class MemberController {
     }
 
     /*네이버 로그인 및 회원가입*/
-    /*callback.html에서 요청*/
-    /*네이버에서 총 4개의 메소드를 제공해주며 그중 메인메소드를 SpringBoot에 맞게 변경시켰다.*/
     @PostMapping("naverlogin")
     public String naverlogin(String token, MemberVO vo, String memberDay, HttpServletRequest req, RedirectAttributes rttr) throws ParseException {
         /*세션 객체 생성*/
         HttpSession session = req.getSession();
 
-//        각 매개변수 출력
-//        System.out.println(token);
-//        System.out.println(vo.toString());
-//        System.out.println(memberDay);
-
-        String ACCESS_TOKEN = token; // 네이버 로그인 접근 토큰;
-        String header = "Bearer " + ACCESS_TOKEN; // Bearer 다음에 공백 추가
+        /*네이버 로그인 접근 토큰;*/
+        String ACCESS_TOKEN = token;
+        /*Bearer 다음에 공백 추가*/
+        String header = "Bearer " + ACCESS_TOKEN;
 
         /*요청 URI 형식*/
         String apiURL = "https://openapi.naver.com/v1/nid/me";
 
-        /*요청 양식에 맞게 변수에 값을 넣고*/
-        /*get() 메소드(REST)를 통해 JSON형태의 String 값을 받는다.*/
+        /*개발자 모드 값이 유효할 때 사용자 정보를 조회*/
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("Authorization", header);
         String responseBody = get(apiURL, requestHeaders);
@@ -310,36 +301,19 @@ public class MemberController {
         /*값을 사용하기 위해서 JSON 파싱이 필요하다.*/
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(responseBody);
+
         /*JSON안에 JSON을 접근하기 위해 한번 더 접근해주었다.*/
         JSONObject jsonObj = (JSONObject)obj;
         JSONObject jsonObj2 = (JSONObject)jsonObj.get("response");
 
-        /*줍깅에서 필요한 데이터 테스트 출력*/
-//        System.out.println(jsonObj2.get("id"));
-//        System.out.println(jsonObj2.get("name"));
-//        System.out.println(jsonObj2.get("email"));
-//        System.out.println(jsonObj2.get("mobile"));
-//        System.out.println(jsonObj2.get("gender"));
-//        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
-
-        /*질문 : 출력은 되는데 객체에 담기지 않는 이유*/
-//        vo.setMemberEmail(jsonObj2.get("email"));
-//        System.out.println(jsonObj2.get("id"));
-
-        /*연산 작업*/
-        /*로그인의 경우, 카카오 혹은 네이버에서 로그인 성공을 하였기 때문에*/
-        /*줍깅 페이지에서 로그인 실패의 처리는 없다.*/
-        /*다만, 가입이 안된 상태일때 상대방이 정보 제공 동의를 한 상태이기 때문에*/
-        /*해당 정보를 수집하고 데이터베이스에 저장해주기만 하면 된다.*/
+        /*네이버 정보 조회 성공*/
         if(memberService.memberLoginNAVER(vo) != 0) {
-            /*로그인 성공*/
-            /*세션 생성*/
+            /*네이버 로그인*/
             session.setAttribute("memberId", jsonObj2.get("id"));
             return "/mainpage";
         } else {
-            /*로그인 실패시 디비 입력 후 성공*/
+            /*회원가입 후 네이버 로그인*/
             memberService.memberJoinNAVER(vo);
-            /*세션 생성*/
             session.setAttribute("memberId", jsonObj2.get("id"));
             return "/mainpage";
         }
@@ -353,8 +327,6 @@ public class MemberController {
             for (Map.Entry<String, String> header : requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
             }
-
-
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
                 return readBody(con.getInputStream());
@@ -383,17 +355,12 @@ public class MemberController {
     /*설정 메소드*/
     private static String readBody(InputStream body) {
         InputStreamReader streamReader = new InputStreamReader(body);
-
-
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
-
-
             String line;
             while ((line = lineReader.readLine()) != null) {
                 responseBody.append(line);
             }
-
             return responseBody.toString();
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
