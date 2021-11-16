@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MainpageController {
 
-    @GetMapping("mainpage")
+    @GetMapping("/index")
     public String mainpage() {
-        return "mainpage";
+        return "/main/index";
     }
 
     @GetMapping("cs")
     public String cs() {
-        return "cs";
+        return "/main/cs";
     }
 
     @GetMapping("/pageframe/header")
@@ -30,6 +30,16 @@ public class MainpageController {
     @GetMapping("/pageframe/footer")
     public String footer() {
         return "/pageframe/footer";
+    }
+
+    @GetMapping("/terms")
+    public String terms() {
+        return "/pageframe/terms";
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "/pageframe/privacy";
     }
 
 }

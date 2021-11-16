@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<!-- 성윤 : 플로깅 예약 상세페이지 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>플로깅 상세페이지</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            margin-top: 5.1em !important;
+            margin-left: 17% !important;
+            margin-right: 17% !important;
+            width: auto !important;
+            padding: 0 5% !important;
+        }
+
+        .eventImage {
+            width: 80%;
+            margin: auto;
+        }
+
+        /* 사이드바 회원정보 관련 CSS*/
+        .grade{
+            float:right;
+            width: 40px;
+            height: 40px;
+        }
+
+        #supersideBar {
+            position: fixed;
+            width: 20%;
+            margin-top: 7.5%;
+        }
+
+        #sideBarInner{
+            width: 260px;
+            float: right;
+            height: auto;
+            border: 2px solid #35A14A;
+            border-radius: 20px;
+            padding: 20px 20px;
+            font-family: 'S-CoreDream-3Light';
+        }
+
+        #sideBarDelivery{
+            padding: 10px 0 0 0;
+        }
+
+        .sideBarInfo{
+            display: inline;
+            float: right;
+        }
+
+        #memberName {
+            font-weight: 700;
+            color: #35A14A;
+            line-height: 40px;
+            font-size: 22px;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        #memberLine {
+            margin:1em 0 1em 0;
+            border-top: solid 2px #35A14A;
+        }
+
+        #attendTable {
+            border-color: #ffffff;
+            background-color: #e2f0d9;
+            margin: 20px 0;
+        }
+
+        .attendTr {
+            height: 40px;
+        }
+
+        .attendTr > td{
+            border: 2px solid #ffffff;
+        }
+
+        #attendButton {
+            font-size: 17px !important;
+            padding: 0.5em 1em !important;
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+        /* 이벤트 상세설명 관련 CSS */
+        .box {
+            font-family: 'S-CoreDream-4Regular';
+        }
+
+    </style>
+</head>
+<body class="homepage is-preload" style="margin: 0;">
+<div id="main_header" style="display: flex"></div>
+<div id="supersideBar">
+    <!-- 회원정보 사이드바 -->
+    <div id="sideBarInner" th:object="${plogging}">
+        <div>
+            <strong id="memberName" th:text="*{ploggingTitle}"></strong>
+        </div>
+        <hr id="memberLine">
+        <div id="sideBarDelivery">
+            <div>
+                <strong>신청 현황</strong>
+                <div class="sideBarInfo" style="display: flex;" >
+                    <span id="ploggingPpl" th:text="*{ploggingPpl}" th:value="*{ploggingPpl}"></span>
+                    <span id="ploggingPplLimit" th:text="|/*{ploggingPplLimit}명|" th:value="*{ploggingPpl}"></span>
+                </div>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>가격</strong>
+                <div class="sideBarInfo" >
+                    <span>2000원(인 당)</span>
+                </div>
+            </div>
+            <div style="margin: auto; padding: 5px; text-align: center;">
+                <span>신청 인원</span>
+                <!-- 인원수 추가 감소 버튼 -->
+                <div>
+                    <input type="submit" id="add" onclick="minPeople()" value=" - " style="padding: revert;">
+                    <input type="number" style="width: 23%; text-align: center;" id="people" name="people" value="1" readonly>
+                    <input type="submit" id="min" onclick="addPeople()" value=" + " style="padding: revert;">
+                </div>
+                <form name="resForm" id="resForm" action="/plo/reservation" method="post">
+                    <div>
+                        <input type="text" id="ploggingNum" name="ploggingNum" th:value="${plogging.ploggingNum}" style="display: none;">
+                        <input type="text" id="memberId" name="memberId" th:value="${session.memberId}" style="display: none;">
+                        <input type="text" id="peo" name="peo" th:value="${session.memberId}" style="display: none;">
+                        <input type="text" value="2000원" style="color: red; width:100%; border:none; text-align:center;" id="pay" name="pay" readonly>
+                        <input type="button" id="attendButton" onclick="goRes()" value="예약 및 결제하기" style="font-size:17px; margin: 5px; width: 80%;"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="box post" th:object="${plogging}">
+        <div style="width: 100%; object-fit: fill;">
+            <img style="width: 90%; object-fit: fill;" th:src="${img}">
+        </div>
+        <div id="ploImage" name="ploImage" class="ploImage">
+            <div class="field">
+                <div class="uploadResult">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+        <br>
+        <header>
+            <h2 th:text="*{ploggingTitle}"></h2>
+        </header>
+        <br>
+<!--        <p style="display: inline">▷신청기간 :</p>-->
+        <p style="display: inline" th:text="*{ploResDate}"></p>
+        <pre th:text="*{ploggingContent}"></pre>
+        <br>
+        <br>
+        <section>
+            <header>
+                <h3>주의 사항</h3>
+            </header>
+            <p style="color: red;">
+                1. 일부 신청은 선착순 예약이며, 가용 인원 초과 시 조기 예약 마감할 수 있습니다.<br>
+                2. 신청시 소액의 신청 금액이 부과 될 수 있습니다.<br>
+                3. 개인 사유로 인해 예약을 취소할 경우 규정에 따라 환불이 불가능 할 수 있습니다.<br>
+                4. 우천 등의 사유로 플로깅 일정이 취소될 수 있으며, 이에 따른 모든 예약은 환불됩니다.<br>
+            </p>
+        </section>
+    </div>
+</div>
+
+<div id="main_footer"></div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<script src="/js/ploggingReservation/ploResInfo.js"></script>
+<script th:inline="javascript">
+    let session = [[${session.memberId}]];
+    let ploggingPpl = [[${plogging.ploggingPpl}]];
+    let ploggingPplLimit = [[${plogging.ploggingPplLimit}]];
+
+    // console.log([[${plogging.ploggingNum}]]);
+
+    function goRes(){
+        let form = document.resForm;
+        // let people = document.getElementById("people").value;
+
+        let people = $("#people").val();
+        if(ploggingPpl == ploggingPplLimit ){
+            alert("예약 신청 인원이 마감되었습니다.");
+            return;
+        }
+        if((ploggingPpl + Number(people)) > ploggingPplLimit){
+            alert("남은 예약이 부족합니다.");
+            return
+        }
+        if(session == null || session == 'null'){
+            alert("로그인 후 진행해주세요!");
+            return;
+        }
+        document.getElementById("peo").value = people;
+        alert("결제완료");
+        form.submit();
+    }
+</script>
+<!--첨부파일-->
+<script th:inline="javascript">
+    let ploImage = $("#ploImage");
+    let ploggingNum = [[${plogging.ploggingNum}]];
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/plo/getAttachList", {ploggingNum: ploggingNum},
+                function(arr){
+                    let str = "";
+                    let mainstr ="";
+
+                    $(arr).each(function(i, attach){
+                        console.log(ploggingNum);
+                        if(!attach.image){
+                            return;
+                        }else {
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<div class=\"detail\">";
+                            str += "<img style=\"text-algin: center; width: 550px; height: 500px;\" src='/upload/plogging/display?fileName=" + originPath + "'>";
+                            str += "</div>";
+                        }
+                        /*첨부파일 여러개 일때 실행되는 조건문*/
+                        // if(i==0){
+                        //     let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                        //     mainstr += "<div class=\"stock_img\">";
+                        //     mainstr += "<a href=\"#\" class=\"stock_detail\">";
+                        //     mainstr += "<img style=\"text-algin: center; width: 500px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                        //     mainstr += "</a></div>"
+                        //     return;
+                        // } else{
+                        //
+                        // }
+                    });
+                    ploImage.html(str);
+                });//getJSON
+        })();
+    })
+</script>
+</html>

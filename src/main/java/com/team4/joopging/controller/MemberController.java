@@ -1,9 +1,9 @@
 package com.team4.joopging.controller;
 
 /*쿨 SMS*/
-//import net.nurigo.java_sdk.api.Message;
-//import net.nurigo.java_sdk.exceptions.CoolsmsException;
-//import org.json.simple.JSONObject;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.simple.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import com.team4.joopging.member.memberVO.MemberVO;
 import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONObject;
+//import org.apache.logging.log4j.message.Message;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
@@ -89,16 +89,22 @@ public class MemberController {
 
     /*로그인하기 : 회원정보 조회 연산 필요*/
     @PostMapping("login")
-    public String loginAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+    public String loginAction(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr, Model model) {
         HttpSession session = req.getSession();
         /*연산 작업*/
         if (memberService.memberLogin(vo) != 0) {
+            /*회원탈퇴 회원인지 검사*/
+            if(memberService.memberLoginStatus(vo.getMemberId()) == 1){
+                model.addAttribute("status", 1);
+                return "member/loginFail";
+            }
             /*로그인 성공*/
             String id = vo.getMemberId();
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패*/
+            model.addAttribute("status", 2);
             return "member/loginFail";
         }
     }
@@ -112,7 +118,7 @@ public class MemberController {
 
     @GetMapping("mainpage")
     public String mainpage() {
-        return "/mainpage";
+        return "/main/mainpage";
     }
 
     /*카카오 로그인하기 : 회원정보 조회 연산 필요*/
@@ -125,12 +131,12 @@ public class MemberController {
         if (memberService.memberLoginKAKAO(vo) != 0) {
             /*로그인 성공*/
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패시 디비 입력 후 성공*/
             memberService.memberJoinKAKAO(vo);
             session.setAttribute("memberId", id);
-            return "/mainpage";
+            return "/main/mainpage";
         }
     }
 
@@ -174,9 +180,9 @@ public class MemberController {
 
 //      내돈 20원.......
 //      SMS보내기 메소드 주석풀면 돈나감
-//      SendSMS(str, phone);
+      SendSMS(str, "01098163693");
 
-        return "member/searchId";
+        return "/member/searchId";
     }
 
     /*아이디 결과 띄워주기(연산)*/
@@ -186,11 +192,13 @@ public class MemberController {
         return "member/resultFindId";
     }
 
+    /*비밀번호 찾기*/
     @GetMapping("findPw")
     public String findPw() {
         return "member/findPw";
     }
 
+    /*비밀번호 찾기 sms인증*/
     @PostMapping("searchPw")
     public String searchPw(MemberVO vo, Model model) {
         /*난수 메소드 사용*/
@@ -208,12 +216,14 @@ public class MemberController {
         return "member/searchPw";
     }
 
+    /*비밀번호 재설정 입력*/
     @PostMapping("resultRePw")
     public String resultRePw(MemberVO vo, Model model) {
         model.addAttribute("result", vo.getMemberId());
         return "member/resultRePw";
     }
 
+    /*비밀번호 재설정 쿼리문*/
     @PostMapping("rePassWordResult")
     public String rePassWordResult(MemberVO vo, Model model) {
         /*비밀번호 수정 쿼리문*/
@@ -231,8 +241,8 @@ public class MemberController {
     private void SendSMS(String str, String phone) {
         String api_key = "NCSDZERXIZUFDHUU";
         String api_secret = "IOM3ZQSFYIDMEQIBWFBB5OOHNIEXITWQ";
-//        Message coolsms = new Message(api_key, api_secret) {
-//        };
+        Message coolsms = new Message(api_key, api_secret) {
+        };
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
@@ -242,13 +252,13 @@ public class MemberController {
         params.put("text", str);
         params.put("app_version", "test app 1.2"); // application name and version
 
-//        try {
-//            JSONObject obj = (JSONObject) coolsms.send(params);
-//            System.out.println(obj.toString());
-//        } catch(CoolsmsException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getCode());
-//        }
+        try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString());
+        } catch(CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
     }
 
     /*랜덤 난수 6자리 생성*/
@@ -295,7 +305,7 @@ public class MemberController {
         requestHeaders.put("Authorization", header);
         String responseBody = get(apiURL, requestHeaders);
 
-        /*String타입으로 전달받았기 때문에*/
+        /*String타입으로 REST 데이터를 전달받았기 때문에*/
         /*값을 사용하기 위해서 JSON 파싱이 필요하다.*/
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(responseBody);
@@ -310,9 +320,8 @@ public class MemberController {
 //        System.out.println(jsonObj2.get("mobile"));
 //        System.out.println(jsonObj2.get("gender"));
 //        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
-        System.out.println(jsonObj2.get("birthyear")+"-"+jsonObj2.get("birthday"));
 
-        /*???*/
+        /*질문 : 출력은 되는데 객체에 담기지 않는 이유*/
 //        vo.setMemberEmail(jsonObj2.get("email"));
 //        System.out.println(jsonObj2.get("id"));
 
@@ -325,13 +334,13 @@ public class MemberController {
             /*로그인 성공*/
             /*세션 생성*/
             session.setAttribute("memberId", jsonObj2.get("id"));
-            return "/mainpage";
+            return "/main/mainpage";
         } else {
             /*로그인 실패시 디비 입력 후 성공*/
             memberService.memberJoinNAVER(vo);
             /*세션 생성*/
             session.setAttribute("memberId", jsonObj2.get("id"));
-            return "/mainpage";
+            return "/main/mainpage";
         }
     }
 

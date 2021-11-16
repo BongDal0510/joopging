@@ -4,6 +4,7 @@
 	License: pixelarity.com/license
 */
 
+/* main.js 관련 코드 */
 (function($) {
 
 	var	$window = $(window),

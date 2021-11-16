@@ -15,4 +15,25 @@ public class AdminController {
     @GetMapping("admin")
     public String adminMain() { return "/admin/admin"; }
 
+    //헤더
+    @GetMapping("/pageframe/header")
+    public String header() {
+        return "/pageframe/header";
+    }
+
+    //푸터
+    @GetMapping("/pageframe/footer")
+    public String footer() {
+        return "/pageframe/footer";
+<<<<<<<< HEAD:src/main/java/com/team4/joopging/controller/AdminController.java
+========
+    }
+
+    @GetMapping("terms")
+    public String terms() {
+        return "pageframe/terms";
+>>>>>>>> yj_test++member++point:src/main/java/com/team4/joopging/controller/HeaderFooterController.java
+    }
+
+
 }
