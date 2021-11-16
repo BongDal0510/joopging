@@ -65,5 +65,35 @@ public class MemberServiceImple implements MemberService{
         return memberDAO.memberAllSelect(id);
     }
 
+    @Override
+    public int memberAttendUpdate(String id) { return memberDAO.memberAttendUpdate(id); }
+
+    @Override
+    public int memberGetAttendCnt(String id) { return memberDAO.memberGetAttendCnt(id); }
+
+    @Override
+    public int memberPointUpdate(MemberVO memberVO) { return memberDAO.memberPointUpdate(memberVO); }
+
+    /*아이디로 이름 조회하기 : 카카오, 네이버, 일반 회원 모두 사용 가능*/
+    @Override
+    public MemberVO memberInfo(String id) {
+        /*아이디의 길이가 16자 이상일 때*/
+        if(id.length() > 16){
+            return memberDAO.userNameNAVER(id);
+        }
+        /*아이디의 길이가 10자 일 때*/
+        if(id.length()==10){
+            return memberDAO.userNameKAKAO(id);
+        }else if(memberDAO.userNameKAKAO(id) == null){ //카카오 검색 실패했을 때
+            return memberDAO.userName(id);
+        }else{
+            /*에러*/
+            return null;
+        }
+    }
+
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    @Override
+    public int memberLoginStatus(String id){ return memberDAO.loginStatus(id); }
 
 }

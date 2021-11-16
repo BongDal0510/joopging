@@ -222,7 +222,7 @@ var naver_id_login = function (client_id,redirect_uri)
         }
         else if (this.button_type == BANNER_SMALL_TYPE)
         {
-            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='/images/naver_login.png' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��' width='"+(this.button_height*656/250)+"px' height='"+this.button_height+"'></a> ";
+            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='/images/member/naver_login.png' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��' width='"+(this.button_height*656/250)+"px' height='"+this.button_height+"'></a> ";
         }
         else
         {

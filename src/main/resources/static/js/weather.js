@@ -1,3 +1,4 @@
+/* 날씨 API */
 $(function(){
     let today = new Date();
 
@@ -29,34 +30,34 @@ $(function(){
 
         switch (weather) {
             case 'Clouds':
-                str = "/images/weather/sunny_cloud.png";
+                str = "/images/weatherIcon/sunny_cloud.png";
                 break;
             case 'Clear':
-                str = "/images/weather/sunny.png";
+                str = "/images/weatherIcon/sunny.png";
                 break;
             case 'Thunderstorm':
-                str = "/images/weather/thunder.png";
+                str = "/images/weatherIcon/thunder.png";
                 break;
             case 'Drizzle':
-                str = "/images/weather/rainy.png";
+                str = "/images/weatherIcon/rainy.png";
                 break;
             case 'Rain':
-                str = "/images/weather/rainy.png";
+                str = "/images/weatherIcon/rainy.png";
                 break;
             case 'Snow':
-                str = "/images/weather/snowman.png";
+                str = "/images/weatherIcon/snowman.png";
                 break;
             case 'Atmosphere':
-                str = "/images/weather/smog.png";
+                str = "/images/weatherIcon/smog.png";
                 break;
             case 'Mist':
-                str = "/images/weather/smog.png";
+                str = "/images/weatherIcon/smog.png";
                 break;
             case 'weather-default':
-                str = "/images/weather/cloud.png";
+                str = "/images/weatherIcon/cloud.png";
                 break;
             default :
-                str = "/images/weather/sunny_cloud.png";
+                str = "/images/weatherIcon/sunny_cloud.png";
                 break;
         }
         return str;

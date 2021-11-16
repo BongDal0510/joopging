@@ -27,4 +27,24 @@ public interface MemberMapper {
     public void updatePw(MemberVO memberVO);
     /*회원정보 전체 조회*/
     public MemberVO allSelect(String id);
+    /* 출석체크 */
+    public int attendUpdate(String id);
+    /* 출석회수 조회 */
+    public int getAttendCnt(String id);
+    /* 매일 0시 마다 출석상태 초기화 */
+    public void resetAttendStatus();
+    /* 출석회수 10회일 경우 0으로 초기화 */
+    public void resetAttendCnt();
+    /* 매월 1일 마다 멤버레벨 승급 */
+    public void updateLevelAmateur();
+    public void updateLevelVeteran();
+    public void updateLevelMaster();
+    /* 포인트 추가 */
+    public int pointUpdate(MemberVO memberVO);
+    /*네이버 카카오 일반 회원의 이름 조회*/
+    public MemberVO userName(String id);
+    public MemberVO userNameKAKAO(String id);
+    public MemberVO userNameNAVER(String id);
+    /*로그인 시 회원 탈퇴 여부 판단*/
+    public int loginStatus(String id);
 }
