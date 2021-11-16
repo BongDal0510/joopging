@@ -2,7 +2,7 @@
 <!--
 	성윤 : 로그인 페이지
 -->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>줍깅 로깅</title>
     <meta charset="utf-8" />
@@ -81,31 +81,31 @@
         line-height: 0px;
         margin: 0px 16px;
     }
+
+    #naver_id_login > a > img {
+        margin-top:2px;
+        width: 100% !important;
+        height: 58px !important;
+    }
 </style>
 <body>
-<!--로그인 버튼 누른 다음 틀렷을 때-->
-<!--<c:if test="${not empty param.code}">
-    <script>
-        alert("아이디 또는 비밀번호를 다시 확인해주세요.");
-    </script>
-</c:if>-->
 <section id="main" style="padding-bottom:0px; margin-bottom:0px;">
         <div style="width:1200px;">
             <!--로그인 창 로고-->
             <div style="text-align: center;">
-                <img src="/images/leaf_logo.png" style="width: 80px;">
+                <img src="/images/member/leaf_logo.png" style="width: 80px;">
                 <h1 style="margin-block-start: 0; margin-top: 10px;">로그인</h1>
             </div>
 
             <!--form 태그-->
-            <form method="post" action="/member/login" name="loginForm">
+            <form method="post" action="/member/login" id="loginForm" name="loginForm">
                 <div style="width:850px; margin: auto;">
 
                     <div style="width: 38%; margin:auto;">
                         <!--아이디 비밀번호 입력-->
                         <div>
-                            <input type="text" name="member_id" value="" placeholder="아이디"/> <br>
-                            <input type="password" name="member_pw" value="" placeholder="비밀번호"/>
+                            <input type="text" id="memberId" name="memberId" placeholder="아이디"/> <br>
+                            <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호"/>
                         </div>
 
                         <!--아이디 비밀번호 찾기-->
@@ -126,23 +126,39 @@
                             <input type="button" value=" 로그인 " onclick="check()" style="width: 48%; height: 58px; font-size: 18px;"/>
                             <input type="button" value="회원가입" onclick="join()" style="width: 48%; height: 58px; font-size: 18px;"/>
                         </div>
-                        <br>
-
-                        <!--소셜 로그인-->
                         <div>
                             <div class="hr-sect" style="font-color:#000000;">소셜 로그인하깅</div>
-                            <a href="/member/ploggingInfo"><img src="/images/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
-                            <a href="/member/ploggingInfo"><img src="/images/naver_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
+                            <!--카카오 로그인-->
+                            <a onclick="kakaoLogin()"><img src="/images/kakao_login.png" style="margin-top:2px; width: 100%; height: 58px;"></a>
+                            <!--네이버 로그인-->
+                            <div id="naver_id_login"></div>
+
                         </div>
 
+                        <!--소셜 로그인-->
+                        <br>
+
                     </div>
+                </div>
+                <div style="display: none">
+                    <input type="text" id="memberName" name="memberName">
+                    <input type="text" id="memberBirth" name="memberBirth">
+                    <input type="text" id="memberEmail" name="memberEmail">
                 </div>
            </form>
         </div>
 </section>
 <div id="main_footer"></div>
-<!-- Scripts -->
-<script>
+<script th:inline="javascript">
+    /*현재 로그인 세션이 존재한다면*/
+    /*메인페이지로 바로 이동한다.*/
+    let session = [[${session.memberId}]];
+    if(!(session == null)){
+        document.location.href="/main/mainpage";
+    }
+    // console.log(session);
+
+    /*아이디 찾기*/
     function findId() {
         /* var url = "http://www.daum.net"; */
         var url = "findId";
@@ -151,6 +167,8 @@
 
         window.open(url, name, option);
     }
+
+    /*비밀번호 찾기*/
     function findPw() {
         /* var url = "http://www.daum.net"; */
         var url = "findPw";
@@ -168,15 +186,96 @@
 
         form.submit();
     }
+
 </script>
-<script src="/js/login.js"></script>
+<script src="/js/member/login.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
-<script src="/js/browser.min.js"></script>
-<script src="/js/breakpoints.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript"></script>
-<script src="/js/header.js"></script>
+<script src="/js/headerfooter.js"></script>
+<!-- 카카오 스크립트-->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    /*카카오 로그인*/
+    let form = document.getElementById("loginForm");
+
+    Kakao.init('5fa1d4826fe6e8d11410cb571085e69d'); //발급받은 키 중 javascript키를 사용해준다.
+    //console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+    //카카오로그인
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        /*console.log(response)
+                        console.log(response.id);
+                        console.log(response.properties.nickname);
+                        console.log(response.kakao_account.birthday);
+                        console.log(response.kakao_account.gender);
+                        console.log(response.kakao_account.email);*/
+
+                        /*response의 정보를 가져와서 input 태그에 넣기*/
+                        document.getElementById("memberId").value=response.id;
+                        document.getElementById("memberName").value=response.properties.nickname;
+                        document.getElementById("memberBirth").value=response.kakao_account.birthday;
+                        document.getElementById("memberEmail").value=response.kakao_account.email;
+
+                        /*카카오 로그인으로 액션 변경*/
+                        form.action="/member/loginKAKAO";
+                        form.submit();
+                    },
+                    fail: function (error) {
+                        console.log("에러 : " + error)
+                    },
+                })
+            },
+            fail: function (error) {
+                console.log("에러 : " + error)
+            },
+        })
+    }
+    //카카오로그아웃
+    // function kakaoLogout() {
+    //     if (Kakao.Auth.getAccessToken()) {
+    //         Kakao.API.request({
+    //             url: '/v1/user/unlink',
+    //             success: function (response) {
+    //                 console.log(response)
+    //             },
+    //             fail: function (error) {
+    //                 console.log(error)
+    //             },
+    //         })
+    //         Kakao.Auth.setAccessToken(undefined)
+    //     }
+    // }
+</script>
+
+
+<!-- 네이버 스크립트 -->
+<!--기존 script 연동 코드-->
+<!--<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>-->
+
+<!--script코드 수정을 위해서 링크 따서 만들어놓은 스크립트-->
+<script type="text/javascript" src="/js/member/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<!--제이쿼리-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+    /*네이버에서 제공되는 개발자 어플리케이션 키 값 , 콜백 URL 입력*/
+    /*콜백 URL : http://localhost:10004/member/callback 가 실행되고 memberController를 통해 callback.html로 이동한다.*/
+    /*1. 버튼을 클릭하면 네이버 로그인 창이 뜬다.*/
+    /*2. 네이버 로그인 성공 시 연동이 안되있으면 연동 창으로 이동 / 연동이 되어있으면 callback.html로 이동*/
+    var naver_id_login = new naver_id_login("OAU8mmDRIAGPllfANyWA", "http://localhost:10004/member/callback");
+
+    /*해당 코드로 네이버 로그인 창이 나타남*/
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2,40);
+    naver_id_login.setDomain("http://localhost:10004");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+</script>
 </body>
 </html>

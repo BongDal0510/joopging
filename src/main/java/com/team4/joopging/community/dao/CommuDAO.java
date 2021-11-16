@@ -42,4 +42,6 @@ public class CommuDAO {
     public int getCommuTotal(Criteria criteria){ return mapper.getCommuTotal(criteria);}
     /*게시글 조회수*/
     public boolean updateCommuViewCnt(Long commuBno){return mapper.updateCommuViewCnt(commuBno) == 1; }
+    /*공지글 가져오기*/
+    public List<CommuVO> getAnnounceList(int commuBoardStatus) {return mapper.getAnnounceList(commuBoardStatus);}
 }

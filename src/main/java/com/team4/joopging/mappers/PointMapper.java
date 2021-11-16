@@ -3,16 +3,17 @@ package com.team4.joopging.mappers;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.point.vo.PointVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface PointMapper {
     /*포인트 목록*/
-    public List<PointVO> getPointList(int memberNum, Criteria criteria);
+    public List<PointVO> getPointList(@Param("memberId")String memberId, @Param("criteria")Criteria criteria);
 
-    /*포인트 전체개수*/
-    public int totalPointCnt(int memberNum);
+    /*회원의 포인트 전체 내역 개수 */
+    public int totalPointCnt(String memberId);
 
     /*포인트 추가*/
     public int addPoint(PointVO vo);

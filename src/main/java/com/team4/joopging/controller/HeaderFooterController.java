@@ -14,12 +14,22 @@ public class HeaderFooterController {
 
     @GetMapping("header")
     public String header() {
-        return "pageframe/header";
+        return "/pageframe/header";
     }
 
     @GetMapping("footer")
     public String footer() {
-        return "pageframe/footer";
+        return "/pageframe/footer";
+    }
+
+    @GetMapping("terms")
+    public String terms() {
+        return "pageframe/terms";
+    }
+
+    @GetMapping("privacy")
+    public String privacy() {
+        return "pageframe/privacy";
     }
 
 }

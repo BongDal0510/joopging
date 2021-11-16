@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
-@RestController
+@RestController//REST
 @Slf4j
 @RequestMapping("/replies/*")
 @RequiredArgsConstructor
@@ -21,7 +21,6 @@ public class CommuReplyController {
     private final CommuReplyService commuReplyService;
 
     /*댓글 등록*/
-
     @PostMapping(value = "/new", consumes = "application/json", produces = "text/plain; charset=utf-8")
     public ResponseEntity<String> create(@RequestBody CommuReplyVO commuReplyVO) throws UnsupportedEncodingException{
 
@@ -35,19 +34,19 @@ public class CommuReplyController {
     }
 
     //게시글 댓글 전체 조회
-    @GetMapping("pages/{bno}/{page}")
-    public CommuReplyPageDTO getCommuReplyList(@PathVariable("commuBno") Long commuBno, @PathVariable("page") int page){
+    @GetMapping("pages/{commuBno}/{page}")
+    public CommuReplyPageDTO getCommuReplyPagingList(@PathVariable("commuBno") Long commuBno, @PathVariable("page") int page){
         log.info("getList--------------------------------");
         Criteria criteria = new Criteria(page, 10);
         log.info(criteria.toString());
-        return commuReplyService.getCommuReplyList(commuBno, criteria);
+        return commuReplyService.getCommuReplyPagingList(commuBno, criteria);
     }
     //댓글조회
     //URI에 댓글 번호만 작성한다.
     //전달받은 rno를 JSON으로 리턴한다.
 
     //1. rno는 보여져도 상관 없는 정보.
-    @GetMapping("pages/{commuRno}")
+    @GetMapping("{commuRno}")
     public CommuReplyVO getCommuReply(@PathVariable("commuRno") Long commuRno){
         log.info("get--------------------------------");
         return commuReplyService.getCommuReply(commuRno);
@@ -57,7 +56,7 @@ public class CommuReplyController {
     //PUT : 자원의 전체 수정, 자원 내 모든 필드럴 전달해야함. 일부만 전달할 경우 오류
     //PATCH : 자원의 일부 수정, 수정할 필드만 전송 (자동 주입이 아닌 부분만 수정하는 쿼리문에서 사용)
     //PATCH가 PUT을 담고 있기 때문에 전체를 전달 받아서 전체를 수정하거나, 부분만 수정하는 상황 모두 PATCH를 사용하는 것이 좋다.
-    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="pages/{rno}",
+    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="{commuRno}",
             consumes = "application/json", produces = "text/plain; charset=UTF-8")
     //제이슨 데이터 = 바디
     public ResponseEntity<String> modify(@RequestBody CommuReplyVO commuReplyVO, @PathVariable("commuRno") Long commuRno) throws UnsupportedEncodingException {
@@ -68,7 +67,7 @@ public class CommuReplyController {
                 new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
-    @DeleteMapping(value="pages/{commuRno}", produces = "text/plain; charset=UTF-8")
+    @DeleteMapping(value="{commuRno}", produces = "text/plain; charset=UTF-8")
     public ResponseEntity<String> remove(@PathVariable("commuRno") Long commuRno) throws UnsupportedEncodingException{
         log.info("remove...................");
         return commuReplyService.removeCommuReply(commuRno) == 1 ?

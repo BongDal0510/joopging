@@ -40,9 +40,9 @@ public class CommuReplyDAO {
     }
 
     /*댓글 목록*/
-    public List<CommuReplyVO> getCommuReplyList(Long commuBno, Criteria criteria){
+    public List<CommuReplyVO> getCommuReplyPagingList(Long commuBno, Criteria criteria){
         log.info("list--------------");
-        return commuReplyMapper.getCommuReplyListWithPaging(commuBno, criteria);
+        return commuReplyMapper.getCommuReplyPagingList(commuBno, criteria);
     }
 
     /*총 댓글 개수*/

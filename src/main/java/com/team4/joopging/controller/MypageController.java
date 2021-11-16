@@ -1,21 +1,26 @@
 package com.team4.joopging.controller;
 
-import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.Criteria;
-import com.team4.joopging.mypage.dao.MypageDAO;
-import com.team4.joopging.mypage.dao.OrderHistoryDAO;
-import com.team4.joopging.mypage.vo.TempMemberVO;
-import com.team4.joopging.point.dao.PointDAO;
+import com.team4.joopging.member.memberVO.MemberVO;
+import com.team4.joopging.services.CommuService;
+import com.team4.joopging.services.MemberService;
+import com.team4.joopging.services.MypageService;
+import com.team4.joopging.services.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
+
+////import org.json.simple.JSONArray;
+//import org.springframework.boot.configurationprocessor.json.JSONArray;
 
 @Controller
 @Slf4j
@@ -23,92 +28,140 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class MypageController {
 
-    private final MypageDAO mypagedao;
-    private final PointDAO pointdao;
-    private final OrderHistoryDAO orderHistorydao;
-    private final TempMemberVO membervo;
-    HttpSession session;
-
+    private final MypageService mypageSVC;
+    private final PointService pointSVC;
+    private final MemberService memberSVC;
 
     /*마이페이지 메인으로 이동*/
     @GetMapping("mypage")
-    public String mypage(Model model, Criteria criteria) {
-        if(session.getAttribute("memberId")!=null) {
-            int memberNum = mypagedao.selectMemberNum((String)session.getAttribute("memberId"));
+    public String mypage(Model model, HttpServletRequest req, Criteria criteria) {
 
-            model.addAttribute("ploRes", mypagedao.getPloResList(memberNum, criteria));
-            model.addAttribute("goodsLikeList", mypagedao.getGoodsLikeList(memberNum, criteria));
-            model.addAttribute("getPointList", pointdao.getPointList(memberNum, criteria));
-            model.addAttribute("orderHistory", orderHistorydao.getOrderHistoryList(memberNum, criteria));
-            model.addAttribute("ploResPageMaker", new CommuPageDTO(mypagedao.totalPloResCnt(memberNum), 10, criteria));
-            model.addAttribute("goodsLikePageMaker", new CommuPageDTO(mypagedao.totalGoodsLikeCnt(memberNum), 10, criteria));
-            model.addAttribute("orderPageMaker", new CommuPageDTO(orderHistorydao.totalOrderCnt(memberNum), 10, criteria));
-            model.addAttribute("pointPageMaker", new CommuPageDTO(pointdao.totalPointCnt(memberNum), 10, criteria));
-            model.addAttribute("ploResTotalCnt", mypagedao.realTotalPloResCnt(memberNum));
-            model.addAttribute("goodslikeTotalCnt", mypagedao.totalGoodsLikeCnt(memberNum));
-            model.addAttribute("orderTotalCnt", orderHistorydao.realTotalOrderCnt(memberNum));
+        HttpSession session = req.getSession();
+
+        if(session.getAttribute("memberId")!=null) {
+            String memberId = (String)session.getAttribute("memberId");
+
+            model.addAttribute("plogging", mypageSVC.getPloggingList());
+            model.addAttribute("member", memberSVC.memberAllSelect(memberId));
+            model.addAttribute("ploRes", mypageSVC.getPloResList(memberId));
+            model.addAttribute("getPointList", pointSVC.getPointList(memberId, criteria));
+            model.addAttribute("orderHistory", mypageSVC.getOrderHistoryList(memberId));
+            model.addAttribute("memberCommu", mypageSVC.getMemberCommuList(memberId));
+            model.addAttribute("goodsLikeList", mypageSVC.getGoodsLikeList(memberId));
+
             return "mypage/mypage";
         }else{
-            model.addAttribute("msg","로그인 후 이용바랍니다.");
-            return "mainpage/mainpage";
+            model.addAttribute("msg","notLogin");
+            return "mypage/resultpage";
         }
     }
 
-    /* */
+    /*비밀번호 수정하는 곳으로 이동*/
+    @PostMapping("resultRePw")
+    public String resultRePw(Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+        model.addAttribute("result", memberId);
+        return "member/resultRePw";
+    }
 
     /*회원 탈퇴*/
     @PostMapping("removeMember")
-    public RedirectView removeMember(String memberId, String memberPw, RedirectAttributes rttr){
-        if(mypagedao.deleteMember(memberId, memberPw)){
-            rttr.addFlashAttribute("msg", "회원 탈퇴가 성공적으로 이루어졌습니다.");
-            return new RedirectView("mainpage/mainpage");
+    public String removeMember(@RequestParam("deleteMemberPw") String memberPw, HttpServletRequest req,Model model){
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+        if(mypageSVC.deleteMember(memberId,memberPw)){
+            model.addAttribute("msg", "deleteMember");
         }else{
-            rttr.addFlashAttribute("msg", "회원탈퇴에 실패하였습니다.");
-            return new RedirectView("mypage/mypage");
+            model.addAttribute("msg", "notDeleteMember");
         }
+        return "mypage/resultpage";
     }
 
-
-    /*회원 정보 수정*/
+    /*회원 수정*/
     @PostMapping("updateMember")
-    public RedirectView updateMember(TempMemberVO vo, RedirectAttributes rttr){
-        if(mypagedao.updateMember(vo)){
-            rttr.addFlashAttribute("msg", "회원 정보가 변경되었습니다.");
-        }else{
-            rttr.addFlashAttribute("msg", "회원 정보 변경에 실패하였습니다.");
+    public String updateMember(MemberVO vo,Model model, @RequestParam("memberEmailSite") String memberEmailSite, @RequestParam("memberAddressDetail") String memberAddressDetail, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+
+        String memberId = (String)session.getAttribute("memberId");
+
+        MemberVO membervo = memberSVC.memberAllSelect(memberId);
+        log.info(membervo.getMemberAddress());
+        log.info(membervo.getMemberEmail());
+        log.info(membervo.getMemberName());
+        log.info(membervo.getMemberId());
+        log.info(membervo.getMemberZipcode());
+        log.info(membervo.getMemberBirth());
+        log.info(membervo.getMemberPw());
+
+        if(vo.getMemberEmail()!=null && memberEmailSite!=null){
+            membervo.setMemberEmail(vo.getMemberEmail() + "@" + memberEmailSite);
         }
-        return new RedirectView("mypage");
+
+        if(vo.getMemberAddress()!=null && vo.getMemberAddress()!=""){
+            membervo.setMemberAddress(vo.getMemberAddress());
+        }
+
+        if((vo.getMemberAddress()!=null && vo.getMemberAddress()!="") && (memberAddressDetail!=null && memberAddressDetail!="")){
+            membervo.setMemberAddress(vo.getMemberAddress() + " " + memberAddressDetail);
+        }
+
+        if(vo.getMemberZipcode()!=null && vo.getMemberZipcode()!=""){
+            membervo.setMemberZipcode(vo.getMemberZipcode());
+        }
+
+        /*디비에 회원정보 저장*/
+        if(mypageSVC.updateMember(membervo)){
+            model.addAttribute("msg","updateMember");
+        }else{
+            model.addAttribute("msg","notUpdateMember");
+        };
+        return "mypage/resultpage";
     }
 
     /*플로깅 취소(파업창)- 천천히 해결합세*/
     @RequestMapping(value = "/ploggingRefundPage", method = RequestMethod.GET)
     public String ploggingRefundPage(Model model, @RequestParam("ploResNum") Long ploResNum) throws IOException {
-        model.addAttribute("ploRes", mypagedao.getPloRes(ploResNum));
+        Long num = ploResNum;
+        log.info(String.valueOf(ploResNum));
+        model.addAttribute("plogging", mypageSVC.getPloggingList());
+        model.addAttribute("ploRes", mypageSVC.getPloRes(num));
         return "/mypage/ploggingRefund";
     }
 
     /*플로깅 취소하기*/
     @PostMapping("ploggingRefund")
-    public void ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
-        if(mypagedao.deletePloRes(ploResNum)){
-            model.addAttribute("result", "success");
+    public String ploggingRefund(Model model, @RequestParam("ploResNum") Long ploResNum){
+        if(mypageSVC.deletePloRes(ploResNum)){
+            model.addAttribute("msg", "refundPlogging");
         }else{
-            model.addAttribute("result", "fail");
+            model.addAttribute("msg", "notRefundPlogging");
         }
-        return;
+        return "mypage/resultpage";
     }
 
     /*찜 삭제*/
     @PostMapping("deleteGoodsLike")
-    public void deleteGoodsLike(Model model, @RequestParam("goodsLikeNum") int goodsLikeNum){
-        if(mypagedao.deleteGoodsLike(goodsLikeNum)){
-            model.addAttribute("msg","해당 상품에 찜을 삭제하였습니다.");
-        }else{
-            model.addAttribute("msg","찜 삭제에 실패하였습니다.");
-        }
-        return;
+    public String deleteGoodsLike(@RequestParam("result") String result, Model model) throws Exception {
+        JSONParser jsonPar = new JSONParser();
+            JSONObject jsonOj = (JSONObject) jsonPar.parse(result);
+            List<String> goodsLikeNums = (List<String>) jsonOj.get("deleteGoodsLike");
+        boolean check = false;
+            for (int i = 0; i < goodsLikeNums.size(); i++) {
+                int goodsLikeNum = Integer.parseInt(goodsLikeNums.get(i));
+                if (mypageSVC.deleteGoodsLike(goodsLikeNum)) {
+                    check = true;
+                } else {
+                    check = false;
+                };
+            }
+            if (check) {
+                model.addAttribute("msg", "daleteGoodsLike");
+            } else {
+                model.addAttribute("msg", "notDeleteGoodsLike");
+            }
+            return "mypage/resultpage";
     }
-
 
     /*해더*/
     @GetMapping("/pageframe/header")

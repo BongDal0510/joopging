@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>plogging_shop</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        @font-face {
+            font-family: 'S-CoreDream-3Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        #maintext{
+            font-family: 'S-CoreDream-3Light';
+            font-weight:bold;
+            font-size:29px;
+            color:green;
+
+        }
+        #s{
+            color:hotpink;
+            font-size:29px;
+            font-weight:bold;
+        }
+
+        #h{
+            color:orange;
+            font-size:29px;
+            font-weight:bold;
+        }
+
+        #o{
+            color:aquamarine;
+            font-size:29px;
+            font-weight:bold;
+        }
+
+        #p{
+            color:palegreen;
+            font-size:29px;
+            font-weight:bold;
+        }
+        .container{
+            font-family: 'S-CoreDream-3Light';
+
+        }
+    </style>
+</head>
+<body class="no-sidebar is-preload" style="margin: 0;">
+
+<div id="page-wrapper">
+    <!-- Header -->
+    <div id="main_header" style="display: flex; margin-bottom:10%"></div>
+
+    <!-- Main -->
+    <section id="main"  style = margin-top:-40px;>
+        <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>
+        <!-- 			<button id = "btnAdd" style="visibility: hidden; margin-left: 80%;">상품 등록</button>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-12-medium">
+
+                    <!-- Sidebar -->
+                    <section class="box" style=text-align:left;>
+                        <a href="#" class="image featured"><img
+                                src="/images/여자둘.png" alt="" /></a>
+                        <header>
+                            <h3>All products()</h3>
+                        </header>
+                        <div>
+                            <a href="#">T-shirts()</a>
+                        </div>
+                        <div>
+                            <a href="#">Bottom()</a>
+                        </div>
+                        <div>
+                            <a href="#">플로깅 Bag()</a>
+                        </div>
+                        <div>
+                            <a href="#">플로깅 Acc()</a>
+                        </div>
+                        <footer>
+                            <a href="#" class="button alt" style="background: #236343">@OOTD</a>
+                        </footer>
+                    </section>
+                    <section class="box">
+                        <header>
+                            <h3>플로깅 상품이란?</h3>
+                        </header>
+                        <p>플로깅은 '이삭을 줍는다'는 뜻의 스웨덴 polcka upp과 영어 단어 jogging의 합성어로 조깅을
+                            하면서 쓰레기를 줍는 행동을 뜻한다. 이렇게 플로깅 활동으로 모은 쓰레기들은 재활용되어 새롭게 탄생한다.</p>
+                        <ul class="divided">
+                            <li><a href="#">플로깅 재활용 수집 과정</a></li>
+                            <li><a href="#">플로깅 물품 생산 과정</a></li>
+                            <li><a href="#">다양한 상품 사례</a></li>
+                        </ul>
+                        <footer>
+                            <a href="#" class="button alt">More Question?</a>
+                        </footer>
+                    </section>
+
+                </div>
+                <div class="col-8 col-12-medium imp-medium">
+
+                    <!-- Content -->
+
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <span id="maintext">Plogging </span>
+                        <span id="s">S</span><span id="h">H</span><span id="o">O</span><span id="p">P</span>
+                    </div>
+                    <div style="text-align: right; margin-bottom: 20px; margin-right: 10px;">
+                        <a href="#"
+                           style="text-decoration-line: none; margin-right: 10px;">신상품순</a>
+                        <a href="#"
+                           style="text-decoration-line: none; margin-right: 10px;">인기순</a>
+                    </div>
+
+                    <!--상품목록 -->
+                    <table style="border-collapse:collapse">
+                        <tr>
+                            <td>
+                                <th:block th:each="shop : ${shop}">
+                                <div style= width:380px;height:700px;float:left;>
+                                    <a href ="javascript:void(0)" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                        <h3>플로깅&프라이탁</h3>
+                                        <span th:object="*{goodsPrice}">55,000원</span></a><br>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                </div>
+                                </th:block>
+                            </td>
+
+                            <td>
+                                <div style= width:380px;height:700px;float:right;>
+                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">
+                                        <h3>플로깅 에코백</h3>
+                                        <span>25,000원</span></a><br>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style= width:380px;height:700px;float:left;>
+                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/티셔츠.jpg">
+                                        <h3>플로깅 티셔츠</h3>
+                                        <span>30,000원</span></a><br>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div style= width:380px;height:700px;float:right;>
+                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">
+                                        <h3>플로깅 모자</h3>
+                                        <span>15,000원</span></a><br>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
+                                    <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
+                                </div>
+                            </td>
+
+                    </table>
+
+               <!--     <table style="font-size:1.3rem">
+                        <tr align="center" valign="middle">
+                            <td>
+                                <a href="">&lt;</a>
+                                <a href="">&gt;</a>
+                            </td>
+                        </tr>-->
+                    </table>
+                    <div th:object="${pageMaker}">
+                        <div class="big-width" style="text-align: center">
+                            <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                            <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                                <code th:if="${pageMaker.shopCriteria.getPageNum() == num}" th:text="${num}"></code>
+                                <a class="changePage" th:unless="${pageMaker.shopCriteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                            </th:block>
+                            <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                        </div>
+                        <form action="/shop/shop" th:object="${shopCriteria}" name="pageForm">
+                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                            <input type="hidden" name="amount" th:field="*{amount}">
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+<div class="col-12"></div>
+<!-- Footer -->
+<div id="main_footer"></div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/header.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        let goodsNum = [[${goodsNum}]];
+        let pageForm = ${document.pageForm);
+
+
+        if(goodsNum == null){
+            return;
+        }
+        alert("상품번호 " + goodsNum +" 번이 등록되었습니다.")
+
+    });
+
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+
+</script>
+
+
+
+</body>
+
+<script>
+</script>
+</html>

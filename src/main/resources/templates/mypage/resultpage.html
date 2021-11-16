@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+<script th:inline="javascript">
+        let msg = [[${msg}]];
+            console.log(msg);
+
+        if (msg != null || msg != "null" || msg != "") {
+            switch (msg) {
+                case "notLogin":
+                    alert("로그인 후 이용바랍니다.");
+                    location.href="/member/login"
+                    break;
+                case "deleteMember":
+                    alert("회원 탈퇴가 완료되었습니다.");
+                    location.href="/member/logout"
+                    break;
+                case "notDeleteMember":
+                    alert("회원 탈퇴에 실패하였습니다.");
+                    location.href="/mypage/mypage"
+                    break;
+                case "updateMember":
+                    alert("회원정보 수정이 완료되었습니다.");
+                    location.href="/mypage/mypage"
+                    break;
+                case "notUpdateMember":
+                    alert("회원 정보 수정에 실패였습니다.");
+                    location.href="/mypage/mypage"
+                    break;
+                case "refundPlogging":
+                    alert("플로깅 예약이 취소되었습니다.");
+                    opener.location.reload();
+                    window.close();
+                    break;
+                case "notRefundPlogging":
+                    alert("플로깅 예약 취소에 실패하였습니다.");
+                    opener.location.reload();
+                    window.close();
+                    break;
+                case "refundOrder":
+                    alert("상품 구매를 취소하였습니다.");
+                    window.opener.location = "/mypage/mypage";
+                    window.close();
+                    break;
+                case "notRefundOrder":
+                    alert("상품 구매 취소에 실패하였습니다.");
+                    opener.location.reload();
+                    window.close();
+                    break;
+                case "daleteGoodsLike":
+                    alert("해당 상품을 찜 목록에서 삭제하였습니다.");
+                    location.href="/mypage/mypage"
+                    break;
+                case "notDeleteGoodsLike":
+                    alert("찜목록 삭제에 실패하였습니다.");
+                    location.href="/mypage/mypage"
+                    break;
+            }}else{
+                console.log("err");
+            }
+        // location.href="/member/login"
+</script>
+</html>

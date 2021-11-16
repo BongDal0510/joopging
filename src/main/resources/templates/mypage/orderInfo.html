@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ORDER INFORMATION</title>
+    <title>상품 주문내역확인하깅</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
@@ -66,14 +66,13 @@
 
         div.img_center {
             width: 100px;
-            background: url('/images/프라이탁.jpg');
             background-size: 100%;
             margin-right: 10px;
         }
 
         /*header*/
 
-        header{
+        header {
             margin: 0px !important;
             padding-bottom: 1em;
             border-bottom: solid #35A14A 3px;
@@ -134,7 +133,7 @@
             background-color: #f7f7f7;
         }
 
-        .blind{
+        .blind {
             display: none;
         }
 
@@ -335,18 +334,22 @@
                 <div id="info-box">
                     <table style="margin: 0px; border: none;">
                         <colgroup>
-                            <col width="120">
-                            <col width="120">
-                            <col width="120">
-                            <col width="120">
-                            <col width="">
+                            <col width="12.5%">
+                            <col width="30%">
+                            <col width="12.5%">
+                            <col width="15%">
+                            <col width="35%">
                         </colgroup>
                         <tr style="text-align: center">
                             <td>주문 일자</td>
-                            <td><strong>0000.00.00</strong></td>
+                            <td><strong th:text="${order.getOrderDate()}"></strong></td>
                             <td>주문 번호</td>
-                            <td>00000000</td>
-                            <td><input type="button" value="재구매"><input type="button" value="구매 취소" style="margin: 10px"></td>
+                            <td th:text="${order.getOrderNum()}"></td>
+                            <td><input type="button" th:id="repurchase" value="재구매">
+                                <input type="button"
+                                       id="refundOrder"
+                                       value="구매 취소"
+                                       style="margin: 10px"></td>
                         </tr>
                     </table>
                 </div>
@@ -371,39 +374,57 @@
                         <tbody>
                         <tr class="group">
                             <td>
-                                <span class="thm ordernum2">상품 주문 번호</span>
+                                <span class="thm ordernum2" th:text="${order.getOrderNum()}"></span>
                             </td>
                             <td class="product">
                                 <div id="goodsMoreInfo">
-                                    <div class="img_center"></div>
+                                    <div id="img_center">
+                                        <img src="/images/dummy.jpg" style="width: 100px;background-size: 100%;margin-right: 10px;">
+                                    </div>
                                     <dl><!-- NV_MID:83250896260 -->
                                         <dt>
-                                            <strong class="name_seller">판매자</strong>
-                                            <br>
-                                            <a href="" target="_blank">
-                                                상품 명 클릭시 해당 상품 페이지로 이동
+                                            <a class="goGoodsDetail" th:href="${order.getGoodsNum()}" th:text="${order.getGoodsName()}">
                                             </a><!--N=a:odd.product-->
                                         </dt>
-                                        <dd>옵션: 선택한 옵션이 나옴
+                                        <dd><span>옵션: <strong th:text="${order.getGoodsColor()}"/> <strong th:text="${order.getGoodsSize()}"/>
+                                            (<strong th:text="${order.getGoodsCnt()}"/> 개)</span>
                                         </dd>
                                     </dl>
                                 </div>
                             </td>
                             <td class="money">
-                                <em class="thm">금액</em>원<br>
-                                <span>( 수량 개)</span>
+                                <em class="thm" th:text="${order.getGoodsTotalCost()}"></em>원<br>
+                                <span>( <span th:text="${order.getGoodsCnt()}"/> 개)</span>
                             </td>
-                            <td class="bg_point state">
-                                진행 상태 (주문 접수/배송 중/ 배송 완료/구매 확정)<br>
+                            <td class="bg_point">
+                            <strong th:if="${order.getOrderStatus()==0}">주문 접수</strong>
+                            <strong th:if="${order.getOrderStatus()==2}">배송 완료</strong>
                             </td>
                             <td class="bg_point btn">
-                                <a href="#" class="">
+                                <a th:href="${order.getGoodsNum()}" class="goGoodsDetail">
                                     <span>리뷰 작성</span>
                                 </a>
                                 <br>
-                                <a href="#" class="">
+                                <form name="parcelForm" action="http://info.sweettracker.co.kr/tracking/5" method="post">
+                                    <div class="form-group" style="display: none;">
+                                        <label for="t_key">API key</label>
+                                        <input type="text" class="form-control" id="t_key" name="t_key" value="Fu4DrmPIpEWijG3g4pPOPg">
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                        <label for="t_code">택배사 코드</label>
+                                        <input type="text" class="form-control" name="t_code" id="t_code" value="04">
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                        <label for="t_invoice">운송장 번호</label>
+                                        <input type="text" class="form-control" name="t_invoice" id="t_invoice" value="556566805873">
+                                    </div>
+                                <a th:if="${order.getOrderStatus()==2}" id="parcelSubmit">
                                     <span>배송 조회</span>
                                 </a>
+                                </form>
+                                    <a th:if="${order.getOrderStatus()==0}" id="notParcelSubmit">
+                                        <span>배송 조회</span>
+                                    </a>
                             </td>
                         </tr>
                         </tbody>
@@ -441,15 +462,15 @@
                                             <ul class="price_list">
                                                 <li>
                                                     <strong>상품금액</strong>
-                                                    <p><em class="thm">144,000</em>원</p>
+                                                    <p><em class="thm"><strong th:text="${goods.getGoodsPrice()}"></strong></em>원</p>
                                                 </li>
                                                 <li>
                                                     <strong>쿠폰할인</strong>
-                                                    <p>-<em class="thm">90,000</em>원</p>
+                                                    <p>-<em class="thm">0</em>원</p>
                                                     <ul class="detail_price_list">
                                                         <li>
                                                             <strong>상품/스토어/주문 할인</strong>
-                                                            <p>-<em class="thm">할인한 금액</em>원</p>
+                                                            <p>-<em class="thm">0</em>원</p>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -466,11 +487,11 @@
                                             <ul class="price_list">
                                                 <li>
                                                     <strong>포인트 사용</strong>
-                                                    <p><em class="thm">사용한 포인트</em>원</p>
+                                                    <p><em class="thm" th:text="${order.getUsePoint()}"/> 포인트</p>
                                                     <ul class="detail_price_list">
                                                         <li>
-                                                            <strong>적립포인트</strong>
-                                                            <p><em class="thm">600</em>원</p>
+                                                            <strong>적립 포인트</strong>
+                                                            <p><em class="thm">0</em> 포인트</p>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -478,8 +499,8 @@
                                             <!-- 주결제수단 정보 -->
                                             <ul class="price_list">
                                                 <li>
-                                                    <strong>결제 수단</strong>
-                                                    <p><em class="thm">최종 금액</em>원</p>
+                                                    <strong>결제 액</strong>
+                                                    <p><em class="thm" th:text="${order.getGoodsTotalCost()}"/>원</p>
                                                 </li>
                                             </ul>
                                         </dd>
@@ -494,22 +515,22 @@
                                         <ul>
                                             <li class="final_payment_price">
                                                 <strong>주문금액</strong>
-                                                <p><em class="thm">최초금액-할인금액</em>원</p>
+                                                <p><em class="thm"><span th:text="${goods.getGoodsPrice()}"/></em>원</p>
                                             </li>
                                             <li>
                                                 <strong>포인트 사용</strong>
-                                                <p><em class="thm">사용 포인트</em>원</p>
+                                                <p><em class="thm" th:text="${order.getUsePoint()}"/> 포인트</p>
                                             </li>
                                             <li>
-                                                <strong>결제 방법</strong>
-                                                <p><em class="thm">주문금액-포인트 사용</em>원</p>
+                                                <strong>최종 결제액</strong>
+                                                <p><em class="thm"><span th:text="${goods.getGoodsPrice()*order.getGoodsCnt()}"/> - <span th:text="${order.getUsePoint()}"/></em> 원</p>
+                                                <p><em class="thm"><span th:text="${order.getGoodsTotalCost()}"/></em> 원</p>
                                             </li>
                                         </ul>
                                     </dd>
                                 </dl>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -537,27 +558,26 @@
                             <tbody>
                             <tr class="gap">
                                 <th scope="row">수령인</th>
-                                <td>홍길동</td>
+                                <td th:text="${order.getRecipient()}"/>
                             </tr>
                             <tr>
                                 <th scope="row">연락처</th>
                                 <td>
-                                    <span class="tel">수령인 연락처</span>
-                                    <span></span>
+                                    <span class="tel" th:text="${order.getRecipientPhone()}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">배송지</th>
                                 <td class="address">
-                                    집코드<br>
-                                    어드레스<br>
-                                    어드레스_etc
+                                    <span th:text="${order.getRecipientZipCode()}"/><br>
+                                    <span th:text="${order.getRecipientAddress()}"/>
+                                    <span th:text="${order.getRecipientAddressEtc()}"/>
                                 </td>
                             </tr>
 
                             <tr class="gap3">
-                                <th scope="row">배송메모</th>
-                                <td></td>
+                                <th scope="row">배송 메모</th>
+                                <td th:text="${order.getParcelMessage()}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -566,48 +586,57 @@
             </article>
         </div>
         <!--주문자 정보-->
-        <div class="col-8 col-12-medium imp-medium" id="info04">
+        <div class=" col-8 col-12-medium imp-medium
+                                " id="info04">
             <header>
                 <h4>주문자 정보</h4>
             </header>
             <article class="box post">
-                <div class="input_section2 _input_section">
-                    <div class="inp_area _deliveryPlace">
-                        <table cellspacing="0" border="1" class="tb_input2">
-                            <colgroup>
-                                <col width="135">
-                                <col>
-                            </colgroup>
-                            <thead class="blind">
-                            <tr>
-                                <th scope="col">주문자 컬럼</th>
-                                <th scope="col">주문자 정보</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="gap">
-                                <th scope="row">주문자</th>
-                                <td>김봉달</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">연락처</th>
-                                <td>
-                                    <span class="tel">주문자 연락처</span>
-                                </td>
-                            </tr>
-                            <tr class="gap3">
-                                <th scope="row">이메일</th>
-                                <td>주문자 이메일</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <th:block th:object="${member}">
+                    <div class="input_section2 _input_section">
+                        <div class="inp_area _deliveryPlace">
+                            <table cellspacing="0" border="1" class="tb_input2">
+                                <colgroup>
+                                    <col width="135">
+                                    <col>
+                                </colgroup>
+                                <thead class="blind">
+                                <tr>
+                                    <th scope="col">주문자 컬럼</th>
+                                    <th scope="col">주문자 정보</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gap">
+                                    <th scope="row">주문자</th>
+                                    <td th:text="*{memberName}"/>
+                                </tr>
+                                <tr>
+                                    <th scope="row">연락처</th>
+                                    <td>
+                                        <span class="tel" th:text="*{memberPhone}"/>
+                                    </td>
+                                </tr>
+                                <tr class="gap3">
+                                    <th scope="row">이메일</th>
+                                    <td th:text="*{memberEmail}"/>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </th:block>
             </article>
+            </tr>
+            </tbody>
+            </table>
         </div>
     </div>
+    </article>
 </div>
 <div id="main_footer"></div>
+</div>
+</div>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
@@ -619,4 +648,37 @@
 <script src="/js/headerfooter.js"></script>
 <script src="/js/weather.js"></script>
 </body>
+<script th:inline="javascript">
+    /*재구매시 해당 상품의 상세페이지로 이동*/
+    $("#repurchase").on("click", function (e) {
+        e.preventDefault();
+        let goodsNum = [[${order.getGoodsNum()}]];
+        location.href = "/shop/shopDetail?goodsNum=" + goodsNum;
+    })
+    /*상품 이름 클릭시 상세페이지로 이동*/
+    $(".goGoodsDetail").on("click", function (e) {
+        e.preventDefault();
+        let goodsNum = [[${order.getGoodsNum()}]];
+        location.href = "/shop/shopDetail?goodsNum=" + goodsNum;
+    })
+
+    /*구매 취소 페이지 이동*/
+    $("#refundOrder").on("click", function () {
+        let orderNum = [[${order.getOrderNum}]];
+        let option = "width=470, height=600, top=100, left=200, location=no";
+        window.open("/orderhistory/refundOrderPage?orderNum=" + orderNum, "", option).focus();
+    });
+
+    $("#parcelSubmit").on("click", function () {
+    let form = document.parcelForm;
+        let title = "parcel"
+        let option = "width=470, height=600, top=100, left=200, location=no";
+        window.open("", title, option);
+        form.target = title;
+    form.submit();
+    })
+    $("#notParcelSubmit").on("click", function () {
+        alert("배송 전 상품입니다.")
+    })
+</script>
 </html>

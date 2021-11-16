@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 찾기 SMS인증 페이지</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+</head>
+<style>
+    /* Button */
+
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    button,
+    .button {
+        -webkit-appearance: none;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        border: 0;
+        border-radius: 5px;
+        background: #94c477;
+        color: #fff !important;
+        font-weight: 700;
+        outline: 0;
+        font-size: 1.1em;
+        padding: 0.65em 1.5em 0.65em 1.5em;
+        text-align: center;
+        -moz-transition: background-color .25s ease-in-out;
+        -webkit-transition: background-color .25s ease-in-out;
+        -ms-transition: background-color .25s ease-in-out;
+        transition: background-color .25s ease-in-out;
+    }
+
+    /*input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="reset"]:hover,
+    button:hover,
+    .button:hover {
+        background: #24b886;
+    }*/
+
+    input[type="button"]:active,
+    input[type="submit"]:active,
+    input[type="reset"]:active,
+    button:active,
+    .button:active {
+        background: #049866;
+    }
+
+    input[type="button"].alt,
+    input[type="submit"].alt,
+    input[type="reset"].alt,
+    button.alt,
+    .button.alt {
+        background: #0b871e;
+    }
+
+    /*
+    input[type="button"].alt:hover,
+    input[type="submit"].alt:hover,
+    input[type="reset"].alt:hover,
+    button.alt:hover,
+    .button.alt:hover {
+        background: #066514;
+    }*/
+
+    input[type="button"].alt:active,
+    input[type="submit"].alt:active,
+    input[type="reset"].alt:active,
+    button.alt:active,
+    .button.alt:active {
+        background: #151112;
+    }
+
+    input[type="button"].icon:before,
+    input[type="submit"].icon:before,
+    input[type="reset"].icon:before,
+    button.icon:before,
+    .button.icon:before {
+        opacity: 0.35;
+        position: relative;
+        top: 0.05em;
+        margin-right: 0.75em;
+    }
+
+    input[type="button"].large,
+    input[type="submit"].large,
+    input[type="reset"].large,
+    button.large,
+    .button.large {
+        font-size: 1.5em;
+        padding: 0.75em 1.5em 0.75em 1.5em;
+    }
+
+    input[type="button"].large,
+    input[type="submit"].large,
+    input[type="reset"].large,
+    button.large,
+    .button.large {
+        font-size: 1.1em;
+        padding: 0.65em 1.5em 0.65em 1.5em;
+    }
+
+    .out {
+        width: 400px;
+        height: 550px;
+        margin: 10px;
+        padding: 10px;
+        border: none;
+    }
+
+    .line {
+        border: solid 1px #dddddd;
+        border-radius: 5px;
+    }
+
+    p{
+        color:#5d5d5d;
+    }
+</style>
+<body>
+<!--전체 틀-->
+    <div style="width: 80%; justify-content: space-around; margin: auto;">
+        <div style="text-align: center">
+            <h1>비밀번호 재설정</h1>
+        </div>
+        <!--비밀번호 -->
+        <form action="/member/rePassWordResult" method="post" id="rePassWord" name="rePassWord">
+            <!--현재 내가 찾은 아이디-->
+            <div style="text-align: center;">
+                <span style="text-align: center;">아이디</span>
+                <input type="text" name="memberId" id="memberId" th:value="${result}" style="width: 70%; border:none; text-align: center;" readonly/>
+            </div>
+            <!--비밀번호 입력-->
+            <div>
+                <!--새 비밀번호 입력-->
+                <p style="margin: 0px 0px 0px 65px;">새로운 비밀번호</p>
+                <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호 입력" style="width: 70%;" />
+                <!--새 비밀번호 확인-->
+                <p style="margin: 15px 0px 0px 65px;">비밀번호 확인</p>
+                <input type="password" name="memberPw_re" id="memberPw_re" placeholder="비밀번호 확인" style="width: 70%;"/><br>
+            </div>
+            <!--비밀번호 일치하는지 확인 후 submit-->
+            <div style="text-align: center;">
+                <input type="button" value="확인" onclick="newPassWord()" />
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    function newPassWord(){
+        var form = document.rePassWord;
+
+        // console.log(form.memberPw.value);
+        // console.log(form.memberPw_re.value);
+
+        if(!form.memberPw.value){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+        if(!form.memberPw_re.value){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+
+        if(form.memberPw.value === form.memberPw_re.value){
+            form.submit();
+        }else{
+            alert("비밀번호 확인이 일치하지 않습니다.");
+            window.close();
+        }
+    }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+</html>
