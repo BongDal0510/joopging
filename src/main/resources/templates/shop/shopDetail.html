@@ -208,7 +208,7 @@
             <div class="shop_text">
                 <div th:object="${shop}">
                     <h2 name="goodsName" th:text="*{goodsName}"></h2>
-                    <span style="font-size: 20px;">\</span><span th:text="*{goodsPrice}"style="font-size: 20px;"></span><span style="font-size: 20px;">원</span>
+                    <span style="font-size: 20px;">\</span><span name ="goodsPrice" th:text="*{goodsPrice}"style="font-size: 20px;"></span><span style="font-size: 20px;">원</span>
                     <p>
 
                     <div th:text="*{goodsContent}">
@@ -232,6 +232,7 @@
                         </div>
                         <select>
                             <option selected>Select</option>
+                            <option value="0">FREE</option>
                             <option value="1">S</option>
                             <option value="2">M</option>
                             <option value="3">L</option>
@@ -248,7 +249,6 @@
                             <option value="1">GREEN</option>
                             <option value="2">WHITE</option>
                         </select>
-                        <form>
                             QUANTITY <input type="text" name="amount" value="1" size="3"
                                             onchange="change();"> <input type="button" value=" + "
                                                                          onclick="add();"> <input type="button"
@@ -256,8 +256,8 @@
                                                                                                   onclick="del();">
                         </form>
                         <div style="margin-top: 30px;">
-                            <input type="button" class="listbtn" value="BUY NOW " onclick=""> <input
-                                type="button" class="listbtn" value="ADD CART" onclick=""> <label><img
+                            <input type="button" class="Payment_btn" value="BUY NOW " onclick=""> <input
+                                type="button" class="Cart_btn" value="ADD CART" onclick=""> <label><img
                                 id="heart"
                                 style="vertical-align: middle; width: 40px; height: 40px; margin-left: 30px;"
                                 src="/images/하트.png"></label> <label><img
@@ -278,7 +278,7 @@
             <table class="navtable">
                 <tr style="background-color: whitesmoke;">
                     <td id="detail_td" class="navbutton">
-                        <a id="detail_a" class="nav_a" href="#detail">상세정보</a>
+                        <a id="detail_a" class="nav_a" href="#uploadResult">상세정보</a>
                     </td>
                     <td id="review_td" class="navbutton">
                         <a id="review_a" class="nav_a" href="#review_div">상품후기</a>
@@ -289,12 +289,14 @@
                 </tr>
             </table>
         </nav>
+        <div id="uploadResult">
 
+        </div>
         <div class="uploadResult">
             <ul></ul>
         </div>
 
-        <div class="detail">
+        <!--<div class="detail">
             <img
                     style="text-algin: center; width: 550px; height: 500px; margin-top: 200px;"
                     src="/images/프라이탁.jpg">
@@ -307,7 +309,7 @@
         <div class="detail">
             <img style="text-algin: center; width: 550px; height: 500px;"
                  src="/images/프라이탁정보2.jpg">
-        </div>
+        </div>-->
 
         <div id="review_div">
             <h3 id="review_h3">상품후기</h3>
@@ -318,7 +320,7 @@
                     <p id="review_notice">고객님의 소중한 상품후기에 <span class="point">포인트</span>를 드립니다.<br>
                         다만 관련법에 위반이 되는표현이 포함된 경우,<br>
                         부득이 삭제될 수 있으니 양해 바랍니다.</p>
-                    <input id="review_btn" type="button" value="후기작성" onclick="">
+                    <input id="review_btn" class="listbtn" type="button" value="후기작성" onclick="">
                 </div>
                 <div>
                     <img src="/images/일반리뷰.png">
@@ -387,6 +389,7 @@
     let uploadResult = $(".uploadResult ul");
     let mainImgUploadResult = $(".stock_img");
 
+
     $(document).ready(function(){
         (function(){
             $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
@@ -431,10 +434,29 @@
 
         /*빈하트를 클릭했을 때 빨간하트를 보여줌(해당상품찜)*/
         $("#heart").click(function () {
+            let goodsNum = [[${shop.getGoodsNum}]];
             $("#heart").hide();
             $("#redheart").show();
             alert("찜 목록에 추가");
-            return false;
+            $.ajax(
+                {
+                    type:"GET",
+                    url:"/shop/insertGoodsLike",
+                    date: goodsNum,
+                    dateType:"text",
+                    success: function (result) {
+                        if(result.eq("1")) {
+
+                            return false;
+                        }else{
+                            alert("찜 추가 실패");
+                        }
+                    },
+                    error: function () {
+                        console.log("err");
+                    }
+                }
+            )
         });
 
         /*빨간하트를 클릭했을 때 빈하트를 보여줌(찜해제)*/
@@ -496,8 +518,22 @@
                 "border-color": "#d3d3d3"
             });
         });
+        /*$(".listbtn").click(function () {
+           alert("준비중입니다");
+           return false;
+        });*/
+        $(".Payment_btn").on("click", function(){
+            location.href="/shop/shopPayment"
+        });
 
+        $(".Cart_btn").on("click", function(){
+            alert("해당 상품을 장바구니에 담고 장바구니로 이동합니다.");
+            location.href="/basket/basket"
+        });
 
+        $("#review_btn").on("click", function(){
+            alert("준비 중 입니다.");
+        });
     });
 
     // 수량 조종하는 함수

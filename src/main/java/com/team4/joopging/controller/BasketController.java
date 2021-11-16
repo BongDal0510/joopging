@@ -12,4 +12,24 @@ public class BasketController {
 
     @GetMapping("basket")
     public String basket(){ return "basket/basket"; }
+
+    @GetMapping("/pageframe/header")
+    public String header() {
+        return "/pageframe/header";
+    }
+
+    @GetMapping("/pageframe/footer")
+    public String footer() {
+        return "/pageframe/footer";
+    }
+
+    @GetMapping("/terms")
+    public String terms() {
+        return "/pageframe/terms";
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "/pageframe/privacy";
+    }
 }

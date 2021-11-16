@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BASKET</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/font.css" type="text/css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <style>
+        .total_price{
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+        .math{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .total_span{
+            font-weight: bolder;
+            font-size: 14px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            background: #ffffff;
+            padding: 0px !important;
+        }
+
+
+        select[name='type'] {
+            width: 30%;
+            margin-right: 1%;
+        }
+
+        input[name='keyword'] {
+            width: 56%;
+            margin-right: 1%;
+        }
+
+        form[name='searchForm'] {
+            overflow: hidden;
+        }
+
+        select[name='type'] {
+            width: 100%;
+        }
+
+        input[name='keyword'] {
+            width: 100%;
+        }
+
+        form[name='searchForm'] {
+            overflow: hidden;
+        }
+
+        /*div*/
+
+        div.imp-medium {
+            font-family: S-CoreDream-3Light;
+            margin: 0 auto;
+            margin-bottom: 3em !important;
+        }
+
+
+
+        /*header*/
+
+        header{
+            margin: 0px !important;
+            padding-bottom: 1em;
+            border-bottom: solid #35A14A 3px;
+        }
+
+        .box.post header {
+            padding: 0px !important;
+            margin: 0 0 2em 0;
+        }
+
+
+        /* h1,h2,h3,h4 */
+
+
+
+
+        /* Box */
+
+        .box {
+            background-color: #ffffff !important;
+            padding: 0px !important;
+            text-align: left !important;
+            border-bottom: none !important;
+        }
+
+        /*table*/
+
+        table {
+            margin-bottom: 0.3em;
+            border-bottom: solid 1px;
+            border-color: #d3d3d3;
+        }
+
+        table thead {
+            font-size: 10px;
+            border-left: none;
+            border-right: none;
+            border-top: solid #35A14A 3px;
+        }
+
+        table thead th {
+            text-align: center !important;
+        }
+
+        table tbody {
+            font-size: 12px;
+        }
+
+        table tbody th {
+            text-align: center !important;
+            background-color: #f7f7f7;
+        }
+
+        table tbody td{
+            text-align: center !important;
+        }
+
+
+        input {
+            border-color: #d3d3d3;
+            border-radius: 5px;
+        }
+
+
+        /* Button */
+
+        button, input[type="button"] {
+            font-family: S-CoreDream-3Light !important;
+        }
+
+        input[type="button"] {
+            font-weight: bold !important;
+            font-size: 12px !important;
+
+        }
+
+        form input[type=text] {
+            padding: 0.5em 0.7em !important;
+        }
+
+        /* List */
+        ul {
+            padding-left: 0px !important;
+        }
+
+        ul li {
+            padding-left: 0px !important;
+            text-align: left;
+            list-style: none;
+        }
+
+        ol li {
+            color: #75ab30;
+        }
+
+        ol li ul li {
+            color: #3d3d3d;
+        }
+
+        /* Main */
+
+        #main {
+            background: #ffffff;
+        }
+
+        #main:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-size: 100% 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        #main .major h2 {
+            background: #ffffff;
+            padding: 0 1em 0 1em;
+        }
+
+        #footer a {
+            color: #000000;
+        }
+
+        #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
+            color: #000000;
+        }
+
+        #footer h2 a, #footer h3 a, #footer h4 a, #footer h5 a, #footer h6 a, #footer strong a, #footer b a {
+            color: inherit;
+        }
+
+        #footer ul.contact li,
+        #footer ul.dates li,
+        #footer ul.divided li {
+            border-top-color: #353434;
+            border-top-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #footer header {
+            margin: 0 0 3em 0;
+        }
+
+        #footer header h2 {
+            font-size: 1.75em;
+        }
+
+        article.box.post header h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        div#page-wrapper {
+            margin-top: 10%;
+            margin-bottom: 5%;
+            margin-left: 17%;
+            margin-right: 17%;
+        }
+
+        .goodsinfo{
+            flex-direction: column;
+            text-align: left !important;
+            margin-left: 4%;
+            width: 100%;
+        }
+
+        /* XLarge */
+
+        @media screen and (max-width: 1680px) {
+
+            div#page-wrapper {
+                margin-top: 10%;
+                margin-bottom: 5%;
+                margin-left: 17%;
+                margin-right: 17%;
+            }
+
+            /* Basic */
+            body, input, textarea, select {
+                font-size: 12pt;
+            }
+
+        }
+
+        /* Large */
+
+        @media screen and (max-width: 1140px) {
+            div#page-wrapper {
+                margin-top: 10%;
+                margin-bottom: 5%;
+                margin-left: 8%;
+                margin-right: 8%;
+            }
+
+
+            /* Basic */
+            body, input, textarea, select {
+                font-size: 11pt;
+            }
+
+            /* Social */
+            ul.social li {
+                margin: 0 0 0.25em 0.75em;
+            }
+
+
+            /* Intro */
+            #intro section {
+                padding: 1em 2em;
+            }
+
+            /* Footer */
+            #footer header {
+                margin: 0 0 1.5em 0;
+            }
+
+            #footer header h2 {
+                font-size: 1.25em;
+            }
+
+            /* Banner */
+            #banner header {
+                padding: 1.5em 1em 1.5em 1em;
+                display: block;
+                border-radius: 0;
+            }
+
+            #banner header h2 {
+                font-size: 1.5em;
+                line-height: 1.5em;
+                margin: 0 0 0.25em 0;
+            }
+
+            #banner header p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body class="homepage is-preload">
+<!-- 헤더 -->
+<header>
+    <div id="main_header" style="display: flex"></div>
+</header>
+<div id="page-wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="col-4 col-12-medium  imp-medium" id="info01">
+
+                <div class="payment_div">
+                    <h3>장바구니</h3><br>
+                    <div style="margin: 0 auto">
+                        <div style="display: flex"><span style="font-size: 8px; width: 100px; padding-top: 0.5em">장바구니(1)</span>
+                            <div style="flex-direction: column; width : 90%; text-align: right; margin-bottom: 1em;"><input type="button" value="삭제하기"></div>
+                        </div>
+                        <table class="order_table">
+                            <thead><tr>
+                            <th style="width: 5%">
+                                선택
+                            </th>
+                            <th style="width:45%">
+                                상품정보
+                            </th>
+                            <th style="width:20%">
+                                판매금액
+                            </th>
+                            <th style="width:10%">
+                                수량
+                            </th>
+                            <th style="width:15%">
+                                택배
+                            </th>
+
+                        </tr>
+                            </thead>
+                        <!--첫번째 상품정보-->
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                            <td style="display: flex;">
+                                <div>
+                                    <img src="/images/프라이탁.jpg" style="width:100px;height:160px;" alt="">
+                                </div>
+                                <div class="goodsinfo">
+                                    <span class="goods_name">프라이탁 그린가방</span><br><br>
+                                    <span class="option">수량 1</span><br>
+                                    <span class="option">옵션 GREEN, FREE</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="goods_price">55,000원</span>
+                            </td>
+                            <td>
+                                <span class="option_stock">1</span>
+                            </td>
+                            <td>
+                                <span>무료 배송</span>
+                            </td>
+                        </tr>
+                            <!--&lt;!&ndash;두번째 상품정보&ndash;&gt;
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td style="display: flex;">
+                                <div>
+                                    <img src="/images/에코백.png" style="width:100px;height:160px;" alt="">
+                                </div>
+                                <div class="goodsinfo">
+                                    <span class="goods_name">줍깅 에코백</span><br><br>
+                                    <span class="option">수량 1</span><br>
+                                    <span class="option">옵션 WHITE, FREE</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="goods_price">25,000원</span>
+                            </td>
+                            <td>
+                                <span class="option_stock">1</span>
+                            </td>
+                                <td>
+                                    <span>무료 배송</span>
+                                </td>
+                        </tr>-->
+                            </tbody>
+                    </table>
+                    </div>
+                    <div class="total_price">
+                        <hr align="center" style="border: solid 1px #5d5d5d59; width: 100%;">
+                        <div>
+                            <span class="total_span">주문상품금액&nbsp; 55,000원 </span>
+                            &nbsp;&nbsp;<span class="math">+</span>&nbsp;&nbsp;
+                            <span class="total_span">총 배송비&nbsp; 0 원</span>
+                            &nbsp;&nbsp;<span class="math">-</span>&nbsp;&nbsp;
+                            <span class="total_span">총 할인금액&nbsp; 0 원</span>
+                            &nbsp; &nbsp;<span class="math">=</span>&nbsp;&nbsp;
+                            <span class="total_span">총 주문금액&nbsp;<span style="color:red; font-size: 14px;">&nbsp;55,000원</span></span>
+                        </div>
+                        <div>
+                            <hr align="center" style="border: solid 1px #5d5d5d59; width: 100%;">
+                        </div>
+                    </div>
+                    <div style="margin-top: 2em; text-align: center">
+                        <input class="Payment_btn" type="button" value="결제하기">
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div id="main_footer"></div>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/paecalinfo.js"></script>
+<script type="text/javascript"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+<script>
+    $(".Payment_btn").on("click", function(){
+        location.href="/shop/shopPayment"
+    });
+
+</script>
+</body>
+</html>

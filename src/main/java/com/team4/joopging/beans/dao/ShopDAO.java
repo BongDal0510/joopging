@@ -1,5 +1,6 @@
 package com.team4.joopging.beans.dao;
 
+import com.team4.joopging.beans.vo.GoodsLikeVO;
 import com.team4.joopging.beans.vo.ShopCriteria;
 import com.team4.joopging.beans.vo.ShopVO;
 import com.team4.joopging.mappers.ShopMapper;
@@ -35,5 +36,7 @@ public class ShopDAO {
     }
 
     public int goodsGetTotal(){return mapper.goodsGetTotal();}
+
+    public boolean insertGoodsLike(GoodsLikeVO vo){return mapper.insertGoodsLike(vo)==1;}
 
 }

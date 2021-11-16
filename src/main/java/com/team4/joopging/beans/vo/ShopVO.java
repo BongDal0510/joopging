@@ -20,4 +20,9 @@ public class ShopVO {
     private String goodsPrice;
     private String goodsContent;
     private List<AttachFileVO> attachList;
+    private String fileName;
+    private String uploadPath;
+    private String uuid;
+
+
 }

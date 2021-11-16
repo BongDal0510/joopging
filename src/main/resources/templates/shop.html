@@ -64,18 +64,29 @@
             font-family: 'S-CoreDream-3Light';
 
         }
+        .changePage{
+            font-family: 'S-CoreDream-3Light';
+            text-decoration: none;
+            color: #0b871e;
+            font-weight: bold;
+        }
+        .Atag{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="no-sidebar is-preload" style="margin: 0;">
 
+<!-- Header -->
+<div id="main_header" style="display: flex; margin-bottom:7%"></div>
+
+
 <div id="page-wrapper">
-    <!-- Header -->
-    <div id="main_header" style="display: flex; margin-bottom:10%"></div>
 
     <!-- Main -->
     <section id="main"  style = margin-top:-40px;>
-        <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>
-
+     <!--   <a style="margin-left: 76%;" href="/shop/shopEnroll">상품 등록</a>-->
+        <!--<button style="margin-left: 76%" id="shopEnrollBtn">상품 등록</button>-->
         <!--
                 <a><input type="button" value="상품 등록" style="margin-left: 76%;"></a>
         -->
@@ -87,21 +98,21 @@
                     <!-- Sidebar -->
                     <section class="box" style=text-align:left;>
                         <a href="#" class="image featured"><img
-                                src="/images/여자둘.png" alt="" /></a>
+                                src="/images/twogirl.png" alt="" /></a>
                         <header th:object="${pageMaker}">
                             <h3>All products ( <span th:text="*{total}"></span> ) </h3>
                         </header>
                         <div>
-                            <a href="#">T-shirts()</a>
+                            <a class="Atag" href="#">T-shirts</a>
                         </div>
                         <div>
-                            <a href="#">Bottom()</a>
+                            <a class="Atag" href="#">Bottom</a>
                         </div>
                         <div>
-                            <a href="#">플로깅 Bag()</a>
+                            <a class="Atag" href="#">플로깅 Bag</a>
                         </div>
                         <div>
-                            <a href="#">플로깅 Acc()</a>
+                            <a class="Atag" href="#">플로깅 Acc</a>
                         </div>
                         <footer>
                             <a href="#" class="button alt" style="background: #236343">@OOTD</a>
@@ -114,9 +125,9 @@
                         <p>플로깅은 '이삭을 줍는다'는 뜻의 스웨덴 polcka upp과 영어 단어 jogging의 합성어로 조깅을
                             하면서 쓰레기를 줍는 행동을 뜻한다. 이렇게 플로깅 활동으로 모은 쓰레기들은 재활용되어 새롭게 탄생한다.</p>
                         <ul class="divided">
-                            <li><a href="#">플로깅 재활용 수집 과정</a></li>
-                            <li><a href="#">플로깅 물품 생산 과정</a></li>
-                            <li><a href="#">다양한 상품 사례</a></li>
+                            <li><a class="Atag" href="#">플로깅 재활용 수집 과정</a></li>
+                            <li><a class="Atag" href="#">플로깅 물품 생산 과정</a></li>
+                            <li><a class="Atag" href="#">다양한 상품 사례</a></li>
                         </ul>
                         <footer>
                             <a href="#" class="button alt">More Question?</a>
@@ -132,7 +143,7 @@
                         <span id="maintext">Plogging </span>
                         <span id="s">S</span><span id="h">H</span><span id="o">O</span><span id="p">P</span>
                     </div>
-                    <div style="text-align: right; margin-bottom: 20px; margin-right: 10px;">
+                    <div style="text-align: right; margin-bottom: 20px; margin-right: 16px;">
                         <a href="#"
                            style="text-decoration-line: none; margin-right: 10px;">신상품순</a>
                         <a href="#"
@@ -141,20 +152,27 @@
 
                     <!--상품목록 -->
                     <table style="border-collapse:collapse">
-                        <tr>
+
                             <th:block th:each="shop, status : ${shop}">
-                                <td th:object="${shop}">
-                                    <th:block th:if="${status.odd}">
-                                        <div style= width:380px;height:700px;float:left;>
-                                            <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
+                                <th:block th:if="${(status.index+1)%2==1}">
+                                    <tr>
+
+                                </th:block>
+                                    <td th:object="${shop}">
+
+                                        <div class="test" style= width:380px;height:700px;float:left;>
+                                            <a class ="goDetail" th:href="*{goodsNum}" style=text-decoration-line:none;><img src ="/images/티셔츠.jpg" style= width:380px;height:500px >
+                                             <!--   <h3 th:text="*{uploadPath}"></h3>
+                                                <h3 th:text="*{fileName}"></h3>
+                                                <h3 th:text="*{uuid}"></h3>-->
+
                                                 <h3 th:text="*{goodsName}"></h3>
-                                                <span th:text="*{goodsPrice}"></span></a><br>
+                                                <span th:text="*{goodsPrice}">원</span></a><br>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/리뷰.png"><span style = margin-right:10px>리뷰</span></a></label>
                                             <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                             <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                         </div>
-                                    </th:block>
-                                    <!-- <th:block th:unless="${status.odd}">
+                                             <!-- <th:block th:unless="${status.odd}">
                                          <div style= width:380px;height:700px;float:left;>
                                              <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/프라이탁.jpg">
                                                  <h3 th:text="*{goodsName}"></h3>
@@ -163,9 +181,14 @@
                                              <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/하트.png"><span style = margin-right:10px>찜</span></a></label>
                                              <label><a href="" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                          </div>-->
-                                </td>
+                                    </td>
+
+                                    <th:block th:if="${(status.index+1)%2==0}">
+                                        </tr>
+
+                                    </th:block>
                             </th:block>
-                        </tr>
+
                         <!--                            <td>-->
                         <!--                                <div style= width:380px;height:700px;float:right;>-->
                         <!--                                    <a href ="#" style=text-decoration-line:none;><img style= width:380px;height:500px src ="/images/에코백.png">-->
@@ -177,7 +200,7 @@
                         <!--                                </div>-->
                         <!--                            </td>-->
                         <!--                        </tr>-->
-                        <tr>
+                       <!-- <tr>
                             <th:block th:each="shop, status : ${shop}">
                                 <td th:object="${shop}">
                                     <th:block th:if="${status.even}">
@@ -190,7 +213,7 @@
                                             <label><a th:href ="@{/basket/basket(goodsNum=*{goodsNum})}" style=text-decoration-line:none;><img style =width:10px;height:10px;margin-right:10px; src ="/images/장바구니.png"><span style = margin-right:10px>장바구니</span></a></label>
                                         </div>
                                     </th:block>
-                                </td>
+                                </td>-->
                                 <!--<th:block th:each="shop, status : ${shop}">
                                     <td th:object="${shop}">
                                         <th:block th:switch="${status.even}">
@@ -205,8 +228,7 @@
                                         </th:block>
                                     </td>
                                 </th:block>-->
-                            </th:block>
-                        </tr>
+                      <!--  </tr>-->
                         <!--     <tr>
                                  <td>
                                      <div style= width:380px;height:700px;float:left;>
@@ -250,13 +272,14 @@
 
                 </div>
             </div>
-        </div>
+
     </section>
 </div>
 <div class="col-12"></div>
 <!-- Footer -->
 <div id="main_footer"></div>
 
+</body>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
@@ -264,13 +287,16 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/header.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+
+
 <script th:inline="javascript">
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.shopCriteria.listLink}]];
 
     $(document).ready(function(){
-        let goodsNum = [[${goodsNum}]];
+        let goodsNum = [[${GoodsNum}]];
         if(goodsNum == null || history.state){
             return;
         }
@@ -289,10 +315,39 @@
         location.href = "/shop/shopDetail" + paging + "&goodsNum=" + $(this).attr("href");
     })
 
+let testResult = $(".test");
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/shop/getAttachList", {goodsNum: goodsNum},
+                function(arr){
+                    let str = "";
+                    let mainstr ="";
+
+                    $(arr).each(function(i, attach){
+                        console.log(goodsNum);
+                        if(!attach.image){
+                            return;
+                        }else{
+                            if(i==0){
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                mainstr += "<div class=\"test\">";
+                                mainstr += "<a href=\""+goodsNum+"\" class=\"goDetail\">";
+                                mainstr += "<img style=\"text-algin: center; width: 500px; height: 500px;\" src='/upload/display?fileName=" + originPath + "'>" ;
+                                mainstr += "</a></div>"
+                                return;
+                            }
+                        }
+                    });
+                    testResult.html(mainstr);
+                });//getJSON
+        })();
+    })
+
+    $("#shopEnrollBtn").on("click", function(){
+       location.href="/shop/shopEnroll"
+    });
 </script>
 
-
-</body>
 
 <script>
 </script>
