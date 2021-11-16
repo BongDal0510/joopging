@@ -37,19 +37,23 @@ a.button{
     margin: 3.4% 0;
 }
 
-#commuBoardWrapper{
+#commuBoardWrapper, #reportListWrapper{
     display: flex;
 }
+
 #commuBoardLeft{
     width: 17%;
     overflow: hidden;
     text-align: center;
-    padding: 5% 0 0 5.6%;
-    margin-left:2%;
+    padding: 5% 0 0 3%;
 }
+
 #commuBoardLeft tr{
     text-align: left;
     font-size: 16px;
+}
+#commuBoardLeft td{
+   text-align: right;
 }
 #commuBoardLeft img{
     width: 100%;
@@ -58,7 +62,7 @@ a.button{
     width: 100%;
 }
 #commuBoardMiddle{
-    width: 56%;
+    width: 58%;
     margin: 0 3% 0 3%;
 }
 #commuBoardRight{
@@ -69,6 +73,9 @@ a.button{
     margin-top: 6%;
 }
 #commuSearchWrap{
+    padding: 0 25% 0 23%;
+}
+#reportSearchWrap{
     padding: 0 25% 0 23%;
 }
 #communityBanner{
@@ -82,7 +89,7 @@ a.button{
 #searchWrap a{
     margin-left: 2%;
 }
-#commuBoardMiddle{
+#commuBoardMiddle, #reportListMiddle{
     font-family: 'S-CoreDream-3Light';
     font-size: 13px;
 }
@@ -94,7 +101,9 @@ a.button{
     text-align: center;
 }
 
-
+div#reportListMiddle{
+    width: 100%;
+}
 #commuSearchWrap{
     font-family: 'S-CoreDream-3Light';
 }
@@ -225,20 +234,49 @@ a#reportBtn.button.small{
     box-shadow: -3px 0px 3px 3px #3c763d;
     top: 8%;
 }
-#commuBoardTh th, #commuAnnounceTh th{
+#commuBoardTh th, #commuAnnounceTh th, #reportListHeader th{
     text-align: center;
 }
 #commuBoardThList td.bno, td.writer, td.regDate, td.viewCnt{
     text-align: center;
 }
-#commuAnnounceThList td.bno, td.writer, td.regDate, td.viewCnt{
+#commuAnnounceThList td.boardStatus, td.writer, td.regDate, td.viewCnt{
     text-align: center;
+}
+#reportListValues td.reportedDate, td.reporter, td.purpose,
+td.reportStatus, td.changeReasons, td.changeStatus{
+    text-align: center;
+}
+
+#reportListHeader td.reportedDate{
+    text-align: center;
+    width: 13%;
+    padding: 0 1%;
+}
+
+#reportListHeader td.reporter{
+    text-align: center;
+    width: 20%;
+}
+
+#reportListHeader td.oneReport{
+    text-align: center;
+    width: 35%;
+}
+
+#reportListHeader td.changeReasons{
+    width: 15%;
+}
+
+#reportListHeader td.changeStatus{
+    text-align: center;
+    width: 15%;
 }
 
 td.boardStatus > img{
     width: 20%;
 }
-#boardTitleArea{
+div#boardTitleArea{
     border: solid 1px #d3d3d3;
     padding: 2%;
 }
@@ -249,9 +287,9 @@ div.field input[name="commuBno"]{
     height: 0;
 }
 #commuWriterTitle{
-    padding: 0 0 0 2.5%;
+    padding: 0 0 0 2%;
     font-size: x-small;
-    width:15%;
+    width:8%;
 }
 div.field input[name="commuWriter"]{
     border: none;
@@ -266,6 +304,19 @@ div.field input[name="commuTitle"]{
 }
 #boardWriterArea{
     display: flex;
+}
+div.fileAreaWrap{
+    border: solid 1px #d3d3d3;
+    border-top: none;
+    height: auto;
+    padding: 4%;
+    margin-bottom: 3%;
+}
+div.contentArea{
+    border: solid 1px #d3d3d3;
+    border-top: 0;
+    padding: 4%;
+    height: auto;
 }
 div#commuContentArea textarea{
     padding: 4%;
@@ -282,4 +333,43 @@ ul{
 a{
     text-decoration: none !important;
     color: #5d5d5d;
+}
+
+#commuAnnounceTh th.bno{
+    width: 15%;
+}
+#commuAnnounceTh th.title{
+    width: 30%;
+}
+#commuAnnounceTh th.writer{
+    width: 20%;
+}
+#commuAnnounceTh th.regDate{
+    width: 15%;
+}
+#commuAnnounceTh th.viewCnt{
+    width: 15%;
+}
+#commuBoardThList td.bno{
+    width: 15%;
+}
+#commuBoardThList td.title{
+    width: 30%;
+}
+#commuBoardThList td.writer{
+    width: 20%;
+}
+#commuBoardThList td.regDate{
+    width: 15%;
+}
+#commuBoardThList td.viewCnt{
+    width: 15%;
+}
+#commuListTable{
+    border-bottom: solid 1px #d3d3d3;
+    margin-bottom: 0%;
+}
+div#reportBoardMiddle{
+    width: 100%;
+    padding: 0 17%;
 }

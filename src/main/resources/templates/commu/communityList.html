@@ -42,11 +42,23 @@
             .viewCnt { display: none;}
             .big-width { display: none;}
             .small-width { display: block;}
+            #commuBoardThList td.title{width: 70%;}
             #commuHeaderWrapper{
                 display: none;
             }
+            #commuBoardLeft{
+                display: none;
+            }
+            #commuBoardRight{
+                display: none;
+            }
+            #announceTable{
+                display: none;
+            }
 
-
+            #main_footer{
+                display: none;
+            }
 
             div#commuBoardRight, div#commuBoardLeft{
                 display: none;
@@ -70,6 +82,7 @@
         header.major{
             border:none !important;
         }
+
 
     </style>
 </head>
@@ -129,20 +142,19 @@
                 <div id="commuBoardLeft">
                     <table id="commuLeftCategory">
                         <tr>
-                            <td><a href="javascript:void(0)" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
+                            <td><a href="/commu/communityList" id="commuBoardBtn" class="commu">커뮤니티 게시판</a></td>
                         </tr>
                         <tr>
-                            <td><a href="javascript:void(0)" id="interview" class="commu">인터뷰</a></td>
+                            <td><a href="javascript:void(0)" id="interview" class="commu" onclick="serviceNotReady()">플로깅
+                                소식지</a></td>
                         </tr>
-                        <!--                        <tr>
-                                                    <th class="commu">이벤트</th>
-                                                </tr>-->
                         <tr>
-                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu">문의하기</a></td>
+                            <td><a href="javascript:void(0)" id="inquiryOneonOne" class="commu"
+                                   onclick="serviceNotReady()">인터뷰</a></td>
                         </tr>
                         <!--admin 계정만 보이게-->
-                        <tr>
-                            <td><a href="javascript:void(0)" id="reportedBoard" class="commu">신고글</a></td>
+                        <tr th:if="${member=='admin'}">
+                            <td><a href="/report/reportList" id="reportedBoard" class="commu">신고글</a></td>
                         </tr>
 
                     </table>
@@ -154,8 +166,8 @@
                         <div>커뮤니티 게시판</div>
                         <div id="registerBtnArea"><a href="/commu/communityRegister" class="button small">글 등록</a></div>
                     </div>
-                    <div class="table-wrapper">
-                        <table>
+                    <div class="table-wrapper" id="announceTable">
+                        <table id="commuListTable">
                             <thead>
                             <tr class="tHead" id="commuAnnounceTh">
                                 <th class="bno" style="color:white;">번호</th>
@@ -168,7 +180,7 @@
                             <tbody>
                             <th:block th:each="announce : ${announceList}">
                                 <tr class="tBody" id="commuAnnounceThList" th:object="${announce}">
-                                    <td class="boardStatus"><img src="/images/commu/siren.png"></td>
+                                    <td class="boardStatus"><span style="color: red">[공지글]</span></td>
                                     <td class="title"><a id="goAnnounceRead" th:href="*{commuBno}" th:text="*{commuTitle}"></a></td>
                                     <td class="writer" th:text="*{commuWriter}"></td>
                                     <td class="regDate" th:text="*{commuRegDate}"></td>
@@ -183,16 +195,7 @@
                     </div>
                     <div class="table-wrapper">
                         <table>
-                            <!--                            <thead>
-                                                        <tr class="tHead" id="commuBoardTh">
-                                                            <th class="bno">번호</th>
-                                                            <th class="title">제목</th>
-                                                            <th class="writer">작성자</th>
-                                                            <th class="regDate">작성일</th>
-                                                            <th class="viewCnt">조회수</th>
-                                                        </tr>
-                                                        </thead>-->
-                            <tbody>
+
                             <th:block th:each="commu : ${commuList}">
                                 <tr class="tBody" id="commuBoardThList" th:object="${commu}">
                                     <td class="bno" th:text="*{commuBno}"></td>
@@ -204,56 +207,6 @@
                             </th:block>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-
-
-                <!--인터뷰-->
-                <div id="interviewLists" class="rotateMainContent" style="display: none">
-                    <div id="interviewArea">
-                        <div>이달의 인터뷰</div>
-                        <!--admin 계정일때만 보이게-->
-                        <div id="interviewBtn"><a href="/interview/interviewRegister" class="button small">글 등록</a></div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12" style=clear:both;>
-
-                                <!-- Portfolio -->
-                                <section>
-                                    <div class="event_subtitle">
-                                        <h2 style="text-align: left; font-family: 'yg-jalnan';">11월 이벤트</h2>
-                                    </div>
-                                    <div class="row">
-
-
-                                        <div class="col-4 col-6-medium col-12-small">
-                                            <section class="eventImage">
-                                                <a href="#" class="image featured"><img style = height:330px; src="/images/event/신규가입.png"/></a>
-                                            </section>
-                                            <section class="box boxinner">
-                                                <div style="display: flex">
-                                                    <header id="center1">
-                                                        <h4 style="font-family: 'S-CoreDream-4Regular';">
-                                                            11월 신규가입 이벤트
-                                                        </h4>
-                                                    </header>
-                                                    <footer class="eventButton">
-                                                        <ul class="actions">
-                                                            <li><a href="#" class="button alt">상세보기</a></li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                                <div>
-                                                    <p class="eventDate">11월 1일-11월 30일</p>
-                                                </div>
-                                            </section>
-                                        </div>
-
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -341,6 +294,12 @@
     //게시글 등록시 몇 번째 글 등록인지 확인시켜주기
     $(document).ready(function () {
         let commuBno = [[${commuBno}]];
+        let msg = [[${msg}]];
+        if(msg == "notLogin"){
+            alert("로그인이 필요한 페이지입니다.")
+            location.href = "/member/login"
+        }
+
         if (commuBno == null || history.state) {
             return;
         }
@@ -382,5 +341,11 @@
             e.preventDefault();
         }
     })
+
+    /*#####################################기능 막기####################################*/
+    function serviceNotReady() {
+        console.log(confirm("준비중인 서비스입니다.\n단장된 모습으로 찾아 뵙겠습니다.") == true);
+    }
+
 </script>
 </html>

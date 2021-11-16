@@ -59,7 +59,7 @@
     <insert id="insertSelectKey_commuBno">
         /*태그 안에서는 이와 같은 주석으로 사용해야 한다.*/
         /*게시글 등록 전 다음 시퀀스를 가져와서 insertSelectKey_COMMUBNO메소드의 매개변수로 매핑후 전달한다.*/
-        <selectKey keyProperty="commuBno" order="BEFORE" resultType="long">
+        <selectKey keyProperty="commuBno" order="BEFORE" resultType="Long">
             SELECT SEQ_COMMUBOARD.NEXTVAL FROM DUAL
         </selectKey>
         /*위에서 전달받은 COMMUBNO를 사용한다.*/
@@ -107,6 +107,12 @@
         SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
 		FROM TBL_COMMUBOARD WHERE COMMUBOARDSTATUS = 2
     </select>
+
+    <!--공지글 읽기-->
+    <select id="readAnnounce" resultType="commuVO">
+		SELECT COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER, COMMUREGDATE, COMMUUPDATEDATE, COMMUVIEWCNT, COMMUBOARDSTATUS
+		FROM TBL_COMMUBOARD WHERE COMMUBNO = #{commuBno}
+	</select>
 
     <!--신고글 가져오기-->
     <select id="getReportList" resultType="commuVO">

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<!--
+	사용자가 게시글 읽기에서 신고하기 버튼을 누르면 팝업으로 창을 띄워
+	팝업을 띄운 게시글을 신고 할 수 있도록 한다.
+
+	commuService.readCommu(commuBno)로 게시글 정보를 가져온다.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Report</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/report.css"/>
+    <link rel="shortcut icon" href="/images/faviconWhite.ico">
+    <link rel="icon" href="/images/faviconWhite.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="is-preload">
+
+<div id="main" class="modal-wrapper">
+    <div id="wrapper" class="modal">
+        <div class="inner head">
+
+            <div class="reportWrapper content">
+                <form method="post" action="/report" id="reportForm">
+                    <div id="joopgingLogoLeaf"><img src="/images/commu/leaf_icon.png"/></div>
+
+                    <div class="reportBackground">
+                        <div class="reportAnnounce">
+                            <div class="reportInfo">
+                                <h3> 게시물 신고하기 </h3>
+                            </div>
+                            <div class="reportAnnounceDetail">
+                                해당 게시판은 모든 연령이 이용 가능한 공간입니다.<br>
+                                비방글, 도배, 불법광고, 청소년 유해글 등<br>
+                                누군가에게 불편을 줄 수 있는 글은 삼가주세요.<br>
+                                <br>
+                                신고된 글은 줍깅 커뮤니티의 이용 수칙에 따라<br>
+                                꼼꼼히 검토 후, 알맞은 조치가 취해질 예정입니다.<br>
+                                <br>
+                                늘 깨끗하고 건전한 커뮤니티를 만들기 위해 최선을 다하겠습니다.<br>
+                                감사합니다.
+                            </div>
+                            <div class="reportWarning">
+                                **허위 신고시 향후 활동에 불이익이 있을 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <!--신고자 정보-->
+                    <div>
+                        <h4 class="reportPage">해당 글을 신고합니다.</h4>
+                        <div id="boardTitleArea">
+                            <div class="field" th:object="${commu}">
+                                <input class="reportedTitle" name="commuTitle" type="text"
+                                       th:value="*{commuTitle}" readonly/>
+                                <!--신고당한 글 제목-->
+                            </div>
+                            <div class="field" id="boardWriterArea">
+                                <h4 id="sessionId">신고자 :</h4>
+                                <input name="sessionId" type="text" th:value="${reporter}" readonly/><!--th:value="${member.getMemberId()}"-->
+                                <!--                                <h4 id="reportDate">신고일 :</h4>&lt;!&ndash;th: ${reportDate}&ndash;&gt;
+                                                                <input name="reportDate" type="text" readonly/> &lt;!&ndash;th:value="${admin.reportDate}"&ndash;&gt;-->
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="reportPage">신고 사유를 선택해주세요</h4>
+                        </div>
+                        <div class="reportSelections" id="reportContent" name="reportContent">
+                            <select>
+                                <option>불법광고</option>
+                                <option>욕설/비방글</option>
+                                <option>도배글</option>
+                                <option>청소년유해글</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                        <div>
+                            <pre><textarea name="reportDetail" id="reportDetail" cols="30" rows="4" style="resize: none"
+                                           placeholder="명확한 사유는 신속한 대응에 도움이 될 수 있습니다."></textarea></pre>
+                        </div>
+                    </div>
+                    <div class="reportPageBtns">
+                        <a href="javascript:void(0)" id="cancelReport" class="button btn-close trigger">취소</a>
+                        <a href="javascript:void(0)" id="insertReport" class="button btn-close trigger" onclick="submit()">신고하기</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/headerfooter.js"></script>
+<script src="/js/weather.js"></script>
+</body>
+
+<script>
+    //취소 버튼 클릭시 팝업 닫기
+    $("a#cancelReport").on("click", function(){
+        self.close();
+    });
+
+    //신고하기 submit
+    $("a#insertReport").on("click", function(){
+     /*   this.submit();*/
+        self.close();
+    });
+</script>
+</html>

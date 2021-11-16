@@ -11,5 +11,5 @@ public class CommuReplyVO {
     private String commuReply;
     private String commuReplier;
     private String commuReplyDate;
-    private String commuUpdateDate;
+    private String commuReplyUpdateDate;
 }

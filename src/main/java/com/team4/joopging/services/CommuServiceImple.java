@@ -6,6 +6,7 @@ import com.team4.joopging.community.vo.CommuAttachFileVO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CommuServiceImple implements CommuService{
 
     private final CommuDAO commuDAO;
@@ -36,7 +38,16 @@ public class CommuServiceImple implements CommuService{
     //게시글 하나 조회
     @Override
     public CommuVO getCommu(Long commuBno) {
-        return commuDAO.getCommu(commuBno);
+        //조회한 vo값
+        CommuVO commuVO = commuDAO.getCommu(commuBno);
+
+        String str[] = commuVO.getCommuRegDate().split(" ");
+        commuVO.setCommuRegDate(str[0]);
+
+        for(int i = 0; i < str.length; i++){
+            log.info(str[i]);
+        }
+        return commuVO;
     }
 
     //게시글 수정
@@ -64,7 +75,13 @@ public class CommuServiceImple implements CommuService{
     //전체 리스트
     @Override
     public List<CommuVO> getCommuList(Criteria criteria) {
-        return commuDAO.getCommuList(criteria);
+
+        List<CommuVO> list = commuDAO.getCommuList(criteria);
+        for (CommuVO commuVO : list) {
+            commuVO.setCommuRegDate(commuVO.getCommuRegDate().substring(0,10));
+
+        }
+        return list;
     }
 
     //전체 글 개수
@@ -77,11 +94,19 @@ public class CommuServiceImple implements CommuService{
 
     //공지글 리스트
     @Override
-    public List<CommuVO> getAnnounceList(int commuBoardStatus) { return commuDAO.getAnnounceList(commuBoardStatus); }
+    public List<CommuVO> getAnnounceList(int commuBoardStatus) {
+
+        List<CommuVO> list = commuDAO.getAnnounceList(commuBoardStatus);
+        for (CommuVO commuVO : list) {
+            commuVO.setCommuRegDate(commuVO.getCommuRegDate().substring(0,10));
+        }
+        return list;
+    }
 
     //첨부파일
     @Override
     public List<CommuAttachFileVO> getAttachList(Long commuBno) {
         return commuAttachFileDAO.findByBno(commuBno);
     }
+
 }

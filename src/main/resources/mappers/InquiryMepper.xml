@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.InquiryMapper">
+    <sql id="search">
+        <if test="type != null and keyword !=null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (INQUIRYTITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (INQUIRYCONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (MEMBERID LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    <select id="getList" resultType="inquiryVO">
+        <![CDATA[
+        SELECT INQUIRYNUM, INQUIRYTITLE, INQUIRYCONTENT, MEMBERID, INQUIRYREGDATE, INQUIRYSTATUS
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(TBL_INQUIRY PK_INQUIRY) */
+            ROWNUM R, INQUIRYNUM, INQUIRYTITLE, INQUIRYCONTENT, MEMBERID, INQUIRYREGDATE, INQUIRYSTATUS
+            FROM TBL_INQUIRY
+            WHERE
+        ]]>
+        <include refid="search"></include>
+        <![CDATA[
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(INQUIRYNUM) FROM TBL_INQUIRY
+    </select>
+
+    <insert id="insertSelectKey_num">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_INQUIRY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_INQUIRY (INQUIRYNUM, INQUIRYTITLE, INQUIRYCONTENT, MEMBERID)
+        VALUES(#{inquiryNum}, #{inquiryTitle}, #{inquiryContent}, #{memberId})
+    </insert>
+
+    <select id="read" resultType="inquiryVO">
+        SELECT INQUIRYNUM, INQUIRYTITLE, INQUIRYCONTENT, MEMBERID, INQUIRYREGDATE FROM TBL_INQUIRY
+        SELECT
+    </select>
+
+    <delete id="delete">
+        DELETE FROM TBL_INQUIRY WHERE INQUIRYNUM = #{inquiryNum}
+    </delete>
+</mapper>

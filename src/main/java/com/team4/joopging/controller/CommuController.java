@@ -5,6 +5,7 @@ import com.team4.joopging.community.vo.CommuPageDTO;
 import com.team4.joopging.community.vo.CommuVO;
 import com.team4.joopging.community.vo.Criteria;
 import com.team4.joopging.services.CommuService;
+import com.team4.joopging.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,26 +28,46 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommuController {
     private final CommuService commuService;
+    private final MemberService memberService;
 
     //커뮤니티 전체목록 + 페이징
     @GetMapping("communityList")
-    public String commuList(Criteria criteria, Model model) {
+    public String commuList(Criteria criteria, Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession();
         log.info("--------------------------------");
         log.info("communityList");
         log.info("--------------------------------");
 
-        model.addAttribute("announceList", commuService.getAnnounceList(2));
-        model.addAttribute("commuList", commuService.getCommuList(criteria));
-        model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
+        if(session.getAttribute("memberId")==null) {
+            model.addAttribute("commuList", commuService.getCommuList(criteria));
+            model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
+            model.addAttribute("announceList", commuService.getAnnounceList(2));
+            return "commu/communityList";
+
+        }else{
+            model.addAttribute("commuList", commuService.getCommuList(criteria));
+            model.addAttribute("pageMaker", new CommuPageDTO(commuService.getCommuTotal(criteria), 10, criteria));
+            model.addAttribute("announceList", commuService.getAnnounceList(2));
+            model.addAttribute("member", memberService.memberAllSelect((String)session.getAttribute("memberId")).getMemberId());
+        }
         return "commu/communityList";
     }
 
     //커뮤니티 글쓰기
     @PostMapping("communityRegister")
-    public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr) {
+    public RedirectView registerCommu(CommuVO commu, RedirectAttributes rttr, HttpServletRequest req, Model model) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
+
+        if(session.getAttribute("memberId")==null) {
+            model.addAttribute("msg", "notLogin");
+            return new RedirectView("communityList");
+        }
         log.info("--------------------------------");
         log.info("register : " + commu.toString());
         log.info("--------------------------------");
+
+        model.addAttribute("commuWriter", session.getAttribute("memberId"));
 
         if(commu.getAttachList() != null){
             commu.getAttachList().forEach(attach -> log.info(attach.toString()));
@@ -61,23 +83,39 @@ public class CommuController {
 
     //커뮤니티 글 읽기/수정하기 경로이동 + 경로 이동 전 페이지 기억하기
     @GetMapping({"communityRead", "communityModify"})
-    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, CommuVO commuVO, HttpServletRequest request) {
+    public void readCommu(@RequestParam("commuBno") Long commuBno, Criteria criteria, Model model, HttpServletRequest req, CommuVO commuVO, HttpServletRequest request) {
         String reqURI = request.getRequestURI();
         String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
-        //read 요청시 read 출력
-        //modify 요청시 modify 출력
-        log.info("--------------------------------");
-        log.info(reqType + " : " + commuBno);
-        log.info("viewCnt : " + commuVO.getCommuViewCnt());
-        log.info("--------------------------------");
-        model.addAttribute("commu", commuService.getCommu(commuBno));
-        model.addAttribute("commuVO", commuService.updateCommuViewCnt(commuBno));
-        model.addAttribute("criteria", criteria);
+        HttpSession session = req.getSession();
+        String memberId = (String) session.getAttribute("memberId");
+
+
+        if (session.getAttribute("memberId") == null) {
+            model.addAttribute("msg", "notLogin");
+            model.addAttribute("commu", commuService.getCommu(commuBno));
+            model.addAttribute("commuVO", commuService.updateCommuViewCnt(commuBno));
+            model.addAttribute("criteria", criteria);
+        } else {
+            //read 요청시 read 출력
+            //modify 요청시 modify 출력
+            log.info("--------------------------------");
+            log.info(reqType + " : " + commuBno);
+            log.info("viewCnt : " + commuVO.getCommuViewCnt());
+            log.info("viewCnt : " + commuVO.getCommuRegDate());
+            log.info("viewCnt : " + commuVO.getCommuUpdateDate());
+            log.info("--------------------------------");
+
+            model.addAttribute("commu", commuService.getCommu(commuBno));
+            model.addAttribute("commuVO", commuService.updateCommuViewCnt(commuBno));
+            model.addAttribute("criteria", criteria);
+        }
     }
 
     //커뮤니티 수정하기
     @PostMapping("communityModify")
-    public RedirectView modifyCommu(CommuVO commu, RedirectAttributes rttr) {
+    public RedirectView modifyCommu(CommuVO commu, RedirectAttributes rttr, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
         log.info("--------------------------------");
         log.info("modify : " + commu.toString());
         log.info("--------------------------------");
@@ -91,7 +129,9 @@ public class CommuController {
 
     //  삭제
     @PostMapping("removeCommu")
-    public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr) {
+    public RedirectView removeCommu(@RequestParam("commuBno") Long commuBno, RedirectAttributes rttr, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String memberId = (String)session.getAttribute("memberId");
         log.info("-------------------------------");
         log.info("remove : " + commuBno);
         log.info("-------------------------------");

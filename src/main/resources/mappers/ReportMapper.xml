@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.ReportMapper">
+
+    <!--신고 등록 from 유저 to 관리자-->
+    <insert id="insertReport">
+        INSERT INTO TBL_REPORT (REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS)
+        VALUES(SEQ_REPORT.NEXTVAL, #{sessionId}, #{reportContent}, #{reportDetail}, #{commuBno}, #{commuTitle}, #{reportDate}, #{reportStatus})
+    </insert>
+
+<!--
+    <insert id="insertSelectKey_commuBno">
+        /*태그 안에서는 이와 같은 주석으로 사용해야 한다.*/
+        /*게시글 등록 전 다음 시퀀스를 가져와서 insertSelectKey_COMMUBNO메소드의 매개변수로 매핑후 전달한다.*/
+        <selectKey keyProperty="commuBno" order="BEFORE" resultType="long">
+            SELECT SEQ_COMMUBOARD.NEXTVAL FROM DUAL
+        </selectKey>
+        /*위에서 전달받은 COMMUBNO를 사용한다.*/
+        INSERT INTO TBL_COMMUBOARD (COMMUBNO, COMMUTITLE, COMMUCONTENT, COMMUWRITER)
+        VALUES(SEQ_REPORT.NEXTVAL, #{commuTitle}, #{commuContent}, #{commuWriter})
+    </insert>
+
+
+    -->
+
+
+
+    <!--신고하기 버튼 누르면 게시글 status를 1로 변경-->
+    <update id="commuToReported">
+		UPDATE TBL_COMMUBOARD
+		SET COMMUBOARDSTATUS = 1
+		WHERE COMMUBNO = #{commuBno}
+	</update>
+
+    <!--특정 게시글 가져오기-->
+    <select id="readReport" resultType="reportVO">
+		SELECT REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, REPORTSTATUS
+		FROM TBL_REPORT WHERE REPORTNUM = #{reportNum}
+	</select>
+
+    <!--검색기능-->
+    <sql id="searchReport">
+        <if test="type != null and keyword !=null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (COMMUTITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (COMMUCONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (COMMUWRITER LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <!--검색기능을 합치기 위해 MyBatis 동적 태그 사용-->
+    <select id="getReportList" resultType="reportVO">
+        <![CDATA[
+        SELECT REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, EXTRADETAILS, REPORTSTATUS
+        FROM
+            (
+                SELECT /*+ INDEX_DESC(TBL_REPORT PK_REPORT)*/
+                ROWNUM R, REPORTNUM, SESSIONID, REPORTCONTENT, REPORTDETAIL, COMMUBNO, COMMUTITLE, REPORTDATE, EXTRADETAILS, REPORTSTATUS
+                FROM TBL_REPORT
+                WHERE
+                        ]]>
+        <include refid="searchReport"></include>
+        <![CDATA[
+                ROWNUM <= #{pageNum} * #{amount}
+            )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+                        ]]>
+    </select>
+
+    <!--전체 게시글 수-->
+    <select id="getReportTotal" resultType="_int">
+        SELECT COUNT(REPORTNUM) FROM TBL_REPORT
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="searchReport"></include>
+            </trim>
+        </where>
+    </select>
+
+    <!--삭제-->
+    <delete id="deleteReport">
+		DELETE FROM TBL_REPORT
+		WHERE REPORTNUM = #{reportNum}
+	</delete>
+</mapper>

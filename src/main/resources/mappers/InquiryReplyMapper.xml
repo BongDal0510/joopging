@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team4.joopging.mappers.InquiryReplyMapper">
+    <insert id="insertInquiryReply">
+        INSERT INTO TBL_INQUIRYREPLY (INQUIRYRNO, INQUIRYNUM, INQUIRYREPLY, INQUIRYREPLIER)
+        VALUES (SEQ_INQUIRYREPLY.NEXTVAL, #{inquiryNum}, #{inquiryReply}, #{inquiryReplier})
+    </insert>
+
+    <select id="readInquiryReply" resultType="InquiryReplyVO">
+        SELECT INQUIRYRNO, INQUIRYNUM, INQUIRYREPLY, INQUIRYREPLIER, INQUIRYREPLYDATE, INQUIRYREPLYUPDATEDATE FROM TBL_INQUIRYREPLY
+        WHERE INQUIRYRNO = #{inquiryRno}
+    </select>
+
+    <delete id="deleteInquiryReply">
+        DELETE FROM TBL_INQUIRYREPLY WHERE INQUIRYRNO = #{inquiryRno}
+    </delete>
+
+    <update id="updateInquiryReply">
+        UPDATE TBL_INQUIRYREPLY
+        SET INQUIRYREPLY = #{inquiryReply}, INQUIRYREPLYUPDATEDATE = SYSDATE
+        WHERE INQUIRYRNO = #{inquiryRno}
+    </update>
+
+    <select id="getInquiryReplyPagingList" resultType="InquiryReplyVO">
+    <![CDATA[
+    SELECT INQUIRYRNO, INQUIRYNUM, INQUIRYREPLY, INQUIRYREPLIER, INQUIRYREPLYDATE, INQUIRYREPLYUPDATEDATE
+    FROM
+        (
+        SELECT /*+ INDEX_DESC(TBL_INQUIRYREPLY PK_INQUIRYREPLY)*/
+        ROWNUM R, INQUIRYRNO, INQUIRYNUM, INQUIRYREPLY, INQUIRYREPLIER, INQUIRYREPLYDATE, INQUIRYREPLYUPDATEDATE
+        FROM TBL_INQUIRYREPLY
+        WHERE INQUIRYNUM = #{inquiryNum}
+        AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+        )
+        WHERE R > (#{criteria.pageNum} -1) * #{criteria.amount}
+    ]]>
+    </select>
+
+    <select id="getInquiryReplyTotal" resultType="_int">
+        SELECT COUNT(INQUIRYRNO) FROM TBL_INQUIRYREPLY WHERE INQUIRYNUM = #{inquiryNum}
+    </select>
+</mapper>
