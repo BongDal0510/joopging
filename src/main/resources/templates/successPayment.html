@@ -12,6 +12,7 @@
         display: flex;
         margin: auto;
         background-color: #f7f7f7;
+
     }
 
     .button{
@@ -19,12 +20,16 @@
         margin-top: 1%;
         text-align: center;
     }
+    .paymentDiv{
+        text-align: center;
+        margin-top: 6%;
+    }
 </style>
 <body>
-<div style ="text-align:center" margin-top>
+<div class="paymentDiv">
 <img style ="width: 10%;" src="/images/초록체크2.png">
     <h2>주문이 완료되었습니다.</h2>
-    <h4>OOO 님의 주문 결과는 다음과 같습니다.</h4>
+    <h4>최원준 님의 주문 결과는 다음과 같습니다.</h4>
     <div class="payment">
     <table style="margin: auto;">
         <tr>
@@ -32,7 +37,7 @@
              주문번호
          </td>
          <td>
-             20211017556479
+             202111097556479
          </td>
         </tr>
         <td>
@@ -46,7 +51,7 @@
                 포인트사용
             </td>
             <td>
-                1,000point
+                0point
             </td>
         </tr>
         <tr>
@@ -63,10 +68,15 @@
     </div>
 
     <button class="button">주문내역보기</button>
-    <button class="button">확인</button>
+    <button id="confirm_btn" class="button">확인</button>
 </div>
 
-
-
 </body>
+<script>
+
+    $("#confirm_btn").on("click", function(){
+        location.href="/shop/shop"
+    });
+
+</script>
 </html>
