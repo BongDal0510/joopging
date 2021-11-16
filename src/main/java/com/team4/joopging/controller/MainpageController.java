@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MainpageController {
 
-    @GetMapping("/index")
+    @GetMapping("/mainpage")
     public String mainpage() {
-        return "/main/index";
+        return "/main/mainpage";
     }
 
     @GetMapping("cs")
