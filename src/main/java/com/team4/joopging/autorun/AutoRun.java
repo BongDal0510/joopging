@@ -52,14 +52,14 @@ public class AutoRun {
 //    }
 
     /* 매월 1일 마다 멤버레벨 승급 */
-//    @Scheduled(cron = "0/10 * * * * ?") //현재 시범용 10초간격
-//    public void updateLevel(){
-//        log.info("========================================");
-//        log.info("멤버레벨 승급");
-//        log.info("========================================");
-//        memberDAO.memberUpdateLevelAmateur();
-//        memberDAO.memberUpdateLevelVeteran();
-//        memberDAO.memberUpdateLevelMaster();
-//    }
+    @Scheduled(cron = "0/10 * * * * ?") //현재 시범용 10초간격
+    public void updateLevel(){
+        log.info("========================================");
+        log.info("멤버레벨 승급");
+        log.info("========================================");
+        memberDAO.memberUpdateLevelAmateur();
+        memberDAO.memberUpdateLevelVeteran();
+        memberDAO.memberUpdateLevelMaster();
+    }
 
 }
